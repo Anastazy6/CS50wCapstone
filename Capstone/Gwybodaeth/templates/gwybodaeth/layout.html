@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="referrer" content="same-origin"/>
+        <link rel="stylesheet"    href="{% static 'gwybodaeth/styles/styles.css' %}">
+        <link rel="stylesheet"    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- class-trash-bin: {} -->
+            <a class="navbar-brand" href="{% url 'index' %}">Network</a>
+          
+            <div>
+              <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            <strong>User placeholder</strong>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="">Placeholder</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">User placeholder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Log Out placeholder</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Log In placeholder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Register placeholder</a>
+                    </li>
+                {% endif %}
+                {% if user.is_authenticated and user.is_superuser %}
+                    <li class="nav-item">
+                        <a href="/admin/" class="nav-link">Administration panel</a>
+                    </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        
+        <div class="body">          
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

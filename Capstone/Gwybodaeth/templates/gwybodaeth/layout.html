@@ -15,10 +15,19 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- class-trash-bin: {} -->
-            <a class="navbar-brand" href="{% url 'index' %}">Network</a>
-          
+            <a class="navbar-brand" href="{% url 'index' %}">Gwybodaeth</a>
+
             <div>
-              <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Placeholder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Placeholder</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="">
@@ -26,22 +35,20 @@
                         </a>
                     </li>
                 {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="">Placeholder</a>
-                </li>
+                
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="">User placeholder</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Log Out placeholder</a>
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="">Log In placeholder</a>
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Register placeholder</a>
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
                     </li>
                 {% endif %}
                 {% if user.is_authenticated and user.is_superuser %}
@@ -49,9 +56,9 @@
                         <a href="/admin/" class="nav-link">Administration panel</a>
                     </li>
                 {% endif %}
-              </ul>
+                </ul>
             </div>
-          </nav>
+        </nav>
         
         <div class="body">          
             {% block body %}

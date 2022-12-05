@@ -1,3 +1,10 @@
+.body {
+  background-color: #191e33;
+  padding: 70px 20px;
+  font-family: Helvetica;
+  color: ghostwhite;
+}
+
 h1 {
   color: blue;
 }

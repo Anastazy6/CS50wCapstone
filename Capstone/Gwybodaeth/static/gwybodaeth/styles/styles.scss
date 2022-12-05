@@ -1,3 +1,18 @@
+$font-main:    Helvetica;
+$font-stylish: 'Times New Roman';
+$text-color: ghostwhite;
+
+$background-color: #191e33;
+
+
+.body {
+  background-color: $background-color;
+  padding: 70px 20px;
+
+  font-family: $font-main;
+  color:       $text-color;
+}
+
 h1 {
   color: blue;
-}
+} 

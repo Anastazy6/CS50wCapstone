@@ -1,8 +1,18 @@
+// Custom variables
+
 $font-main:    Helvetica;
 $font-stylish: 'Times New Roman';
 $text-color: ghostwhite;
 
 $background-color: #191e33;
+
+// Bootstrap variables and modifications
+
+$theme-colors: (
+  "porffor": #3a003d
+);
+
+// The rest
 
 @import "../bootstrap/scss/bootstrap";
 .body {
@@ -16,3 +26,7 @@ $background-color: #191e33;
 h1 {
   color: blue;
 } 
+
+.bg-porffor {
+  background-color: theme-color("porffor");
+}

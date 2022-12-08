@@ -7,6 +7,11 @@ class UserAdmin(admin.ModelAdmin):
                     'date_joined', 'last_login', 'is_active',\
                     'is_staff', 'is_superuser')
 
+class Study_setAdmin(admin.ModelAdmin):
+    list_display = ('author', 'title', 'description',\
+                    'terms_lang', 'defs_lang', 'terms')
+
 # Register your models here.
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Study_set, Study_setAdmin)

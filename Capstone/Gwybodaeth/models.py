@@ -5,9 +5,20 @@ from django.forms import CharField
 # Create your models here.
 
 class User(AbstractUser):
-  
+
     def __str__(self):
         return f"{self.username}"
+
+
+class Study_set(models.Model):
+    author      = models.ForeignKey(User, on_delete=models.CASCADE, related_name="study_sets")
+    description = models.CharField(max_length=1023)
+    title       = models.CharField(max_length=127)
+
+    defs_lang   = models.CharField(max_length=8)
+    terms_lang  = models.CharField(max_length=8)
+    terms       = models.JSONField()
+
 
 # TODO:
 #   Zestawy:

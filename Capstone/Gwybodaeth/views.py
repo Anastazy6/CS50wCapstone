@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
 from .models import *
+from .util   import *
 
 
 # Create your views here.
@@ -68,3 +69,15 @@ def register(request):
 
 def index(request):
     return render(request, "gwybodaeth/index.html")
+
+
+
+
+def create_set(request):
+    require_method(request, ['GET', 'POST'])
+
+    if request.method == 'POST':
+        print("Create study set form sent. Warning: functionality is not yet implemented!")
+
+    else:
+        return render(request, "gwybodaeth/create_set.html")

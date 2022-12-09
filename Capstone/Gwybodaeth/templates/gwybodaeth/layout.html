@@ -5,20 +5,25 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <meta charset="UTF-8">
-        <meta name="referrer" content="same-origin"/>
-        <link rel="stylesheet"    href="{% static 'gwybodaeth/styles/styles.css' %}">
+        <meta   name="referrer" 
+                content="same-origin"/>
+
+        <link   rel="stylesheet" 
+                href="{% static 'gwybodaeth/styles/styles.css' %}">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+        <script src="{% static 'gwybodaeth/scripts/study_set.mjs' %}"></script>
     </head>
     <body>
 
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-porffor">
-            <a class="navbar-brand" href="{% url 'index' %}">Gwybodaeth</a>
+            <a  class="navbar-brand"
+                href="{% url 'index' %}">Gwybodaeth</a>
             
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    <a  class="nav-link" 
+                        href="{% url 'index' %}">Home</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">

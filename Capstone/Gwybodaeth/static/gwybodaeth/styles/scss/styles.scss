@@ -15,6 +15,11 @@ $theme-colors: (
 // The rest
 
 @import "../bootstrap/scss/bootstrap";
+
+html {
+  background-color: $background-color;
+} 
+
 .body {
   background-color: $background-color;
   padding: 70px 20px;
@@ -29,4 +34,18 @@ h1 {
 
 .bg-porffor {
   background-color: theme-color("porffor");
+}
+
+.grid-container {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 400px 400px;
+  justify-content: center;
+}
+
+.form-line {
+  grid-column: 1 / span 2;
+  background-color: azure;
+  display: inline;
+  padding: 20px
 }

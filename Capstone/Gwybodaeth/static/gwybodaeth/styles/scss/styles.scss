@@ -5,7 +5,7 @@ $font-stylish: 'Times New Roman';
 $text-color: ghostwhite;
 
 $background-color: #191e33;
-
+$transparent-ghostwhite: #f8f8ff47;
 // Bootstrap variables and modifications
 
 $theme-colors: (
@@ -29,7 +29,7 @@ html {
 }
 
 h1 {
-  color: blue;
+  color: $text-color;
 } 
 
 .bg-porffor {
@@ -43,9 +43,49 @@ h1 {
   justify-content: center;
 }
 
+.form-line, .form-cell {
+  border-radius: 21.37px;
+  box-shadow: 0 0 5px $transparent-ghostwhite,
+              0 0 5px $transparent-ghostwhite inset;
+  padding: 10px;
+  justify-content: space-evenly;
+  background: $background-color
+}
+
 .form-line {
   grid-column: 1 / span 2;
-  background-color: azure;
-  display: inline;
-  padding: 20px
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.form-cell {
+  grid-column: span 1;
+}
+
+input, textarea, select {
+  width: 100%;
+  border-radius: 20px;
+  padding: 8px 20px;
+  background-color: $background-color;
+  border: none;
+  color: $text-color;
+
+  &:active, &:focus, &:hover {
+    border: none;
+  }
+}
+
+input[type=submit] {
+  background-color: $transparent-ghostwhite;
+  max-width: min-content;
+  margin: auto;
+}
+
+
+.stylish {
+  font-family: $font-stylish;
+}
+
+.header-centered {
+  text-align: center;
 }

@@ -79,5 +79,11 @@ def create_set(request):
     if request.method == 'POST':
         print("Create study set form sent. Warning: functionality is not yet implemented!")
 
+        print(request.POST)
+
+        return HttpResponseRedirect(reverse('create-set'))
+
     else:
-        return render(request, "gwybodaeth/create_set.html")
+        return render(request, "gwybodaeth/create_set.html", {
+            'range': range(1, 6)
+        })

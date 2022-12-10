@@ -4,6 +4,8 @@
 
 {% block body %}
 
+<h1 class="stylish header-centered">Create a new set</h1>
+
 <form id    ="create-set" 
         action="/create-set" 
         method="POST">
@@ -31,20 +33,33 @@
                 placeholder="Description"></textarea>
     </div>
 
-    <div class="form-line">
-      <select name ="terms-lang" 
-              label="Terms language: " 
-              required>
-        {% include './language_selection.html' %}
-      </select>
 
-      <select name ="defs-lang" 
-              label="Definitions language: "
+    <div  id   ="terms-lang-container"
+          class="form-cell">
+      <label for="terms-lang-container">Terms language: </label>
+      <select name ="terms-lang"  
               required>
         {% include './language_selection.html' %}
       </select>
     </div>
 
+
+    <div  id   ="defs-lang-container"
+          class="form-cell">
+    <label for="defs-lang-container">Definitions language: </label>
+      <select name ="defs-lang" 
+              required>
+        {% include './language_selection.html' %}
+      </select>
+    </div>
+
+    {% for i in range %}
+      <div id="item-{{ i }}" class="form-line study-item">
+        {% include './study-item.html' %}
+      </div>
+    {% endfor %}
   </div>
+
+  <input type="submit" value="Create study set">
 </form>
 {% endblock %}

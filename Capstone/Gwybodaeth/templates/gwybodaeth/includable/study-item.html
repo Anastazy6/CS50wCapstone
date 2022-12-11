@@ -1,0 +1,25 @@
+<div class="form-cell">
+  <textarea name="term" 
+            cols="25" 
+            rows="1"
+            required
+            placeholder="Enter term">{% if debug %}Term {{ i }}{% endif %}</textarea>
+</div>
+
+<div class="form-cell">
+  <textarea name="definition"
+            cols="25"
+            rows="1"
+            required
+            placeholder="Enter definition">{% if debug %}Def {{ i }}{% endif %}</textarea>
+</div>
+
+<div class="form-cell">
+  <input  class="category-input"
+          type ="text"
+          name ="category"
+          placeholder="Category"
+        {% if debug %}
+          value="cat {{ i }}"
+        {% endif %}>
+</div>

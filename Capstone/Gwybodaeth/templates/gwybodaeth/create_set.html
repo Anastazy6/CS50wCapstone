@@ -7,7 +7,7 @@
 <h1 class="stylish header-centered">Create a new set</h1>
 
 <form id    ="create-set" 
-        action="/create-set" 
+        action=""
         method="POST">
     {% csrf_token %}
   <div class="grid-container">
@@ -21,6 +21,7 @@
               size="81" 
               maxlength  ="127"
               placeholder="Title"  
+              {% if debug %}value="Title test"{% endif %}
               required>
     </div>
 
@@ -30,7 +31,7 @@
                 cols="80" 
                 rows="5" 
                 maxlenght  ="1023" 
-                placeholder="Description"></textarea>
+                placeholder="Description">{% if debug %}Description test{% endif %}</textarea>
     </div>
 
 
@@ -39,7 +40,7 @@
       <label for="terms-lang-container">Terms language: </label>
       <select name ="terms-lang"  
               required>
-        {% include './language_selection.html' %}
+        {% include './includable/language_selection.html' %}
       </select>
     </div>
 
@@ -49,17 +50,19 @@
     <label for="defs-lang-container">Definitions language: </label>
       <select name ="defs-lang" 
               required>
-        {% include './language_selection.html' %}
+        {% include './includable/language_selection.html' %}
       </select>
     </div>
 
     {% for i in range %}
       <div id="item-{{ i }}" class="form-line study-item">
-        {% include './study-item.html' %}
+        {% include './includable/study-item.html' %}
       </div>
     {% endfor %}
   </div>
 
-  <input type="submit" value="Create study set">
+  <input  id   ="study-set-submit"
+          type ="submit" 
+          value="Create study set">
 </form>
 {% endblock %}

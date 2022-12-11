@@ -9,10 +9,14 @@ $transparent-ghostwhite: #f8f8ff47;
 // Bootstrap variables and modifications
 
 $theme-colors: (
-  "porffor": #3a003d
+  "porffor": #200722
 );
 
 // The rest
+
+* {
+  box-sizing: border-box;
+}
 
 @import "../bootstrap/scss/bootstrap";
 
@@ -22,10 +26,10 @@ html {
 
 .body {
   background-color: $background-color;
-  padding: 70px 20px;
+  padding         : 70px 20px;
 
   font-family: $font-main;
-  color:       $text-color;
+  color      : $text-color;
 }
 
 h1 {
@@ -38,23 +42,23 @@ h1 {
 
 .grid-container {
   display: grid;
-  gap: 40px;
+  gap    : 40px;
   grid-template-columns: 400px 400px;
-  justify-content: center;
+  justify-content      : center;
 }
 
 .form-line, .form-cell {
-  border-radius: 21.37px;
-  box-shadow: 0 0 5px $transparent-ghostwhite,
-              0 0 5px $transparent-ghostwhite inset;
-  padding: 10px;
-  justify-content: space-evenly;
-  background: $background-color
+  border-radius   : 21.37px;
+  box-shadow      : 0 0 5px $transparent-ghostwhite,
+                    0 0 5px $transparent-ghostwhite inset;
+  padding         : 10px;
+  justify-content : space-evenly;
+  background      : $background-color
 }
 
 .form-line {
   grid-column: 1 / span 2;
-  display: grid;
+  display    : grid;
   grid-template-columns: auto auto;
 }
 
@@ -63,22 +67,35 @@ h1 {
 }
 
 input, textarea, select {
-  width: 100%;
-  border-radius: 20px;
-  padding: 8px 20px;
+  width           : 100%;
+  border-radius   : 20px;
+  padding         : 8px 20px;
   background-color: $background-color;
-  border: none;
-  color: $text-color;
+  border          : none;
+  color           : $text-color;
 
   &:active, &:focus, &:hover {
     border: none;
   }
 }
 
-input[type=submit] {
+.category-input {
+  margin-top : 5px;
+  grid-column: span 2;
+  width      : 150px;
+}
+
+#study-set-submit {
   background-color: $transparent-ghostwhite;
-  max-width: min-content;
-  margin: auto;
+  cursor          : pointer;
+  display         : block;
+  max-width       : min-content;
+  margin          : auto;
+  margin-top      : 15px;
+
+  &:hover {
+    box-shadow: 0 0 5px ghostwhite;
+  }
 }
 
 

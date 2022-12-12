@@ -61,11 +61,7 @@ def register(request):
     else:
         return render(request, "gwybodaeth/register.html")
 
-
-
-
-
-
+################################################################################
 
 def index(request):
     return render(request, "gwybodaeth/index.html")

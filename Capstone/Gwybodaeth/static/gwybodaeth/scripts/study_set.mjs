@@ -29,13 +29,34 @@ var StudySet = (function(){
     return false;
   }
 
+  function getNewStudySetData() {
+    let   data       = {};
+    const studyItems = document.getElementsByClassName("study-item");
+
+    Array.from(studyItems).forEach(studyItem => {
+      const id         = studyItem.id.slice(5);
+
+      const term       = studyItem.querySelector("[name=term]")      .innerHTML;
+      const definition = studyItem.querySelector("[name=definition]").innerHTML;
+      const category   = studyItem.querySelector("[name=category")   .value;
+
+      data[`${id}`] = { "term"      : `${term}`,
+                        "definition": `${definition}`,
+                        "category"  : `${category}` };
+
+    })
+    console.log(data);
+    return data;
+  }
+
 // Private functions
 
 
 
 return {
-  testFunction  : testFunction,
-  createStudySet: createStudySet,
+  testFunction      : testFunction,
+  createStudySet    : createStudySet,
+  getNewStudySetData: getNewStudySetData
 };
 })();
 
@@ -48,5 +69,7 @@ $(document).ready(function(){
   if (!!createStudySetForm) {
     createStudySetForm.onsubmit = StudySet.createStudySet;
   }
+
+  StudySet.getNewStudySetData();
 
 })

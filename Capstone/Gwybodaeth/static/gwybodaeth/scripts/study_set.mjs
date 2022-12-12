@@ -49,6 +49,25 @@ var StudySet = (function(){
     return data;
   }
 
+  function test_getNewStudySetData() {
+    let   data       = {};
+    
+    $(".study-item").each(function() {
+      const id         = $(this).attr('id').slice(5);
+
+      const term       = $(this).find("[name='term']")      .val();
+      const definition = $(this).find("[name='definition']").val();
+      const category   = $(this).find("[name='category']")  .val();
+
+      data[`${id}`] = { "term"      : `${term}`,
+                        "definition": `${definition}`,
+                        "category"  : `${category}` };
+
+    })
+    console.log(data);
+    return data;
+  }
+
 // Private functions
 
 
@@ -56,7 +75,8 @@ var StudySet = (function(){
 return {
   testFunction      : testFunction,
   createStudySet    : createStudySet,
-  getNewStudySetData: getNewStudySetData
+  getNewStudySetData: getNewStudySetData,
+  test_getNewStudySetData: test_getNewStudySetData
 };
 })();
 
@@ -70,6 +90,15 @@ $(document).ready(function(){
     createStudySetForm.onsubmit = StudySet.createStudySet;
   }
 
+  console.log("Vanilla method:")
+  var startTime = performance.now()
   StudySet.getNewStudySetData();
+  var endTime = performance.now()
+  console.log(`Vanilla method: ${endTime - startTime} milliseconds.`);
 
+  console.log("JQuery method:")
+  var jqueryStart = performance.now();
+  StudySet.test_getNewStudySetData();
+  var jqueryEnd = performance.now();
+  console.log(`JQuery method: ${jqueryEnd - jqueryStart} miliseconds.`);
 })

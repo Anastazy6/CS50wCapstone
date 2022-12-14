@@ -75,6 +75,7 @@ def create_set(request):
     if request.method == 'POST':
         print("Create study set form sent. Warning: functionality is not yet implemented!")
 
+        print(request.body)
         data = json.loads(request.body)
         print(data)
 

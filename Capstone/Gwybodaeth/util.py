@@ -15,3 +15,14 @@ def require_method(request, method, status=400):
     if not request.method == method:
         return JsonResponse({"error": f"{method} request required"},
                             status=status)
+
+def require_login(request, error_message="Login required!"):
+    '''
+    Some sort of @login_required that can be attached to a single request method
+    if a view allows more than one. Also sends a JsonResponse a user is not logged
+    in while trying to access stuff only accessible to authenticated users.
+    '''
+    if not request.user.is_authenticated:
+            return JsonResponse(
+                {   "error" : error_message
+                },   status = 403)

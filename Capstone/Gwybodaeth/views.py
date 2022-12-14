@@ -70,13 +70,15 @@ def index(request):
 
 
 def create_set(request):
+    # TODO: Expand this feature: 
+    #   A) allow the user to expand the form to create study sets with more than 5 items.
+    #   This should be done with Java Script. Ideally, the user should be able to add another
+    #   form line with the Tab key if they tab from the last form cell.
+    #   B) allow the user to edit their study sets. This will require python and possibly JS.
     require_method(request, ['GET', 'POST'])
 
     if request.method == 'POST':
-        if not request.user.is_authenticated:
-            return JsonResponse(
-                {   "error" : "Log in to create study sets!"
-                },   status = 403)
+        require_login(request, "Log in to create study sets!")
 
         data = json.loads(request.body)
         
@@ -99,3 +101,16 @@ def create_set(request):
             'range': range(1, 6),
             'debug': True
         })
+
+def user_sets(request, username):
+    require_method(request, 'GET')
+    
+    if not username == request.user.username:
+        print("Accessing study sets belonging to another user.\
+                This may or may not be allowed (TODO as an optional feature.)")
+
+    sets = Study_set.objects.filter(author__username=username)
+
+    return render(request, "gwybodaeth/user_sets.html", {
+        "sets": sets
+    })

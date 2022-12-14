@@ -1,0 +1,16 @@
+{% extends './layout.html' %}
+
+{% block title %}
+  {{ user.username|title }}'s sets
+{% endblock %}
+
+{% block body %}
+  TODO
+
+  {% for set in sets %}
+    <h1> {{ set.title }} </h1>
+  {% empty %}
+    <h3> You haven't created any study sets! </h3>
+    <p> Maybe it's time to <a href="{% url 'create-set' %}">create one</a>?
+  {% endfor %}
+{% endblock %}

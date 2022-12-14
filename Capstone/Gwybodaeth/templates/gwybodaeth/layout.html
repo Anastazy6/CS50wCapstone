@@ -31,7 +31,7 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="">Your study sets</a>
+                    <a class="nav-link" href="{% url 'user-sets' user.username %}">Your study sets</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'create-set' %}">Create</a>

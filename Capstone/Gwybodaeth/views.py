@@ -73,31 +73,26 @@ def create_set(request):
     require_method(request, ['GET', 'POST'])
 
     if request.method == 'POST':
-        print("Create study set form sent. Warning: functionality is not yet implemented!")
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {   "error" : "Log in to create study sets!"
+                },   status = 403)
 
-        print(request.body)
         data = json.loads(request.body)
-        print(data)
+        
+        Study_set(
+            author      = request.user,
+            title       = data['title'],
+            description = data['description'],
+            terms_lang  = data['terms-lang'],
+            defs_lang   = data['defs-lang'],
+            terms       = data['terms']
+        ).save()
 
-        terms = {}
-        id = 1
-        for key in data:
-            print(f"{key}: {data[key]}")
-
-    #    for term in request.POST['term']:
-      #      new_term = {}
-     #       terms['id']             = id
-
-     #       print(f"ID is {id}, term is {term}")
-     #       new_term['term']        = term
-      #      new_term['definition']  = request.POST['definition'][id - 1]
-     #       new_term['category']    = request.POST['category'][id - 1]
-
-      #      id += 1
-
-        print(terms)
-        return JsonResponse({"todo": "todo"}, status=200)
-        return HttpResponseRedirect(reverse('create-set'))
+        return JsonResponse(
+            {   'study_set': data['title'],
+                'action'   : "Create"
+            },   status    = 200)
 
     else:
         return render(request, "gwybodaeth/create_set.html", {

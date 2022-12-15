@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.forms import CharField
+from datetime import datetime 
 
 # Create your models here.
 
@@ -19,6 +20,8 @@ class Study_set(models.Model):
     terms_lang  = models.CharField(max_length=8)
     terms       = models.JSONField()
 
+    timestamp   = models.DateTimeField(auto_now_add=True)
+    
     def terms_count(self):
         return len(self.terms.keys())
 

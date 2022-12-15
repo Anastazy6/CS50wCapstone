@@ -8,8 +8,8 @@ class UserAdmin(admin.ModelAdmin):
                     'is_staff', 'is_superuser')
 
 class Study_setAdmin(admin.ModelAdmin):
-    list_display = ('author', 'title', 'description',\
-                    'terms_lang', 'defs_lang', 'terms')
+    list_display = ('author', 'title', 'description', 'terms_lang',\
+                    'defs_lang', 'timestamp', 'terms')
 
 # Register your models here.
 

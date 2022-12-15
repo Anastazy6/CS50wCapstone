@@ -40,14 +40,14 @@ h1 {
   background-color: theme-color("porffor");
 }
 
-.grid-container {
+.grid-container-2 {
   display: grid;
   gap    : 40px;
   grid-template-columns: 400px 400px;
   justify-content      : center;
 }
 
-.form-line, .form-cell {
+.form-line, .form-cell, .set-item {
   border-radius   : 21.37px;
   box-shadow      : 0 0 5px $transparent-ghostwhite,
                     0 0 5px $transparent-ghostwhite inset;
@@ -62,7 +62,7 @@ h1 {
   grid-template-columns: auto auto;
 }
 
-.form-cell {
+.form-cell, .set-item {
   grid-column: span 1;
 }
 

@@ -52,6 +52,6 @@ const _getNewStudySetData = () => {
 return {
   testFunction      : testFunction,
   createStudySet    : createStudySet,
-  // getNewStudySetData: getNewStudySetData // private
+  // getNewStudySetData: _getNewStudySetData // private
 };
 })();

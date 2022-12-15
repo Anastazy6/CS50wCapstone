@@ -19,6 +19,9 @@ class Study_set(models.Model):
     terms_lang  = models.CharField(max_length=8)
     terms       = models.JSONField()
 
+    def terms_count(self):
+        return len(self.terms.keys())
+
 
 # TODO:
 #   Zestawy:

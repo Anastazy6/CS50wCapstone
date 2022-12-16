@@ -114,3 +114,18 @@ def user_sets(request, username):
     return render(request, "gwybodaeth/user_sets.html", {
         "sets": sets
     })
+
+def study_set_view(request, study_set_id):
+    require_method(request, 'GET')
+
+    study_set = get_object_if_exists(Study_set, study_set_id)
+    
+    if not study_set:
+        return render(request, "gwybodaeth/404_page_not_found.html", {
+            "page_type": "Study set",
+            "page_id"  : study_set_id
+        })
+
+    return render(request, "gwybodaeth/study_set.html", {
+        "study_set": study_set
+    })

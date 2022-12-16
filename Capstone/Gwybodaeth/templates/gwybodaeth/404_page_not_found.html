@@ -1,0 +1,11 @@
+{% extends "./layout.html" %}
+
+{% block title %}
+  {{ page_type }} not found!
+{% endblock %}
+
+{% block body %}
+
+  <h1>{{ page_type }} {% if page_id %}{{ page_id }}{% endif %} does not exist!</h1>
+
+{% endblock %}

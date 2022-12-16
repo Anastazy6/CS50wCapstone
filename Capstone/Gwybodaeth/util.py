@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 def require_method(request, method, status=400):
     '''
@@ -26,3 +27,16 @@ def require_login(request, error_message="Login required!"):
             return JsonResponse(
                 {   "error" : error_message
                 },   status = 403)
+
+def get_object_if_exists(model, id):
+    '''
+    Returns an instance of model with given id if exists. Else returns False.
+    Parametres: 
+        model: specifies the database table from which you want to get the object
+        id:    primary key of the object
+    '''
+    try:
+        object = model.objects.get(pk=id)
+    except ObjectDoesNotExist:
+        return False
+    return object

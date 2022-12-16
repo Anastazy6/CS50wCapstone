@@ -9,5 +9,6 @@ urlpatterns = [
     path("create-set", views.create_set,  name="create-set"),
 
 
-    path("<str:username>/sets",     views.user_sets,    name="user-sets")
+    path("<str:username>/sets",  views.user_sets,      name="user-sets"),
+    path("<int:study_set_id>",   views.study_set_view, name="study-set-view")
 ]

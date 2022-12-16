@@ -47,7 +47,19 @@ h1 {
   justify-content      : center;
 }
 
-.form-line, .form-cell, .set-item {
+.grid-container-6 {
+  display: grid;
+  gap    : 20px;
+  grid-template-columns: auto auto auto auto auto auto;
+  justify-content      : center;
+}
+
+.form-cell,
+.form-line, 
+.set-item,
+.study-set-line,
+.study-set-cell-1,
+.study-set-cell-2 {
   border-radius   : 21.37px;
   box-shadow      : 0 0 5px $transparent-ghostwhite,
                     0 0 5px $transparent-ghostwhite inset;
@@ -64,6 +76,18 @@ h1 {
 
 .form-cell, .set-item {
   grid-column: span 1;
+}
+
+.study-set-line {
+  grid-column: 1 / span 6;
+}
+
+.study-set-cell-1 {
+  grid-column: span 1;
+}
+
+.study-set-cell-2 {
+  grid-column: span 2;
 }
 
 input, textarea, select {

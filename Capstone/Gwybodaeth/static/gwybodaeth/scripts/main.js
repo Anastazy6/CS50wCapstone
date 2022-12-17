@@ -8,4 +8,6 @@ $(document).ready(function(){
   if (!!createStudySetForm) {
     createStudySetForm.onsubmit = StudySet.createStudySet;
   }
+
+  console.log(StudySet.loadStudyTerms());
 })

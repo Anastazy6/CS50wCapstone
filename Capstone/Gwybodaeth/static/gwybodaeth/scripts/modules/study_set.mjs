@@ -1,7 +1,7 @@
 export const StudySet = (function(){
 // Public functions
   const testFunction = () => {
-    console.log("Test successfull");
+    console.log("StudySet module loaded successfully!");
   }
 
   const createStudySet = () => {
@@ -26,9 +26,28 @@ export const StudySet = (function(){
     return false;
   }
 
+  const loadStudyTerms = () => {
+    fetch(`/load/${_getStudySetID()}`)
+    .then(response => response.json())
+    .then(result => {
+      _fillStudySetViewWithTerms(result['terms']);
+    })
+  }
+
 
 
 // Private functions
+
+const _createStudyTerm = (termData) => {
+  console.log('In createStudyTerm, termData:');
+  console.log(termData);
+}
+
+const _fillStudySetViewWithTerms = (terms) => {
+  Object.entries(terms).forEach(term => {
+    _createStudyTerm(term);
+  })
+}
 
 const _getNewStudySetData = () => {
   let   data       = {};
@@ -48,10 +67,15 @@ const _getNewStudySetData = () => {
   return data;
 }
 
+const _getStudySetID = () => {
+  return window.location.pathname.slice(1)
+}
+
+
 //
 return {
   testFunction      : testFunction,
   createStudySet    : createStudySet,
-  // getNewStudySetData: _getNewStudySetData // private
+  loadStudyTerms    : loadStudyTerms,
 };
 })();

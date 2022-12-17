@@ -61,11 +61,12 @@ def register(request):
     else:
         return render(request, "gwybodaeth/register.html")
 
+
+
 ################################################################################
 
 def index(request):
     return render(request, "gwybodaeth/index.html")
-
 
 
 
@@ -102,6 +103,8 @@ def create_set(request):
             'debug': True
         })
 
+
+
 def user_sets(request, username):
     require_method(request, 'GET')
     
@@ -115,11 +118,13 @@ def user_sets(request, username):
         "sets": sets
     })
 
+
+
 def study_set_view(request, study_set_id):
     require_method(request, 'GET')
 
     study_set = get_object_if_exists(Study_set, study_set_id)
-    
+
     if not study_set:
         return render(request, "gwybodaeth/404_page_not_found.html", {
             "page_type": "Study set",
@@ -129,3 +134,18 @@ def study_set_view(request, study_set_id):
     return render(request, "gwybodaeth/study_set.html", {
         "study_set": study_set
     })
+
+def load_study_terms(request, study_set_id):
+    require_method(request, 'GET')
+
+    study_set = get_object_if_exists(Study_set, study_set_id)
+
+    if not study_set:
+        return JsonResponse(
+            {   "error"  :  "Can't load study set data: Study set " +
+                            f"with ID #{study_set_id} doesn't exist.",
+            },   status  =  404)
+    
+    return JsonResponse(
+        {   "terms" : study_set.terms
+        },   status = 200)

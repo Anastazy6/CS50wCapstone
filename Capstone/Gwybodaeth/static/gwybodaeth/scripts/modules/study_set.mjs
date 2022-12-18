@@ -49,20 +49,13 @@ export const StudySet = (function(){
  * @param {Object} termData[1] - An object/dictionary with 3 keys: "term", "def" (definition), "cat" (category).
  */
 const _createStudyTerm = (termData) => {
-  console.log('In createStudyTerm, termData:');
-  console.log(termData);
-  console.log(termData[0]);
-  console.log(termData[1]);
-
   const studyItem = _createStudyTermContainer(termData[0]);
 
   Object.entries(termData[1]).forEach(([key, value]) => {
     studyItem.append(_createStudyTermFields(key, value));
   })
-
   studyItem.append(_createStudyTermOptions());
 
-  console.log(studyItem);
   return studyItem;
 }
 
@@ -79,7 +72,6 @@ const _createStudyTermContainer = (termID) => {
 
 
 const _createStudyTermFields = (key, value) => {
-  console.log("Key is:" + key);
   const studyField = document.createElement("div");
   studyField.classList.add(`study-${key}`);
   studyField.classList.add((key === 'cat') ? "study-set-cell-1" : "study-set-cell-2");
@@ -103,10 +95,9 @@ const _createStudyTermOptions = () => {
 
 const _fillStudySetViewWithTerms = (terms) => {
   const studyItems = document.getElementById("study-items");
-
+  
   Object.entries(terms).forEach(term => {
-    _createStudyTerm(term);
-    //studyItems.append(_createStudyTerm(term));
+    studyItems.append(_createStudyTerm(term));
   })
 }
 

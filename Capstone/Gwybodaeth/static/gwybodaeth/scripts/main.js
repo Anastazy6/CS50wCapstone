@@ -9,5 +9,5 @@ $(document).ready(function(){
     createStudySetForm.onsubmit = StudySet.createStudySet;
   }
 
-  console.log(StudySet.loadStudyTerms());
+  StudySet.loadStudyTerms();
 })

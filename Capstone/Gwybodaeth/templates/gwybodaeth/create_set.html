@@ -54,12 +54,19 @@
       </select>
     </div>
 
-    {% for i in range %}
-      <div id="item-{{ i }}" class="form-line study-item">
-        {% include './includable/study-item.html' %}
-      </div>
-    {% endfor %}
+    <div id="study-items-wrapper">
+      {% for i in range %}
+        <div class="form-line study-item">
+          {% include './includable/study-item.html' %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
+
+  <button id="study-set-add-item"
+          type="button">
+    Add item
+  </button>
 
   <input  id   ="study-set-submit"
           type ="submit" 

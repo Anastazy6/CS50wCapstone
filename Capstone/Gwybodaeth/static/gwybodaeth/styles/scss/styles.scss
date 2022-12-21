@@ -49,7 +49,7 @@ h1 {
 
 .grid-container-6 {
   display: grid;
-  gap    : 20px;
+  gap    : 5px;
   grid-template-columns: auto auto auto auto auto auto;
   justify-content      : center;
 }
@@ -57,16 +57,34 @@ h1 {
 .form-cell,
 .form-line, 
 .set-item,
-.study-set-line,
-.study-set-cell-1,
-.study-set-cell-2 {
+.study-item,
+.study-set-line {
   border-radius   : 21.37px;
   box-shadow      : 0 0 5px $transparent-ghostwhite,
                     0 0 5px $transparent-ghostwhite inset;
   padding         : 10px;
   justify-content : space-evenly;
-  background      : $background-color
+  background      : $background-color;
+  
 }
+
+.form-line,
+.study-set-line,
+.study-item {
+  max-width       : 1200px;
+  margin          : auto;
+  margin-top      : 10px;
+  vertical-align  : middle;
+}
+
+.study-set-cell-1 {
+  width: 150px;
+}
+
+.study-set-cell-2 {
+  width: 400px;
+}
+
 
 .form-line {
   grid-column: 1 / span 2;
@@ -88,9 +106,25 @@ h1 {
 
 .study-set-cell-2 {
   grid-column: span 2;
+
 }
 
-input, textarea, select {
+.study-set-cell-1,
+.study-set-cell-2 {
+  border-left: 2px solid $transparent-ghostwhite;
+  padding: 5px 10px;
+}
+
+#study-items-wrapper {
+  display: block;
+  width: 840px;
+}
+
+
+input,
+textarea,
+select,
+button {
   width           : 100%;
   border-radius   : 20px;
   padding         : 8px 20px;
@@ -109,11 +143,12 @@ input, textarea, select {
   width      : 150px;
 }
 
-#study-set-submit {
+#study-set-submit,
+#study-set-add-item {
   background-color: $transparent-ghostwhite;
   cursor          : pointer;
   display         : block;
-  max-width       : min-content;
+  max-width       : fit-content;
   margin          : auto;
   margin-top      : 15px;
 

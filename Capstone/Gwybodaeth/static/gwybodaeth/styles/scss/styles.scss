@@ -165,3 +165,35 @@ button {
 .header-centered {
   text-align: center;
 }
+
+/**
+ *  #flashcards-container elements
+ *  The block below is only meant to contain grid-area names for each element.
+ *  Note: keep the elements in order and keep the block clumped together.
+ */
+#flashcards-side-type    { grid-area: type;}
+#flashcards-card-id      { grid-area: id;  }
+#flashcards-category     { grid-area: cat; }
+#flashcards-main         { grid-area: main;}
+#flashcards-options      { grid-area: opts;}
+#flashcards-button-left  { grid-area: butl;}
+#flashcards-button-right { grid-area: butr;}
+
+#flashcards-container {
+  background: red;
+  padding: 10px;
+  display: grid;
+  max-width: 800px;
+  min-height: 400px;
+  margin: auto;
+  margin-top: 30px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 50px 250px 50px 50px;
+  grid-template-areas: 
+    'type .    id   id   .    opts'
+    'main main main main main main'
+    '.    cat  cat  cat  cat  .   '
+    'butl butl butl butr butr butr'
+  ;
+}
+

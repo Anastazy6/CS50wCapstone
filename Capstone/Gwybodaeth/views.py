@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import json
 from django.db import IntegrityError
@@ -110,7 +109,8 @@ def user_sets(request, username):
     
     if not username == request.user.username:
         print("Accessing study sets belonging to another user.\
-                This may or may not be allowed (TODO as an optional feature.)")
+                This may or may not be allowed (TODO as an optional feature.\
+                Type: advanced (to be done AFTER the important parts are done and working))")
 
     sets = Study_set.objects.filter(author__username=username)
 
@@ -126,14 +126,27 @@ def study_set_view(request, study_set_id):
     study_set = get_object_if_exists(Study_set, study_set_id)
 
     if not study_set:
-        return render(request, "gwybodaeth/404_page_not_found.html", {
-            "page_type": "Study set",
-            "page_id"  : study_set_id
-        })
+        return page_not_found(request, "Study set", study_set_id)
 
     return render(request, "gwybodaeth/study_set.html", {
         "study_set": study_set
     })
+
+
+
+def flashcards_view(request, study_set_id):
+    require_method(request, 'GET')
+
+    study_set = get_object_if_exists(Study_set, study_set_id)
+
+    if not study_set:
+        return page_not_found(request, "Study set", study_set_id)
+
+    return render(request, "gwybodaeth/flashcards.html",{
+        "study_set": study_set
+    })
+
+
 
 def load_study_terms(request, study_set_id):
     require_method(request, 'GET')

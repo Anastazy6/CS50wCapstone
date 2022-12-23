@@ -1,0 +1,45 @@
+{% extends './layout.html' %}
+
+{% block title %}
+  {{ study_set.title}} - flashcards
+{% endblock %}
+
+{% block body %}
+  <h1>{{ study_set.title}} - flashcards</h1>
+
+
+  <div id="flashcards-container">
+  
+    <div id="flashcards-side-type">
+      "Term"/"definition"
+    </div>
+
+    <div id="flashcards-card-id">
+      21/37
+    </div>
+
+    <div id="flashcards-category">
+      enw priodol
+    </div>
+
+    <div id="flashcards-main">
+      Term/definition
+    </div>
+
+    <div id="flashcards-options">
+      (hard) (edit)
+    </div>
+
+    <div id="flashcards-button-left">
+      <button><--</button>
+    </div>
+
+    <div id="flashcards-button-right">
+      <button>--></button>
+    </div>
+
+  </div>
+
+
+
+{% endblock %}

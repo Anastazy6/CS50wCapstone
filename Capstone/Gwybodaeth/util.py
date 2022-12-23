@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 
 def require_method(request, method, status=400):
@@ -40,3 +41,9 @@ def get_object_if_exists(model, id):
     except ObjectDoesNotExist:
         return False
     return object
+
+def page_not_found(request, type, id):
+    return render(request, "gwybodaeth/404_page_not_found.html", {
+            "page_type": type,
+            "page_id"  : id
+        })

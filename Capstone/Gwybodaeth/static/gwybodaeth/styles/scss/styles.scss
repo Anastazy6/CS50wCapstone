@@ -4,8 +4,11 @@ $font-main:    Helvetica;
 $font-stylish: 'Times New Roman';
 $text-color: ghostwhite;
 
-$background-color: #191e33;
-$transparent-ghostwhite: #f8f8ff47;
+$background-color         : #191e33;
+$transparent-ghostwhite-15: rgba(250, 250, 255, 0.15);
+$transparent-ghostwhite-08: rgba(250, 250, 255, 0.08);
+$item-background-color : $transparent-ghostwhite-08;
+$item-box-shador-color : $transparent-ghostwhite-15; 
 // Bootstrap variables and modifications
 
 $theme-colors: (
@@ -60,11 +63,11 @@ h1 {
 .study-item,
 .study-set-line {
   border-radius   : 21.37px;
-  box-shadow      : 0 0 5px $transparent-ghostwhite,
-                    0 0 5px $transparent-ghostwhite inset;
+  box-shadow      : 0 0 5px $item-box-shador-color,
+                    0 0 5px $item-box-shador-color inset;
   padding         : 10px;
   justify-content : space-evenly;
-  background      : $background-color;
+  background      : $item-background-color;
   
 }
 
@@ -111,8 +114,8 @@ h1 {
 
 .study-set-cell-1,
 .study-set-cell-2 {
-  border-left: 2px solid $transparent-ghostwhite;
-  padding: 5px 10px;
+  border-left: 2px solid $item-box-shador-color;
+  padding    : 5px 10px;
 }
 
 #study-items-wrapper {
@@ -137,6 +140,17 @@ button {
   }
 }
 
+.learning-options {
+  margin : auto;
+  display: block;
+
+}
+
+.learning-options-button {
+  max-width: 100px;
+  margin: auto;
+}
+
 .category-input {
   margin-top : 5px;
   grid-column: span 2;
@@ -145,7 +159,7 @@ button {
 
 #study-set-submit,
 #study-set-add-item {
-  background-color: $transparent-ghostwhite;
+  background-color: $item-background-color;
   cursor          : pointer;
   display         : block;
   max-width       : fit-content;
@@ -180,20 +194,40 @@ button {
 #flashcards-button-right { grid-area: butr;}
 
 #flashcards-container {
-  background: red;
-  padding: 10px;
-  display: grid;
-  max-width: 800px;
-  min-height: 400px;
-  margin: auto;
-  margin-top: 30px;
+  background   : $item-background-color;
+  border-radius: 21.37px;
+  display      : grid;
+  max-width    : 800px;
+  min-height   : 400px;
+  margin       : auto;
+  margin-top   : 30px;
+  gap          : 10px;
+  padding      : 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 50px 250px 50px 50px;
-  grid-template-areas: 
+  grid-template-rows   : 1fr 4fr 1fr 1fr;
+  grid-template-areas  : 
     'type .    id   id   .    opts'
     'main main main main main main'
     '.    cat  cat  cat  cat  .   '
-    'butl butl butl butr butr butr'
-  ;
+    'butl butl butl butr butr butr';
+
 }
 
+#flashcards-side-type   ,
+#flashcards-card-id     ,
+#flashcards-category    ,
+#flashcards-main        ,
+#flashcards-options     ,
+#flashcards-button-left ,
+#flashcards-button-right {
+  align-self  : center;
+  justify-self: center;
+}
+
+#flashcards-main {
+  font-size: 2.137em;
+}
+
+.flashcards-button-directional {
+  width: 80%;
+}

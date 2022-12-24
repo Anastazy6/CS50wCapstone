@@ -111,16 +111,12 @@ export const StudySet = (function(){
 
 
 
-  const loadStudyTerms = () => {
-    const studySetView = document.getElementById("study-items");
-
-    if (!!studySetView) {
-      fetch(`/load/${_getStudySetID()}`)
-      .then(response => response.json())
-      .then(result => {
-        _fillStudySetViewWithTerms(studySetView, result['terms']);
-      })
-    }
+  const loadStudyTerms = (studySetView) => {
+    fetch(`/load/${_getStudySetID()}`)
+    .then(response => response.json())
+    .then(result => {
+      _fillStudySetViewWithTerms(studySetView, result['terms']);
+    })
   }
 
 

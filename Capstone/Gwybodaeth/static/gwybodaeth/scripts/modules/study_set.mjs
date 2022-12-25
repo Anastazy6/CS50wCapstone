@@ -168,7 +168,7 @@ export const StudySet = (function(){
 
 
   const _createStudyTermOptions = () => {
-    // TODO: create buttons for editing and marking a term as difficult.
+    // TODO (core): create buttons for editing and marking a term as difficult.
     const studyOptions = document.createElement('div');
     studyOptions.classList.add( "study-set-cell-1",
                                 "study-options");
@@ -221,9 +221,3 @@ export const StudySet = (function(){
     loadStudyTerms: loadStudyTerms,
   };
 })();
-
-const addStudyItemButton = document.getElementById("study-set-add-item");
-
-if (!!addStudyItemButton) {
-  addStudyItemButton.onclick = StudySet.addStudyItem;
-}

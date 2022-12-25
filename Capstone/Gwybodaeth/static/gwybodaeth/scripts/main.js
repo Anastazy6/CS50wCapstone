@@ -14,11 +14,13 @@ $(document).ready(function(){
   StudySet.testFunction();
   Flashcards.testFunction();
 
+  const addStudyItemButton = document.getElementById("study-set-add-item");
   const createStudySetForm = document.getElementById("create-set");
-  const studySetView       = document.getElementById("study-items");
   const flashcardsView     = document.getElementById("flashcards-container");
-  
+  const studySetView       = document.getElementById("study-items");
+
+  if (!!addStudyItemButton) {addStudyItemButton.onclick  = StudySet.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = StudySet.createStudySet;}
+  if (!!flashcardsView)     {Flashcards.loadFlashcards();            }
   if (!!studySetView)       {StudySet  .loadStudyTerms(studySetView);}
-  if (!!flashcardsView)     {Flashcards.loadFlashcards(flashcardsView);}
 })

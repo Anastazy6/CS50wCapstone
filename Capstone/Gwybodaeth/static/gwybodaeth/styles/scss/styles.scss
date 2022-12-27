@@ -9,6 +9,9 @@ $transparent-ghostwhite-15: rgba(250, 250, 255, 0.15);
 $transparent-ghostwhite-08: rgba(250, 250, 255, 0.08);
 $item-background-color : $transparent-ghostwhite-08;
 $item-box-shador-color : $transparent-ghostwhite-15; 
+
+$base-z-index: 0;
+
 // Bootstrap variables and modifications
 
 $theme-colors: (
@@ -199,6 +202,7 @@ button {
 #flashcards-button-right { grid-area: butr;}
 
 #flashcards-container {
+  align-items  : stretch;
   background   : $item-background-color;
   border-radius: 21.37px;
   display      : grid;
@@ -208,6 +212,7 @@ button {
   margin-top   : 30px;
   gap          : 10px;
   padding      : 10px;
+  z-index      : $base-z-index;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows   : 1fr 4fr 1fr 1fr;
   grid-template-areas  : 
@@ -231,14 +236,10 @@ button {
 
 #flashcards-main {
   font-size: 2.137em;
-  background: red;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  justify-items: center;
-  justify-content: center;
+  z-index: $base-z-index;
 }
 
 .flashcards-button-directional {
   width: 80%;
+  z-index: $base-z-index + 3;
 }

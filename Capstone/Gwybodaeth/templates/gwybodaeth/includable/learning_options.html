@@ -1,15 +1,17 @@
 <div class="learning-options">
+
+
+    <a href="{% url 'study-set-view' study_set.id %}">
+      <button type ="button"
+              class="learning-options-button btn btn-secondary">
+        Set
+      </button>
+    </a>
+
     <a href="{% url 'flashcards' study_set.id %}">
       <button type ="button"
               class="learning-options-button btn btn-secondary">
         Flashcards
-      </button>
-    </a>
-
-    <a href="">
-      <button type ="button"
-              class="learning-options-button btn btn-secondary">
-        Placeholder
       </button>
     </a>
 

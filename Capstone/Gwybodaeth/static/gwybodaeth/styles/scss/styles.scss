@@ -68,7 +68,7 @@ h1 {
   padding         : 10px;
   justify-content : space-evenly;
   background      : $item-background-color;
-  
+  text-align      : center;
 }
 
 .form-line,
@@ -231,6 +231,12 @@ button {
 
 #flashcards-main {
   font-size: 2.137em;
+  background: red;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
 }
 
 .flashcards-button-directional {

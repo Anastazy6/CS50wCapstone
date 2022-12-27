@@ -17,6 +17,13 @@ Element.prototype.setAttributes = function(attributes) {
   }
 }
 
+/**
+ * Capitalizes a string. The first letter will be upcased whild the rest will be downcased.
+ */
+String.prototype.capitalize = function() {
+  return this[0].toUpperCase() + this.slice(1).toLowerCase();
+}
+
 export const StudySet = (function(){
 // Public functions
   const testFunction = () => {
@@ -34,17 +41,13 @@ export const StudySet = (function(){
     _addStudyItemFormInputsTo(newStudyItem);
 
     studyItemsWrapper.append(newStudyItem);
-    id++;
   }
 
   const _addStudyItemFormInputsTo = (newStudyItem) => {
     ['term', 'definition'].forEach(name => {
-      console.log(`Adding ${name} textarea...`);
       newStudyItem.append(_createStudyItemTextarea(name));
     })
-    console.log("Adding category text input...");
     newStudyItem.append(_createStudyItemTextInput("category"));
-    
   }
 
   const _createStudySetInputContainer = () => {
@@ -71,6 +74,7 @@ export const StudySet = (function(){
   }
 
   const _createStudyItemTextInput = (name) => {
+    console.log(name.capitalize());
     const container = _createStudySetInputContainer();
     const input     = document.createElement("input");
 
@@ -79,7 +83,7 @@ export const StudySet = (function(){
     input    .setAttributes(
       { "name"       : name,
         "type"       : "text",
-        "placeholder": name.charAt(0).toUpperCase() + name.slice(1)}
+        "placeholder": name.capitalize()}
     );
 
     return container;

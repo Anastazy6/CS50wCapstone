@@ -5,31 +5,25 @@
 {% endblock %}
 
 {% block body %}
-  <h1>{{ study_set.title}} - flashcards</h1>
 
+  <div class="grid-container-6">
+    <div class="study-set-line">
+      <h2>{{ study_set.title }} - flashcards</h1>
+    </div>
+  </div>
+  
   {% include "./includable/learning_options.html" %}
 
   <div id="flashcards-container">
-  
-    <div id="flashcards-side-type">
-      "Term"/"definition"
-    </div>
-
-    <div id="flashcards-card-id">
-      21/37
-    </div>
-
-    <div id="flashcards-category">
-      enw priodol
-    </div>
-
-    <div id="flashcards-main">
-      Term/definition
-    </div>
-
-    <div id="flashcards-options">
-      (hard) (edit)
-    </div>
+    <!-- Content generated with JS -->
+    <div id="flashcards-side-type"></div>
+    <div id="flashcards-card-id"  >
+      <span id="flashcards-current-id"></span>/<span id="flashcards-total-cards"></span></div>
+    <div id="flashcards-category" ></div>
+    <div id="flashcards-main"     ></div>
+    
+    <!-- TODO: Core -->
+    <div id="flashcards-options">(hard) (edit)</div>
 
     <div  id   ="flashcards-button-left"
           class="flashcards-button-directional">

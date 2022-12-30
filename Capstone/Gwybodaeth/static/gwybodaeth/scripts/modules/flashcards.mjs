@@ -21,42 +21,19 @@ export const Flashcards = (function(){
     const previous   = document.getElementById("flashcards-button-left" );
     const next       = document.getElementById("flashcards-button-right");
 
-  /*  const setDefault = function(firstCard, numberOfCards) {
-      currentCard = firstCard;
-      _set("type",       "Term");
-      _set("id" ,        '1');
-      _set("totalCards", numberOfCards);
-      _set("main",       currentCard.term);
-      _set("category",   currentCard.category || "Uncategorized");
-      // view.options = TODO (core or advanced);
-  
-    }
-  
-    const flip = function() {
-      (type.innerHTML === 'Term') ? _showDefinition() : _showTerm(); 
-    };
-
-    const _showTerm = function() {
-      set("type", "Term");
-      set("main", currentCard.term);
-    }
-
-    const _showDefinition = function() {
-      set("type", "Definition");
-      set("main", currentCard.definition);
-    }
-
-
+    /**
+     * Allows to set a flashcards view element's inner HTML to a chosen value. 
+     * Eliminates the need to explicitly use .innerHTML method and ensures that
+     * the attribute exists before setting its value.
+     * @param {String} attr 
+     * @param {String} value 
+     */
     const set = function(attr, value) {
       if (attr in View) { View[`${attr}`].innerHTML = value };
     }
 
-    // TODO: This solution doesn't work as intended. Clicking on main should flip the card too.
-    container.onclick = function(event) {
-      if (this === event.target) { flip() };
-    }
-  */
     return {
+      container : container,
       type      : type,
       id        : id,
       totalCards: totalCards,
@@ -66,39 +43,49 @@ export const Flashcards = (function(){
       previous  : previous,
       next      : next,
       set       : set,
-   //   setDefault: setDefault
     }
   })();
 
+
+
   const FlashcardsFactory = (id, term, definition, category, options=null) => {
-    const show = function(type="Term") {
-      View.set("type",      this.type);
-      View.set("main",     (this.type === "Term") ? this.term : this.definition );
-      View.set("category",  this.category);
+    const show = function() {
+      _showTerm();
+      View.set("id",       _currentCardIndex + 1);
+      View.set("category", category);
     }
 
-    const flip = function() {
-      (View.type.innerHTML === 'Term') ? _showDefinition() : _showTerm(); 
+    const flip = () => {
+      if (View.type.innerHTML === 'Term') {
+        _showDefinition();
+      } else{
+        _showTerm(); 
+      } 
     };
 
     const _showTerm = function() {
       View.set("type", "Term");
-      View.set("main", currentCard.term);
+      View.set("main", term);
     }
 
     const _showDefinition = function() {
-      set("type", "Definition");
-      set("main", currentCard.definition);
+      View.set("type", "Definition");
+      View.set("main", definition);
     }
 
-    return {id, term, definition, category, options,
-            show, flip};
+    return {  id, 
+              term,
+              definition,
+              category,
+              options,
+              show,
+              flip
+            };
   }
 
+
+
   // Public
-
-  let currentCard;
-
 
   const loadFlashcards = () => { 
     fetch(`/load/${_getStudySetID()}`)
@@ -110,10 +97,17 @@ export const Flashcards = (function(){
   
 
   // Private
+  let _currentCardIndex;
+  let _flashcards;
+  const _getCurrentCard = () => { return _flashcards[_currentCardIndex]; }
+
+
 
   const _getStudySetID = () => {
     return window.location.pathname.slice(1).split("/")[0];
   }
+
+
 
   const _createFlashcardsList = (data) => {
     let flashcardsList = [];
@@ -132,20 +126,65 @@ export const Flashcards = (function(){
 
 
 
-  const _runFlashcards = (flashcards) => {
-    _setDefault(flashcards.length);
-    flashcards[currentCard].show();
-    
+  const _runFlashcards = (flashcardsList) => {
+    _initialize(flashcardsList);
+    _addEventListeners();
   }
 
+
+
+  const _initialize = (flashcardsList) => {
+    _flashcards = flashcardsList;
+    _setDefault(_flashcards.length);
+    _getCurrentCard().show();
+  }
+
+
+
+  const _addEventListeners = () => {
+    View.main    .onclick = _getCurrentCard().flip;
+    View.previous.onclick = _showPreviousCard;
+    View.next    .onclick = _showNextCard;
+  }
+
+
+/*
+  const _flip = () => {
+    console.log(_getCurrentCard());
+    if (View.type.innerHTML === 'Term') {
+      _getCurrentCard()._showDefinition();
+    } else{
+      _getCurrentCard()._showTerm(); 
+    } 
+  };
+*/
+
+
+  const _showPreviousCard = () => {
+    if (_currentCardIndex > 0) {
+      _currentCardIndex--;
+      _getCurrentCard().show();
+    }
+  }
+
+
+
+  const _showNextCard = () => {
+    if (_currentCardIndex < (_flashcards.length - 1)) {
+      _currentCardIndex++;
+      _getCurrentCard().show();
+    } 
+  }
+
+
+
   const _setDefault = (count) => {
-    currentCard   = 0;
-    View.set('id',         `${parseInt(currentCard) + 1}`);
+    _currentCardIndex   = 0;
+    View.set('id',         `${parseInt(_currentCardIndex) + 1}`); // 1
     View.set("totalCards", count);
   }
 
-
-
+  
   // Return
 
   return {

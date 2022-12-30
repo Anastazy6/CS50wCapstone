@@ -74,7 +74,6 @@ export const StudySet = (function(){
   }
 
   const _createStudyItemTextInput = (name) => {
-    console.log(name.capitalize());
     const container = _createStudySetInputContainer();
     const input     = document.createElement("input");
 
@@ -192,10 +191,10 @@ export const StudySet = (function(){
 
 
   const _getNewStudySetData = () => {
+    let   id         = 1
     let   data       = {};
     const studyItems = document.getElementsByClassName("study-item");
-
-    let id = 1
+    
     Array.from(studyItems).forEach(studyItem => {
       const term       = studyItem.querySelector("[name=term]"      ).value;
       const definition = studyItem.querySelector("[name=definition]").value;

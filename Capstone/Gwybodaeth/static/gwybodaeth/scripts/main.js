@@ -10,7 +10,7 @@ import {StudySet}     from "./modules/study_set.mjs"
 import {Flashcards}   from "./modules/flashcards.mjs";
 
 
-$(document).ready(function(){
+document.addEventListener("DOMContentLoaded", function() {
   StudySet.testFunction();
   Flashcards.testFunction();
 

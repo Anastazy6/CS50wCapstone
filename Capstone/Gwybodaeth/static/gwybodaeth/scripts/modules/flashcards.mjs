@@ -28,9 +28,29 @@ export const Flashcards = (function(){
      * @param {String} attr 
      * @param {String} value 
      */
-    const set = function(attr, value) {
-      if (attr in View) { View[`${attr}`].innerHTML = value };
+    const _set = function(attr, value) {
+      if (attr in View && !(attr in [previous, next])) {
+        View[`${attr}`].innerHTML = value;
+      } else {
+        console.log( `Cannot assign value "${value}" to attribute "${attr}"\
+                      because it either doesn't exist or shouldn't be changed.`);
+      }
     }
+
+
+    /**
+     * Allows to set values for multiple View elements with one function call.
+     * Takes an object as an argument. The object consists of key-value pairs, where
+     * the key is the name of a particular view element and the value is what it is going 
+     * to be the element's inner HTML.
+     * @param {Object} params 
+     */
+    const setValues = function(params) {
+      Object.entries(params).forEach(([element, value]) => {
+        _set(element, value);
+      })
+    }
+
 
     return {
       container : container,
@@ -42,45 +62,91 @@ export const Flashcards = (function(){
       category  : category,
       previous  : previous,
       next      : next,
-      set       : set,
+      setValues : setValues
     }
   })();
 
 
 
-  const FlashcardsFactory = (id, term, definition, category, options=null) => {
-    const show = function() {
-      _showTerm();
-      View.set("id",       _currentCardIndex + 1);
-      View.set("category", category);
+  class Flashcard {
+    static flashcards   = [];
+    static currentIndex = 0;
+    static currentCard  = () => { return this.flashcards[this.currentIndex]; }
+
+    static createList = (data) => {
+      Object.entries(data).forEach(([id, values]) => {
+        this.flashcards.push(new Flashcard(
+            id,
+            values['term'],
+            values['def' ],
+            values['cat' ],
+            values['options']
+        ));
+      })
+      return this;
     }
 
-    const flip = () => {
+    static flip() {
+      let currentCard = Flashcard.currentCard();
       if (View.type.innerHTML === 'Term') {
-        _showDefinition();
+        currentCard.#showDefinition();
       } else{
-        _showTerm(); 
+        currentCard.#showTerm(); 
       } 
-    };
-
-    const _showTerm = function() {
-      View.set("type", "Term");
-      View.set("main", term);
     }
 
-    const _showDefinition = function() {
-      View.set("type", "Definition");
-      View.set("main", definition);
+    static showNext() {
+      if (Flashcard.currentIndex < (Flashcard.flashcards.length - 1)) {
+        Flashcard.currentIndex++;
+        Flashcard.currentCard().show();
+      }
     }
 
-    return {  id, 
-              term,
-              definition,
-              category,
-              options,
-              show,
-              flip
-            };
+    static showPrevious = () => {
+      if (this.currentIndex > 0) {
+        this.currentIndex--;
+        this.currentCard().show();
+      }
+    }
+    
+
+    constructor(id, term, definition, category, options=null) {
+      this.id         = id;
+      this.term       = term;
+      this.definition = definition;
+      this.category   = category;
+      this.options    = options;
+    }
+    
+
+    show() {
+      this.#showTerm();
+      this.#showUnflippables();
+    }
+
+
+    #showTerm () {
+      View.setValues({
+        "type": "Term",
+        "main": this.term
+      })
+    }
+
+
+    #showDefinition() {
+      View.setValues({
+        "type": "Definition",
+        "main": this.definition
+      })
+    }
+
+
+    #showUnflippables() {
+      View.setValues({
+        "id"      : Flashcard.currentIndex + 1,
+        "category": this.category
+      })
+    }
   }
 
 
@@ -91,100 +157,43 @@ export const Flashcards = (function(){
     fetch(`/load/${_getStudySetID()}`)
     .then(response => response.json())
     .then(result => {
-      _runFlashcards(_createFlashcardsList(result['terms']));
+      _prepareData(result['terms']);
     });
   }
-  
 
   // Private
-  let _currentCardIndex;
-  let _flashcards;
-  const _getCurrentCard = () => { return _flashcards[_currentCardIndex]; }
-
-
 
   const _getStudySetID = () => {
     return window.location.pathname.slice(1).split("/")[0];
   }
 
 
-
-  const _createFlashcardsList = (data) => {
-    let flashcardsList = [];
-
-    Object.entries(data).forEach(([id, values]) => {
-      flashcardsList.push(FlashcardsFactory(
-          id,
-          values['term'],
-          values['def' ],
-          values['cat' ],
-          values['options'] || null
-      ));
-    })
-    return flashcardsList;
+  const _prepareData = (data) => {
+    Flashcard.createList(data);
+    _initialize()
+    Flashcard.currentCard().show();
   }
 
 
-
-  const _runFlashcards = (flashcardsList) => {
-    _initialize(flashcardsList);
+  const _initialize = () => {
     _addEventListeners();
+    _setDefault(Flashcard.flashcards.length)
   }
-
-
-
-  const _initialize = (flashcardsList) => {
-    _flashcards = flashcardsList;
-    _setDefault(_flashcards.length);
-    _getCurrentCard().show();
-  }
-
 
 
   const _addEventListeners = () => {
-    View.main    .onclick = _getCurrentCard().flip;
-    View.previous.onclick = _showPreviousCard;
-    View.next    .onclick = _showNextCard;
+    View.main    .onclick = Flashcard.flip;
+    View.previous.onclick = Flashcard.showPrevious;
+    View.next    .onclick = Flashcard.showNext;
   }
-
-
-/*
-  const _flip = () => {
-    console.log(_getCurrentCard());
-    if (View.type.innerHTML === 'Term') {
-      _getCurrentCard()._showDefinition();
-    } else{
-      _getCurrentCard()._showTerm(); 
-    } 
-  };
-*/
-
-
-  const _showPreviousCard = () => {
-    if (_currentCardIndex > 0) {
-      _currentCardIndex--;
-      _getCurrentCard().show();
-    }
-  }
-
-
-
-  const _showNextCard = () => {
-    if (_currentCardIndex < (_flashcards.length - 1)) {
-      _currentCardIndex++;
-      _getCurrentCard().show();
-    } 
-  }
-
-
 
   const _setDefault = (count) => {
-    _currentCardIndex   = 0;
-    View.set('id',         `${parseInt(_currentCardIndex) + 1}`); // 1
-    View.set("totalCards", count);
+    View.setValues({
+      'id'        : 1, 
+      'totalCards': count
+    })
   }
 
-  
   // Return
 
   return {

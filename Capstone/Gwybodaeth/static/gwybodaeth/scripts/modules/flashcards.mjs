@@ -11,7 +11,6 @@ export const Flashcards = (function(){
    * 
    */
   const View = (function(){
-    const container  = document.getElementById("flashcards-container"   );
     const type       = document.getElementById("flashcards-side-type"   );
     const id         = document.getElementById("flashcards-current-id"  );
     const totalCards = document.getElementById("flashcards-total-cards" );
@@ -20,6 +19,7 @@ export const Flashcards = (function(){
     const category   = document.getElementById("flashcards-category"    );
     const previous   = document.getElementById("flashcards-button-left" );
     const next       = document.getElementById("flashcards-button-right");
+    const shuffle    = document.getElementById("shuffle-button"         );
 
     /**
      * Allows to set a flashcards view element's inner HTML to a chosen value. 
@@ -29,14 +29,15 @@ export const Flashcards = (function(){
      * @param {String} value 
      */
     const _set = function(attr, value) {
-      if (attr in View && !(attr in [previous, next])) {
+      let immutable = [previous, next, shuffle];
+
+      if (attr in View && !(attr in immutable)) {
         View[`${attr}`].innerHTML = value;
       } else {
         console.log( `Cannot assign value "${value}" to attribute "${attr}"\
                       because it either doesn't exist or shouldn't be changed.`);
       }
     }
-
 
     /**
      * Allows to set values for multiple View elements with one function call.
@@ -51,9 +52,7 @@ export const Flashcards = (function(){
       })
     }
 
-
     return {
-      container : container,
       type      : type,
       id        : id,
       totalCards: totalCards,
@@ -62,6 +61,7 @@ export const Flashcards = (function(){
       category  : category,
       previous  : previous,
       next      : next,
+      shuffle   : shuffle,
       setValues : setValues
     }
   })();
@@ -95,6 +95,15 @@ export const Flashcards = (function(){
       } 
     }
 
+    /**
+     * Shuffles the flashcards list and shows the first card from the shuffled list.
+     */
+    static shuffle() {
+      Flashcard.flashcards.sort(() => { return Math.random() - 0.5; });
+      Flashcard.currentIndex = 0;
+      Flashcard.currentCard().show();
+    }
+
     static showNext() {
       if (Flashcard.currentIndex < (Flashcard.flashcards.length - 1)) {
         Flashcard.currentIndex++;
@@ -124,14 +133,12 @@ export const Flashcards = (function(){
       this.#showUnflippables();
     }
 
-
     #showTerm () {
       View.setValues({
         "type": "Term",
         "main": this.term
       })
     }
-
 
     #showDefinition() {
       View.setValues({
@@ -140,7 +147,6 @@ export const Flashcards = (function(){
       })
     }
 
-
     #showUnflippables() {
       View.setValues({
         "id"      : Flashcard.currentIndex + 1,
@@ -148,7 +154,6 @@ export const Flashcards = (function(){
       })
     }
   }
-
 
 
   // Public
@@ -162,6 +167,7 @@ export const Flashcards = (function(){
   }
 
   // Private
+
 
   const _getStudySetID = () => {
     return window.location.pathname.slice(1).split("/")[0];
@@ -185,6 +191,7 @@ export const Flashcards = (function(){
     View.main    .onclick = Flashcard.flip;
     View.previous.onclick = Flashcard.showPrevious;
     View.next    .onclick = Flashcard.showNext;
+    View.shuffle .onclick = Flashcard.shuffle;
   }
 
   const _setDefault = (count) => {

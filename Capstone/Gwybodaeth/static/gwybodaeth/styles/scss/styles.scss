@@ -132,7 +132,7 @@ textarea,
 select,
 button {
   width           : 100%;
-  border-radius   : 20px;
+  border-radius   : 21.37px;
   padding         : 8px 20px;
   background-color: $background-color;
   border          : none;
@@ -243,4 +243,16 @@ button {
   width: 80%;
   z-index: $base-z-index + 3;
   font-size: 1.5em;
+}
+
+#flashcards-extras {
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#shuffle-button {
+  max-width: 100px;
+  border-radius: 21.37px;
 }

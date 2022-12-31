@@ -53,6 +53,47 @@ export const Flashcards = (function(){
       })
     }
 
+  /**
+   * Eh, maybe later...
+   */
+  const initialize = () => {
+    _addEventListeners();
+    _setDefault(Flashcard.flashcards.length);
+  }
+
+  /**
+   * Sets the default values for the View.
+   * Setting "totalCards" to the number of study items in the study set should suffice.
+   */
+    const _setDefault = (count) => {
+      View.setValues({
+        'totalCards': count
+      })
+    }
+
+  /**
+   *  Adds all the event listeners for the module. Insert new event listeners here.
+   */
+  const _addEventListeners = () => {
+    _setFlippableElements();
+    View.previous.onclick = Flashcard.showPrevious;
+    View.next    .onclick = Flashcard.showNext;
+    View.shuffle .onclick = Flashcard.shuffle;
+    View.resort  .onclick = Flashcard.resort;
+  }
+
+  /**
+   *   Adds (onclick = Flashcard.flip) to the view elements which are meant to 
+   *     flip the current flashcard when clicked.
+   */
+  const _setFlippableElements = () => {
+    const flippable = [View.main, View.category];
+    
+    flippable.forEach(view => {
+      view.onclick = Flashcard.flip;
+    })
+  }
+
     return {
       type      : type,
       id        : id,
@@ -64,7 +105,8 @@ export const Flashcards = (function(){
       next      : next,
       shuffle   : shuffle,
       resort    : resort,
-      setValues : setValues
+      setValues : setValues,
+      initialize: initialize
     }
   })();
 
@@ -169,60 +211,27 @@ export const Flashcards = (function(){
 
   // Public
 
-  const loadFlashcards = () => { 
-    fetch(`/load/${_getStudySetID()}`)
-    .then(response => response.json())
-    .then(result => {
-      _prepareData(result['terms']);
-    });
+  const loadFlashcards = (data) => {
+    _prepareData(data);
+    Flashcard.currentCard().show();
   }
 
   // Private
 
-
-  const _getStudySetID = () => {
-    return window.location.pathname.slice(1).split("/")[0];
-  }
-
-
+  /**
+   * Prepares stuff that is necessary to diplay flashcards: the flashcards list itself and the View.
+   * @param {JSON} data 
+   */
   const _prepareData = (data) => {
     Flashcard.createList(data);
-    _initialize();
-    Flashcard.currentCard().show();
+    View     .initialize();
   }
 
-
-  const _initialize = () => {
-    _addEventListeners();
-    _setDefault(Flashcard.flashcards.length);
-  }
-
-
-  const _addEventListeners = () => {
-    _setFlippableElements();
-    View.previous.onclick = Flashcard.showPrevious;
-    View.next    .onclick = Flashcard.showNext;
-    View.shuffle .onclick = Flashcard.shuffle;
-    View.resort  .onclick = Flashcard.resort;
-  }
-  const _setFlippableElements = () => {
-    const flippable = [View.main, View.category];
-    flippable.forEach(view => {
-      view.onclick = Flashcard.flip;
-    })
-  }
-
-  const _setDefault = (count) => {
-    View.setValues({
-      'id'        : 1, 
-      'totalCards': count
-    })
-  }
 
   // Return
 
   return {
     testFunction  : testFunction,
-    loadFlashcards: loadFlashcards
+    loadFlashcards: loadFlashcards,
   };
 })();

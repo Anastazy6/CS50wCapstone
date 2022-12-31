@@ -6,13 +6,17 @@
  *   I guess it's not the best idea as well. At the moment (24.12.2022) I have no better idea tho...
  */
 
+import {Load}         from "./modules/load.mjs";
 import {StudySet}     from "./modules/study_set.mjs"
 import {Flashcards}   from "./modules/flashcards.mjs";
+import {Write}        from "./modules/write.mjs";
 
 
 document.addEventListener("DOMContentLoaded", function() {
+  Load      .testFunction();
   StudySet  .testFunction();
   Flashcards.testFunction();
+  Write     .testFunction();
 
   const addStudyItemButton = document.getElementById("study-set-add-item"  );
   const createStudySetForm = document.getElementById("create-set"          );
@@ -21,6 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!!addStudyItemButton) {addStudyItemButton.onclick  = StudySet.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = StudySet.createStudySet;}
-  if (!!flashcardsView)     {Flashcards.loadFlashcards();            }
-  if (!!studySetView)       {StudySet  .loadStudyTerms(studySetView);}
+  if (!!flashcardsView)     {Load.terms(Flashcards.loadFlashcards);}
+  if (!!studySetView)       {Load.terms(StudySet  .prepareData   );}
 })

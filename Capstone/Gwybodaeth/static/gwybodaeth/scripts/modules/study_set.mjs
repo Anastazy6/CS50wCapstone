@@ -30,67 +30,18 @@ export const StudySet = (function(){
     console.log("StudySet module loaded successfully!");
   }
 
+  const View = function() {
+    const studySet =  document.getElementById("study-items");
+
+    return {
+      studySet: studySet
+    }
+  }()
 
 
   const addStudyItem = () => {
     const studyItemsWrapper = document.getElementById("study-items-wrapper")
     studyItemsWrapper.append(_createNewStudyItem());
-  }
-
-
-  const _createNewStudyItem = () => {
-    const newStudyItem      = document.createElement('div');
-    newStudyItem.classList.add( "form-line",
-                                "study-item");
-    _addStudyItemFormInputsTo(newStudyItem);
-    return newStudyItem;
-  }
-
-  
-  const _addStudyItemFormInputsTo = (newStudyItem) => {
-    ['term', 'definition'].forEach(name => {
-      newStudyItem.append(_createStudyItemTextarea(name));
-    })
-    newStudyItem.append(_createStudyItemTextInput("category"));
-  }
-
-
-  const _createStudySetInputContainer = () => {
-    const container = document.createElement('div');
-    container.classList.add("form-cell");
-
-    return container;
-  }
-
-  const _createStudyItemTextarea = (name) => {
-    const container = _createStudySetInputContainer();
-    const textarea  = document.createElement("textarea");
-    
-    container.append(textarea);
-    textarea .setAttributes(
-      { "name"       : name,
-        "cols"       : 25,
-        "rows"       : 1,
-        "required"   : true,
-        "placeholder": `Enter ${name}`}
-    );
-    
-    return container;
-  }
-
-  const _createStudyItemTextInput = (name) => {
-    const container = _createStudySetInputContainer();
-    const input     = document.createElement("input");
-
-    container.append(input);
-    input    .classList.add(`${name}-input`)
-    input    .setAttributes(
-      { "name"       : name,
-        "type"       : "text",
-        "placeholder": name.capitalize()}
-    );
-
-    return container;
   }
 
 
@@ -119,14 +70,11 @@ export const StudySet = (function(){
 
 
 
-  const loadStudyTerms = (studySetView) => {
-    fetch(`/load/${_getStudySetID()}`)
-    .then(response => response.json())
-    .then(result => {
-      _fillStudySetViewWithTerms(studySetView, result['terms']);
+  const prepareData = (terms) => {
+    Object.entries(terms).forEach(term => {
+      View.studySet.append(_createStudyTerm(term));
     })
   }
-
 
 
   // Private functions
@@ -186,15 +134,6 @@ export const StudySet = (function(){
   }
 
 
-
-  const _fillStudySetViewWithTerms = (studySetView, terms) => {
-    Object.entries(terms).forEach(term => {
-      studySetView.append(_createStudyTerm(term));
-    })
-  }
-
-
-
   const _getNewStudySetData = () => {
     let   id         = 1
     let   data       = {};
@@ -213,12 +152,60 @@ export const StudySet = (function(){
     return data;
   }
 
-
-
-  const _getStudySetID = () => {
-    return window.location.pathname.slice(1);
+  const _createNewStudyItem = () => {
+    const newStudyItem      = document.createElement('div');
+    newStudyItem.classList.add( "form-line",
+                                "study-item");
+    _addFormInputsTo(newStudyItem);
+    return newStudyItem;
   }
 
+
+  const _addFormInputsTo = (newStudyItem) => {
+    ['term', 'definition'].forEach(name => {
+      newStudyItem.append(_createTextarea(name));
+    })
+    newStudyItem.append(_createTextInput("category"));
+  }
+
+
+  const _createInputContainer = () => {
+    const container = document.createElement('div');
+    container.classList.add("form-cell");
+
+    return container;
+  }
+
+  const _createTextarea = (name) => {
+    const container = _createInputContainer();
+    const textarea  = document.createElement("textarea");
+    
+    container.append(textarea);
+    textarea .setAttributes(
+      { "name"       : name,
+        "cols"       : 25,
+        "rows"       : 1,
+        "required"   : true,
+        "placeholder": `Enter ${name}`}
+    );
+    
+    return container;
+  }
+
+  const _createTextInput = (name) => {
+    const container = _createInputContainer();
+    const input     = document.createElement("input");
+
+    container.append(input);
+    input    .classList.add(`${name}-input`)
+    input    .setAttributes(
+      { "name"       : name,
+        "type"       : "text",
+        "placeholder": name.capitalize()}
+    );
+
+    return container;
+  }
 
 
   //
@@ -226,6 +213,6 @@ export const StudySet = (function(){
     testFunction  : testFunction,
     addStudyItem  : addStudyItem,
     createStudySet: createStudySet,
-    loadStudyTerms: loadStudyTerms,
+    prepareData   : prepareData,
   };
 })();

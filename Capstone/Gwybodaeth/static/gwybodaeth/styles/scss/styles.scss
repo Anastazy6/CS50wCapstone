@@ -218,7 +218,6 @@ button {
   min-height   : 400px;
   margin       : auto;
   margin-top   : 30px;
-  gap          : 10px;
   padding      : 10px;
   z-index      : $base-z-index;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -226,7 +225,7 @@ button {
   grid-template-areas  : 
     'type .    id   id   .    opts'
     'main main main main main main'
-    '.    cat  cat  cat  cat  .   '
+    'cat  cat  cat  cat  cat  cat '
     'butl butl butl butr butr butr';
 
 }

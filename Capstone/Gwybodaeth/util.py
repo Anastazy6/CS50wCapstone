@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
+from .models import *
 
 def require_method(request, method, status=400):
     '''
@@ -17,6 +18,8 @@ def require_method(request, method, status=400):
     if not request.method == method:
         return JsonResponse({"error": f"{method} request required"},
                             status=status)
+
+
 
 def require_login(request, error_message="Login required!"):
     '''
@@ -47,3 +50,16 @@ def page_not_found(request, type, id):
             "page_type": type,
             "page_id"  : id
         })
+
+
+def require_study_set(request, study_set_id):
+    '''
+    Returns a study set if it exists. Otherwise forces rendering a 404 error page
+    informing the client that a study set with given id was not found.
+    '''
+    study_set = get_object_if_exists(Study_set, study_set_id)
+
+    if not study_set:
+        return page_not_found(request, "Study set", study_set_id)
+    
+    return study_set

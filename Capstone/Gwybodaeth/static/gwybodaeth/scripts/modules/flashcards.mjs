@@ -20,6 +20,7 @@ export const Flashcards = (function(){
     const previous   = document.getElementById("flashcards-button-left" );
     const next       = document.getElementById("flashcards-button-right");
     const shuffle    = document.getElementById("shuffle-button"         );
+    const resort     = document.getElementById("resort-button"          );
 
     /**
      * Allows to set a flashcards view element's inner HTML to a chosen value. 
@@ -29,7 +30,7 @@ export const Flashcards = (function(){
      * @param {String} value 
      */
     const _set = function(attr, value) {
-      let immutable = [previous, next, shuffle];
+      let immutable = [previous, next, shuffle, resort];
 
       if (attr in View && !(attr in immutable)) {
         View[`${attr}`].innerHTML = value;
@@ -62,6 +63,7 @@ export const Flashcards = (function(){
       previous  : previous,
       next      : next,
       shuffle   : shuffle,
+      resort    : resort,
       setValues : setValues
     }
   })();
@@ -100,6 +102,15 @@ export const Flashcards = (function(){
      */
     static shuffle() {
       Flashcard.flashcards.sort(() => { return Math.random() - 0.5; });
+      Flashcard.showFirst();
+    }
+
+    static resort() {
+      Flashcard.flashcards.sort((first, second) => { return parseInt(first.id) - parseInt(second.id)} );
+      Flashcard.showFirst();
+    }
+
+    static showFirst() {
       Flashcard.currentIndex = 0;
       Flashcard.currentCard().show();
     }
@@ -176,22 +187,29 @@ export const Flashcards = (function(){
 
   const _prepareData = (data) => {
     Flashcard.createList(data);
-    _initialize()
+    _initialize();
     Flashcard.currentCard().show();
   }
 
 
   const _initialize = () => {
     _addEventListeners();
-    _setDefault(Flashcard.flashcards.length)
+    _setDefault(Flashcard.flashcards.length);
   }
 
 
   const _addEventListeners = () => {
-    View.main    .onclick = Flashcard.flip;
+    _setFlippableElements();
     View.previous.onclick = Flashcard.showPrevious;
     View.next    .onclick = Flashcard.showNext;
     View.shuffle .onclick = Flashcard.shuffle;
+    View.resort  .onclick = Flashcard.resort;
+  }
+  const _setFlippableElements = () => {
+    const flippable = [View.main, View.category];
+    flippable.forEach(view => {
+      view.onclick = Flashcard.flip;
+    })
   }
 
   const _setDefault = (count) => {
@@ -206,7 +224,5 @@ export const Flashcards = (function(){
   return {
     testFunction  : testFunction,
     loadFlashcards: loadFlashcards
-
   };
-
 })();

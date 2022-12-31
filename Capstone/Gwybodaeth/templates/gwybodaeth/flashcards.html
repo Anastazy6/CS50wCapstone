@@ -19,8 +19,12 @@
     <div id="flashcards-side-type"></div>
     <div id="flashcards-card-id"  >
       <span id="flashcards-current-id"></span>/<span id="flashcards-total-cards"></span></div>
-    <div id="flashcards-category" ></div>
-    <div id="flashcards-main"     ></div>
+    
+    <div  id   ="flashcards-main"
+          class="grid-centered"></div>
+          
+    <div  id="flashcards-category"
+          class="grid-centered"></div>
     
     <!-- TODO: Core -->
     <div id="flashcards-options">(hard) (edit)</div>
@@ -43,9 +47,15 @@
 
   <div id="flashcards-extras">
     <button id   ="shuffle-button"
-            class="btn btn-secondary"
+            class="btn btn-secondary flashcard-extra"
             type ="button">
       Shuffle
+    </button>
+
+    <button id   ="resort-button"
+            class="btn btn-secondary flashcard-extra"
+            type ="button">
+      Resort
     </button>
   </div>
 

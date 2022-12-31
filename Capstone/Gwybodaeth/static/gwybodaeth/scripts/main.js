@@ -11,13 +11,13 @@ import {Flashcards}   from "./modules/flashcards.mjs";
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  StudySet.testFunction();
+  StudySet  .testFunction();
   Flashcards.testFunction();
 
-  const addStudyItemButton = document.getElementById("study-set-add-item");
-  const createStudySetForm = document.getElementById("create-set");
+  const addStudyItemButton = document.getElementById("study-set-add-item"  );
+  const createStudySetForm = document.getElementById("create-set"          );
   const flashcardsView     = document.getElementById("flashcards-container");
-  const studySetView       = document.getElementById("study-items");
+  const studySetView       = document.getElementById("study-items"         );
 
   if (!!addStudyItemButton) {addStudyItemButton.onclick  = StudySet.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = StudySet.createStudySet;}

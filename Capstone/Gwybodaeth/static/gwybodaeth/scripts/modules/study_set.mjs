@@ -34,21 +34,26 @@ export const StudySet = (function(){
 
   const addStudyItem = () => {
     const studyItemsWrapper = document.getElementById("study-items-wrapper")
+    studyItemsWrapper.append(_createNewStudyItem());
+  }
+
+
+  const _createNewStudyItem = () => {
     const newStudyItem      = document.createElement('div');
-    
     newStudyItem.classList.add( "form-line",
                                 "study-item");
     _addStudyItemFormInputsTo(newStudyItem);
-
-    studyItemsWrapper.append(newStudyItem);
+    return newStudyItem;
   }
 
+  
   const _addStudyItemFormInputsTo = (newStudyItem) => {
     ['term', 'definition'].forEach(name => {
       newStudyItem.append(_createStudyItemTextarea(name));
     })
     newStudyItem.append(_createStudyItemTextInput("category"));
   }
+
 
   const _createStudySetInputContainer = () => {
     const container = document.createElement('div');

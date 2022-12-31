@@ -123,10 +123,7 @@ def user_sets(request, username):
 def study_set_view(request, study_set_id):
     require_method(request, 'GET')
 
-    study_set = get_object_if_exists(Study_set, study_set_id)
-
-    if not study_set:
-        return page_not_found(request, "Study set", study_set_id)
+    study_set = require_study_set(request, study_set_id)
 
     return render(request, "gwybodaeth/study_set.html", {
         "study_set": study_set
@@ -136,13 +133,21 @@ def study_set_view(request, study_set_id):
 
 def flashcards_view(request, study_set_id):
     require_method(request, 'GET')
+    
+    study_set = require_study_set(request, study_set_id)
 
-    study_set = get_object_if_exists(Study_set, study_set_id)
+    return render(request, "gwybodaeth/flashcards.html", {
+        "study_set": study_set
+    })
 
-    if not study_set:
-        return page_not_found(request, "Study set", study_set_id)
 
-    return render(request, "gwybodaeth/flashcards.html",{
+
+def write_view(request, study_set_id):
+    require_method    (request, 'GET')
+    
+    study_set = require_study_set(request, study_set_id)
+
+    return render(request, "gwybodaeth/write.html", {
         "study_set": study_set
     })
 

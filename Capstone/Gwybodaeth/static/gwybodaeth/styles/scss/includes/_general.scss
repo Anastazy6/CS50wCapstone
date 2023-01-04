@@ -1,0 +1,102 @@
+/*
+ * Styles that can be reused among several apps (like flashcards, write etc.)  
+ *   should go into this file.
+ */
+
+
+html {
+  background-color: $background-color;
+} 
+
+.body {
+  background-color: $background-color;
+  padding         : 70px 20px;
+
+  font-family: $font-main;
+  color      : $text-color;
+}
+
+h1 {
+  color: $text-color;
+} 
+
+
+.bg-porffor {
+  background-color: theme-color("porffor");
+}
+
+input,
+textarea,
+select,
+button {
+  width           : 100%;
+  border-radius   : 21.37px;
+  padding         : 8px 20px;
+  background-color: $background-color;
+  border          : none;
+  color           : $text-color;
+
+  &:active, &:focus, &:hover {
+    border: none;
+  }
+}
+
+.learning-options {
+  display      : block;
+  margin       : auto;
+  margin-top   : 30px;
+  margin-bottom: 30px;
+  position     : relative;
+  text-align   : center;
+}
+
+.learning-options-button {
+  max-width    : 150px;
+  margin       : auto;
+  text-align   : center;
+  border-radius: 21.37px;
+}
+
+#study-set-submit,
+#study-set-add-item {
+  background-color: $item-background-color;
+  cursor          : pointer;
+  display         : block;
+  max-width       : fit-content;
+  margin          : auto;
+  margin-top      : 15px;
+
+  &:hover {
+    box-shadow: 0 0 5px ghostwhite;
+  }
+}
+
+.stylish {
+  font-family: $font-stylish;
+}
+
+.header-centered {
+  text-align: center;
+}
+
+.grid-centered {
+  display        : flex;    // --------------------------------------------------------------- //
+  align-items    : center;  //   These three center content both horizontally and vertically   //
+  justify-content: center;  // --------------------------------------------------------------- //
+  width    : 100%;
+  height   : 100%;
+}
+
+.grid-standard-container {
+  align-items  : stretch;
+  background   : $item-background-color;
+  border-radius: 21.37px;
+  display      : grid;
+  gap          : 5px;
+  max-width    : 800px;
+  min-height   : 400px;
+  margin       : auto;
+  margin-top   : 30px;
+  padding      : 10px;
+  z-index      : $base-z-index;        
+}

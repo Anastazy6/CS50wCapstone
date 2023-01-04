@@ -1,0 +1,57 @@
+/**
+ *  #flashcards-container elements
+ *  The block below is only meant to contain grid-area names for each element.
+ *  Note: keep the elements in order and keep the block clumped together.
+ */
+#flashcards-side-type    { grid-area: type;}
+#flashcards-card-id      { grid-area: id;  }
+#flashcards-category     { grid-area: cat; }
+#flashcards-main         { grid-area: main;}
+#flashcards-options      { grid-area: opts;}
+#flashcards-button-left  { grid-area: butl;}
+#flashcards-button-right { grid-area: butr;}
+
+
+#flashcards-container {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows   : 1fr 4fr 1fr 1fr;
+  grid-template-areas  : 
+    'type .    id   id   .    opts'
+    'main main main main main main'
+    'cat  cat  cat  cat  cat  cat '
+    'butl butl butl butr butr butr';
+}
+
+#flashcards-side-type   ,
+#flashcards-card-id     ,
+#flashcards-category    ,
+#flashcards-main        ,
+#flashcards-options     ,
+#flashcards-button-left ,
+#flashcards-button-right {
+  align-self  : center;
+  justify-self: center;
+}
+
+#flashcards-main {
+  font-size: 2.137em;
+  z-index  : $base-z-index;
+}
+
+.flashcards-button-directional {
+  width    : 80%;
+  z-index  : $base-z-index + 3;
+  font-size: 1.5em;
+}
+
+#flashcards-extras {
+  display   : block;
+  margin    : auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.flashcard-extra {
+  max-width    : 100px;
+  border-radius: 21.37px;
+}

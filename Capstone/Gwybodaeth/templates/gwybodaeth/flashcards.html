@@ -6,15 +6,12 @@
 
 {% block body %}
 
-  <div class="grid-container-6">
-    <div class="study-set-line">
-      <h2>{{ study_set.title }} - flashcards</h1>
-    </div>
-  </div>
-  
+
+  {% include "./includable/study_set_header.html" %}
   {% include "./includable/learning_options.html" %}
 
-  <div id="flashcards-container">
+  <div  id   ="flashcards-container"
+        class="grid-standard-container">
     <!-- Content generated with JS -->
     <div id="flashcards-side-type"></div>
     <div id="flashcards-card-id"  >
@@ -22,7 +19,7 @@
     
     <div  id   ="flashcards-main"
           class="grid-centered"></div>
-          
+
     <div  id="flashcards-category"
           class="grid-centered"></div>
     

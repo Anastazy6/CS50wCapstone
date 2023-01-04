@@ -126,7 +126,8 @@ def study_set_view(request, study_set_id):
     study_set = require_study_set(request, study_set_id)
 
     return render(request, "gwybodaeth/study_set.html", {
-        "study_set": study_set
+        "study_set": study_set,
+    #   "subtitle" : None       # Keeping this line for information
     })
 
 
@@ -137,7 +138,8 @@ def flashcards_view(request, study_set_id):
     study_set = require_study_set(request, study_set_id)
 
     return render(request, "gwybodaeth/flashcards.html", {
-        "study_set": study_set
+        "study_set": study_set,
+        "subtitle" : "flashcards"
     })
 
 
@@ -148,7 +150,8 @@ def write_view(request, study_set_id):
     study_set = require_study_set(request, study_set_id)
 
     return render(request, "gwybodaeth/write.html", {
-        "study_set": study_set
+        "study_set": study_set,
+        "subtitle" : "write"
     })
 
 

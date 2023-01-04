@@ -6,22 +6,12 @@
 
 {% block body %}
 
-  <div class="grid-container-6">
-
-    <div class="study-set-line">
-      <h2>{{ study_set.title }}</h2>
-    </div>
-
-    <div class="study-set-line">
-      <p>{{ study_set.description }}</p>
-    </div>
-  </div>
-
-  {% include "./includable/learning_options.html" %}
+  {% include "./includable/study_set_header.html"      %}
+  {% include "./includable/study_set_description.html" %}
+  {% include "./includable/learning_options.html"      %}
 
   <div id="study-items" class="study-items">
-    <!-- Generated with Java Script -->
+    <!-- Generated with JavaScript -->
   </div>
   
-
 {% endblock %}

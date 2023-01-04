@@ -1,0 +1,85 @@
+.grid-container-2 {
+  display: grid;
+  gap    : 40px;
+  grid-template-columns: 400px 400px;
+  justify-content      : center;
+}
+
+.grid-container-6 {
+  display: grid;
+  gap    : 5px;
+  grid-template-columns: auto auto auto auto auto auto;
+  justify-content      : center;
+}
+
+.form-cell,
+.form-line, 
+.set-item,
+.study-item,
+.study-set-line {
+  border-radius   : 21.37px;
+  box-shadow      : 0 0 5px $item-box-shador-color,
+                    0 0 5px $item-box-shador-color inset;
+  padding         : 10px;
+  justify-content : space-evenly;
+  background      : $item-background-color;
+  text-align      : center;
+}
+
+.form-line,
+.study-set-line,
+.study-item {
+  max-width       : 1200px;
+  margin          : auto;
+  margin-top      : 10px;
+  vertical-align  : middle;
+}
+
+.study-set-cell-1 {
+  width: 150px;
+}
+
+.study-set-cell-2 {
+  width: 400px;
+}
+
+
+.form-line {
+  grid-column: 1 / span 2;
+  display    : grid;
+  grid-template-columns: auto auto;
+}
+
+.form-cell, .set-item {
+  grid-column: span 1;
+}
+
+.study-set-line {
+  grid-column: 1 / span 6;
+}
+
+.study-set-cell-1 {
+  grid-column: span 1;
+}
+
+.study-set-cell-2 {
+  grid-column: span 2;
+
+}
+
+.study-set-cell-1,
+.study-set-cell-2 {
+  border-left: 2px solid $item-box-shador-color;
+  padding    : 5px 10px;
+}
+
+#study-items-wrapper {
+  display: block;
+  width: 840px;
+}
+
+.category-input {
+  margin-top : 5px;
+  grid-column: span 2;
+  width      : 150px;
+}

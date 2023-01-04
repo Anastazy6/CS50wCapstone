@@ -147,15 +147,17 @@ export const Flashcards = (function(){
       Flashcard.showFirst();
     }
 
+    static showFirst() {
+      Flashcard.currentIndex = 0;
+      Flashcard.currentCard().show();
+    }
+    
     static resort() {
       Flashcard.flashcards.sort((first, second) => { return parseInt(first.id) - parseInt(second.id)} );
       Flashcard.showFirst();
     }
 
-    static showFirst() {
-      Flashcard.currentIndex = 0;
-      Flashcard.currentCard().show();
-    }
+
 
     static showNext() {
       if (Flashcard.currentIndex < (Flashcard.flashcards.length - 1)) {

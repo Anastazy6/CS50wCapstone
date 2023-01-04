@@ -1,0 +1,73 @@
+/**
+ *  #write-container elements
+ *  The block below is only meant to contain grid-area names for each element.
+ *  Note: keep the elements in order and keep the block clumped together.
+ */
+#write-question           { grid-area: quest; }
+#write-pass               { grid-area: pass;  }
+#write-answer-area        { grid-area: answer;}
+#write-answer-button      { grid-area: submit;}
+#write-category           { grid-area: cat;   }
+#write-textarea-label     { grid-area: label; }
+#write-special-letters    { grid-area: spec;  }
+#write-progress-container { grid-area: prog;  }
+
+#write-container       {
+  grid-template-columns: 3fr 3fr 2fr 2fr;
+  grid-template-rows   : 1fr 3fr 1fr 1fr 1fr;
+  grid-template-areas  : 
+      'quest  quest  quest  pass  '
+      'answer answer answer answer'
+      'label  .      cat    submit'
+      'spec   .      .      .     '
+      'prog   prog   prog   prog  ' 
+      ;
+}
+
+#write-answer-button {
+  border-radius: 21.37px;
+  margin       : auto;
+  width        : 100%;
+  height       : 75%;
+}
+
+/**
+ *  #write-progress-area elements
+ *  #write-progress-area is a grid container which itself is located in another grid container,
+ *     namely #write-progress-container (which is designed to hold 3 areas)
+ *  The block below is only meant to contain grid-area names for each element.
+ *  Note: keep the elements in order and keep the block clumped together.
+ */
+
+#progress-bar-correct  ,     
+#progress-bar-incorrect,   
+#progress-bar-remaining  { grid-area: bar;}
+.progress-bar-label      { grid-area: lab;} 
+.progress-bar-counter    { grid-area: cnt;}
+
+#write-progress-container {
+  align-items  : stretch; 
+  display: grid;
+  width  : 100%;
+  height : 100%;
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows   : subgrid;
+}
+
+.progress-area {
+  display  : grid;
+  width    : 100%;
+  height   : 100%;
+  padding  : 5px 15px;
+  grid-column: span 1;
+  grid-template-columns: subgrid;
+  grid-template-rows   : subgrid;
+  grid-template-areas  : 
+      'bar bar bar'
+      'lab .   cnt'
+      ;
+}
+
+.progress-bar-counter {
+  text-align: right;
+}

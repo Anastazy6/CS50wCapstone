@@ -4,15 +4,26 @@
  */
 export const Load = function() {
   const testFunction = () => {
-    console.log("Utilities module loaded successfully!");
+    console.log("Load module loaded successfully!");
   }
 
-
+  /**
+   *  
+   * @param {*} handler 
+   */
   const terms = (handler) => { 
     fetch(`/load/${_getStudySetID()}`)
     .then(response => response.json())
     .then(result => {
       handler(result['terms']);
+    });
+  }
+
+  const full = (handler) => { 
+    fetch(`/load/${_getStudySetID()}`)
+    .then(response => response.json())
+    .then(result => {
+      handler(result);
     });
   }
 
@@ -22,6 +33,7 @@ export const Load = function() {
 
   return {
     testFunction: testFunction,
-    terms       : terms
+    terms       : terms,
+    full        : full
   };
 }();

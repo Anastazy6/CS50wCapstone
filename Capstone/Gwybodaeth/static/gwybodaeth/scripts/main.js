@@ -22,9 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const createStudySetForm = document.getElementById("create-set"          );
   const flashcardsView     = document.getElementById("flashcards-container");
   const studySetView       = document.getElementById("study-items"         );
+  const writeView          = document.getElementById("write-container"     );
 
   if (!!addStudyItemButton) {addStudyItemButton.onclick  = StudySet.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = StudySet.createStudySet;}
   if (!!flashcardsView)     {Load.terms(Flashcards.loadFlashcards);}
   if (!!studySetView)       {Load.terms(StudySet  .prepareData   );}
+  if (!!writeView)          {Load.terms(Write     .loadItems     );}
 })

@@ -11,10 +11,15 @@
 
   <form>
     <div  id   ="write-container"
-          class="grid-standard-container">
+          class="grid-wide-container">
 
       <div id="write-question">Placeholder</div>
-      <div id="write-pass">Don't know</div>
+      <div id="write-pass">
+        <button id   ="write-pass-button"
+                class="btn btn-outline-warning">
+          Don't know
+        </button>
+      </div>
       
         <textarea name="answer" 
                   id  ="write-answer-area"
@@ -34,7 +39,7 @@
       <div  id="write-progress-container">
         {% include './includable/progress_3.html' %}
       </div>
-      
+
     </div>
   </form>
 

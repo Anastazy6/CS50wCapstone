@@ -13,22 +13,37 @@ export const Write = function() {
     const specials = document.getElementById("write-special-letters"   );
     const progress = document.getElementById("write-progress-container");
 
+    const initialize = () => {
+      _addEventListeners();
+    }
+
+    const _addEventListeners = () => {
+      submit.onclick = _submitAnswer;
+      pass  .onclick = _pass;
+    }
+
     return {
-      question: question,
-      pass    : pass,
-      answer  : answer,
-      submit  : submit,
-      category: category,
-      label   : label,
-      specials: specials,
-      progress: progress
+      question  : question,
+      pass      : pass,
+      answer    : answer,
+      submit    : submit,
+      category  : category,
+      label     : label,
+      specials  : specials,
+      progress  : progress,
+      initialize: initialize
     }
   }();
 
 
 
   const Memory = function() {
-    let items = [];
+    const items     = [];
+    let   currentID = 0;
+
+    const currentItem = () => {
+      return items[currentID];
+    }
 
     const shuffle = () => {
       items.sort(() => { return Math.random() - 0.5; });
@@ -39,9 +54,10 @@ export const Write = function() {
     }
 
     return {
-      items  : items,
-      shuffle: shuffle,
-      sort   : sort
+      items      : items,
+      currentItem: currentItem,
+      shuffle    : shuffle,
+      sort       : sort
     }
   }();
 
@@ -75,15 +91,54 @@ export const Write = function() {
           values['options']
       ))
     })
-    console.log(Memory.items);
+
     _run();
   }
 
   const _run = () => {
     Memory.shuffle();
-    console.log(Memory.items);
-   // Memory.sort();
-   // console.log(Memory.items);
+    View  .initialize();
+    _showCurrent();
+  }
+
+  const _showCurrent = () => {
+    let currentItem = Memory.currentItem();
+
+    View.question.innerHTML = currentItem.definitions.join(', ');
+    View.category.innerHTML = currentItem.category;
+  }
+
+  const _submitAnswer = () => {
+    let input = View.answer.value.split(/[,;/]/);
+    let answers = Memory.currentItem().terms;
+    console.log(`Answer sent: ${input}`);
+
+    if (_verifyAnswers(answers, input)) {
+      console.log("Answer correct");
+    } else {
+      console.log(`Answer incorrect. Correct answers: ${answers.join(', ')}`);
+    }
+
+    return false;
+  }
+
+  const _verifyAnswers = (questions, answers) => {
+    console.log(`Questions: ${questions}`)
+    answers.forEach(answer => {
+      console.log(`Checking answer: ${answer}`);
+      if (questions.includes(answer.trim())) { 
+        console.log("Found it!");
+        return true;
+      } else {
+        console.log("Nope");
+      }
+    })
+    console.log("Nothing was correct...");
+    return false;
+  }
+
+  const _pass = () => {
+    console.log("IDK, next question please!");
   }
 
   return {

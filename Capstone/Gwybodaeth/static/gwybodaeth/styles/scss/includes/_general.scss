@@ -87,16 +87,25 @@ button {
   height   : 100%;
 }
 
-.grid-standard-container {
+.grid-standard-container,
+.grid-wide-container {
   align-items  : stretch;
   background   : $item-background-color;
   border-radius: 21.37px;
   display      : grid;
   gap          : 5px;
-  max-width    : 800px;
-  min-height   : 400px;
   margin       : auto;
   margin-top   : 30px;
   padding      : 10px;
   z-index      : $base-z-index;        
+}
+
+.grid-standard-container {
+  max-width : 800px;
+  min-height: 400px;
+}
+
+.grid-wide-container {
+  max-width : 1000px;
+  min-height: 300px;
 }

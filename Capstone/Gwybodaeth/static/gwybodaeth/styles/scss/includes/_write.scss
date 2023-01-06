@@ -13,6 +13,7 @@
 #write-progress-container { grid-area: prog;  }
 
 #write-container       {
+  padding: 20px;
   grid-template-columns: 3fr 3fr 2fr 2fr;
   grid-template-rows   : 1fr 3fr 1fr 1fr 1fr;
   grid-template-areas  : 
@@ -24,15 +25,39 @@
       ;
 }
 
+#write-question {
+  font-size: 1.5em;
+}
+
 #write-pass {
   text-align: right;
+}
+
+#write-pass-button {
+  cursor    : pointer;
+  border-radius: 21.37px;;
+}
+
+#write-answer-area {
+  font-size: 1.5em;
+  padding-top: 50px;
+  padding-left: 0;
+  padding-right: 0;
+  height: 100px;
+  background: transparent;
+  border-top: 2px solid $transparent-ghostwhite-15;
+  border-bottom: 3px solid goldenrod;
+  border-radius: 0;
+
+  &:focus {
+    outline: none !important;
+  }
 }
 
 #write-answer-button {
   border-radius: 21.37px;
   margin       : auto;
   width        : 100%;
-  height       : 75%;
 }
 
 /**
@@ -62,7 +87,7 @@
   display  : grid;
   width    : 100%;
   height   : 100%;
-  padding  : 5px 15px;
+  padding  : 0px 15px;
   grid-column: span 1;
   grid-template-columns: subgrid;
   grid-template-rows   : subgrid;

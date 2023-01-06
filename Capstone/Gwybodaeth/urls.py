@@ -1,14 +1,17 @@
 from django.urls import path
-from . import views
+from . import views, auth_views
 
 urlpatterns = [
+    # Authentication views
+    path("login",      auth_views.login_view,  name="login"     ),
+    path("logout",     auth_views.logout_view, name="logout"    ),
+    path("register",   auth_views.register,    name="register"  ),
+
+    # No-parameter views
     path("", views.index, name="index"),
-    path("login",      views.login_view,  name="login"     ),
-    path("logout",     views.logout_view, name="logout"    ),
-    path("register",   views.register,    name="register"  ),
     path("create-set", views.create_set,  name="create-set"),
 
-
+    # Single-parameter views
     path("<str:username>/sets",           views.user_sets,            name="user-sets"      ),
     path("<int:study_set_id>",            views.study_set_view,       name="study-set-view" ),
     path("<int:study_set_id>/flashcards", views.flashcards_view,      name="flashcards"     ),

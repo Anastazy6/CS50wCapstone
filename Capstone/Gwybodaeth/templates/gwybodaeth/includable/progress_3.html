@@ -1,3 +1,17 @@
+<div  id   ="progress-remaining"
+      class="progress-area">
+  <div  id   ="progress-bar-remaining"
+        class="progress-bar bg-info"
+        role ="progressbar">
+  </div>
+  <div class="progress-bar-label">
+    Remaining
+  </div>
+  <div class="progress-bar-counter">
+    <span id="remaining-counter">C</span> / <span class="total-items">X</span>
+  </div>
+</div>
+
 <div  id   ="progress-correct"
       class="progress-area">
   <div  id   ="progress-bar-correct"
@@ -8,7 +22,7 @@
     Correct
   </div>
   <div class="progress-bar-counter">
-    A / X
+    <span id="correct-counter">A</span> / <span class="total-items">X</span>
   </div>
 </div>
 
@@ -22,20 +36,6 @@
     Incorrect
   </div>
   <div class="progress-bar-counter">
-    B / X
-  </div>
-</div>
-
-<div  id   ="progress-remaining"
-      class="progress-area">
-  <div  id   ="progress-bar-remaining"
-        class="progress-bar bg-info"
-        role ="progressbar">
-  </div>
-  <div class="progress-bar-label">
-    Remaining
-  </div>
-  <div class="progress-bar-counter">
-    C / X
+    <span id="incorrect-counter">B</span> / <span class="total-items">X</span>
   </div>
 </div>

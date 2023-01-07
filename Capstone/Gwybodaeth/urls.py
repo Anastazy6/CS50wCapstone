@@ -8,7 +8,7 @@ urlpatterns = [
     path("register",   auth_views.register,    name="register"  ),
 
     # No-parameter views
-    path("", views.index, name="index"),
+    path("",           views.index,       name="index"),
     path("create-set", views.create_set,  name="create-set"),
 
     # Single-parameter views

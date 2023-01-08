@@ -33,7 +33,7 @@
                 value="Answer">
       
       <div id="write-textarea-label">Type the answer in ...</div>
-      <div id="write-category">Category</div>
+      <div id="write-category-container">Category: <span id="write-category"></span></div>
       <div id="write-special-letters">TODO (optional)</div> <!-- May be postponed as there are more important things to do -->
 
       <div  id="write-progress-container">
@@ -42,6 +42,31 @@
 
     </div>
   </form>
+
+
+  <div  id   ="write-feedback-container"
+        class="grid-wide-container">
+
+    <div id="write-feedback-value">
+      Correct/incorrect
+    </div>
+    <div id="write-feedback-question">
+      Asked question
+    </div>
+    <div id="write-feedback-input">
+      User input
+    </div>
+    <div id="write-feedback-answers">
+      All the correct answers
+    </div>
+    <div id="write-feedback-continue">
+      <button id   ="write-feedback-button"
+              class="btn btn-outline-success">
+        Click here or press any key to continue
+      </button>
+    </div>
+
+  </div>
 
 
 {% endblock %}

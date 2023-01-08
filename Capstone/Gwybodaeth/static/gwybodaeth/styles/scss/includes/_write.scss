@@ -7,7 +7,7 @@
 #write-pass               { grid-area: pass;  }
 #write-answer-area        { grid-area: answer;}
 #write-answer-button      { grid-area: submit;}
-#write-category           { grid-area: cat;   }
+#write-category-container { grid-area: cat;   }
 #write-textarea-label     { grid-area: label; }
 #write-special-letters    { grid-area: spec;  }
 #write-progress-container { grid-area: prog;  }
@@ -99,4 +99,23 @@
 
 .progress-bar-counter {
   text-align: right;
+}
+
+
+/**
+ *  #write-feedback-container elements
+ *  The block below is only meant to contain grid-area names for each element.
+ *  Note: keep the elements in order and keep the block clumped together.
+ */
+#write-feedback-value    {grid-area: todo;}
+#write-feedback-question {grid-area: todo;}
+#write-feedback-input    {grid-area: todo;}
+#write-feedback-answers  {grid-area: todo;}
+#write-feedback-continue {grid-area: todo;}
+#write-feedback-button   {grid-area: todo;}
+
+#write-feedback-container { // TODO
+  grid-template-columns: todo;
+  grid-template-rows   : todo;
+  grid-template-areas  : todo;
 }

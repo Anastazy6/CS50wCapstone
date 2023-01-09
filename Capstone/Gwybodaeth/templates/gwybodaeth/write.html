@@ -16,7 +16,7 @@
       <div id="write-question">Placeholder</div>
       <div id="write-pass">
         <button id   ="write-pass-button"
-                class="btn btn-outline-warning">
+                class="btn btn-outline-danger">
           Don't know
         </button>
       </div>
@@ -28,7 +28,7 @@
                   placeholder="Some answer"></textarea>
         
         <input  id   ="write-answer-button"
-                class="btn btn-info"
+                class="btn btn-outline-warning"
                 type ="submit" 
                 value="Answer">
       
@@ -51,18 +51,33 @@
       Correct/incorrect
     </div>
     <div id="write-feedback-question">
-      Asked question
+      Question:
     </div>
-    <div id="write-feedback-input">
-      User input
+    <div id="write-feedback-input-container">
+      Your answer: <span id="write-feedback-input"></span>
     </div>
-    <div id="write-feedback-answers">
-      All the correct answers
+    <div id="write-feedback-answers-container"> 
+      Correct answers: <span id="write-feedback-answers"></span>
     </div>
+
+    <div id="write-feedback-retry">
+      <button id   ="write-retry-button"
+              class="btn btn-outline-info">
+        Retry this item later this round
+      </button>
+    </div>
+
+    <div id="write-feedback-override">
+    <button id   ="write-override-button"
+            class="btn btn-outline-danger">
+      Override
+    </button>
+    </div>
+
     <div id="write-feedback-continue">
-      <button id   ="write-feedback-button"
-              class="btn btn-outline-success">
-        Click here or press any key to continue
+      <button id   ="write-continue-button"
+              class="btn btn-outline-primary">
+        Click here (TODO) or press any key (TODO) to continue
       </button>
     </div>
 

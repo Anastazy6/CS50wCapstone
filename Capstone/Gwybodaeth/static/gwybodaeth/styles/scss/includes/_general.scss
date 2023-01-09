@@ -54,7 +54,6 @@ button {
   max-width    : 150px;
   margin       : auto;
   text-align   : center;
-  border-radius: 21.37px;
 }
 
 #study-set-submit,
@@ -96,16 +95,21 @@ button {
   gap          : 5px;
   margin       : auto;
   margin-top   : 30px;
-  padding      : 10px;
   z-index      : $base-z-index;        
 }
 
 .grid-standard-container {
   max-width : 800px;
   min-height: 400px;
+  padding   : 10px;
 }
 
 .grid-wide-container {
   max-width : 1000px;
   min-height: 300px;
+  padding   : 20px; 
+}
+
+.btn {
+  border-radius: 21.37px;
 }

@@ -12,8 +12,7 @@
 #write-special-letters    { grid-area: spec;  }
 #write-progress-container { grid-area: prog;  }
 
-#write-container       {
-  padding: 20px;
+#write-container {
   grid-template-columns: 3fr 3fr 2fr 2fr;
   grid-template-rows   : 1fr 3fr 1fr 1fr 1fr;
   grid-template-areas  : 
@@ -79,6 +78,7 @@
   display: grid;
   width  : 100%;
   height : 100%;
+  gap    : 20px;
   grid-template-columns: 1fr 1fr 1fr; 
   grid-template-rows   : subgrid;
 }
@@ -87,7 +87,6 @@
   display  : grid;
   width    : 100%;
   height   : 100%;
-  padding  : 0px 15px;
   grid-column: span 1;
   grid-template-columns: subgrid;
   grid-template-rows   : subgrid;
@@ -107,15 +106,21 @@
  *  The block below is only meant to contain grid-area names for each element.
  *  Note: keep the elements in order and keep the block clumped together.
  */
-#write-feedback-value    {grid-area: todo;}
-#write-feedback-question {grid-area: todo;}
-#write-feedback-input    {grid-area: todo;}
-#write-feedback-answers  {grid-area: todo;}
-#write-feedback-continue {grid-area: todo;}
-#write-feedback-button   {grid-area: todo;}
+#write-feedback-value             {grid-area: value;}
+#write-feedback-question          {grid-area: quest;}
+#write-feedback-input-container   {grid-area: input;}
+#write-feedback-answers-container {grid-area: answs;}
+#write-feedback-continue          {grid-area: contn;}
+#write-feedback-retry             {grid-area: retry;}
+#write-feedback-override          {grid-area: overr;}
 
-#write-feedback-container { // TODO
-  grid-template-columns: todo;
-  grid-template-rows   : todo;
-  grid-template-areas  : todo;
+#write-feedback-container { 
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas  : 
+    'value value'
+    'quest retry'
+    'input overr'
+    'answs answs'
+    'contn contn';
 }

@@ -13,6 +13,8 @@ export const Write = function() {
     //--------------------------------------------------------------------------
     //                     View: HTML elements references
     //--------------------------------------------------------------------------
+
+    // Main view
     const question         = document.getElementById("write-question"          );
     const pass             = document.getElementById("write-pass"              );
     const answer           = document.getElementById("write-answer-area"       );
@@ -22,10 +24,21 @@ export const Write = function() {
     const specials         = document.getElementById("write-special-letters"   );
     const progress         = document.getElementById("write-progress-container");
 
+    // Progress bars and counters
     const correctCounter   = document.getElementById("correct-counter"         );
     const incorrectCounter = document.getElementById("incorrect-counter"       );
     const remainingCounter = document.getElementById("remaining-counter"       );
     const totalCounter     = document.querySelectorAll(".total-items"          );
+
+    // Feedback view
+    const feedbackValue    = document.getElementById("write-feedback-value"    );
+    const feedbackQuestion = document.getElementById("write-feedback-question" );
+    const feedbackInput    = document.getElementById("write-feedback-input"    );
+    const feedbackAnswers  = document.getElementById("write-feedback-answers"  );
+    const feedbackContinue = document.getElementById("write-continue-button"   );
+    const feedbackRetry    = document.getElementById("write-retry-button"      );
+    const feedbackOverride = document.getElementById("write-override-button"   );
+
 
     //--------------------------------------------------------------------------
     //                     View: public methods
@@ -49,6 +62,16 @@ export const Write = function() {
       return answer.value.split(/[,;/]/);
     }
 
+    const showNegativeFeedback = (currentItem) => {
+      _setNegativeFeedbackStyle();
+      _showFeedbackData(currentItem);
+    }
+
+    const showPositiveFeedback = (currentItem) => {
+      _setPositiveFeedbackStyle();
+      _showFeedbackData(currentItem);
+    }
+
     //--------------------------------------------------------------------------
     //                     View: private methods
     //--------------------------------------------------------------------------
@@ -56,7 +79,7 @@ export const Write = function() {
     const _showCurrent = () => {
       let currentItem = Memory.currentItem();
 
-      if (!currentItem) { return alert("End reached.");}
+      if (!currentItem) { return alert("End reached. Further functionality is not yet implemented");}
 
       question.innerHTML = currentItem.definitions.join(', ');
       category.innerHTML = currentItem.category;
@@ -69,6 +92,10 @@ export const Write = function() {
     const _addEventListeners = () => {
       submit.onclick = _submitAnswer;
       pass  .onclick = _pass;
+
+      feedbackContinue.onclick = () => { alert("Not yet implemented.") };
+      feedbackOverride.onclick = () => { alert("Not yet implemented.") };
+      feedbackRetry   .onclick = () => { alert("Not yet implemented.") };
     }
 
     const _setTotalCounters = (itemsCount) => {
@@ -83,10 +110,53 @@ export const Write = function() {
       remainingCounter.innerHTML = Memory.countRemaining();
     }
 
+    const _showFeedbackData = (currentItem) => {
+      console.log(currentItem);
+      feedbackQuestion.innerHTML = currentItem.definitions.join(', ');
+      feedbackAnswers .innerHTML = currentItem.terms.join(', ');
+      feedbackInput   .innerHTML = getUserInput();
+    }
+
+    const _setNegativeFeedbackStyle = () => {
+      _setNegativeFeedbackValue();
+      _setNegativeFeedbackOverride();
+    }
+
+    const _setNegativeFeedbackValue = () => {
+      feedbackValue.innerHTML = "How pathetic!";
+      feedbackValue.classList.add   ('text-danger');
+      feedbackValue.classList.remove('text-success');
+    }
+
+    const _setNegativeFeedbackOverride = () => {
+      feedbackOverride.innerHTML = "Override as correct";
+      feedbackOverride.classList.add   ('btn-outline-success', 'btn');
+      feedbackOverride.classList.remove('btn-outline-danger');
+    }
+
+    const _setPositiveFeedbackStyle = () => {
+      _setPositiveFeedbackValue();
+      _setPositiveFeedbackOverride();
+    }
+
+    const _setPositiveFeedbackValue = () => {
+      feedbackValue.innerHTML = "Meh, beginners' luck...";
+      feedbackValue.classList.add   ('text-success' );
+      feedbackValue.classList.remove('text-danger');
+    }
+
+    const _setPositiveFeedbackOverride = () => {
+      feedbackOverride.innerHTML = "Override as incorrect";
+      feedbackOverride.classList.add   ('btn-outline-danger', 'btn' );
+      feedbackOverride.classList.remove('btn-outline-success');
+    }
+
     return {
-      getUserInput: getUserInput,
-      initialize  : initialize,
-      update      : update
+      getUserInput        : getUserInput,
+      initialize          : initialize,
+      update              : update,
+      showNegativeFeedback: showNegativeFeedback,
+      showPositiveFeedback: showPositiveFeedback
     }
   }();
 
@@ -221,11 +291,13 @@ export const Write = function() {
     let input   = View.getUserInput();
     if (!input) { return false; } // Prevent accidentally sending empty input.
 
-    let answers = Memory.currentItem().terms;
+    let answers = Memory.currentItem();
 
-    if (_verifyAnswers(answers, input)) {
+    if (_verifyAnswers(answers.terms, input)) {
+      View.showPositiveFeedback(answers);
       Memory.markAsCorrect();
     } else {
+      View.showNegativeFeedback(answers);
       Memory.markAsIncorrect();
     }
 

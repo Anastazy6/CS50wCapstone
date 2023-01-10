@@ -3,10 +3,6 @@
  *     processed by other modules. 
  */
 export const Load = function() {
-  const testFunction = () => {
-    console.log("Load module loaded successfully!");
-  }
-
   /**
    *  
    * @param {*} handler 
@@ -32,7 +28,6 @@ export const Load = function() {
   }
 
   return {
-    testFunction: testFunction,
     terms       : terms,
     full        : full
   };

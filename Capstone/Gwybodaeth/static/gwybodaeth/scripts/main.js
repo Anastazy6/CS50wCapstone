@@ -7,16 +7,13 @@
  */
 
 import {Load}         from "./modules/load.mjs";
+import {Create}       from "./modules/create.mjs";
 import {StudySet}     from "./modules/study_set.mjs"
 import {Flashcards}   from "./modules/flashcards.mjs";
 import {Write}        from "./modules/write.mjs";
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  Load      .testFunction();
-  StudySet  .testFunction();
-  Flashcards.testFunction();
-  Write     .testFunction();
 
   const addStudyItemButton = document.getElementById("study-set-add-item"  );
   const createStudySetForm = document.getElementById("create-set"          );
@@ -24,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const studySetView       = document.getElementById("study-items"         );
   const writeView          = document.getElementById("write-container"     );
 
-  if (!!addStudyItemButton) {addStudyItemButton.onclick  = StudySet.addStudyItem;  }
-  if (!!createStudySetForm) {createStudySetForm.onsubmit = StudySet.createStudySet;}
+  if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
+  if (!!createStudySetForm) {createStudySetForm.onsubmit = Create.createStudySet;}
   if (!!flashcardsView)     {Load.terms(Flashcards.loadFlashcards);}
-  if (!!studySetView)       {Load.terms(StudySet  .prepareData   );}
+  if (!!studySetView)       {Load.terms(StudySet  .loadStudySet  );}
   if (!!writeView)          {Load.terms(Write     .loadItems     );}
 })

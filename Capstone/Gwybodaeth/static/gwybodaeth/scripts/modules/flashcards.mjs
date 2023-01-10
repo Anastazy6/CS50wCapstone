@@ -1,9 +1,4 @@
 export const Flashcards = (function(){
-  const testFunction = () => {
-    console.log("Flashcards module loaded successfully!");
-  }
-
-
   /**
    * A private submodule for the Flashcards module. Contains references to all the
    * HTML elements used to display flashcards data and perform actions such as
@@ -233,7 +228,6 @@ export const Flashcards = (function(){
   // Return
 
   return {
-    testFunction  : testFunction,
     loadFlashcards: loadFlashcards,
   };
 })();

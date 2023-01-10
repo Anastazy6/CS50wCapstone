@@ -1,11 +1,4 @@
 export const Write = function() {
-  const testFunction = () => {
-    console.log("Write module loaded successfully!");
-  }
-  
-
-
-
   /**
    *  Contains references to the visible HTML elements and methods of displaying/updating them.
    */
@@ -334,7 +327,6 @@ export const Write = function() {
   }
 
   return {
-    testFunction: testFunction,
     loadItems   : loadItems
   };
 }();

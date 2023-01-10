@@ -23,15 +23,6 @@ export const Write = function() {
     const remainingCounter = document.getElementById("remaining-counter"       );
     const totalCounter     = document.querySelectorAll(".total-items"          );
 
-    // Feedback view
-    const feedbackValue    = document.getElementById("write-feedback-value"    );
-    const feedbackQuestion = document.getElementById("write-feedback-question" );
-    const feedbackInput    = document.getElementById("write-feedback-input"    );
-    const feedbackAnswers  = document.getElementById("write-feedback-answers"  );
-    const feedbackContinue = document.getElementById("write-continue-button"   );
-    const feedbackRetry    = document.getElementById("write-retry-button"      );
-    const feedbackOverride = document.getElementById("write-override-button"   );
-
 
     //--------------------------------------------------------------------------
     //                     View: public methods
@@ -55,15 +46,7 @@ export const Write = function() {
       return answer.value.split(/[,;/]/);
     }
 
-    const showNegativeFeedback = (currentItem) => {
-      _setNegativeFeedbackStyle();
-      _showFeedbackData(currentItem);
-    }
 
-    const showPositiveFeedback = (currentItem) => {
-      _setPositiveFeedbackStyle();
-      _showFeedbackData(currentItem);
-    }
 
     //--------------------------------------------------------------------------
     //                     View: private methods
@@ -74,6 +57,7 @@ export const Write = function() {
 
       if (!currentItem) { return alert("End reached. Further functionality is not yet implemented");}
 
+      Feedback.hide();
       question.innerHTML = currentItem.definitions.join(', ');
       category.innerHTML = currentItem.category;
     }
@@ -82,13 +66,16 @@ export const Write = function() {
       answer.value = '';
     }
 
+    /**
+     * Adds static event listeners (including the one for Feedback.retry). 
+     *   Event listeners for the Feedback view,
+     *   whose actions depend on whether the user's answer was correct or not
+     *   are added within the feedback submodule.
+     */
     const _addEventListeners = () => {
-      submit.onclick = _submitAnswer;
-      pass  .onclick = _pass;
-
-      feedbackContinue.onclick = () => { alert("Not yet implemented.") };
-      feedbackOverride.onclick = () => { alert("Not yet implemented.") };
-      feedbackRetry   .onclick = () => { alert("Not yet implemented.") };
+      submit        .onclick = _submitAnswer;
+      pass          .onclick = _pass;
+      Feedback.retry.onclick = _retryItem;
     }
 
     const _setTotalCounters = (itemsCount) => {
@@ -103,53 +90,131 @@ export const Write = function() {
       remainingCounter.innerHTML = Memory.countRemaining();
     }
 
-    const _showFeedbackData = (currentItem) => {
-      console.log(currentItem);
-      feedbackQuestion.innerHTML = currentItem.definitions.join(', ');
-      feedbackAnswers .innerHTML = currentItem.terms.join(', ');
-      feedbackInput   .innerHTML = getUserInput();
-    }
 
-    const _setNegativeFeedbackStyle = () => {
-      _setNegativeFeedbackValue();
-      _setNegativeFeedbackOverride();
-    }
+    // ----------------------------------------------
+    //    Submodule for namespacing Feedback view.
+    // ----------------------------------------------
 
-    const _setNegativeFeedbackValue = () => {
-      feedbackValue.innerHTML = "How pathetic!";
-      feedbackValue.classList.add   ('text-danger');
-      feedbackValue.classList.remove('text-success');
-    }
 
-    const _setNegativeFeedbackOverride = () => {
-      feedbackOverride.innerHTML = "Override as correct";
-      feedbackOverride.classList.add   ('btn-outline-success', 'btn');
-      feedbackOverride.classList.remove('btn-outline-danger');
-    }
+    const Feedback = (function () {
+      // Container for the main part of the View. Only needed here as it is designed to be hidden
+      //   while the Feedback view is shown.
+      const mainView    = document.getElementById("write-container");
 
-    const _setPositiveFeedbackStyle = () => {
-      _setPositiveFeedbackValue();
-      _setPositiveFeedbackOverride();
-    }
+      const container   = document.getElementById("write-feedback-container");
+      const value       = document.getElementById("write-feedback-value"    );
+      const question    = document.getElementById("write-feedback-question" );
+      const input       = document.getElementById("write-feedback-input"    );
+      const answers     = document.getElementById("write-feedback-answers"  );
+      const btnContinue = document.getElementById("write-continue-button"   );
+      const retry       = document.getElementById("write-retry-button"      );
+      const override    = document.getElementById("write-override-button"   );
 
-    const _setPositiveFeedbackValue = () => {
-      feedbackValue.innerHTML = "Meh, beginners' luck...";
-      feedbackValue.classList.add   ('text-success' );
-      feedbackValue.classList.remove('text-danger');
-    }
 
-    const _setPositiveFeedbackOverride = () => {
-      feedbackOverride.innerHTML = "Override as incorrect";
-      feedbackOverride.classList.add   ('btn-outline-danger', 'btn' );
-      feedbackOverride.classList.remove('btn-outline-success');
-    }
+      // ----------------------------------
+      //         Feedback: public
+      // ----------------------------------
+
+
+      const showNegative = (currentItem) => {
+        _show();
+        _setNegativeStyle();
+        _setNegativeResolution();
+        _showData(currentItem);
+
+      }
+  
+      const showPositive = (currentItem) => {
+        _show();
+        _setPositiveStyle();
+        _setPositiveResolution();
+        _showData(currentItem);
+      }
+
+      const hide = () => {
+        mainView .classList.remove('hidden');
+        container.classList.add   ('hidden');
+      }
+
+
+      // ----------------------------------
+      //         Feedback: private
+      // ----------------------------------
+
+
+      const _show = () => {
+        mainView .classList.add   ('hidden');    
+        container.classList.remove('hidden'); 
+      } 
+
+
+      const _showData = (currentItem) => {
+        console.log(currentItem);
+        question.innerHTML = currentItem.definitions.join(', ');
+        answers .innerHTML = currentItem.terms.join(', ');
+        input   .innerHTML = getUserInput();
+      }
+  
+      const _setNegativeStyle = () => {
+        _setNegativeValue();
+        _setNegativeOverride();
+      }
+  
+      const _setNegativeValue = () => {
+        value.innerHTML = "How pathetic!";
+        value.classList.add   ('text-danger');
+        value.classList.remove('text-success');
+      }
+  
+      const _setNegativeOverride = () => {
+        override.innerHTML = "Override as correct";
+        override.classList.add   ('btn-outline-success', 'btn');
+        override.classList.remove('btn-outline-danger');
+      }
+  
+      const _setPositiveStyle = () => {
+        _setPositiveValue();
+        _setPositiveOverride();
+      }
+  
+      const _setPositiveValue = () => {
+        value.innerHTML = "Meh, beginners' luck...";
+        value.classList.add   ('text-success' );
+        value.classList.remove('text-danger');
+      }
+  
+      const _setPositiveOverride = () => {
+        override.innerHTML = "Override as incorrect";
+        override.classList.add   ('btn-outline-danger', 'btn' );
+        override.classList.remove('btn-outline-success');
+  
+      }
+  
+      const _setPositiveResolution = () => {
+        btnContinue.onclick = _resolvePositively;
+        override   .onclick = _resolveNegatively; // Override as negative
+      }
+  
+      const _setNegativeResolution = () => {
+        btnContinue.onclick = _resolveNegatively;
+        override   .onclick = _resolvePositively;
+      }
+
+
+      return {
+        hide        : hide,
+        showNegative: showNegative,
+        showPositive: showPositive,
+        retry       : retry
+      }
+    })();
+
 
     return {
-      getUserInput        : getUserInput,
-      initialize          : initialize,
-      update              : update,
-      showNegativeFeedback: showNegativeFeedback,
-      showPositiveFeedback: showPositiveFeedback
+      Feedback    : Feedback,
+      getUserInput: getUserInput,
+      initialize  : initialize,
+      update      : update
     }
   }();
 
@@ -166,12 +231,21 @@ export const Write = function() {
     const _correct   = [];
     const _incorrect = [];
 
+    const countRemaining = () => {return _remaining.length;}
+    const countCorrect   = () => {return _correct  .length;}
+    const countIncorrect = () => {return _incorrect.length;}
+
     /**
      * Loads into memory a new StudyItem object, created from the fetched data. 
      * @param {StudyItem} item 
      */
     const loadItem = (item) => {
-      _remaining.push(item);
+      if (item instanceof StudyItem) {
+        _remaining.push(item);
+      } else {
+        console.log(`Soft TypeError: ${item} is not a StudyItem.`);
+        console.log(item);
+      }
     }
 
     /**
@@ -213,12 +287,6 @@ export const Write = function() {
     const sort = () => {
       _remaining.sort((first, second) => {return parseInt(first.id) - parseInt(second.id)});
     }
-
-    const countRemaining = () => {return _remaining.length;}
-
-    const countCorrect   = () => {return _correct  .length;}
-
-    const countIncorrect = () => {return _incorrect.length;}
 
     return {
       countRemaining : countRemaining,
@@ -287,16 +355,13 @@ export const Write = function() {
     let answers = Memory.currentItem();
 
     if (_verifyAnswers(answers.terms, input)) {
-      View.showPositiveFeedback(answers);
-      Memory.markAsCorrect();
+      View.Feedback.showPositive(answers);
     } else {
-      View.showNegativeFeedback(answers);
-      Memory.markAsIncorrect();
+      View.Feedback.showNegative(answers);
     }
-
-    View.update();
     return false; // Prevent page reload on form submit.
   }
+
 
   const _verifyAnswers = (questions, answers) => {
     return _clean(answers).some(answer => _clean(questions).includes(answer));
@@ -324,6 +389,22 @@ export const Write = function() {
     Memory .markAsIncorrect();
     View.update();
     return false;
+  }
+
+
+  const _resolvePositively = () => {
+    Memory.markAsCorrect();
+    View.update()
+  }
+
+  const _resolveNegatively = () => {
+    Memory.markAsIncorrect();
+    View.update();
+  }
+
+  const _retryItem = () => {
+    Memory.shuffle();
+    View.update();
   }
 
   return {

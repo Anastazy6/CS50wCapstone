@@ -25,6 +25,10 @@ h1 {
   background-color: theme-color("porffor");
 }
 
+.bg-lleuad {
+  background-color: theme-color("lleuad");
+}
+
 input,
 textarea,
 select,
@@ -112,4 +116,8 @@ button {
 
 .btn {
   border-radius: 21.37px;
+}
+
+.hidden {
+  display: none !important;
 }

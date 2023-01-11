@@ -4,10 +4,10 @@
  */
 export const Load = function() {
   /**
-   *  
+   * Loads a study set and passes just its terms to a given handler.
    * @param {*} handler 
    */
-  const terms = (handler) => { 
+  const justTerms = (handler) => { 
     fetch(`/load/${_getStudySetID()}`)
     .then(response => response.json())
     .then(result => {
@@ -15,6 +15,10 @@ export const Load = function() {
     });
   }
 
+  /**
+   * Loads a study set and passes all its data to a given handler.
+   * @param {*} handler 
+   */
   const full = (handler) => { 
     fetch(`/load/${_getStudySetID()}`)
     .then(response => response.json())
@@ -28,7 +32,7 @@ export const Load = function() {
   }
 
   return {
-    terms       : terms,
-    full        : full
+    justTerms: justTerms,
+    full     : full
   };
 }();

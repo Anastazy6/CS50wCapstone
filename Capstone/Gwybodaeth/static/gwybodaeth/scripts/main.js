@@ -10,7 +10,7 @@ import {Load}         from "./modules/load.mjs";
 import {Create}       from "./modules/create.mjs";
 import {StudySet}     from "./modules/study_set.mjs"
 import {Flashcards}   from "./modules/flashcards.mjs";
-import {Write}        from "./modules/write.mjs";
+import {Write}        from "./modules/Write/write.mjs";
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = Create.createStudySet;}
-  if (!!flashcardsView)     {Load.terms(Flashcards.loadFlashcards);}
-  if (!!studySetView)       {Load.terms(StudySet  .loadStudySet  );}
-  if (!!writeView)          {Load.terms(Write     .loadItems     );}
+  if (!!flashcardsView)     {Load.justTerms(Flashcards.loadFlashcards);}
+  if (!!studySetView)       {Load.justTerms(StudySet  .loadStudySet  );}
+  if (!!writeView)          {Load.justTerms(Write     .loadItems     );}
 })

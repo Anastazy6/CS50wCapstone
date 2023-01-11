@@ -106,7 +106,7 @@ def write_view(request, study_set_id):
 
 
 
-def load_study_terms(request, study_set_id):
+def load_study_set(request, study_set_id):
     require_method(request, 'GET')
 
     study_set = get_object_if_exists(Study_set, study_set_id)
@@ -118,5 +118,13 @@ def load_study_terms(request, study_set_id):
             },   status  =  404)
     
     return JsonResponse(
-        {   "terms" : study_set.terms
+        {   "author"     : study_set.author.username,
+            "description": study_set.description,
+            "title"      : study_set.title,
+
+            "defs_lang"  : study_set.defs_lang,
+            "terms_lang" : study_set.terms_lang,
+            "terms"      : study_set.terms,
+
+            "timestamp"  : study_set.timestamp
         },   status = 200)

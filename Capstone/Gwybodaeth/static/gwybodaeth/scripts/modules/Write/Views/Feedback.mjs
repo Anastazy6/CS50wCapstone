@@ -3,9 +3,6 @@
   // ----------------------------------------------
 
   export const Feedback = (function () {
-    // Container for the main part of the View. Only needed here as it is designed to be hidden
-    //   while the Feedback view is shown.
-    const mainView    = document.getElementById("write-container");
 
     const container   = document.getElementById("write-feedback-container");
     const value       = document.getElementById("write-feedback-value"    );
@@ -43,7 +40,6 @@
     }
 
     const hide = () => {
-      mainView .classList.remove('hidden');
       container.classList.add   ('hidden');
     }
 
@@ -53,52 +49,74 @@
     // ----------------------------------
 
 
-    const _show = () => {
-      mainView .classList.add   ('hidden');    
+    const _show = () => {  
       container.classList.remove('hidden'); 
     } 
 
 
     const _showData = (currentItem, userInput) => {
       question.innerHTML = currentItem.definitions.join(', ');
-      answers .innerHTML = currentItem.terms.join(', ');
+      answers .innerHTML = currentItem.terms      .join(', ');
       input   .innerHTML = userInput;
     }
+
+    // --------------------------------------
+    //        Styling incorrect answers
+    // --------------------------------------
 
     const _setNegativeStyle = () => {
       _setNegativeValue();
       _setNegativeOverride();
+      _setNegativeInput();
     }
 
     const _setNegativeValue = () => {
       value.innerHTML = "How pathetic!";
-      value.classList.add   ('text-danger');
+      value.classList.add   ('text-danger' );
       value.classList.remove('text-success');
     }
 
     const _setNegativeOverride = () => {
       override.innerHTML = "Override as correct";
-      override.classList.add   ('btn-outline-success', 'btn');
-      override.classList.remove('btn-outline-danger');
+      override.classList.add   ('btn-outline-success');
+      override.classList.remove('btn-outline-danger' );
     }
+
+    const _setNegativeInput = () => {
+      input.classList.add   ('text-danger');
+      input.classList.remove('text-success');
+    }
+
+    // --------------------------------------
+    //         Styling correct answers
+    // --------------------------------------
 
     const _setPositiveStyle = () => {
       _setPositiveValue();
       _setPositiveOverride();
+      _setPositiveInput();
     }
 
     const _setPositiveValue = () => {
       value.innerHTML = "Meh, beginners' luck...";
-      value.classList.add   ('text-success' );
-      value.classList.remove('text-danger');
+      value.classList.add   ('text-success');
+      value.classList.remove('text-danger' );
     }
 
     const _setPositiveOverride = () => {
       override.innerHTML = "Override as incorrect";
-      override.classList.add   ('btn-outline-danger', 'btn' );
+      override.classList.add   ('btn-outline-danger' );
       override.classList.remove('btn-outline-success');
-
     }
+
+    const _setPositiveInput = () => {
+      input.classList.add   ('text-success');
+      input.classList.remove('text-danger' );
+    }
+
+    // ---------------------------------------------------
+    //  Setting actions for continue and override buttons
+    // ---------------------------------------------------
 
     const _setPositiveResolution = () => {
       btnContinue.dataset.resolution = 'positive';

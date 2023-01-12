@@ -9,6 +9,12 @@
   {% include "./includable/study_set_header.html" %}
   {% include "./includable/learning_options.html" %}
 
+
+  <!----------------------------------------------------------------------------
+                                      Main
+  ----------------------------------------------------------------------------->
+
+
   <form>
     <div  id   ="write-container"
           class="grid-wide-container">
@@ -44,20 +50,27 @@
   </form>
 
 
+  <!----------------------------------------------------------------------------
+                                    Feedback
+  ----------------------------------------------------------------------------->
+
+
   <div  id   ="write-feedback-container"
         class="grid-wide-container hidden">
 
     <div id="write-feedback-value">
-      Correct/incorrect
+      Correct/incorrect <!-- governed by JS (static -> scritps/modules/Write/Views/Feedback.mjs) -->
     </div>
-    <div id="write-feedback-question">
+    <div  id   ="write-feedback-question"
+          class="text-info">
       Question:
     </div>
     <div id="write-feedback-input-container">
       Your answer: <span id="write-feedback-input"></span>
     </div>
     <div id="write-feedback-answers-container"> 
-      Correct answers: <span id="write-feedback-answers"></span>
+      Correct answers: <span  id   ="write-feedback-answers"
+                              class="text-info"></span>
     </div>
 
     <div id="write-feedback-retry">
@@ -68,10 +81,10 @@
     </div>
 
     <div id="write-feedback-override">
-    <button id   ="write-override-button"
-            class="btn btn-outline-danger">
-      Override
-    </button>
+      <button id   ="write-override-button"
+              class="btn btn-outline-danger">
+        Override
+      </button>
     </div>
 
     <div id="write-feedback-continue">
@@ -81,6 +94,30 @@
       </button>
     </div>
 
+  </div>
+
+
+  <!---------------------------------------------------------------------------- 
+                                    Summary
+  ----------------------------------------------------------------------------->
+
+  <div  id   ="write-summary-container"
+        class="grid-wide-container hidden">
+  
+    <div id="write-summary-correct">
+      Correct answers: <span id="summary-correct"></span>
+    </div>
+
+    <div id="write-summary-incorrect">
+      Incorrect answers: <span id="summary-incorrect"><span>
+    </div>
+
+    <div id="write-summary-percentage">
+      Correct answers percentage: <span id="summary-percentage"></span>%
+    </div>
+  
+  
+  
   </div>
 
 

@@ -124,3 +124,19 @@
     'answs answs'
     'contn contn';
 }
+
+
+
+
+
+  
+#write-summary-correct    {grid-area: good;}
+#write-summary-incorrect  {grid-area: bad; }
+#write-summary-percentage {grid-area: perc;}
+
+#write-summary-container {
+  grid-template-columns: 1fr;
+  grid-template-rows   : 1fr 1fr 1fr;
+  grid-template-areas  :
+    'good bad  perc';
+}

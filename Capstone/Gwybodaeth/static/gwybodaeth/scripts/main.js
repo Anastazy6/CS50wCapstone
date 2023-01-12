@@ -6,11 +6,12 @@
  *   I guess it's not the best idea as well. At the moment (24.12.2022) I have no better idea tho...
  */
 
-import {Load}         from "./modules/Load/load.mjs";
-import {Create}       from "./modules/Create/create.mjs";
-import {StudySet}     from "./modules/StudySet/study_set.mjs"
-import {Flashcards}   from "./modules/Flashcards/flashcards.mjs";
-import {Write}        from "./modules/Write/write.mjs";
+
+import  { Create     }  from  "./modules/Create/create.mjs";
+import  { Flashcards }  from  "./modules/Flashcards/flashcards.mjs";
+import  { Load       }  from  "./modules/Load/load.mjs";
+import  { StudySet   }  from  "./modules/StudySet/study_set.mjs"
+import  { Write      }  from  "./modules/Write/write.mjs";
 
 
 document.addEventListener("DOMContentLoaded", function() {

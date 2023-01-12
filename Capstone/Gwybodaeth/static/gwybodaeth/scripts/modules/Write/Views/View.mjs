@@ -1,4 +1,5 @@
 import { Feedback } from "./Feedback.mjs";
+import { Summary  } from "./summary.mjs";
 
 /**
    *  Contains references to the visible HTML elements and methods of displaying/updating them.
@@ -9,6 +10,8 @@ export const View = function() {
   //--------------------------------------------------------------------------
 
   // Main view
+  const mainView    = document.getElementById("write-container");
+
   const question         = document.getElementById("write-question"          );
   const pass             = document.getElementById("write-pass"              );
   const answer           = document.getElementById("write-answer-area"       );
@@ -46,6 +49,14 @@ export const View = function() {
     return answer.value.split(/[,;/]/);
   }
 
+  const hide = () => {
+    mainView.classList.add('hidden');
+  }
+
+  const show = () => {
+    mainView.classList.remove('hidden');
+  }
+
 
 
   //--------------------------------------------------------------------------
@@ -53,9 +64,9 @@ export const View = function() {
   //--------------------------------------------------------------------------
 
   const _showCurrent = (currentItem) => {
-    if (!currentItem) { return alert("End reached. Further functionality is not yet implemented");}
 
     Feedback.hide();
+    show();
     question.innerHTML = currentItem.definitions.join(', ');
     category.innerHTML = currentItem.category;
   }
@@ -87,8 +98,11 @@ export const View = function() {
 
   return {
     Feedback    : Feedback,
+    Summary     : Summary,
     getUserInput: getUserInput,
     initialize  : initialize,
-    update      : update
+    update      : update,
+    hide        : hide,
+    show        : show
   }
 }();

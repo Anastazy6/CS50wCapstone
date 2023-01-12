@@ -1,5 +1,5 @@
-import { Memory }    from "./Memory/Memory.mjs";
-import { View }      from "./Views/View.mjs";
+import { Memory    } from "./Memory/Memory.mjs";
+import { View      } from "./Views/View.mjs";
 import { StudyItem } from "./Models/StudyItem.mjs";
 
 export const Write = function() {
@@ -36,6 +36,7 @@ export const Write = function() {
     _updateView();
   } 
 
+  
   const _submitAnswer = () => {
     let input   = View.getUserInput();
     if (!input) { return false; } // Prevent accidentally sending empty input.
@@ -55,12 +56,14 @@ export const Write = function() {
 
   const _showFeedback = (isCorrect, currentItem) => {
     let userInput = View.getUserInput()
+
+    View.hide();
+
     if (isCorrect) {
       View.Feedback.showPositive(currentItem, userInput);
     } else {
       View.Feedback.showNegative(currentItem, userInput);
     }
-  
   }
 
   /**
@@ -81,9 +84,7 @@ export const Write = function() {
    */
   const _pass = () => { // TODO: this method requires repetition of View.update() and return false, which 
                         //         are already invoked in _submitAnswer(). Find a better solution.
-    console.log("User passed.") 
-    Memory .markAsIncorrect();
-    _updateView();
+    View.Feedback.showNegative(Memory.currentItem(), "<span class='text-warning'>None</span>");
     return false;
   }
 
@@ -117,9 +118,13 @@ export const Write = function() {
     _updateView();
   }
 
+
   const _updateView = () => {
+    let currentItem = Memory.currentItem();
+    if (!currentItem) { return _showSummary() };
+
     let data = {
-      currentItem: Memory.currentItem(),
+      currentItem: currentItem,
       counters   : {
           correct  : Memory.countCorrect(),
           incorrect: Memory.countIncorrect(),
@@ -128,6 +133,25 @@ export const Write = function() {
     }
     return View.update(data);
   }
+
+  const _showSummary = () => {
+    View.hide();
+    View.Feedback.hide();
+    View.Summary .show(_getSummaryData());
+  }
+
+  const _getSummaryData = () => {
+    let correct    = Memory.countCorrect();
+    let incorrect  = Memory.countIncorrect();
+    let percentage = parseFloat(100 * correct / (correct + incorrect)).toFixed(2);
+
+    return {
+      correct   : Memory.countCorrect(),
+      incorrect : Memory.countIncorrect(),
+      percentage: percentage
+    }
+  }
+
 
   return {
     loadItems: loadItems

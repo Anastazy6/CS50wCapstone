@@ -1,6 +1,6 @@
-import { Memory }    from "./Memory.mjs";
-import { View }      from "./View/View.mjs";
-import { StudyItem } from "./StudyItem.mjs";
+import { Memory }    from "./Memory/Memory.mjs";
+import { View }      from "./Views/View.mjs";
+import { StudyItem } from "./Models/StudyItem.mjs";
 
 export const Write = function() {
   

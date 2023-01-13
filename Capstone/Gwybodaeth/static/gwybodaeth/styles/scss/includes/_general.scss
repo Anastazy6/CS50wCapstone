@@ -21,13 +21,11 @@ h1 {
 } 
 
 
-.bg-porffor {
-  background-color: theme-color("porffor");
-}
-
-.bg-lleuad {
-  background-color: theme-color("lleuad");
-}
+.bg-porffor       { background-color: theme-color("porffor"      ) !important; }
+.bg-lleuad        { background-color: theme-color("lleuad"       ) !important; }
+.bg-success-empty { background-color: theme-color("success-empty") !important; }
+.bg-info-empty    { background-color: theme-color("info-empty"   ) !important; }
+.bg-danger-empty  { background-color: theme-color("danger-empty" ) !important; }
 
 input,
 textarea,
@@ -120,4 +118,9 @@ button {
 
 .hidden {
   display: none !important;
+}
+
+.progress {
+  height: 8px;
+  width: 100%;
 }

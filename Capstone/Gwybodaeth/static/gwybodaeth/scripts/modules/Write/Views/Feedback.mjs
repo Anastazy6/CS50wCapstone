@@ -5,10 +5,14 @@
   export const Feedback = (function () {
 
     const container   = document.getElementById("write-feedback-container");
+    
+    // Information about the current study item
     const value       = document.getElementById("write-feedback-value"    );
     const question    = document.getElementById("write-feedback-question" );
     const input       = document.getElementById("write-feedback-input"    );
     const answers     = document.getElementById("write-feedback-answers"  );
+    
+    // Buttons
     const btnContinue = document.getElementById("write-continue-button"   );
     const retry       = document.getElementById("write-retry-button"      );
     const override    = document.getElementById("write-override-button"   );
@@ -64,6 +68,10 @@
     //        Styling incorrect answers
     // --------------------------------------
 
+    /**
+     * Sets negative style for all the elements that change their style depending
+     *   on whether the answer was correct or not
+     */
     const _setNegativeStyle = () => {
       _setNegativeValue();
       _setNegativeOverride();
@@ -91,6 +99,10 @@
     //         Styling correct answers
     // --------------------------------------
 
+    /**
+     * Sets positive style for all the elements that change their style depending
+     *   on whether the answer was correct or not
+     */
     const _setPositiveStyle = () => {
       _setPositiveValue();
       _setPositiveOverride();

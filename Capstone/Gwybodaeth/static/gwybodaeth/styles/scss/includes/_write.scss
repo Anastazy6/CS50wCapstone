@@ -67,9 +67,9 @@
  *  Note: keep the elements in order and keep the block clumped together.
  */
 
-#progress-bar-correct  ,     
-#progress-bar-incorrect,   
-#progress-bar-remaining  { grid-area: bar;}
+#progress-correct  ,     
+#progress-incorrect,   
+#progress-remaining      { grid-area: bar;}
 .progress-bar-label      { grid-area: lab;} 
 .progress-bar-counter    { grid-area: cnt;}
 

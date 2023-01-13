@@ -1,4 +1,5 @@
 import { Feedback } from "./Feedback.mjs";
+import { Progress } from "./Progress.mjs";
 import { Summary  } from "./summary.mjs";
 
 /**
@@ -21,11 +22,7 @@ export const View = function() {
   const specials         = document.getElementById("write-special-letters"   );
   const progress         = document.getElementById("write-progress-container");
 
-  // Progress bars and counters
-  const correctCounter   = document.getElementById("correct-counter"         );
-  const incorrectCounter = document.getElementById("incorrect-counter"       );
-  const remainingCounter = document.getElementById("remaining-counter"       );
-  const totalCounter     = document.querySelectorAll(".total-items"          );
+  
 
 
   //--------------------------------------------------------------------------
@@ -33,13 +30,13 @@ export const View = function() {
   //--------------------------------------------------------------------------
   
   const initialize = (itemCount, methods) => {
-    _setTotalCounters(itemCount);
+    Progress.initialize(itemCount)
     _addEventListeners(methods);
   }
 
   const update = (data) => {
     _showCurrent(data.currentItem);
-    _setCounters(data.counters);
+    Progress.update(data.counters);
     _clearInput();
   }
 
@@ -81,18 +78,6 @@ export const View = function() {
     pass  .onclick = methods.pass;
 
     Feedback.addEventListeners(methods);
-  }
-
-  const _setTotalCounters = (itemsCount) => {
-    totalCounter.forEach(counter => {
-      counter.innerHTML = itemsCount;
-    })
-  }
-
-  const _setCounters = (counters) => {
-    correctCounter  .innerHTML = counters.correct;
-    incorrectCounter.innerHTML = counters.incorrect;
-    remainingCounter.innerHTML = counters.remaining;
   }
 
 

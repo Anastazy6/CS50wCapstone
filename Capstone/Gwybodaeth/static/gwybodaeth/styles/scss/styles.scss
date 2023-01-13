@@ -15,8 +15,11 @@ $base-z-index: 0;
 // Bootstrap variables and modifications
 
 $theme-colors: (
-  "porffor": #200722,
-  "lleuad" : rgb(52, 98, 113)
+  "porffor"      : #200722,
+  "lleuad"       : rgb(52, 98, 113),
+  "success-empty": rgb(0, 118, 57),
+  "info-empty"   : rgb(0, 59, 107),
+  "danger-empty" : rgb(109, 0, 0)
 );
 
 // The rest

@@ -4,6 +4,10 @@
 export const Progress = (function() {
   let totalItems;
   
+  //--------------------------------------------------------------------------
+  //                     Progress: HTML elements references
+  //--------------------------------------------------------------------------
+  
   // Progress counters
   const correctCounter   = document.getElementById("correct-counter"         );
   const incorrectCounter = document.getElementById("incorrect-counter"       );
@@ -19,6 +23,10 @@ export const Progress = (function() {
   const correctEmpty     = document.getElementById("progress-empty-correct"  );
   const incorrectEmpty   = document.getElementById("progress-empty-incorrect");
   const remainingEmpty   = document.getElementById("progress-empty-remaining");
+
+  //--------------------------------------------------------------------------
+  //                     Progress: public methods
+  //--------------------------------------------------------------------------
 
   const initialize = (numberOfItems) => {
     let counters = {
@@ -36,25 +44,11 @@ export const Progress = (function() {
     _setCounters(counters);
     _setProgress(counters);
   }
-  
-  
-  const _setProgress = (counters) => {
-    let values = _calculateProgressBars(counters)
-    
-    _setFullBars (values);
-    _setEmptyBars(values);
-  }
 
 
-  const _calculateProgressBars = (counters) => {
-    return {
-      correct  : (counters.correct   / totalItems) * 100,
-      incorrect: (counters.incorrect / totalItems) * 100,
-      remaining: (counters.remaining / totalItems) * 100
-    }
-  }
-
-
+  //--------------------------------------------------------------------------
+  //                 Progress: private methods for counters
+  //--------------------------------------------------------------------------
   const _setCounters = (counters) => {
     correctCounter  .innerHTML = counters.correct;
     incorrectCounter.innerHTML = counters.incorrect;
@@ -71,6 +65,25 @@ export const Progress = (function() {
     })
   }
 
+  //--------------------------------------------------------------------------
+  //                 Progress: private methods for progress bars
+  //--------------------------------------------------------------------------
+
+  const _setProgress = (counters) => {
+    let values = _calculateProgressBars(counters)
+    
+    _setFullBars (values);
+    _setEmptyBars(values);
+  }
+
+
+  const _calculateProgressBars = (counters) => {
+    return {
+      correct  : (counters.correct   / totalItems) * 100,
+      incorrect: (counters.incorrect / totalItems) * 100,
+      remaining: (counters.remaining / totalItems) * 100
+    }
+  }
 
 
   const _setFullBars = (values) => {

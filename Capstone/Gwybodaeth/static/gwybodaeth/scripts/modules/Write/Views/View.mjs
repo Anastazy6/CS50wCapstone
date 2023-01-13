@@ -20,9 +20,6 @@ export const View = function() {
   const category         = document.getElementById("write-category"          );
   const label            = document.getElementById("write-textarea-label"    );
   const specials         = document.getElementById("write-special-letters"   );
-  const progress         = document.getElementById("write-progress-container");
-
-  
 
 
   //--------------------------------------------------------------------------

@@ -51,10 +51,8 @@
 
     const isVisible = () => {
       if (container.classList.contains('hidden')) {
-        console.log("Feedback not visible!");
         return false;
       }
-      console.log("Feedback visible!")
       return true;
     }
     
@@ -153,7 +151,6 @@
 
 
     const _addKeyboardSupport = () => {
-      console.log("Feedback keyboard support added!");
       window.addEventListener("keydown", function(event) {
         if (isVisible()) {
           event.preventDefault();
@@ -161,10 +158,6 @@
         }
       })
     }
-
-    
-
-    
 
 
     return {

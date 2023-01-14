@@ -18,7 +18,10 @@ export const View = function() {
   const answer           = document.getElementById("write-answer-area"       );
   const submit           = document.getElementById("write-answer-button"     );
   const category         = document.getElementById("write-category"          );
+  
+  // Will only become useful when answering with both terms or definitions will be implemented
   const label            = document.getElementById("write-textarea-label"    );
+  // Will only become useful when support for diacritics will be added
   const specials         = document.getElementById("write-special-letters"   );
 
 

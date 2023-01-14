@@ -91,7 +91,6 @@ button {
 .grid-standard-container,
 .grid-wide-container {
   align-items  : stretch;
-  background   : $item-background-color;
   border-radius: 21.37px;
   display      : grid;
   gap          : 5px;
@@ -101,15 +100,17 @@ button {
 }
 
 .grid-standard-container {
+  background: $item-background-color;
   max-width : 800px;
   min-height: 400px;
   padding   : 10px;
 }
 
-.grid-wide-container {
+.grid-wide-outer {
+  background: $item-background-color;
+  padding   : 0px 20px 10px 20px;
+  min-height: 400px;
   max-width : 1000px;
-  min-height: 300px;
-  padding   : 20px; 
 }
 
 .btn {

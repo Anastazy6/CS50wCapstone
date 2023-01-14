@@ -1,0 +1,34 @@
+  <!----------------------------------------------------------------------------
+                                      Main
+  ----------------------------------------------------------------------------->
+    
+    <form>
+      <div  id   ="write-container"
+            class="grid-wide-container">
+
+        <div id="write-question">Placeholder</div>
+        <div id="write-pass">
+          <button id   ="write-pass-button"
+                  class="btn btn-outline-danger">
+            Don't know
+          </button>
+        </div>
+        
+          <textarea name="answer" 
+                    id  ="write-answer-area"
+                    cols="80"
+                    rows="1"
+                    placeholder="Some answer"
+                    autofocus></textarea>
+          
+          <input  id   ="write-answer-button"
+                  class="btn btn-outline-warning"
+                  type ="submit" 
+                  value="Answer">
+        
+        <div id="write-textarea-label">Type the answer in ...</div>
+        <div id="write-category-container">Category: <span id="write-category"></span></div>
+        <div id="write-special-letters">TODO (optional)</div> <!-- May be postponed as there are more important things to do -->
+
+      </div>
+    </form>

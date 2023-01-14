@@ -49,6 +49,7 @@ export const View = function() {
 
   const show = () => {
     mainView.classList.remove('hidden');
+    answer.focus();
   }
 
 
@@ -74,13 +75,27 @@ export const View = function() {
     submit.onclick = methods.submit;
     pass  .onclick = methods.pass;
 
+    _addKeyboardSupport();
+
     Feedback.addEventListeners(methods);
+  }
+
+  const _addKeyboardSupport = () => {
+    answer.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        submit.click();
+      }
+    })
+
+
   }
 
 
   return {
     Feedback    : Feedback,
     Summary     : Summary,
+    Progress    : Progress,
     getUserInput: getUserInput,
     initialize  : initialize,
     update      : update,

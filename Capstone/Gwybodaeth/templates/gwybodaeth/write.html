@@ -10,115 +10,20 @@
   {% include "./includable/learning_options.html" %}
 
 
-  <!----------------------------------------------------------------------------
-                                      Main
-  ----------------------------------------------------------------------------->
 
+  <div  id   ="write-wrapper"
+        class="grid-wide-container grid-wide-outer">
 
-  <form>
-    <div  id   ="write-container"
-          class="grid-wide-container">
+    {% include './Write/main.html'     %}
+    {% include './Write/feedback.html' %}
+    {% include './Write/summary.html'  %}
 
-      <div id="write-question">Placeholder</div>
-      <div id="write-pass">
-        <button id   ="write-pass-button"
-                class="btn btn-outline-danger">
-          Don't know
-        </button>
-      </div>
-      
-        <textarea name="answer" 
-                  id  ="write-answer-area"
-                  cols="80"
-                  rows="1"
-                  placeholder="Some answer"></textarea>
-        
-        <input  id   ="write-answer-button"
-                class="btn btn-outline-warning"
-                type ="submit" 
-                value="Answer">
-      
-      <div id="write-textarea-label">Type the answer in ...</div>
-      <div id="write-category-container">Category: <span id="write-category"></span></div>
-      <div id="write-special-letters">TODO (optional)</div> <!-- May be postponed as there are more important things to do -->
-
-      <div  id="write-progress-container">
-        {% include './includable/progress_3.html' %}
-      </div>
-
-    </div>
-  </form>
-
-
-  <!----------------------------------------------------------------------------
-                                    Feedback
-  ----------------------------------------------------------------------------->
-
-
-  <div  id   ="write-feedback-container"
-        class="grid-wide-container hidden">
-
-    <div id="write-feedback-value">
-      Correct/incorrect <!-- governed by JS (static -> scritps/modules/Write/Views/Feedback.mjs) -->
-    </div>
-    <div  id   ="write-feedback-question"
-          class="text-info">
-      Question:
-    </div>
-    <div id="write-feedback-input-container">
-      Your answer: <span id="write-feedback-input"></span>
-    </div>
-    <div id="write-feedback-answers-container"> 
-      Correct answers: <span  id   ="write-feedback-answers"
-                              class="text-info"></span>
-    </div>
-
-    <div id="write-feedback-retry">
-      <button id   ="write-retry-button"
-              class="btn btn-outline-info">
-        Retry this item later this round
-      </button>
-    </div>
-
-    <div id="write-feedback-override">
-      <button id   ="write-override-button"
-              class="btn btn-outline-danger">
-        Override
-      </button>
-    </div>
-
-    <div id="write-feedback-continue">
-      <button id   ="write-continue-button"
-              class="btn btn-outline-primary">
-        Click here or press any key (TODO) to continue
-      </button>
+    <div id="write-progress-container">
+      {% include './Write/progress.html' %}
     </div>
 
   </div>
 
-
-  <!---------------------------------------------------------------------------- 
-                                    Summary
-  ----------------------------------------------------------------------------->
-
-  <div  id   ="write-summary-container"
-        class="grid-wide-container hidden">
-  
-    <div id="write-summary-correct">
-      Correct answers: <span id="summary-correct"></span>
-    </div>
-
-    <div id="write-summary-incorrect">
-      Incorrect answers: <span id="summary-incorrect"><span>
-    </div>
-
-    <div id="write-summary-percentage">
-      Correct answers percentage: <span id="summary-percentage"></span>%
-    </div>
-  
-  
-  
-  </div>
 
 
 {% endblock %}

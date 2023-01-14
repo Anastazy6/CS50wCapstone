@@ -26,6 +26,8 @@
       retry      .onclick = methods.retry;
       btnContinue.onclick = methods.resolve;
       override   .onclick = methods.resolve;
+
+      _addKeyboardSupport();
     }
 
     const showNegative = (currentItem, userInput) => {
@@ -47,6 +49,15 @@
       container.classList.add   ('hidden');
     }
 
+    const isVisible = () => {
+      if (container.classList.contains('hidden')) {
+        console.log("Feedback not visible!");
+        return false;
+      }
+      console.log("Feedback visible!")
+      return true;
+    }
+    
 
     // ----------------------------------
     //         Feedback: private
@@ -141,9 +152,25 @@
     }
 
 
+    const _addKeyboardSupport = () => {
+      console.log("Feedback keyboard support added!");
+      window.addEventListener("keydown", function(event) {
+        if (isVisible()) {
+          event.preventDefault();
+          btnContinue.click();
+        }
+      })
+    }
+
+    
+
+    
+
+
     return {
       addEventListeners: addEventListeners,
       hide             : hide,
+      isVisible        : isVisible,
       showNegative     : showNegative,
       showPositive     : showPositive,
       retry            : retry

@@ -44,7 +44,7 @@ export const Write = function() {
     let currentItem   = Memory.currentItem();
     let answerCorrect = _verifyAnswers(currentItem.terms, input);
 
-    _showFeedback(answerCorrect, currentItem);
+    _showFeedback(answerCorrect, currentItem, View.getUserInput());
 
     return false; // Prevent page reload on form submit.
   }
@@ -54,9 +54,7 @@ export const Write = function() {
     return _clean(answers).some(answer => _clean(questions).includes(answer));
   }
 
-  const _showFeedback = (isCorrect, currentItem) => {
-    let userInput = View.getUserInput()
-
+  const _showFeedback = (isCorrect, currentItem, userInput) => {
     View.hide();
 
     if (isCorrect) {
@@ -82,10 +80,13 @@ export const Write = function() {
    * Gives up on answering a particular question, marking it as incorrect.
    *   Then the user will be asked the next question.
    */
-  const _pass = () => { // TODO: this method requires repetition of View.update() and return false, which 
-                        //         are already invoked in _submitAnswer(). Find a better solution.
-    View.Feedback.showNegative(Memory.currentItem(), "<span class='text-warning'>None</span>");
-    return false;
+  const _pass = () => {
+    let answerCorrect = false;
+    let currentItem   = Memory.currentItem();
+    let userInput     = "<span class='text-warning'>None</span>";
+    
+    _showFeedback(answerCorrect, currentItem, userInput);
+    return false; // Prevent page reload on submit.
   }
 
   // TODO (optional): refactor so that it uses booleans instead of strings. Using dataset for booleans
@@ -125,16 +126,21 @@ export const Write = function() {
 
     let data = {
       currentItem: currentItem,
-      counters   : {
-          correct  : Memory.countCorrect(),
-          incorrect: Memory.countIncorrect(),
-          remaining: Memory.countRemaining(),
-        } 
+      counters   : _getCountersData() 
     }
     return View.update(data);
   }
 
+  const _getCountersData = () => {
+    return  {
+      correct  : Memory.countCorrect(),
+      incorrect: Memory.countIncorrect(),
+      remaining: Memory.countRemaining(),
+    } 
+  }
+
   const _showSummary = () => {
+    View.Progress.update(_getCountersData());
     View.hide();
     View.Feedback.hide();
     View.Summary .show(_getSummaryData());

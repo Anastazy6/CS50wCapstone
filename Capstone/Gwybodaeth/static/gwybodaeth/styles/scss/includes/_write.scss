@@ -1,3 +1,23 @@
+#write-container,
+#write-feedback-container,
+#write-summary-container {grid-area: view;}
+
+#write-progress-container {grid-area: prog;}
+
+#write-wrapper {
+  grid-template-columns: 1fr;
+  grid-template-rows   : 350px 65px;
+  grid-template-areas  :
+  'view view'
+  'prog prog';
+}
+
+#write-progress-container {
+  border-top : 3px solid theme-color("lleuad");
+  padding-top: 20px;
+}
+
+
 /**
  *  #write-container elements
  *  The block below is only meant to contain grid-area names for each element.
@@ -115,6 +135,7 @@
 #write-feedback-override          {grid-area: overr;}
 
 #write-feedback-container { 
+  gap: 20px;
   grid-template-columns: 3fr 1fr;
   grid-template-rows   : 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas  : 
@@ -135,8 +156,12 @@
 #write-summary-percentage {grid-area: perc;}
 
 #write-summary-container {
+  height: max-content;
+  width : max-content;
   grid-template-columns: 1fr;
   grid-template-rows   : 1fr 1fr 1fr;
   grid-template-areas  :
-    'good bad  perc';
+    'good'
+    'bad'
+    'perc';
 }

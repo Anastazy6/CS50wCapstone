@@ -1,0 +1,45 @@
+  <!----------------------------------------------------------------------------
+                                    Feedback
+  ----------------------------------------------------------------------------->
+
+
+    <div  id   ="write-feedback-container"
+          class="grid-wide-container hidden">
+
+      <div id="write-feedback-value">
+        Correct/incorrect <!-- governed by JS (static -> scritps/modules/Write/Views/Feedback.mjs) -->
+      </div>
+      <div  id   ="write-feedback-question"
+            class="text-info">
+        Question:
+      </div>
+      <div id="write-feedback-input-container">
+        Your answer: <span id="write-feedback-input"></span>
+      </div>
+      <div id="write-feedback-answers-container"> 
+        Correct answers: <span  id   ="write-feedback-answers"
+                                class="text-info"></span>
+      </div>
+
+      <div id="write-feedback-retry">
+        <button id   ="write-retry-button"
+                class="btn btn-outline-info">
+          Retry this item later this round
+        </button>
+      </div>
+
+      <div id="write-feedback-override">
+        <button id   ="write-override-button"
+                class="btn btn-outline-danger">
+          Override
+        </button>
+      </div>
+
+      <div id="write-feedback-continue">
+        <button id   ="write-continue-button"
+                class="btn btn-outline-primary">
+          Click here or press any key (TODO) to continue
+        </button>
+      </div>
+
+    </div>

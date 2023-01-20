@@ -9,6 +9,7 @@
 
 import  { Create     }  from  "./modules/Create/create.mjs";
 import  { Flashcards }  from  "./modules/Flashcards/flashcards.mjs";
+import  { Learn      }  from  "./modules/Learn/learn.mjs";
 import  { Load       }  from  "./modules/Load/load.mjs";
 import  { StudySet   }  from  "./modules/StudySet/study_set.mjs"
 import  { Write      }  from  "./modules/Write/write.mjs";
@@ -19,12 +20,14 @@ document.addEventListener("DOMContentLoaded", function() {
   const addStudyItemButton = document.getElementById("study-set-add-item"  );
   const createStudySetForm = document.getElementById("create-set"          );
   const flashcardsView     = document.getElementById("flashcards-container");
+  const learnView          = document.getElementById("learn-wrapper"       );
   const studySetView       = document.getElementById("study-items"         );
-  const writeView          = document.getElementById("write-container"     );
+  const writeView          = document.getElementById("write-wrapper"       );
 
   if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = Create.createStudySet;}
   if (!!flashcardsView)     {Load.justTerms(Flashcards.loadFlashcards);}
-  if (!!studySetView)       {Load.justTerms(StudySet  .loadStudySet  );}
-  if (!!writeView)          {Load.justTerms(Write     .loadItems     );}
+  if (!!learnView     )     {Load.justTerms(Learn     .loadItems     );}
+  if (!!studySetView  )     {Load.justTerms(StudySet  .loadStudySet  );}
+  if (!!writeView     )     {Load.justTerms(Write     .loadItems     );}
 })

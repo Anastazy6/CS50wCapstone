@@ -24,7 +24,7 @@ def login_view(request):
                 'message': "Invalid username or password."
             })
     else:
-        return render(request, "gwybodaeth/login.html")
+        return render(request, "gwybodaeth/Auth/login.html")
 
 def logout_view(request):
     logout(request)
@@ -55,4 +55,4 @@ def register(request):
         return HttpResponseRedirect(reverse('index'))
 
     else:
-        return render(request, "gwybodaeth/register.html")
+        return render(request, "gwybodaeth/Auth/register.html")

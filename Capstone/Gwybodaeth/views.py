@@ -95,15 +95,25 @@ def flashcards_view(request, study_set_id):
 
 
 def write_view(request, study_set_id):
-    require_method    (request, 'GET')
+    require_method(request, 'GET')
     
     study_set = require_study_set(request, study_set_id)
 
-    return render(request, "gwybodaeth/write.html", {
+    return render(request, "gwybodaeth/Write/write.html", {
         "study_set": study_set,
         "subtitle" : "write"
     })
 
+#TODO: Consider merging the nearly the same 4 functions into one.
+def learn_view(request, study_set_id):
+    require_method(request, 'GET')
+
+    study_set = require_study_set(request, study_set_id)
+
+    return render(request, "gwybodaeth/Learn/learn.html", {
+        "study_set": study_set,
+        "subtitle" : 'learn'
+    })
 
 
 def load_study_set(request, study_set_id):

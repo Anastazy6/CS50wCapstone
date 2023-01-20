@@ -1,0 +1,25 @@
+{% extends 'gwybodaeth/layout.html' %}
+
+{% block title %}
+  {{ study_set.title }} - learn
+{% endblock %}
+
+
+
+{% block body %}
+  {% include "gwybodaeth/includable/study_set_header.html" %}
+  {% include "gwybodaeth/includable/learning_options.html" %}
+
+
+    <div  id   ="learn-wrapper"
+          class="grid-wide-container grid-wide-outer">
+
+    {% include './multiple_choice.html' %}
+    {% include './learn_write.html'     %}
+    {% include './summary.html'         %}
+
+    
+  </div>
+
+
+{% endblock %}

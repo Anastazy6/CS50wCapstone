@@ -1,0 +1,29 @@
+{% extends '../layout.html' %}
+
+{% block title %}
+  {{ study_set.title }} - write
+{% endblock %}
+
+{% block body %}
+  
+  {% include "gwybodaeth/includable/study_set_header.html" %}
+  {% include "gwybodaeth/includable/learning_options.html" %}
+
+
+
+  <div  id   ="write-wrapper"
+        class="grid-wide-container grid-wide-outer">
+
+    {% include './main.html'     %}
+    {% include './feedback.html' %}
+    {% include './summary.html'  %}
+
+    <div id="write-progress-container">
+      {% include './progress.html' %}
+    </div>
+
+  </div>
+
+
+
+{% endblock %}

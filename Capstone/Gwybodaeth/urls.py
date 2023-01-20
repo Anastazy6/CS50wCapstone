@@ -16,5 +16,6 @@ urlpatterns = [
     path("<int:study_set_id>",            views.study_set_view,       name="study-set-view" ),
     path("<int:study_set_id>/flashcards", views.flashcards_view,      name="flashcards"     ),
     path("<int:study_set_id>/write",      views.write_view,           name="write"          ),
-    path("load/<int:study_set_id>",       views.load_study_set,     name="load-study-set")
+    path("<int:study_set_id>/learn",      views.learn_view,           name="learn"          ),
+    path("load/<int:study_set_id>",       views.load_study_set,       name="load-study-set" )
 ]

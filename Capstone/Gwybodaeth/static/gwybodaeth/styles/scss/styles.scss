@@ -4,7 +4,7 @@ $font-main:    Helvetica;
 $font-stylish: 'Times New Roman';
 $text-color: ghostwhite;
 
-$background-color         : #191e33;
+$background-color         : #0b0f1e;
 $transparent-ghostwhite-15: rgba(250, 250, 255, 0.15);
 $transparent-ghostwhite-08: rgba(250, 250, 255, 0.08);
 $item-background-color : $transparent-ghostwhite-08;
@@ -16,7 +16,7 @@ $base-z-index: 0;
 
 $theme-colors: (
   "porffor"      : #200722,
-  "lleuad"       : rgb(52, 98, 113),
+  "lleuad"       : rgb(62, 97, 109),
   "success-empty": rgb(1, 76, 37),
   "info-empty"   : rgb(0, 49, 89),
   "danger-empty" : rgb(87, 2, 2)
@@ -36,3 +36,4 @@ $theme-colors: (
 @import "./includes/_study_set.scss";
 @import "./includes/_flashcards.scss";
 @import "./includes/_write.scss";
+@import "./includes/learn";

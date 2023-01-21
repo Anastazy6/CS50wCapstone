@@ -10,7 +10,7 @@ html {
 
 .body {
   background-color: $background-color;
-  padding         : 70px 20px;
+  padding         : 100px 20px;
 
   font-family: $font-main;
   color      : $text-color;
@@ -56,6 +56,13 @@ button {
   max-width    : 150px;
   margin       : auto;
   text-align   : center;
+}
+
+.moonlight-stronk {
+  box-shadow: 
+      0 0 10px  theme-color("lleuad"),
+      0 0 25px  theme-color("lleuad"),
+      0 0 70px theme-color("lleuad");
 }
 
 #study-set-submit,
@@ -111,6 +118,15 @@ button {
   padding   : 0px 20px 10px 20px;
   min-height: 400px;
   max-width : 1000px;
+}
+
+.grid-progress-container {
+  align-items  : stretch; 
+  display: grid;
+  width  : 100%;
+  height : 100%;
+  gap    : 20px;
+  grid-template-rows   : subgrid;
 }
 
 .btn {

@@ -1,0 +1,58 @@
+#learn-multiple-choice-container,
+#learn-writing-container,
+#learn-summary-container  {grid-area: view;}
+
+#learn-progress-container {grid-area: prog;}
+
+#learn-wrapper {
+  grid-template-rows   : 5fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas  :
+  'view'
+  'prog';
+}
+
+
+
+
+
+
+
+
+
+
+
+#lmc-term     {grid-area: term;}
+#lmc-category {grid-area: cat;}
+#lmc-answer-A {grid-area: ansA;}
+#lmc-answer-B {grid-area: ansB;}
+#lmc-answer-C {grid-area: ansC;}
+#lmc-answer-D {grid-area: ansD;}
+
+#learn-multiple-choice-container {
+  grid-template-rows   : 3fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas  :
+  'term term term cat '
+  'ansA ansA ansB ansB'
+  'ansC ansC ansD ansD';
+}
+
+#lmc-answers {
+  list-style-type: upper-latin;
+}
+
+
+
+#learn-progress-remaining-area {grid-area: left;}
+#learn-progress-bar-area       {grid-area: prog;}
+#learn-progress-failures-area  {grid-area: fail;}
+
+#learn-progress-container {
+  border-top : 2px solid theme-color('lleuad');
+  padding-top: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows   : subgrid;
+  grid-template-areas  :
+  'left prog fail';
+}

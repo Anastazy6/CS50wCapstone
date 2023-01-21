@@ -1,6 +1,6 @@
 #write-container,
 #write-feedback-container,
-#write-summary-container {grid-area: view;}
+#write-summary-container  {grid-area: view;}
 
 #write-progress-container {grid-area: prog;}
 
@@ -53,18 +53,18 @@
 }
 
 #write-pass-button {
-  cursor    : pointer;
+  cursor       : pointer;
   border-radius: 21.37px;;
 }
 
 #write-answer-area {
-  font-size: 1.5em;
-  padding-top: 50px;
-  padding-left: 0;
+  font-size    : 1.5em;
+  padding-top  : 50px;
+  padding-left : 0;
   padding-right: 0;
-  height: 100px;
-  background: transparent;
-  border-top: 2px solid $transparent-ghostwhite-15;
+  height       : 100px;
+  background   : transparent;
+  border-top   : 2px solid $transparent-ghostwhite-15;
   border-bottom: 3px solid theme-color("lleuad");
   border-radius: 0;
 
@@ -94,19 +94,13 @@
 .progress-bar-counter    { grid-area: cnt;}
 
 #write-progress-container {
-  align-items  : stretch; 
-  display: grid;
-  width  : 100%;
-  height : 100%;
-  gap    : 20px;
   grid-template-columns: 1fr 1fr 1fr; 
-  grid-template-rows   : subgrid;
 }
 
 .progress-area {
-  display  : grid;
-  width    : 100%;
-  height   : 100%;
+  display    : grid;
+  width      : 100%;
+  height     : 100%;
   grid-column: span 1;
   grid-template-columns: subgrid;
   grid-template-rows   : subgrid;

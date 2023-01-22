@@ -9,11 +9,38 @@ export const Memory = (function() {
   }
 
   const test = () => {
-    console.log(_pickable);
+    _pickable.forEach(item => console.log(item));
+  }
+
+  /**
+   * Used to generate wrong answers for the multiple choice view.
+   * @returns All the terms except the current pickable one
+   */
+  const getOthers = () => {
+    return _pickable.slice(1) + _writable + _complete;
+  }
+
+  const getCurrentPickable = () => {
+    return _pickable[0];
+  }
+
+  const getWritable = () => {
+    return _writable[0];
+  }
+
+  const isItTimeToWrite = () => {
+    if (_writable.length <= 7 && _pickable.length > 0) {
+      return false;
+    }
+    return true;
   }
 
   return {
-    loadItem: loadItem,
-    test    : test
+    getOthers             : getOthers,
+    getCurrentPickable    : getCurrentPickable,
+    getWritable           : getWritable,
+    isItTimeToWrite       : isItTimeToWrite,
+    loadItem              : loadItem,
+    test                  : test
   }
 })()

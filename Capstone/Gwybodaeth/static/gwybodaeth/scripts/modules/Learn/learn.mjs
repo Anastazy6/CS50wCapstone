@@ -21,6 +21,7 @@ export const Learn = (function() {
   const _run = () => {
     console.log("Study items loaded.")
     Memory .test();
+    View.Choice.showCurrent(Memory.getCurrentPickable(), Memory.getOthers())
   }
 
   return {

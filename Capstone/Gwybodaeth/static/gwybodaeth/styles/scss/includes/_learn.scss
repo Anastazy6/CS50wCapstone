@@ -5,41 +5,70 @@
 #learn-progress-container {grid-area: prog;}
 
 #learn-wrapper {
-  grid-template-rows   : 5fr 1fr;
+  grid-template-rows   : 350px 70px;
   grid-template-columns: 1fr;
   grid-template-areas  :
-  'view'
-  'prog';
+    'view'
+    'prog';
 }
 
 
-
-
-
-
-
-
-
-
-
 #lmc-term     {grid-area: term;}
-#lmc-category {grid-area: cat;}
+#lmc-category {grid-area: cat; }
+#lmc-answers  {grid-area: answ;}
+
+#learn-multiple-choice-container {
+  width: 100%;
+  grid-template-rows   : 4fr 3fr;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas  :
+    'term cat '
+    'answ answ';
+}
+
+#lmc-term,
+#lmc-category {
+  font-size: 2em;
+  border-bottom: 2px solid $transparent-ghostwhite-15;
+}
+
+#lmc-category {
+  text-align: right;
+}
+
+
 #lmc-answer-A {grid-area: ansA;}
 #lmc-answer-B {grid-area: ansB;}
 #lmc-answer-C {grid-area: ansC;}
 #lmc-answer-D {grid-area: ansD;}
 
-#learn-multiple-choice-container {
-  grid-template-rows   : 3fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+#lmc-answers {
+  background         : transparent;
+  display            : grid;
+  gap                : 5px;
+  width              : 100%; 
+  list-style-position: inside;
+  list-style-type    : decimal;
+  padding            : 0;
+  grid-template-columns: subgrid;
+  grid-template-rows   : 1fr 1fr;
   grid-template-areas  :
-  'term term term cat '
-  'ansA ansA ansB ansB'
-  'ansC ansC ansD ansD';
+    'ansA ansB'
+    'ansC ansD';
 }
 
-#lmc-answers {
-  list-style-type: upper-latin;
+.lmc-answer {
+  align-items: center;
+  background : $background-color;
+  cursor     : pointer;
+  display    : list-item;
+  height     : 50px;
+  padding    : 13px 15px;
+  width      : 100%;
+
+  &:hover {
+    box-shadow: 0 0 10px theme-color("lleuad") inset;
+  }
 }
 
 
@@ -52,7 +81,36 @@
   border-top : 2px solid theme-color('lleuad');
   padding-top: 10px;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows   : subgrid;
+  grid-template-rows   : 1fr;
   grid-template-areas  :
-  'left prog fail';
+    'left prog fail';
+}
+
+
+.prog-row-left  {grid-area: left; }
+.prog-row-right {grid-area: right;}
+
+
+.prog-row {
+  display: grid;
+  grid-template-rows   : 0; // somehow it works...
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas  :
+  'left rigth';
+}
+
+.prog-row-right {
+  justify-content: right;
+}
+
+.prog-row-top    {grid-area: top;   }
+.prog-row-bottom {grid-area: bottom;}
+
+.learn-progress-grid-cell {
+  display: grid;
+  grid-template-rows   : subgrid;
+  grid-template-columns: subgrid;
+  grid-template-areas  :
+    'top'
+    'bottom';
 }

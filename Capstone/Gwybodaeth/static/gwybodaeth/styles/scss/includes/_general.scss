@@ -23,9 +23,11 @@ h1 {
 
 .bg-porffor       { background-color: theme-color("porffor"      ) !important; }
 .bg-lleuad        { background-color: theme-color("lleuad"       ) !important; }
+.bg-moon-glass    { background-color: theme-color("moon-glass"   ) !important; }
 .bg-success-empty { background-color: theme-color("success-empty") !important; }
 .bg-info-empty    { background-color: theme-color("info-empty"   ) !important; }
 .bg-danger-empty  { background-color: theme-color("danger-empty" ) !important; }
+.bg-warning-empty { background-color: theme-color("warning-empty") !important; }
 
 input,
 textarea,
@@ -62,7 +64,7 @@ button {
   box-shadow: 
       0 0 10px  theme-color("lleuad"),
       0 0 25px  theme-color("lleuad"),
-      0 0 70px theme-color("lleuad");
+      0 0 70px  theme-color("lleuad");
 }
 
 #study-set-submit,
@@ -106,15 +108,18 @@ button {
   z-index      : $base-z-index;        
 }
 
+.grid-standard-container,
+.grid-wide-outer {
+  background: theme-color("moon-glass");
+}
+
 .grid-standard-container {
-  background: $item-background-color;
   max-width : 800px;
   min-height: 400px;
   padding   : 10px;
 }
 
 .grid-wide-outer {
-  background: $item-background-color;
   padding   : 0px 20px 10px 20px;
   min-height: 400px;
   max-width : 1000px;

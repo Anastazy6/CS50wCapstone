@@ -16,8 +16,8 @@ export const Memory = (function() {
    * Used to generate wrong answers for the multiple choice view.
    * @returns All the terms except the current pickable one
    */
-  const getOthers = () => {
-    return _pickable.slice(1) + _writable + _complete;
+  const getWrongAnswers = () => {
+    return _pickable.slice(1).concat(_writable).concat(_complete);
   }
 
   const getCurrentPickable = () => {
@@ -35,8 +35,14 @@ export const Memory = (function() {
     return true;
   }
 
+  const getShuffledTraps = () => {
+    console.log(typeof getWrongAnswers());
+    return getWrongAnswers().sort(() => Math.random() - 0.5 )
+  }
+
   return {
-    getOthers             : getOthers,
+    getWrongAnswers       : getWrongAnswers,
+    getShuffledTraps      : getShuffledTraps,
     getCurrentPickable    : getCurrentPickable,
     getWritable           : getWritable,
     isItTimeToWrite       : isItTimeToWrite,

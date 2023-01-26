@@ -24,6 +24,20 @@ export const Learn = (function() {
     View.Choice.showCurrent(Memory.getCurrentPickable(), Memory.getShuffledTraps())
   }
 
+
+  const _processCorrectChoice = () => {
+    Memory.processCorrectChoice();
+  }
+
+  const _processWrongChoice = () => {
+    Memory.processWrongChoice();
+  }
+
+  const _multipleChoiceMethods = {
+    processCorrectChoice: _processCorrectChoice,
+    processWrongChoice  : _processWrongChoice
+  }
+
   return {
     loadItems: loadItems
   }

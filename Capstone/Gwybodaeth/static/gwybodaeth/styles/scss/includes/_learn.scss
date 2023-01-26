@@ -13,29 +13,37 @@
 }
 
 
-#lmc-term     {grid-area: term;}
-#lmc-category {grid-area: cat; }
-#lmc-answers  {grid-area: answ;}
+#lmc-term            {grid-area: term;}
+#lmc-category        {grid-area: cat; }
+#lmc-feedback        {grid-area: feed;}
+#lmc-answers         {grid-area: answ;}
+#lmc-continue-button {grid-area: next;}
 
 #learn-multiple-choice-container {
   width: 100%;
-  grid-template-rows   : 4fr 3fr;
+  grid-template-rows   : 2fr 1fr 3fr 1fr;
   grid-template-columns: 3fr 1fr;
   grid-template-areas  :
     'term cat '
-    'answ answ';
+    'feed feed'
+    'answ answ'
+    'next next';
 }
 
 #lmc-term,
 #lmc-category {
   font-size: 2em;
-  border-bottom: 2px solid $transparent-ghostwhite-15;
 }
 
 #lmc-category {
   text-align: right;
 }
 
+#lmc-feedback {
+  border-bottom: 2px solid $transparent-ghostwhite-15;
+  margin-bottom: 5px;
+  text-align   : center;
+}
 
 #lmc-answer-A {grid-area: ansA;}
 #lmc-answer-B {grid-area: ansB;}
@@ -45,7 +53,7 @@
 #lmc-answers {
   background         : transparent;
   display            : grid;
-  gap                : 5px;
+  gap                : 7px;
   width              : 100%; 
   list-style-position: inside;
   list-style-type    : decimal;
@@ -67,7 +75,7 @@
   width      : 100%;
 
   &:hover {
-    box-shadow: 0 0 10px theme-color("lleuad") inset;
+    box-shadow: 0 0 15px theme-color("lleuad") inset;
   }
 }
 
@@ -78,7 +86,7 @@
 #learn-progress-failures-area  {grid-area: fail;}
 
 #learn-progress-container {
-  border-top : 2px solid theme-color('lleuad');
+  border-top : 3px solid theme-color('lleuad');
   padding-top: 10px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows   : 1fr;
@@ -89,8 +97,13 @@
 
 .prog-row-left  {grid-area: left; }
 .prog-row-right {grid-area: right;}
-.prog-row-full  {grid-column: span 2}
+.prog-row-full  {grid-area: left / left / left / right;}
 
+.prog-row-full {
+  align-items: center;
+  height: 100%;
+  display: flex;
+}
 
 .prog-row {
   display: grid;
@@ -109,9 +122,19 @@
 
 .learn-progress-grid-cell {
   display: grid;
-  grid-template-rows   : subgrid;
+  grid-template-rows   : 1fr 1fr;
   grid-template-columns: subgrid;
   grid-template-areas  :
     'top'
     'bottom';
+}
+
+.lmc-answer-clicked-correct,
+.lmc-answer-clicked-correct:hover {
+  box-shadow: 0 0 15px theme-color("success") inset;
+}
+
+.lmc-answer-clicked-wrong,
+.lmc-answer-clicked-wrong:hover {
+  box-shadow: 0 0 15px theme-color("danger") inset;
 }

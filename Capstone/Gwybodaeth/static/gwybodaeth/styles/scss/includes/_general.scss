@@ -29,6 +29,18 @@ h1 {
 .bg-danger-empty  { background-color: theme-color("danger-empty" ) !important; }
 .bg-warning-empty { background-color: theme-color("warning-empty") !important; }
 
+
+.btn-lleuad,
+.btn-outline-lleuad {
+  &:hover {
+    background-color: theme-color("lleuad") !important;
+  }
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 input,
 textarea,
 select,
@@ -58,6 +70,11 @@ button {
   max-width    : 150px;
   margin       : auto;
   text-align   : center;
+}
+
+.hover-moonlight:hover {
+  box-shadow:
+    0 0 25px 2px theme-color("lleuad");
 }
 
 .moonlight-stronk {

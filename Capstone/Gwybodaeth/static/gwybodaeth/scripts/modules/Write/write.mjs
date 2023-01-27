@@ -3,6 +3,8 @@ import { View      } from "./Views/View.mjs";
 import { StudyItem } from "./Models/StudyItem.mjs";
 
 export const Write = function() {
+
+  document.getElementById("learning-options-write").classList.add("active-learning-option");
   
   const loadItems = (data) => {
     Object.entries(data).forEach(([id, values]) => {

@@ -20,7 +20,7 @@ h1 {
   color: $text-color;
 } 
 
-
+/*
 .bg-porffor       { background-color: theme-color("porffor"      ) !important; }
 .bg-lleuad        { background-color: theme-color("lleuad"       ) !important; }
 .bg-moon-glass    { background-color: theme-color("moon-glass"   ) !important; }
@@ -28,7 +28,7 @@ h1 {
 .bg-info-empty    { background-color: theme-color("info-empty"   ) !important; }
 .bg-danger-empty  { background-color: theme-color("danger-empty" ) !important; }
 .bg-warning-empty { background-color: theme-color("warning-empty") !important; }
-
+*/
 
 .btn-lleuad,
 .btn-outline-lleuad {
@@ -161,5 +161,24 @@ button {
 
 .progress {
   height: 8px;
-  width: 100%;
+  width : 100%;
+}
+
+.study-set-title,
+.study-set-description {
+  text-align : center;
+  text-shadow: 0 0 3px theme-color("lleuad-lawn");
+}
+
+.study-set-title {
+  font-size: 3em;
+}
+
+.study-set-description {
+  font-size: 1.5em;
+}
+
+.active-learning-option {
+  background: theme-color("lleuad-lawn");
+  color     : $background-color;
 }

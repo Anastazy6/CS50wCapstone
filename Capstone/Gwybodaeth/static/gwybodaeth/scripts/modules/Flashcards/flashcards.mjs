@@ -1,4 +1,7 @@
 export const Flashcards = (function(){
+
+  document.getElementById("learning-options-flashcards").classList.add("active-learning-option");
+
   /**
    * A private submodule for the Flashcards module. Contains references to all the
    * HTML elements used to display flashcards data and perform actions such as
@@ -16,6 +19,7 @@ export const Flashcards = (function(){
     const next       = document.getElementById("flashcards-button-right");
     const shuffle    = document.getElementById("shuffle-button"         );
     const resort     = document.getElementById("resort-button"          );
+
 
     /**
      * Allows to set a flashcards view element's inner HTML to a chosen value. 

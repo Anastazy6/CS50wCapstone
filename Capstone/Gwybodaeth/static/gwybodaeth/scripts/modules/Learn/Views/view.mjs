@@ -5,10 +5,16 @@ import  { Summary  }  from  "./summary.mjs"
 
 export const View = (function() {
 
+  const initialize = (intermodularMethods) => {
+    Choice.connectToMemory(intermodularMethods.multipleChoice);
+  }
+
   return {
     Choice  : Choice,
     Progress: Progress,
     Write   : Write,
-    Summary : Summary
+    Summary : Summary,
+
+    initialize: initialize,
   }
 })()

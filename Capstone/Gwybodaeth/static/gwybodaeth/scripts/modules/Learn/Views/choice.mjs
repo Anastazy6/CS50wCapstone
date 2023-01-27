@@ -12,10 +12,14 @@ export const Choice = (function() {
   let trapAnswers;
 
 
-
-  const initialize = (methods) => {
+  /**
+   * Adds methods with access to Memory.
+   */
+  const connectToMemory = (methods) => {
 
   }
+
+
 
 
 
@@ -34,13 +38,13 @@ export const Choice = (function() {
 
   const _setCorrect = (answer) => {
     correctAnswer.innerHTML = answer.terms;
-    correctAnswer.addEventListener('click', _correctAnswerClicked)
+    correctAnswer.onclick = _correctAnswerClicked;
   }
 
   const _setTraps = (traps) => {
     trapAnswers.forEach(trapAnswer => {
       trapAnswer.innerHTML = traps[0].terms;
-      trapAnswer.addEventListener('click', _trapClicked, true)
+      trapAnswer.onclick = () => {_trapClicked(trapAnswer)};
       traps.shift();
     })
   }
@@ -63,9 +67,9 @@ export const Choice = (function() {
     _anyAnswerClicked();
   }
 
-  const _trapClicked = function() {
+  const _trapClicked = function(trap) {
     _showNegativeFeedback();
-    _highlightWrong();
+    _highlightWrong(trap);
 
     _anyAnswerClicked();
   }
@@ -104,19 +108,22 @@ export const Choice = (function() {
     correctAnswer.classList.add("lmc-answer-clicked-correct");
   }
 
-  const _highlightWrong = function() {
-    this.classList.add   ("lmc-answer-clicked-wrong"  );
+  const _highlightWrong = function(trap) {
+    trap.classList.add   ("lmc-answer-clicked-wrong"  );
   }
 
   const _disableAnswers = () => {
-    correctAnswer.removeEventListener('click', _correctAnswerClicked);
+    correctAnswer.onclick = null;
     
-    trapAnswers.forEach(trap => {
-      trap.removeEventListener('click', _trapClicked)
+    trapAnswers.forEach(trapAnswer => {
+      console.log(`Removing event listener for trap: `)
+      console.log(trapAnswer)
+      trapAnswer.onclick = null;
     })
   }
 
   return {
-    showCurrent: showCurrent
+    showCurrent    : showCurrent,
+    connectToMemory: connectToMemory,
   }
 })()

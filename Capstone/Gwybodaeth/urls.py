@@ -12,10 +12,10 @@ urlpatterns = [
     path("create-set", views.create_set,  name="create-set"),
 
     # Single-parameter views
-    path("<str:username>/sets",           views.user_sets,            name="user-sets"      ),
-    path("<int:study_set_id>",            views.study_set_view,       name="study-set-view" ),
-    path("<int:study_set_id>/flashcards", views.flashcards_view,      name="flashcards"     ),
-    path("<int:study_set_id>/write",      views.write_view,           name="write"          ),
-    path("<int:study_set_id>/learn",      views.learn_view,           name="learn"          ),
-    path("load/<int:study_set_id>",       views.load_study_set,       name="load-study-set" )
+    path("<str:username>/sets",               views.user_sets,            name="user-sets"      ),
+    path("set/<int:study_set_id>",            views.study_set_view,       name="study-set-view" ),
+    path("set/<int:study_set_id>/flashcards", views.flashcards_view,      name="flashcards"     ),
+    path("set/<int:study_set_id>/write",      views.write_view,           name="write"          ),
+    path("set/<int:study_set_id>/learn",      views.learn_view,           name="learn"          ),
+    path("load/<int:study_set_id>",           views.load_study_set,       name="load-study-set" )
 ]

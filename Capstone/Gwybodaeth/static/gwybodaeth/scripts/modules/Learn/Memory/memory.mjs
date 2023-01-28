@@ -49,7 +49,6 @@ export const Memory = (function() {
   }
 
   const getShuffledTraps = () => {
-    console.log(typeof getWrongAnswers());
     return getWrongAnswers().sort(() => Math.random() - 0.5 )
   }
 
@@ -60,7 +59,26 @@ export const Memory = (function() {
 
   const processWrongChoice = () => {
     _wrongChoices += 1;
-    // TODOMove the item from _pickable[0] a few (up to 7, at random) indexes to the right
+    _insert(_pickable, _rollRandomIndex(_pickable), _pickable.shift());y
+  }
+
+  const _rollRandomIndex = (array) => {
+    let constraints = {
+      min: 1,
+      max: array.length - 1
+    }
+
+    let randomIndex = round(Math.random * 7);
+    randomIndex = max(constraints.min, randomIndex) // Ensure the value is never less than 1
+    randomIndex = min(constraints.max, randomIndex) // Then ensure it's not greater than the length of _pickable
+    return randomIndex;
+  }
+
+  const _insert = (array, index, value) => {
+    let firstHalf  = array.slice(0, index);
+    let secondHalf = array.slice(index);
+
+    return firstHalf.push(value).concat(secondHalf);
   }
 
   return {

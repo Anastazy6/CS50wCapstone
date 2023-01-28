@@ -1,7 +1,5 @@
 export const Flashcards = (function(){
 
-  document.getElementById("learning-options-flashcards").classList.add("active-learning-option");
-
   /**
    * A private submodule for the Flashcards module. Contains references to all the
    * HTML elements used to display flashcards data and perform actions such as

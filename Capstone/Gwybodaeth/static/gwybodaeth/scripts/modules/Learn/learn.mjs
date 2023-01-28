@@ -4,8 +4,6 @@ import { View      } from "./Views/view.mjs"
 
 export const Learn = (function() {
 
-  document.getElementById("learning-options-learn").classList.add("active-learning-option");
-
   const loadItems = (data) => {
     Object.entries(data).forEach(([id, values]) => {
       Memory.loadItem(new StudyItem(
@@ -23,27 +21,29 @@ export const Learn = (function() {
   const _run = () => {
     console.log("Study items loaded.")
     Memory .test();
-    View.initialize(_intermodularMethods);
-    View.Choice.showCurrent(Memory.getCurrentPickable(), Memory.getShuffledTraps())
+    View.grantAccessToMemory(_intermodularMethods);
+    View.Choice.showCurrent()
   }
 
 
-  const _processCorrectChoice = () => {
-    Memory.processCorrectChoice();
+  const _getCurrentChoice = () => {
+    return {
+      correct: Memory.getCurrentPickable(),
+      traps  : Memory.getShuffledTraps()
+    }
   }
-
-  const _processWrongChoice = () => {
-    Memory.processWrongChoice();
-  }
-
+  
   const _multipleChoiceMethods = {
-    processCorrectChoice: _processCorrectChoice,
-    processWrongChoice  : _processWrongChoice
+    handleCorrect: Memory.processCorrectChoice,
+    handleWrong  : Memory.processWrongChoice,
+    getCurrent   : _getCurrentChoice
   }
 
   const _intermodularMethods = {
-    multipleChoice: _multipleChoiceMethods,
+    Choice: _multipleChoiceMethods,
   }
+
+
 
 
 

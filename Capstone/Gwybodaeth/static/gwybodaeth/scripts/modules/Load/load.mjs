@@ -28,7 +28,7 @@ export const Load = function() {
   }
 
   const _getStudySetID = () => {
-    return window.location.pathname.slice(1).split("/")[0];
+    return window.location.pathname.slice(1).split("/")[1];
   }
 
   return {

@@ -1,7 +1,5 @@
 export const StudySet = (function(){
 
-  document.getElementById("learning-options-set").classList.add("active-learning-option");
-
   const View = function() {
     const studySet =  document.getElementById("study-items");
 

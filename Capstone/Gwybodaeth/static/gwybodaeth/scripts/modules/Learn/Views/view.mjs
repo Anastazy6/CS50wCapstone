@@ -5,8 +5,8 @@ import  { Summary  }  from  "./summary.mjs"
 
 export const View = (function() {
 
-  const initialize = (intermodularMethods) => {
-    Choice.connectToMemory(intermodularMethods.multipleChoice);
+  const grantAccessToMemory = (intermodularMethods) => {
+    Choice.connectToMemory(intermodularMethods.Choice);
   }
 
   return {
@@ -15,6 +15,6 @@ export const View = (function() {
     Write   : Write,
     Summary : Summary,
 
-    initialize: initialize,
+    grantAccessToMemory: grantAccessToMemory,
   }
 })()

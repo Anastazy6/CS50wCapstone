@@ -14,6 +14,8 @@ import  { Load       }  from  "./modules/Load/load.mjs";
 import  { StudySet   }  from  "./modules/StudySet/study_set.mjs"
 import  { Write      }  from  "./modules/Write/write.mjs";
 
+import  { Util       } from "./modules/Utilities/util.mjs";
+
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -23,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const learnView          = document.getElementById("learn-wrapper"       );
   const studySetView       = document.getElementById("study-items"         );
   const writeView          = document.getElementById("write-wrapper"       );
+
+  Util.highglighCurrentLearningOption();
 
   if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = Create.createStudySet;}

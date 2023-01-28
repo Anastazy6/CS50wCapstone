@@ -11,24 +11,39 @@ export const Choice = (function() {
   let correctAnswer;
   let trapAnswers;
 
+  let handleCorrect;
+  let handleWrong;
+  let getCurrentChoice;
 
   /**
    * Adds methods with access to Memory.
    */
   const connectToMemory = (methods) => {
-
+    console.log(methods)
+    handleCorrect    = methods.handleCorrect;
+    handleWrong      = methods.handleWrong;
+    getCurrentChoice = methods.getCurrentChoice;
   }
 
 
+  const showCurrent = () => {
+    console.log(getCurrentChoice);
+    let current = getCurrentChoice();
 
-
-
-  const showCurrent = (correct, traps) => {
-    question.innerHTML = correct.definitions;
-    category.innerHTML = correct.category;
+    question.innerHTML = current.correct.definitions;
+    category.innerHTML = current.correct.category;
 
     _randomizeAnswers();
-    _setAnswers(correct, traps);
+    _setAnswers(current.correct, current.traps);
+  }
+
+
+  const _reset = () => {
+    btnContinue.onclick = null;
+    correctAnswer.classList.remove("lmc-answer-clicked-correct");
+    trapAnswers.forEach(trap => {
+      trap.classList.remove("lmc-answer-clicked-wrong");
+    })
   }
 
   const _setAnswers = (correct, traps) => {
@@ -58,20 +73,22 @@ export const Choice = (function() {
   }
 
   const _addEventListeners = () => {
-    btnContinue.onclick = _showNext;
+
   }
 
   const _correctAnswerClicked = () => {
+    _anyAnswerClicked();
     _showPositiveFeedback();
 
-    _anyAnswerClicked();
+    handleCorrect();
   }
 
   const _trapClicked = function(trap) {
+    _anyAnswerClicked();
     _showNegativeFeedback();
     _highlightWrong(trap);
 
-    _anyAnswerClicked();
+    handleWrong();
   }
 
 
@@ -82,6 +99,7 @@ export const Choice = (function() {
   const _anyAnswerClicked = () => {
     _highlightCorrect();
     _disableAnswers();
+    btnContinue.onclick = showCurrent;
   }
 
   const _showPositiveFeedback = () => {
@@ -102,6 +120,8 @@ export const Choice = (function() {
 
   const _showNext = () => {
     _hideFeedback();
+    _reset();
+    showCurrent();
   }
 
   const _highlightCorrect = () => {

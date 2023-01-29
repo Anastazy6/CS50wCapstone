@@ -20,31 +20,8 @@ export const Learn = (function() {
 
   const _run = () => {
     console.log("Study items loaded.")
-    Memory .test();
-    View.grantAccessToMemory(_intermodularMethods);
     View.Choice.showCurrent()
   }
-
-
-  const _getCurrentChoice = () => {
-    return {
-      correct: Memory.getCurrentPickable(),
-      traps  : Memory.getShuffledTraps()
-    }
-  }
-  
-  const _multipleChoiceMethods = {
-    handleCorrect: Memory.processCorrectChoice,
-    handleWrong  : Memory.processWrongChoice,
-    getCurrent   : _getCurrentChoice
-  }
-
-  const _intermodularMethods = {
-    Choice: _multipleChoiceMethods,
-  }
-
-
-
 
 
   return {

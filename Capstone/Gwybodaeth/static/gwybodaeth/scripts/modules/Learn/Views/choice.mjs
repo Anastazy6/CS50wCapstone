@@ -1,3 +1,6 @@
+import { Memory }   from "../Memory/memory.mjs";
+import { Progress } from "./progress.mjs";
+
 export const Choice = (function() {
   const question    = document.getElementById("lmc-term"           );
   const category    = document.getElementById("lmc-category"       );
@@ -11,30 +14,23 @@ export const Choice = (function() {
   let correctAnswer;
   let trapAnswers;
 
-  let handleCorrect;
-  let handleWrong;
-  let getCurrentChoice;
-
-  /**
-   * Adds methods with access to Memory.
-   */
-  const connectToMemory = (methods) => {
-    console.log(methods)
-    handleCorrect    = methods.handleCorrect;
-    handleWrong      = methods.handleWrong;
-    getCurrentChoice = methods.getCurrentChoice;
-  }
-
 
   const showCurrent = () => {
-    console.log(getCurrentChoice);
-    let current = getCurrentChoice();
+    let current = _getCurrentChoice();
 
-    question.innerHTML = current.correct.definitions;
+    Progress.updateStats();
+    question.innerHTML = current.correct.definitions.join(', ');
     category.innerHTML = current.correct.category;
 
     _randomizeAnswers();
     _setAnswers(current.correct, current.traps);
+  }
+
+  const _getCurrentChoice = () => {
+    return {
+      correct: Memory.getCurrentPickable(),
+      traps  : Memory.getShuffledTraps()
+    }
   }
 
 
@@ -52,13 +48,13 @@ export const Choice = (function() {
   }
 
   const _setCorrect = (answer) => {
-    correctAnswer.innerHTML = answer.terms;
+    correctAnswer.innerHTML = answer.terms.join(', ');
     correctAnswer.onclick = _correctAnswerClicked;
   }
 
   const _setTraps = (traps) => {
     trapAnswers.forEach(trapAnswer => {
-      trapAnswer.innerHTML = traps[0].terms;
+      trapAnswer.innerHTML = traps[0].terms.join(', ');
       trapAnswer.onclick = () => {_trapClicked(trapAnswer)};
       traps.shift();
     })
@@ -72,15 +68,11 @@ export const Choice = (function() {
     trapAnswers   = shuffled.slice(1);
   }
 
-  const _addEventListeners = () => {
-
-  }
-
   const _correctAnswerClicked = () => {
     _anyAnswerClicked();
     _showPositiveFeedback();
 
-    handleCorrect();
+    Memory.processCorrectChoice();
   }
 
   const _trapClicked = function(trap) {
@@ -88,7 +80,7 @@ export const Choice = (function() {
     _showNegativeFeedback();
     _highlightWrong(trap);
 
-    handleWrong();
+    Memory.processWrongChoice();
   }
 
 
@@ -99,7 +91,7 @@ export const Choice = (function() {
   const _anyAnswerClicked = () => {
     _highlightCorrect();
     _disableAnswers();
-    btnContinue.onclick = showCurrent;
+    btnContinue.onclick = _showNext;
   }
 
   const _showPositiveFeedback = () => {
@@ -136,14 +128,13 @@ export const Choice = (function() {
     correctAnswer.onclick = null;
     
     trapAnswers.forEach(trapAnswer => {
-      console.log(`Removing event listener for trap: `)
-      console.log(trapAnswer)
       trapAnswer.onclick = null;
     })
   }
 
+
+
   return {
     showCurrent    : showCurrent,
-    connectToMemory: connectToMemory,
   }
 })()

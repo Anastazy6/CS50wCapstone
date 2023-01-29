@@ -4,9 +4,9 @@ export const Memory = (function() {
   let _complete  = []; // FINISH: Contains study items which the user has successfully leart.
   
   let _correctChoices = 0;
-  let _wrongChoices   = 0;
+  let _failedChoices  = 0;
   let _correctWrites  = 0;
-  let _wrongWrites    = 0;
+  let _failedWrites   = 0;
 
   const loadItem = (StudyItem) => {
     _pickable.push(StudyItem);
@@ -34,10 +34,13 @@ export const Memory = (function() {
 
   const getStats = () => {
     return {
-      correctChoices: _correctChoices,
-      wrongChoices  : _wrongChoices,
-      correctWrites : _correctWrites,
-      wrongWrites   : _wrongWrites
+      correctChoices  : _correctChoices,
+      failedChoices   : _failedChoices,
+      remainingChoices: _pickable.length,
+
+      correctWrites   : _correctWrites,
+      failedWrites    : _failedWrites,
+      remainingWrites : _writable.length
     }
   }
 
@@ -54,23 +57,19 @@ export const Memory = (function() {
 
   const processCorrectChoice = () => {
     _correctChoices += 1;
-    _writable.push(_pickable(shift)); // Move the first item from the _pickable to the end of the _writable.
+    _writable.push(_pickable.shift()); // Move the first item from the _pickable to the end of the _writable.
   }
 
   const processWrongChoice = () => {
-    _wrongChoices += 1;
-    _insert(_pickable, _rollRandomIndex(_pickable), _pickable.shift());y
+    _failedChoices += 1;
+    _pickable = _insert(_pickable, _rollRandomIndex(_pickable.length), _pickable.shift());
   }
 
-  const _rollRandomIndex = (array) => {
-    let constraints = {
-      min: 1,
-      max: array.length - 1
-    }
+  const _rollRandomIndex = (max) => {
+    max = Math.min(max, 7); 
 
-    let randomIndex = round(Math.random * 7);
-    randomIndex = max(constraints.min, randomIndex) // Ensure the value is never less than 1
-    randomIndex = min(constraints.max, randomIndex) // Then ensure it's not greater than the length of _pickable
+    let randomIndex = Math.floor(Math.random() * (max - 1)) + 1;
+    console.log(randomIndex);
     return randomIndex;
   }
 
@@ -78,7 +77,9 @@ export const Memory = (function() {
     let firstHalf  = array.slice(0, index);
     let secondHalf = array.slice(index);
 
-    return firstHalf.push(value).concat(secondHalf);
+    firstHalf[firstHalf.length] = value;
+
+    return firstHalf.concat(secondHalf);
   }
 
   return {

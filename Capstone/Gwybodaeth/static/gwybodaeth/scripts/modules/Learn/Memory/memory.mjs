@@ -8,12 +8,10 @@ export const Memory = (function() {
   let _correctWrites  = 0;
   let _failedWrites   = 0;
 
+  let _itsTimeToWrite = false;
+
   const loadItem = (StudyItem) => {
     _pickable.push(StudyItem);
-  }
-
-  const test = () => {
-    _pickable.forEach(item => console.log(item));
   }
 
   /**
@@ -44,15 +42,16 @@ export const Memory = (function() {
     }
   }
 
+
+  const getShuffledTraps = (limit = 3) => {
+    return getWrongAnswers().sort(() => Math.random() - 0.5 ).slice(0, limit);
+  }
+
   const isItTimeToWrite = () => {
     if (_writable.length <= 7 && _pickable.length > 0) {
       return false;
     }
     return true;
-  }
-
-  const getShuffledTraps = () => {
-    return getWrongAnswers().sort(() => Math.random() - 0.5 )
   }
 
   const processCorrectChoice = () => {
@@ -65,13 +64,18 @@ export const Memory = (function() {
     _pickable = _insert(_pickable, _rollRandomIndex(_pickable.length), _pickable.shift());
   }
 
-  const _rollRandomIndex = (max) => {
-    max = Math.min(max, 7); 
 
-    let randomIndex = Math.floor(Math.random() * (max - 1)) + 1;
-    console.log(randomIndex);
-    return randomIndex;
+  // ---------------------------------------------------------------------------
+  //                                Private
+  // ---------------------------------------------------------------------------
+
+  const _rollRandomIndex = (max) => {
+    max = Math.min(max, 7 - _writable.length) - 1; 
+
+    return Math.floor(Math.random() * max) + 1;
   }
+
+
 
   const _insert = (array, index, value) => {
     let firstHalf  = array.slice(0, index);
@@ -82,6 +86,8 @@ export const Memory = (function() {
     return firstHalf.concat(secondHalf);
   }
 
+
+
   return {
     getWrongAnswers       : getWrongAnswers,
     getShuffledTraps      : getShuffledTraps,
@@ -91,7 +97,6 @@ export const Memory = (function() {
     isItTimeToWrite       : isItTimeToWrite,
     loadItem              : loadItem,
     processCorrectChoice  : processCorrectChoice,
-    processWrongChoice    : processWrongChoice,
-    test                  : test
+    processWrongChoice    : processWrongChoice
   }
 })()

@@ -2,6 +2,8 @@ import { Memory }   from "../Memory/memory.mjs";
 import { Progress } from "./progress.mjs";
 
 export const Choice = (function() {
+  const container   = document.getElementById("learn-multiple-choice-container");
+
   const question    = document.getElementById("lmc-term"           );
   const category    = document.getElementById("lmc-category"       );
   const feedback    = document.getElementById("lmc-feedback"       );
@@ -15,6 +17,16 @@ export const Choice = (function() {
   let trapAnswers;
 
 
+  const hide = () => {
+    container.classList.add('hidden');
+  }
+  
+
+  const show = () => {
+    container.classList.remove('hidden');
+  }
+
+
   const showCurrent = () => {
     let current = _getCurrentChoice();
 
@@ -25,6 +37,12 @@ export const Choice = (function() {
     _randomizeAnswers();
     _setAnswers(current.correct, current.traps);
   }
+
+
+  // ---------------------------------------------------------------------------
+  //                                Private
+  // ---------------------------------------------------------------------------
+
 
   const _getCurrentChoice = () => {
     return {
@@ -120,8 +138,8 @@ export const Choice = (function() {
     correctAnswer.classList.add("lmc-answer-clicked-correct");
   }
 
-  const _highlightWrong = function(trap) {
-    trap.classList.add   ("lmc-answer-clicked-wrong"  );
+  const _highlightWrong = (trap) => {
+    trap.classList.add("lmc-answer-clicked-wrong");
   }
 
   const _disableAnswers = () => {
@@ -135,6 +153,8 @@ export const Choice = (function() {
 
 
   return {
-    showCurrent    : showCurrent,
+    hide       : hide,
+    show       : show,
+    showCurrent: showCurrent,
   }
 })()

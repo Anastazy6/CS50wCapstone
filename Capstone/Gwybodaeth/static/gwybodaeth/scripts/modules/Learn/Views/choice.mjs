@@ -23,11 +23,35 @@ export const Choice = (function() {
     container.classList.remove('hidden');
   }
 
-
-  const showCurrent = (current, methods) => {
-    _displayData(current.correct);
+  /**
+   * Displays an ABCD choice test for the current study items. Requires 2 objects
+   * passed as parametres:
+   * - Object data:
+   * - - StudyItem correct     : a single StudyItem representing the current correct answer
+   * - - Array<StudyItem> traps: an array consisting of 3 (or more) StudyItems representing
+   *       wrong answers which the user has to avoid
+   * - Object methods:
+   * - - function processCorrect: operations to perform on the memory after clicking on the correct answer
+   * - - function processWrong  : operations to perform on the memory after clicking on any of the wrong (trap) answers
+   * - - function showNext      : operations to perform on the memory in order to show the next study item 
+   *        (or either switch to the write mode or show summary)
+   * 
+   * Displaying an ABCD choice test unit is a task that is split into:
+   * - displaying the current item's definition and category;
+   * - picking randomly which of the 4 answer fields will hold the correct answer
+   * - filling the answer fields with data: the chosen field for the correct answer
+   *     gets the correct answer, while the rest become traps
+   * - adding listeners to the buttons (with style related stuff being defined within
+   *     this module while access to Memory is granted through the methods parameter), while
+   *     enabling and disabling them as it fits;
+   * - clearing any feedback from the previous study unit
+   * @param {Object} data 
+   * @param {Object} methods 
+   */
+  const showCurrent = (data, methods) => {
+    _displayData(data.correct);
     _randomizeAnswers();
-    _setAnswers(current.correct, current.traps, methods);
+    _setAnswers(data.correct, data.traps, methods);
     _initializeButtons(methods.showNext);
     _clearFeedback();
   }
@@ -52,8 +76,8 @@ export const Choice = (function() {
     feedback.innerHTML = '';
 
     _allAnswers().forEach(answer => {
-      answer.parentNode.classList.remove( "lmc-answer-clicked-correct",
-                                          "lmc-answer-clicked-wrong");
+      answer.classList.remove("lmc-answer-clicked-correct",
+                              "lmc-answer-clicked-wrong");
     })
   }
 
@@ -65,15 +89,18 @@ export const Choice = (function() {
 
 
   const _enableAnswers = () => {
-    console.log("enabling answers");
     _allAnswers().forEach(answer => answer.disabled = false);
   }
 
-
+  /**
+   *  Adds onclick method which shows the next study unit to the Continue Button,
+   *    while disabling it so that the user cannot continue without answering.
+   *  Ensures that the answer buttons are enabled.
+   */
   const _initializeButtons = (showNext) => {
     btnContinue.onclick = showNext;
     
-    btnContinue  .disabled = true;
+    btnContinue.disabled = true;
     _enableAnswers();
   }
 
@@ -168,11 +195,11 @@ export const Choice = (function() {
 
 
   const _highlightCorrect = () => {
-    correctAnswer.parentNode.classList.add("lmc-answer-clicked-correct");
+    correctAnswer.classList.add("lmc-answer-clicked-correct");
   }
 
   const _highlightWrong = (trap) => {
-    trap.parentNode.classList.add("lmc-answer-clicked-wrong");
+    trap.classList.add("lmc-answer-clicked-wrong");
   }
 
 

@@ -21,7 +21,7 @@
 
 #learn-multiple-choice-container {
   width: 100%;
-  grid-template-rows   : 2fr 1fr 3fr 1fr;
+  grid-template-rows   : 2fr 1fr 3fr 40px;
   grid-template-columns: 3fr 1fr;
   grid-template-areas  :
     'term cat '
@@ -55,8 +55,8 @@
   display            : grid;
   gap                : 7px;
   width              : 100%; 
-  list-style-position: inside;
-  list-style-type    : decimal;
+  //list-style-position: inside;
+  list-style-type    : none;
   padding            : 0;
   grid-template-columns: subgrid;
   grid-template-rows   : 1fr 1fr;
@@ -66,24 +66,26 @@
 }
 
 .lmc-answer {
-  align-items: center;
-  background : $background-color;
-  display    : list-item;
-  height     : 50px;
-  padding    : 13px 15px;
-  width      : 100%;
+  align-items  : center;
+  background   : $background-color;
+  border-radius: 0;
+  cursor       : pointer;
+  display      : block;
+  height       : 50px;
+  padding      : 13px 15px;
+  text-align   : left;
+  width        : 100%;
 
   &:hover {
     box-shadow: 0 0 15px theme-color("lleuad") inset;
   }
 }
 
-.lmc-answer-btn {
-  cursor : pointer;
-  display: contents;
-  height : inherit;
-  width  : inherit;
-}
+
+#lmc-answer-A::before {content: "1) ";}
+#lmc-answer-B::before {content: "2) ";}
+#lmc-answer-C::before {content: "3) ";}
+#lmc-answer-D::before {content: "4) ";}
 
 
 #learn-progress-remaining-area {grid-area: left;}
@@ -142,4 +144,19 @@
 .lmc-answer-clicked-wrong,
 .lmc-answer-clicked-wrong:hover {
   box-shadow: 0 0 15px theme-color("danger") inset;
+}
+
+#lmc-continue-button:disabled {
+  opacity: 0.3;
+
+  &:hover {
+    color: $background-color;
+    opacity: 0.3;
+    box-shadow: none;
+  }
+  
+}
+
+#lmc-continue-button {
+  max-height: 38px;
 }

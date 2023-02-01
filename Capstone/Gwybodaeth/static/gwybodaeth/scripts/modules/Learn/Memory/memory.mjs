@@ -44,6 +44,12 @@ export const Memory = (function() {
 
 
   const getShuffledTraps = (limit = 3) => {
+    if (limit < 3) {
+      limit = 3;
+      console.log("Warning: trying to get less than 3 trap answers which is not enough\
+                    for the app to work. Setting the limit to 3.");
+    }
+
     return getWrongAnswers().sort(() => Math.random() - 0.5 ).slice(0, limit);
   }
 

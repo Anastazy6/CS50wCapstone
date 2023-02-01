@@ -68,7 +68,6 @@
 .lmc-answer {
   align-items: center;
   background : $background-color;
-  cursor     : pointer;
   display    : list-item;
   height     : 50px;
   padding    : 13px 15px;
@@ -79,6 +78,12 @@
   }
 }
 
+.lmc-answer-btn {
+  cursor : pointer;
+  display: contents;
+  height : inherit;
+  width  : inherit;
+}
 
 
 #learn-progress-remaining-area {grid-area: left;}

@@ -64,6 +64,10 @@ export const Memory = (function() {
     _pickable = _insert(_pickable, _rollRandomIndex(_pickable.length), _pickable.shift());
   }
 
+  const shufflePickables = () => {
+    _pickable = _pickable.sort(() => Math.random() - 0.5);
+  }
+
 
   // ---------------------------------------------------------------------------
   //                                Private
@@ -97,6 +101,7 @@ export const Memory = (function() {
     isItTimeToWrite       : isItTimeToWrite,
     loadItem              : loadItem,
     processCorrectChoice  : processCorrectChoice,
-    processWrongChoice    : processWrongChoice
+    processWrongChoice    : processWrongChoice,
+    shufflePickables      : shufflePickables
   }
 })()

@@ -1,5 +1,3 @@
-import { Memory } from "../Memory/memory.mjs";
-
 export const Progress = (function() {
   const remainingChoices = document.getElementById('learn-remaining-choices'); 
   const remainingWrites  = document.getElementById('learn-remaining-writes' ); 
@@ -7,9 +5,7 @@ export const Progress = (function() {
   const failedWrites     = document.getElementById('learn-failed-writes'    ); 
 
 
-  const updateStats = () => {
-    let stats = Memory.getStats();
-
+  const updateStats = (stats) => {
     remainingChoices.innerHTML = stats.remainingChoices;
     remainingWrites .innerHTML = stats.remainingWrites;
 

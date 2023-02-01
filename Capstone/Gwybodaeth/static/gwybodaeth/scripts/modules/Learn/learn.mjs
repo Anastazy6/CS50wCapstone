@@ -19,8 +19,54 @@ export const Learn = (function() {
   }
 
   const _run = () => {
-    console.log("Study items loaded.")
-    View.Choice.showCurrent()
+    Memory.shufflePickables();
+    _updateView();
+  }
+
+
+  const _updateView = () => {
+    let method = Memory.isItTimeToWrite() ? 'write' : 'choice';
+
+    if (method === 'write') {
+      console.log("Writing is not yet implemented");
+    } else {
+      console.log("Proceeding as expected");
+    }
+
+    _updateProgress();
+    _showMultileChoice();
+  }
+
+
+  const _showMultileChoice = () => {
+    _showView(View.Choice);
+    
+    View.Choice.showCurrent({
+      correct: Memory.getCurrentPickable(),
+      traps  : Memory.getShuffledTraps(),
+    },
+    {
+      processCorrect: Memory.processCorrectChoice,
+      processWrong  : Memory.processWrongChoice,
+      showNext      : _updateView
+    });
+  }
+  
+
+  const _showView = (currentView) => {
+    let views = [
+      View.Choice,
+      View.Write,
+      View.Summary
+    ];
+    
+    views.forEach(view => view.hide());
+
+    currentView.show();
+  }
+
+  const _updateProgress = () => {
+    View.Progress.updateStats(Memory.getStats());
   }
 
 

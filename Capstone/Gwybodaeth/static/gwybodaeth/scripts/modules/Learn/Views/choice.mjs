@@ -1,6 +1,3 @@
-import { Memory }   from "../Memory/memory.mjs";
-import { Progress } from "./progress.mjs";
-
 export const Choice = (function() {
   const container   = document.getElementById("learn-multiple-choice-container");
 
@@ -27,56 +24,59 @@ export const Choice = (function() {
   }
 
 
-  const showCurrent = () => {
-    let current = _getCurrentChoice();
-
-    Progress.updateStats();
-    question.innerHTML = current.correct.definitions.join(', ');
-    category.innerHTML = current.correct.category;
-
+  const showCurrent = (current, methods) => {
+    _displayData(current.correct);
     _randomizeAnswers();
-    _setAnswers(current.correct, current.traps);
+    _setAnswers(current.correct, current.traps, methods);
+    _initializeButtons(methods.showNext);
+    _clearFeedback();
   }
 
 
   // ---------------------------------------------------------------------------
-  //                                Private
+  //                           Private - helpers
   // ---------------------------------------------------------------------------
 
 
-  const _getCurrentChoice = () => {
-    return {
-      correct: Memory.getCurrentPickable(),
-      traps  : Memory.getShuffledTraps()
-    }
+  const _allAnswers = () => {
+    return [correctAnswer, ...trapAnswers];
   }
 
 
-  const _reset = () => {
-    btnContinue.onclick = null;
-    correctAnswer.classList.remove("lmc-answer-clicked-correct");
-    trapAnswers.forEach(trap => {
-      trap.classList.remove("lmc-answer-clicked-wrong");
+  // ---------------------------------------------------------------------------
+  //                           Private - creation
+  // ---------------------------------------------------------------------------
+
+
+  const _clearFeedback = () => {
+    feedback.innerHTML = '';
+
+    _allAnswers().forEach(answer => {
+      answer.parentNode.classList.remove( "lmc-answer-clicked-correct",
+                                          "lmc-answer-clicked-wrong");
     })
   }
 
-  const _setAnswers = (correct, traps) => {
-    _setCorrect(correct);
-    _setTraps  (traps);
+
+  const _displayData = (data) => {
+    question.innerHTML = data.definitions.join(', ');
+    category.innerHTML = data.category;
   }
 
-  const _setCorrect = (answer) => {
-    correctAnswer.innerHTML = answer.terms.join(', ');
-    correctAnswer.onclick = _correctAnswerClicked;
+
+  const _enableAnswers = () => {
+    console.log("enabling answers");
+    _allAnswers().forEach(answer => answer.disabled = false);
   }
 
-  const _setTraps = (traps) => {
-    trapAnswers.forEach(trapAnswer => {
-      trapAnswer.innerHTML = traps[0].terms.join(', ');
-      trapAnswer.onclick = () => {_trapClicked(trapAnswer)};
-      traps.shift();
-    })
+
+  const _initializeButtons = (showNext) => {
+    btnContinue.onclick = showNext;
+    
+    btnContinue  .disabled = true;
+    _enableAnswers();
   }
+
 
   const _randomizeAnswers = () => {
     let answers  = [answerA, answerB, answerC, answerD];
@@ -86,21 +86,31 @@ export const Choice = (function() {
     trapAnswers   = shuffled.slice(1);
   }
 
-  const _correctAnswerClicked = () => {
-    _anyAnswerClicked();
-    _showPositiveFeedback();
 
-    Memory.processCorrectChoice();
+  const _setAnswers = (correct, traps, methods) => {
+    _setCorrect(correct, methods.processCorrect);
+    _setTraps  (traps,   methods.processWrong);
   }
 
-  const _trapClicked = function(trap) {
-    _anyAnswerClicked();
-    _showNegativeFeedback();
-    _highlightWrong(trap);
 
-    Memory.processWrongChoice();
+  const _setCorrect = (answer, processCorrect) => {
+    correctAnswer.innerHTML = answer.terms.join(', ');
+    correctAnswer.onclick = () => {_correctAnswerClicked(processCorrect)};
   }
 
+
+  const _setTraps = (traps, processWrong) => {
+    trapAnswers.forEach(trapAnswer => {
+      trapAnswer.innerHTML = traps[0].terms.join(', ');
+      trapAnswer.onclick = () => {_trapClicked(trapAnswer, processWrong)};
+      traps.shift();
+    })
+  }
+
+
+  // ---------------------------------------------------------------------------
+  //                       Private - handling clicks
+  // ---------------------------------------------------------------------------
 
   /**
    * Wraps all the submethods that are run when either the correct answer or any trap
@@ -109,8 +119,39 @@ export const Choice = (function() {
   const _anyAnswerClicked = () => {
     _highlightCorrect();
     _disableAnswers();
-    btnContinue.onclick = _showNext;
+    btnContinue.disabled = false;
   }
+
+  
+  const _disableAnswers = () => {
+    console.log("disabling answers");
+    _allAnswers().forEach(answer => answer.disabled = true);
+  }
+
+  
+  const _correctAnswerClicked = (processCorrect) => {
+    _anyAnswerClicked();
+    _showPositiveFeedback();
+
+    processCorrect();
+  }
+
+
+  const _trapClicked = (trap, processWrong) => {
+    _anyAnswerClicked();
+    _showNegativeFeedback();
+    _highlightWrong(trap);
+
+    processWrong();
+  }
+
+
+  
+  // ---------------------------------------------------------------------------
+  //                          Private - feedback
+  // ---------------------------------------------------------------------------
+
+
 
   const _showPositiveFeedback = () => {
     feedback.innerHTML = "Sigh, you made it...";
@@ -118,37 +159,22 @@ export const Choice = (function() {
     feedback.classList.remove("text-danger");
   }
 
+
   const _showNegativeFeedback = () => {
     feedback.innerHTML = "Haha, you lost!";
     feedback.classList.add("text-danger");
     feedback.classList.remove("text-success");
   }
 
-  const _hideFeedback = () => {
-    feedback.innerHTML = '';
-  }
-
-  const _showNext = () => {
-    _hideFeedback();
-    _reset();
-    showCurrent();
-  }
 
   const _highlightCorrect = () => {
-    correctAnswer.classList.add("lmc-answer-clicked-correct");
+    correctAnswer.parentNode.classList.add("lmc-answer-clicked-correct");
   }
 
   const _highlightWrong = (trap) => {
-    trap.classList.add("lmc-answer-clicked-wrong");
+    trap.parentNode.classList.add("lmc-answer-clicked-wrong");
   }
 
-  const _disableAnswers = () => {
-    correctAnswer.onclick = null;
-    
-    trapAnswers.forEach(trapAnswer => {
-      trapAnswer.onclick = null;
-    })
-  }
 
 
 

@@ -3,6 +3,9 @@ import  { Progress }  from  "./progress.mjs"
 import  { Write    }  from  "./write.mjs"
 import  { Summary  }  from  "./summary.mjs"
 
+/**
+ * Separates subviews for namespacing purposes.
+ */
 export const View = (function() {
 
   return {
@@ -10,6 +13,5 @@ export const View = (function() {
     Progress: Progress,
     Write   : Write,
     Summary : Summary,
-
   }
 })()

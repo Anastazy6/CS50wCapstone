@@ -2,78 +2,96 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>{% block title %}{% endblock %}</title>
-        <meta charset="UTF-8">
-        <meta   name="referrer" 
-                content="same-origin"/>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta   name="referrer" 
+            content="same-origin"/>
 
-        <link   rel ="icon" 
-                type="image/x-icon"
-                href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhQSPaO-J0w14NgFpbf23Hzl6zaT-zZFboaXcYVrB72Bgo6I0SYFwdnL9xq4QG4FzbrlA&usqp=CAU">
+    <link   rel ="icon" 
+            type="image/x-icon"
+            href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhQSPaO-J0w14NgFpbf23Hzl6zaT-zZFboaXcYVrB72Bgo6I0SYFwdnL9xq4QG4FzbrlA&usqp=CAU">
 
-        <link   rel ="stylesheet" 
-                href="{% static 'gwybodaeth/styles/styles.css' %}">
+    <link   rel ="stylesheet" 
+            href="{% static 'gwybodaeth/styles/styles.css' %}">
+    
+    <script type="module"
+            src ="{% static 'gwybodaeth/scripts/main.js' %}"></script>
+  </head>
+  <body>
+
+  <nav class="navbar 
+              fixed-top
+              navbar-expand-lg 
+              navbar-dark 
+              bg-lleuad
+              moonlight-stronk">
+    <a  class="navbar-brand"
+        href="{% url 'index' %}">Gwybodaeth</a>
+    
+    <ul class="navbar-nav mr-auto">
+    
+      <li class="nav-item">
+        <a  class="nav-link" 
+            href="{% url 'index' %}">Home</a>
+      </li>
+
+      {% if user.is_authenticated %}
+
+      <li class="nav-item">
+        <a  class="nav-link" 
+            href="{% url 'user-sets' user.username %}">Your study sets</a>
+      </li>
+
+      <li class="nav-item">
+        <a  class="nav-link" 
+            href="{% url 'create-set' %}">Create</a>
+      </li>
+      
+        {% endif %}
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+    {% if user.is_authenticated %}
+
+      {% if user.is_superuser %}
+        <li class="nav-item">
+          <a  href="/admin/" 
+              class="nav-link">Administration panel</a>
+        </li>
+      {% endif %}
+
+      <li class="nav-item">
+        <a  class="nav-link" 
+            href="">
+            <strong>{{ user.username }}</strong>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a  class="nav-link" 
+            href="{% url 'logout' %}">Log Out</a>
+      </li>
+    
+    {% else %}
+      <li class="nav-item">
+        <a  class="nav-link" 
+            href="{% url 'login' %}">Log In</a>
+      </li>
+
+      <li class="nav-item">
+        <a  class="nav-link" 
+            href="{% url 'register' %}">Register</a>
+      </li>
+    {% endif %}
+
+    </ul>
         
-        <script type="module"
-                src ="{% static 'gwybodaeth/scripts/main.js' %}"></script>
-    </head>
-    <body>
-
-        <nav class="navbar 
-                    fixed-top
-                    navbar-expand-lg 
-                    navbar-dark 
-                    bg-lleuad
-                    moonlight-stronk">
-            <a  class="navbar-brand"
-                href="{% url 'index' %}">Gwybodaeth</a>
-            
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a  class="nav-link" 
-                        href="{% url 'index' %}">Home</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-sets' user.username %}">Your study sets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create-set' %}">Create</a>
-                </li>
-                {% endif %}
-            </ul>
-
-            <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-                {% if user.is_superuser %}
-                    <li class="nav-item">
-                        <a href="/admin/" class="nav-link">Administration panel</a>
-                    </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="">
-                        <strong>{{ user.username }}</strong>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-            {% endif %}
-            </ul>
-            
-        </nav>
-        
-        <div class="body">          
-            {% block body %}
-            {% endblock %}
-        </div>
-    </body>
+    </nav>
+    
+    <div class="body">          
+      {% block body %}
+      {% endblock %}
+    </div>
+  </body>
 </html>

@@ -39,17 +39,18 @@ export const Learn = (function() {
 
 
   const _showMultileChoice = () => {
-    _showView(View.Choice);
-    
-    View.Choice.showCurrent({
+    let data = {
       correct: Memory.getCurrentPickable(),
-      traps  : Memory.getShuffledTraps(),
-    },
-    {
+      traps  : Memory.getShuffledTraps()
+    }
+    let methods = {
       processCorrect: Memory.processCorrectChoice,
       processWrong  : Memory.processWrongChoice,
       showNext      : _updateView
-    });
+    }
+
+    _showView(View.Choice);
+    View.Choice.showCurrent(data, methods);
   }
   
 

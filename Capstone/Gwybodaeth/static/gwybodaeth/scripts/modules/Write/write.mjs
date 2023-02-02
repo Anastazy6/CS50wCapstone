@@ -1,6 +1,7 @@
-import { Memory    } from "./Memory/Memory.mjs";
-import { View      } from "./Views/View.mjs";
-import { StudyItem } from "./Models/StudyItem.mjs";
+import { Memory         } from "./Memory/Memory.mjs";
+import { View           } from "./Views/View.mjs";
+import { StudyItem      } from "./Models/StudyItem.mjs";
+import { WriteUtilities } from "./write_utilities.mjs";
 
 export const Write = function() {
   
@@ -32,30 +33,28 @@ export const Write = function() {
       resolve: _resolve
     }
 
-    View .initialize(itemCount, methods);
+    View.initialize(itemCount, methods);
     _updateView();
   } 
 
   
   const _submitAnswer = () => {
-    let input   = View.getUserInput();
+    let input   = View.Write.getUserInput();
     if (!input) { return false; } // Prevent accidentally sending empty input.
 
     let currentItem   = Memory.currentItem();
-    let answerCorrect = _verifyAnswers(currentItem.terms, input);
+    let answerCorrect = WriteUtilities.verifyAnswers(currentItem.terms, input);
 
-    _showFeedback(answerCorrect, currentItem, View.getUserInput());
+    _showFeedback(answerCorrect, currentItem, input);
 
     return false; // Prevent page reload on form submit.
   }
 
 
-  const _verifyAnswers = (questions, answers) => {
-    return _clean(answers).some(answer => _clean(questions).includes(answer));
-  }
+
 
   const _showFeedback = (isCorrect, currentItem, userInput) => {
-    View.hide();
+    View.Write.hide();
 
     if (isCorrect) {
       View.Feedback.showPositive(currentItem, userInput);
@@ -64,17 +63,7 @@ export const Write = function() {
     }
   }
 
-  /**
-   * Takes an array of strings and makes it easier to compare with another cleaned array of strings by
-   *   trimming its both ends (so the extra spaces won't interfere with the comparison process),
-   *   lowercases every element (so if both arrays are cleaned, then the comparison becomes case insensitive)
-   *   and removes characters which are to be ignored during the comparison (ATM it's just the full stop).
-   * @param {Array<String>} choices 
-   * @returns Array<string> with its elements trimmed, lowercased and without these characters: ['.']
-   */
-  const _clean = (choices) => {
-    return choices.map(choice => choice.trim().toLowerCase().replace(/\./g, ''));
-  }
+
 
   /**
    * Gives up on answering a particular question, marking it as incorrect.
@@ -141,7 +130,7 @@ export const Write = function() {
 
   const _showSummary = () => {
     View.Progress.update(_getCountersData());
-    View.hide();
+    View.Write   .hide();
     View.Feedback.hide();
     View.Summary .show(_getSummaryData());
   }

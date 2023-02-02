@@ -8,7 +8,7 @@ export const Memory = (function() {
   let _correctWrites  = 0;
   let _failedWrites   = 0;
 
-  let _itsTimeToWrite = false;
+  let writingTime = false;
 
   const loadItem = (StudyItem) => {
     _pickable.push(StudyItem);
@@ -53,11 +53,14 @@ export const Memory = (function() {
     return getWrongAnswers().sort(() => Math.random() - 0.5 ).slice(0, limit);
   }
 
-  const isItTimeToWrite = () => {
-    if (_writable.length <= 7 && _pickable.length > 0) {
-      return false;
-    }
-    return true;
+
+  const viewToBeShown = () => {
+    _checkIfItsTimeToWrite();
+
+    if (_writable.length === 0 && _pickable.length === 0) { return 'summary' }
+    if (writingTime) { return 'write'}
+
+    return 'choice';
   }
 
   const processCorrectChoice = () => {
@@ -96,6 +99,14 @@ export const Memory = (function() {
     return firstHalf.concat(secondHalf);
   }
 
+  const _checkIfItsTimeToWrite = () => {
+    if (writingTime) {
+      if (_writable.length === 0 && _pickable.length > 0) { writingTime = false; }
+    } else {
+      if (_writable.length >= 7) { writingTime = true; }
+    }
+  }
+
 
 
   return {
@@ -104,10 +115,10 @@ export const Memory = (function() {
     getCurrentPickable    : getCurrentPickable,
     getWritable           : getWritable,
     getStats              : getStats,
-    isItTimeToWrite       : isItTimeToWrite,
     loadItem              : loadItem,
     processCorrectChoice  : processCorrectChoice,
     processWrongChoice    : processWrongChoice,
-    shufflePickables      : shufflePickables
+    shufflePickables      : shufflePickables,
+    viewToBeShown         : viewToBeShown
   }
 })()

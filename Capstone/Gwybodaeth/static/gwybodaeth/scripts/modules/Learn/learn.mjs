@@ -25,16 +25,23 @@ export const Learn = (function() {
 
 
   const _updateView = () => {
-    let method = Memory.isItTimeToWrite() ? 'write' : 'choice';
-
-    if (method === 'write') {
-      console.log("Writing is not yet implemented");
-    } else {
-      console.log("Proceeding as expected");
-    }
-
     _updateProgress();
-    _showMultileChoice();
+    _showProperView();
+  }
+
+  const _showProperView = () => {
+    let currentView = Memory.viewToBeShown();
+
+    switch (currentView) {
+      case 'choice':
+        _showMultileChoice();
+        break;
+      case 'write':
+        _showWrite();
+        break;
+      default:
+        _showSummary();
+    }
   }
 
 
@@ -52,12 +59,23 @@ export const Learn = (function() {
     _showView(View.Choice);
     View.Choice.showCurrent(data, methods);
   }
+
+  const _showWrite = () => {
+    console.log("Writing should be shown")
+    _showMultileChoice(); // Temporary!
+  }
+
+  const _showSummary = () => {
+    console.log("Summary should be shown")
+    _showMultileChoice(); // Temporary!
+
+  }
   
 
   const _showView = (currentView) => {
     let views = [
       View.Choice,
-      View.Write,
+      View.Writing,
       View.Summary
     ];
     

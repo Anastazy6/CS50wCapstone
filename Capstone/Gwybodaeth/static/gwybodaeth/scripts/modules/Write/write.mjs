@@ -27,7 +27,7 @@ export const Write = function() {
   const _startView = () => {
     let itemCount  = Memory.countRemaining();
     let methods = {
-      submit : _submitAnswer,
+      submit : _submitAnswerWrapper,
       pass   : _pass,
       retry  : _retryItem,
       resolve: _resolve
@@ -38,29 +38,19 @@ export const Write = function() {
   } 
 
   
-  const _submitAnswer = () => {
-    let input   = View.Write.getUserInput();
+  
+
+  const _submitAnswerWrapper = () => {
+    let currentItem  = Memory.currentItem();
+    let input        = View.Write.getUserInput();
+    let feedbackView = View.Feedback;
+
     if (!input) { return false; } // Prevent accidentally sending empty input.
+    console.log(input);
 
-    let currentItem   = Memory.currentItem();
-    let answerCorrect = WriteUtilities.verifyAnswers(currentItem.terms, input);
-
-    _showFeedback(answerCorrect, currentItem, input);
-
+    WriteUtilities.submitAnswer(currentItem, input, feedbackView);
+    
     return false; // Prevent page reload on form submit.
-  }
-
-
-
-
-  const _showFeedback = (isCorrect, currentItem, userInput) => {
-    View.Write.hide();
-
-    if (isCorrect) {
-      View.Feedback.showPositive(currentItem, userInput);
-    } else {
-      View.Feedback.showNegative(currentItem, userInput);
-    }
   }
 
 

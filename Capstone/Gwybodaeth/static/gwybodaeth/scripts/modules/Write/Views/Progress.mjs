@@ -99,28 +99,52 @@ export const Progress = (function() {
 
 
   const _setProgressArias = (values) => {
-    correctFull  .setAttribute("aria-valuenow", values.correct  );
-    incorrectFull.setAttribute("aria-valuenow", values.incorrect);
-    remainingFull.setAttribute("aria-valuenow", values.remaining);
+    let pairs = [
+      [correctFull  , values.correct  ],
+      [incorrectFull, values.incorrect],
+      [remainingFull, values.remaining]
+    ]
+    
+    pairs.forEach(pair => {
+      pair[0].setAttribute("aria-valuenow", pair[1]);
+    })
   } 
 
   const _setProgressWidths = (values) => {
-    correctFull  .style.width = `${values.correct}%`;
-    incorrectFull.style.width = `${values.incorrect}%`;
-    remainingFull.style.width = `${values.remaining}%`;
+    let pairs = [
+      [correctFull  , values.correct  ],
+      [incorrectFull, values.incorrect],
+      [remainingFull, values.remaining]
+    ]
+
+    pairs.forEach(pair => {
+      pair[0].style.width = `${pair[1]}%`;
+    })
   }
 
 
   const _setEmptyArias = (values) => {
-    correctEmpty  .setAttribute("aria-valuenow", 100 - values.correct  );
-    incorrectEmpty.setAttribute("aria-valuenow", 100 - values.incorrect);
-    remainingEmpty.setAttribute("aria-valuenow", 100 - values.remaining);
+    let pairs = [
+      [correctEmpty  , values.correct  ],
+      [incorrectEmpty, values.incorrect],
+      [remainingEmpty, values.remaining]
+    ]
+
+    pairs.forEach(pair => {
+      pair[0].setAttribute("aria-valuenow", 100 - pair[1]);
+    })
   }
 
   const _setEmptyWidths = (values) => {
-    correctEmpty  .style.width = `${100 - values.correct}%`;
-    incorrectEmpty.style.width = `${100 - values.incorrect}%`;
-    remainingEmpty.style.width = `${100 - values.remaining}%`;
+    let pairs = [
+      [correctEmpty  , values.correct  ],
+      [incorrectEmpty, values.incorrect],
+      [remainingEmpty, values.remaining]
+    ]
+
+    pairs.forEach(pair => {
+      pair[0].style.width = `${100 - pair[1]}%`;
+    })
   }
 
 

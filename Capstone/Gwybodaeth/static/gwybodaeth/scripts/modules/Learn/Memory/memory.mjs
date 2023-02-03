@@ -14,6 +14,14 @@ export const Memory = (function() {
     _pickable.push(StudyItem);
   }
 
+
+  const currentItem = () => {
+    _checkIfItsTimeToWrite();
+
+    return writingTime ? _writable[0] : _pickable[0] 
+  }
+
+
   /**
    * Used to generate wrong answers for the multiple choice view.
    * @returns All the terms except the current pickable one
@@ -22,13 +30,6 @@ export const Memory = (function() {
     return _pickable.slice(1).concat(_writable).concat(_complete);
   }
 
-  const getCurrentPickable = () => {
-    return _pickable[0];
-  }
-
-  const getWritable = () => {
-    return _writable[0];
-  }
 
   const getStats = () => {
     return {
@@ -74,9 +75,16 @@ export const Memory = (function() {
   }
 
   const shufflePickables = () => {
-    _pickable = _pickable.sort(() => Math.random() - 0.5);
+    _shuffle(_pickable);
   }
 
+  const shuffleWritables = () => {
+    _shuffle(_writable);
+  }
+
+  const _shuffle = (array) => {
+    array = array.sort(() => Math.random() - 0.5 );
+  }
 
   // ---------------------------------------------------------------------------
   //                                Private
@@ -110,15 +118,15 @@ export const Memory = (function() {
 
 
   return {
+    currentItem           : currentItem,
     getWrongAnswers       : getWrongAnswers,
     getShuffledTraps      : getShuffledTraps,
-    getCurrentPickable    : getCurrentPickable,
-    getWritable           : getWritable,
     getStats              : getStats,
     loadItem              : loadItem,
     processCorrectChoice  : processCorrectChoice,
     processWrongChoice    : processWrongChoice,
     shufflePickables      : shufflePickables,
+    shuffleWritables      : shuffleWritables,
     viewToBeShown         : viewToBeShown
   }
 })()

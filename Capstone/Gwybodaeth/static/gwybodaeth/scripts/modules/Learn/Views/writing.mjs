@@ -1,11 +1,14 @@
-import { Write    } from "../../Write/write.mjs";
+import { Write    } from "../../Write/Views/Write.mjs";
 import { Feedback } from "../../Write/Views/Feedback.mjs";
 
 export const Writing = (function() {
   const container = document.getElementById("learn-writing-container");
 
 
-
+  const initialize = (methods) => {
+    Write   .addEventListeners(methods.write);
+    Feedback.addEventListeners(methods.feedback);
+  }
 
   const hide = () => {
     container.classList.add('hidden');
@@ -30,6 +33,7 @@ export const Writing = (function() {
     Write   : Write,
     Feedback: Feedback,
 
+    initialize  : initialize,
     hide        : hide,
     show        : show,
     showWrite   : showWrite,

@@ -5,16 +5,15 @@ import { WriteUtilities } from "../Write/write_utilities.mjs"
 
 export const Learn = (function() {
 
-  const _methodsForWrite =  {
-    write: {
-      submit: console.log("Submit clicked"),
-      pass  : console.log("Pass clicked")
-    },
-    feedback: {
-      retry  : console.log("Retry clicked"),
-      resolve: console.log("Resolving...")
+  const _resolutionMethods = () => {
+    return {
+      processCorrect: Memory.processCorrectWrite,
+      processWrong  : Memory.processWrongWrite,
+      updateView    : _updateView
     }
   }
+
+
 
   const loadItems = (data) => {
     Object.entries(data).forEach(([id, values]) => {
@@ -32,10 +31,24 @@ export const Learn = (function() {
 
   const _run = () => {
     Memory.shufflePickables();
-    View.Write.initialize(_methodsForWrite);
+    _initializeWritingView();
     _updateView();
   }
 
+  const _initializeWritingView = () => {
+
+    let writeMethods = {
+      write: {
+        submit: _submitAnswerWrapper,
+        pass  : _passWrapper
+      },
+      feedback: {
+        retry  : _retryWrite,
+        resolve: (target) => {WriteUtilities.resolve(_resolutionMethods(), target)}
+      }
+    } 
+    View.Writing.initialize(writeMethods);
+  }
 
 
 
@@ -112,6 +125,28 @@ export const Learn = (function() {
     _updateView();
   }
 
+
+  const _submitAnswerWrapper = () => {
+    let currentItem  = Memory.currentItem();
+    let input        = View.Writing.Write.getUserInput();
+    let feedbackView = View.Writing.Feedback;
+
+    if (!input) { return false; } // Prevent accidentally sending empty input.
+    
+    _showView(feedbackView);
+    WriteUtilities.submitAnswer(currentItem, input, feedbackView);
+    
+    return false; // Prevent page reload on form submit.
+  }
+
+  const _passWrapper = () => {
+    let currentItem  = Memory.currentItem();
+    let feedbackView = View.Writing.Feedback;
+
+    _showView(feedbackView);
+    WriteUtilities.pass(currentItem, feedbackView);
+    return false;
+  }
 
   return {
     loadItems: loadItems

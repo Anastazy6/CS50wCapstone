@@ -74,6 +74,20 @@ export const Memory = (function() {
     _pickable = _insert(_pickable, _rollRandomIndex(_pickable.length), _pickable.shift());
   }
 
+
+  const processCorrectWrite = () => {
+    _correctWrites += 1;
+    _complete.push(_writable.shift());
+  }
+
+
+  const processWrongWrite = () => {
+    _failedWrites += 1;
+    shuffleWritables();
+  }
+
+
+
   const shufflePickables = () => {
     _shuffle(_pickable);
   }
@@ -111,7 +125,8 @@ export const Memory = (function() {
     if (writingTime) {
       if (_writable.length === 0 && _pickable.length > 0) { writingTime = false; }
     } else {
-      if (_writable.length >= 7) { writingTime = true; }
+      if (_pickable.length === 0 && _writable.length > 0) { writingTime = true; }
+      else if (_writable.length >= 7 ) { writingTime = true; }
     }
   }
 
@@ -125,6 +140,8 @@ export const Memory = (function() {
     loadItem              : loadItem,
     processCorrectChoice  : processCorrectChoice,
     processWrongChoice    : processWrongChoice,
+    processCorrectWrite   : processCorrectWrite,
+    processWrongWrite     : processWrongWrite,
     shufflePickables      : shufflePickables,
     shuffleWritables      : shuffleWritables,
     viewToBeShown         : viewToBeShown

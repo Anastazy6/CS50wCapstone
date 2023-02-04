@@ -32,7 +32,7 @@
      *  Marks the currentItem as being answered correctly, moving it from
      *   the _remaining list to the _correct list.
      */
-    const markAsCorrect = () => {
+    const processCorrectWrite = () => {
       _correct.push(_remaining.shift());
     }
     
@@ -40,7 +40,7 @@
      *  Marks the currentItem as being answered incorrectly, moving it from
      *   the _remaining list to the _incorrect list.
      */
-    const markAsIncorrect = () => {
+    const processWrongWrite = () => {
       _incorrect.push(_remaining.shift());
     }
 
@@ -60,14 +60,14 @@
     }
 
     return {
-      countRemaining : countRemaining,
-      countCorrect   : countCorrect,
-      countIncorrect : countIncorrect,
-      currentItem    : currentItem,
-      loadItem       : loadItem,
-      markAsCorrect  : markAsCorrect,
-      markAsIncorrect: markAsIncorrect,
-      shuffle        : shuffle,
-      sort           : sort
+      countRemaining     : countRemaining,
+      countCorrect       : countCorrect,
+      countIncorrect     : countIncorrect,
+      currentItem        : currentItem,
+      loadItem           : loadItem,
+      processCorrectWrite: processCorrectWrite,
+      processWrongWrite  : processWrongWrite,
+      shuffle            : shuffle,
+      sort               : sort
     }
   }();

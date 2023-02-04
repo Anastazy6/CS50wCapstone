@@ -30,8 +30,12 @@
       _addKeyboardSupport();
     }
 
+    const show = () => {  
+      container.classList.remove('hidden'); 
+    } 
+
     const showNegative = (currentItem, userInput) => {
-      _show();
+      show();
       _setNegativeStyle();
       _setNegativeResolution();
       _showData(currentItem, userInput);
@@ -39,7 +43,7 @@
     }
 
     const showPositive = (currentItem, userInput) => {
-      _show();
+      show();
       _setPositiveStyle();
       _setPositiveResolution();
       _showData(currentItem, userInput);
@@ -62,9 +66,6 @@
     // ----------------------------------
 
 
-    const _show = () => {  
-      container.classList.remove('hidden'); 
-    } 
 
 
     const _showData = (currentItem, userInput) => {
@@ -164,6 +165,7 @@
       addEventListeners: addEventListeners,
       hide             : hide,
       isVisible        : isVisible,
+      show             : show,
       showNegative     : showNegative,
       showPositive     : showPositive,
       retry            : retry

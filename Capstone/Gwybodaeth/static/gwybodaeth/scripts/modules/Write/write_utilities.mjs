@@ -1,6 +1,23 @@
 export const WriteUtilities = (function() {
 
 
+  /**
+   * Gives up on answering a particular question, marking it as incorrect.
+   *   Then the user will be asked the next question.
+   */
+    const pass = (currentItem, feedbackView) => {
+      let data = {
+        answerCorrect: false,
+        currentItem  : currentItem,
+        userInput    : "<span class='text-warning'>None</span>"
+      }
+      
+      _showFeedback(feedbackView, data);
+      return false; // Prevent page reload on submit.
+    }
+
+
+
   const submitAnswer = (currentItem, input, feedbackView) => {
     let data = {
       currentItem  : currentItem,
@@ -39,8 +56,36 @@ export const WriteUtilities = (function() {
     }
     
 
+  // TODO (optional): refactor so that it uses booleans instead of strings. Using dataset for booleans
+  //   has proven to be quite tricky, so I'm leaving this band-aid solution for now.
+  const resolve = (methods, event) => {
+    console.log(event.target);
+    let resolution = event.target.dataset.resolution;
+
+    if (resolution === 'positive') {
+      _resolvePositively(methods);
+    } else if (resolution === 'negative') {
+      _resolveNegatively(methods);
+    } else {
+      console.log("Couldn't resolve..."); 
+    }
+  }
+
+
+  const _resolvePositively = (methods) => {
+    methods.processCorrect();
+    methods.updateView();
+  }
+
+  const _resolveNegatively = (methods) => {
+    methods.processWrong();
+    methods.updateView();
+  }
+
 
   return {
+    pass         : pass,
+    resolve      : resolve,
     submitAnswer : submitAnswer,
     verifyAnswers: verifyAnswers,
   }

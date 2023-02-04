@@ -39,6 +39,7 @@ export const Write = (function() {
 
   const show = () => {
     mainView.classList.remove('hidden');
+    clearInput();
     answer.focus();
   }
 

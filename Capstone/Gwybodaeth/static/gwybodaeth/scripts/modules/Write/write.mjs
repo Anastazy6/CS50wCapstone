@@ -5,6 +5,14 @@ import { WriteUtilities } from "./write_utilities.mjs";
 
 export const Write = function() {
   
+  const _resolutionMethods = () =>{
+    return {
+      processCorrect: Memory.processCorrectWrite,
+      processWrong  : Memory.processWrongWrite,
+      updateView    : _updateView
+    }
+  }
+
   const loadItems = (data) => {
     Object.entries(data).forEach(([id, values]) => {
       Memory.loadItem(new StudyItem(
@@ -28,9 +36,9 @@ export const Write = function() {
     let itemCount  = Memory.countRemaining();
     let methods = {
       submit : _submitAnswerWrapper,
-      pass   : _pass,
+      pass   : _passWrapper,
       retry  : _retryItem,
-      resolve: _resolve
+      resolve: (target) => {WriteUtilities.resolve(_resolutionMethods(), target)}
     }
 
     View.initialize(itemCount, methods);
@@ -46,52 +54,26 @@ export const Write = function() {
     let feedbackView = View.Feedback;
 
     if (!input) { return false; } // Prevent accidentally sending empty input.
-    console.log(input);
+    View.Write.hide();
 
     WriteUtilities.submitAnswer(currentItem, input, feedbackView);
     
     return false; // Prevent page reload on form submit.
   }
 
+  const _passWrapper = () => {
+    let currentItem  = Memory.currentItem();
+    let feedbackView = View.Feedback;
 
-
-  /**
-   * Gives up on answering a particular question, marking it as incorrect.
-   *   Then the user will be asked the next question.
-   */
-  const _pass = () => {
-    let answerCorrect = false;
-    let currentItem   = Memory.currentItem();
-    let userInput     = "<span class='text-warning'>None</span>";
-    
-    _showFeedback(answerCorrect, currentItem, userInput);
-    return false; // Prevent page reload on submit.
-  }
-
-  // TODO (optional): refactor so that it uses booleans instead of strings. Using dataset for booleans
-  //   has proven to be quite tricky, so I'm leaving this band-aid solution for now.
-  const _resolve = function() {
-    let resolution = this.dataset.resolution;
-
-    if (resolution === 'positive') {
-      _resolvePositively();
-    } else if (resolution === 'negative') {
-      _resolveNegatively();
-    } else {
-      console.log("Couldn't resolve..."); 
-    }
+    View.Write.hide();
+    WriteUtilities.pass(currentItem, feedbackView);
+    return false;
   }
 
 
-  const _resolvePositively = () => {
-    Memory.markAsCorrect();
-    _updateView();
-  }
 
-  const _resolveNegatively = () => {
-    Memory.markAsIncorrect();
-    _updateView();
-  }
+
+
 
   const _retryItem = () => {
     Memory.shuffle();

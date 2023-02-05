@@ -5,23 +5,23 @@
         class="learn-progress-grid-cell">
 
     <div class="prog-row prog-row-top">
-      <span class="prog-row-left">
+      <div class="prog-row-left">
         Remaining choices: 
-      </span>
-      <span id   ="learn-remaining-choices"
+      </div>
+      <div id   ="learn-remaining-choices"
             class="prog-row-right">
         
-      </span>
+      </div>
     </div>
     
     <div class="prog-row prog-row-bottom">
-      <span class="prog-row-left">
+      <div class="prog-row-left">
         Remaining writes:
-      </span>
-      <span id   ="learn-remaining-writes"
+      </div>
+      <div id   ="learn-remaining-writes"
             class="prog-row-right">
         
-      </span>
+      </div>
     </div>
 
   </div>
@@ -32,8 +32,10 @@
       <div class="prog-row-full">
         <div class="progress">
         
-          <div  id   ="progress-bar-remaining"
-                class="progress-bar bg-warning"
+          <div  id   ="progress-bar-correct"
+                class= "progress-bar 
+                        bg-lleuad-lawn
+                        moonlight-full-small"
                 role ="progressbar"
                 style="width: 0%"
                 aria-valuenow="0"
@@ -41,8 +43,8 @@
                 aria-valuemax="100">
           </div>
 
-          <div  id   ="progress-empty-remaining"
-                class="progress-bar bg-warning-empty"
+          <div  id   ="progress-bar-incorrect"
+                class="progress-bar bg-lleuad"
                 role ="progressbar"
                 style="width: 100%"
                 aria-valuenow="100"
@@ -54,36 +56,43 @@
       </div>
     </div>
 
-    <div class="prog-row prog-row-bottom">
-      <span class="prog-row-left">
-        Some stuff
-      </span>
-      <span class="prog-row-right">
-        More stuff
-      </span>
+    <div class="prog-row-3 prog-row-bottom">
+      <div class="prog-row-left">
+        Total correct: 
+          <span id='total-correct'></span>
+      </div>
+
+      <div class="prog-row-mid">
+        <span id="correct-percentage"></span>%
+      </div>
+
+      <div class="prog-row-right">
+        Total wrong: 
+          <span id='total-wrong'></span>
+      </div>
     </div>
   </div>
 
   <div  id   ="learn-progress-failures-area"
         class="learn-progress-grid-cell">
     <div class="prog-row prog-row-top">
-      <span class="prog-row-left">
+      <div class="prog-row-left">
         Failed choices:
-      </span>
-      <span id   ="learn-failed-choices"
+      </div>
+      <div id   ="learn-failed-choices"
             class="prog-row-right">
         
-      </span>
+      </div>
     </div>
 
     <div class="prog-row prog-row-bottom">
-      <span class="prog-row-left">
+      <div class="prog-row-left">
         Failed writes: 
-      </span>
-      <span id   ="learn-failed-writes"
+      </div>
+      <div id   ="learn-failed-writes"
             class="prog-row-right">
         
-      </span>
+      </div>
     </div>
 
   </div>

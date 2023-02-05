@@ -35,7 +35,7 @@
     } 
 
     const showNegative = (currentItem, userInput) => {
-      show();
+        show();
       _setNegativeStyle();
       _setNegativeResolution();
       _showData(currentItem, userInput);

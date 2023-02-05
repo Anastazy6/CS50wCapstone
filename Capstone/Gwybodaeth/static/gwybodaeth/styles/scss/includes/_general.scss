@@ -84,6 +84,11 @@ button {
       0 0 70px  theme-color("lleuad");
 }
 
+.moonlight-full-small {
+  box-shadow:
+      0 0 5px  theme-color("lleuad-lawn") !important;
+}
+
 #study-set-submit,
 #study-set-add-item {
   background-color: $item-background-color;

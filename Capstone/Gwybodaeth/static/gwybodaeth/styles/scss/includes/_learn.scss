@@ -95,7 +95,7 @@
 #learn-progress-container {
   border-top : 3px solid theme-color('lleuad');
   padding-top: 10px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows   : 1fr;
   grid-template-areas  :
     'left prog fail';
@@ -108,8 +108,9 @@
 
 .prog-row-full {
   align-items: center;
-  height: 100%;
-  display: flex;
+  padding-top: 12px;
+  height     : 100%;
+  display    : flex;
 }
 
 .prog-row {
@@ -120,12 +121,27 @@
   'left rigth';
 }
 
+
+.prog-row-3 {
+  display: grid;
+  grid-template-rows   : 0; // somehow it works...
+  grid-template-columns: 3fr 2fr 3fr;
+  grid-template-areas  :
+  'left mid rigth';
+}
+
 .prog-row-right {
   justify-content: right;
 }
 
+.prog-row-mid {
+  justify-content: center;
+}
+
 .prog-row-top    {grid-area: top;   }
 .prog-row-bottom {grid-area: bottom;}
+.prog-row-mid    {grid-area: mid;   }
+
 
 .learn-progress-grid-cell {
   display: grid;
@@ -159,4 +175,10 @@
 
 #lmc-continue-button {
   max-height: 38px;
+}
+
+#learn-progress-bar-area {
+  border-left : 2px solid $transparent-ghostwhite-15;
+  border-right: 2px solid $transparent-ghostwhite-15;
+  padding     : 0 20px;
 }

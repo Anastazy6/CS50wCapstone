@@ -22,7 +22,6 @@ export const View = function() {
   const update = (data) => {
     _showCurrent(data.currentItem);
     Progress.update(data.counters);
-    Write.clearInput();
   }
 
 

@@ -18,7 +18,7 @@ export const Memory = (function() {
   const currentItem = () => {
     _checkIfItsTimeToWrite();
 
-    return writingTime ? _writable[0] : _pickable[0] 
+    return writingTime ? _writable[0] : _pickable[0];
   }
 
 
@@ -64,14 +64,19 @@ export const Memory = (function() {
     return 'choice';
   }
 
+
   const processCorrectChoice = () => {
     _correctChoices += 1;
     _writable.push(_pickable.shift()); // Move the first item from the _pickable to the end of the _writable.
   }
 
+
   const processWrongChoice = () => {
     _failedChoices += 1;
-    _pickable = _insert(_pickable, _rollRandomIndex(_pickable.length), _pickable.shift());
+    _pickable = _insert(_pickable, 
+                        _rollRandomIndex(_pickable.length),
+                        _pickable.shift()
+                );
   }
 
 
@@ -87,7 +92,6 @@ export const Memory = (function() {
   }
 
 
-
   const shufflePickables = () => {
     _shuffle(_pickable);
   }
@@ -96,20 +100,20 @@ export const Memory = (function() {
     _shuffle(_writable);
   }
 
-  const _shuffle = (array) => {
-    array = array.sort(() => Math.random() - 0.5 );
-  }
 
   // ---------------------------------------------------------------------------
   //                                Private
   // ---------------------------------------------------------------------------
-
-  const _rollRandomIndex = (max) => {
-    max = Math.min(max, 7 - _writable.length) - 1; 
-
-    return Math.floor(Math.random() * max) + 1;
-  }
-
+  
+  
+  const _checkIfItsTimeToWrite = () => {
+    if (writingTime) {
+      if (_writable.length === 0 && _pickable.length > 0) { writingTime = false; }
+    } else {
+      if (_pickable.length === 0 && _writable.length > 0) { writingTime = true; }
+      else if (_writable.length >= 7 ) { writingTime = true; }
+    }
+  } 
 
 
   const _insert = (array, index, value) => {
@@ -121,15 +125,17 @@ export const Memory = (function() {
     return firstHalf.concat(secondHalf);
   }
 
-  const _checkIfItsTimeToWrite = () => {
-    if (writingTime) {
-      if (_writable.length === 0 && _pickable.length > 0) { writingTime = false; }
-    } else {
-      if (_pickable.length === 0 && _writable.length > 0) { writingTime = true; }
-      else if (_writable.length >= 7 ) { writingTime = true; }
-    }
+
+  const _rollRandomIndex = (max) => {
+    max = Math.min(max, 7 - _writable.length) - 1; 
+
+    return Math.floor(Math.random() * max) + 1;
   }
 
+
+  const _shuffle = (array) => {
+    array = array.sort(() => Math.random() - 0.5 );
+  }
 
 
   return {

@@ -47,7 +47,7 @@ def create_set(request):
             },   status    = 200)
 
     else:
-        return render(request, "gwybodaeth/create_set.html", {
+        return render(request, "gwybodaeth/Create/create_set.html", {
             'range': range(1, 6),
             'debug': True
         })

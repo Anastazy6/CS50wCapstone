@@ -1,0 +1,42 @@
+#create-set-title       {grid-area: title;}
+#create-set-description {grid-area: descr;}
+#terms-lang-container   {grid-area: langT;}
+#defs-lang-container    {grid-area: langD;}
+
+
+#study-set-info-wrapper {
+  background   : theme-color("moon-glass");
+  border-radius: 21.37px;
+  display      : grid;
+  max-width    : 800px;
+  margin       : auto;
+  padding      : 10px;
+  column-gap   : 10px;
+  row-gap      : 30px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr;
+  grid-template-areas  :
+  'title title'
+  'descr descr'
+  'langT langD';
+}
+
+#create-set-title,
+#create-set-description,
+#terms-lang, #defs-lang  {
+  background   : transparent;
+  outline      : none;
+  border-bottom: 2px solid theme-color("lleuad");
+  border-radius: 0;
+  font-size    : 1.25em;
+  margin       : auto;
+
+  &:focus {
+    outline      : none;
+    border-bottom: 2px solid theme-color("lleuad-lawn");
+  }
+}
+
+#create-set-description {
+  resize: none;
+}

@@ -1,4 +1,4 @@
-{% extends './layout.html' %}
+{% extends 'gwybodaeth/layout.html' %}
 
 {% block title %}Create study set{% endblock %}
 
@@ -10,11 +10,10 @@
         action=""
         method="POST">
     {% csrf_token %}
-  <div class="grid-container-2">
+  
+  <div id="study-set-info-wrapper">
 
 
-
-    <div class="form-line">
       <input  id  ="create-set-title" 
               type="text" 
               name="title" 
@@ -23,45 +22,46 @@
               placeholder="Title"  
               {% if debug %}value="Title test"{% endif %}
               required>
-    </div>
 
-    <div class="form-line">
+
+
       <textarea id  ="create-set-description" 
                 name="description"
-                cols="80" 
-                rows="5" 
                 maxlenght  ="1023" 
+                oninput    ="Util.autoGrow(this)"
                 placeholder="Description">{% if debug %}Description test{% endif %}</textarea>
-    </div>
 
 
-    <div  id   ="terms-lang-container"
-          class="form-cell">
+
+    <div  id   ="terms-lang-container">
       <label for="terms-lang-container">Terms language: </label>
-      <select name ="terms-lang"  
+      <select id   ="terms-lang"
+              name ="terms-lang"  
               required>
-        {% include './includable/language_selection.html' %}
+        {% include './language_selection.html' %}
       </select>
     </div>
 
 
-    <div  id   ="defs-lang-container"
-          class="form-cell">
+    <div  id   ="defs-lang-container">
     <label for="defs-lang-container">Definitions language: </label>
-      <select name ="defs-lang" 
+      <select id   ="defs-lang"
+              name ="defs-lang" 
               required>
-        {% include './includable/language_selection.html' %}
+        {% include './language_selection.html' %}
       </select>
     </div>
+
+  </div>
 
     <div id="study-items-wrapper">
       {% for i in range %}
         <div class="form-line study-item">
-          {% include './includable/study_item.html' %}
+          {% include './study_item.html' %}
         </div>
       {% endfor %}
     </div>
-  </div>
+
 
   <button id="study-set-add-item"
           type="button">

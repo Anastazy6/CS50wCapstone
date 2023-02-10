@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const studySetView       = document.getElementById("study-items"         );
   const writeView          = document.getElementById("write-wrapper"       );
 
-  Util.highglighCurrentLearningOption();
+  Util.highlightCurrentLearningOption();
 
   if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
   if (!!createStudySetForm) {createStudySetForm.onsubmit = Create.createStudySet;}

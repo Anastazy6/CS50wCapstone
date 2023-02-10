@@ -1,6 +1,12 @@
 export const Util = (function() {
   
-  const highglighCurrentLearningOption = () => {
+  const autoGrow = (element) => {
+    element.style.height = '5px';
+    element.style.height = `${element.scrollHeight}px`;
+  }
+
+
+  const highlightCurrentLearningOption = () => {
     let currentOption = _getCurrentLearningOption() || 'set';  
 
     const optionButton = document.getElementById(`learning-options-${currentOption}`);
@@ -14,7 +20,8 @@ export const Util = (function() {
   }
 
   return {
-    highglighCurrentLearningOption: highglighCurrentLearningOption
+    autoGrow                      : autoGrow,
+    highlightCurrentLearningOption: highlightCurrentLearningOption
   }
 
 })()

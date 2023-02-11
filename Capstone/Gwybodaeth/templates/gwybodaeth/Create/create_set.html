@@ -28,13 +28,17 @@
       <textarea id  ="create-set-description" 
                 name="description"
                 maxlenght  ="1023" 
-                oninput    ="Util.autoGrow(this)"
+                oninput    ="" 
                 placeholder="Description">{% if debug %}Description test{% endif %}</textarea>
 
 
+<!-- Util.autoGrow(this) -->
 
     <div  id   ="terms-lang-container">
-      <label for="terms-lang-container">Terms language: </label>
+      <label for="terms-lang-container">
+        Terms language: 
+      </label>
+
       <select id   ="terms-lang"
               name ="terms-lang"  
               required>
@@ -44,7 +48,10 @@
 
 
     <div  id   ="defs-lang-container">
-    <label for="defs-lang-container">Definitions language: </label>
+      <label for="defs-lang-container">
+        Definitions language:
+      </label>
+
       <select id   ="defs-lang"
               name ="defs-lang" 
               required>
@@ -56,7 +63,7 @@
 
     <div id="study-items-wrapper">
       {% for i in range %}
-        <div class="form-line study-item">
+        <div class="study-item-container">
           {% include './study_item.html' %}
         </div>
       {% endfor %}

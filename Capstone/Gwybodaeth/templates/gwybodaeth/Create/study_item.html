@@ -1,25 +1,25 @@
-<div class="form-cell">
-  <textarea name="term" 
-            cols="25" 
-            rows="1"
+<div class="term-input study-item-input">
+  <textarea name       ="term" 
+            placeholder="Enter term"
             required
-            placeholder="Enter term">{% if debug %}Term {{ i }}{% endif %}</textarea>
+            >{% if debug %}Term {{ i }}{% endif %}</textarea>
 </div>
 
-<div class="form-cell">
-  <textarea name="definition"
-            cols="25"
-            rows="1"
+<div class="description-input study-item-input">
+  <textarea name       ="definition"
+            placeholder="Enter definition"
             required
-            placeholder="Enter definition">{% if debug %}Def {{ i }}{% endif %}</textarea>
+            >{% if debug %}Def {{ i }}{% endif %}</textarea>
 </div>
 
-<div class="form-cell">
-  <input  class="category-input"
-          type ="text"
-          name ="category"
-          placeholder="Category"
-        {% if debug %}
-          value="cat {{ i }}"
-        {% endif %}>
+<div class="category-input study-item-input">
+  <textarea name       ="category"
+            placeholder="Category"
+            >{% if debug %}Cat {{ i }}{% endif %}</textarea>
+</div>
+
+<div class="notes-input study-item-input">
+  <textarea name       ="notes"
+            placeholder="Notes (placeholder for a future update"
+            ></textarea>
 </div>

@@ -49,7 +49,7 @@ def create_set(request):
     else:
         return render(request, "gwybodaeth/Create/create_set.html", {
             'range': range(1, 6),
-            'debug': True
+            'debug': False
         })
 
 

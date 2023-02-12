@@ -60,7 +60,7 @@
 }
 
 .term-input        {grid-area: term;}
-.description-input {grid-area: defi;}
+.definition-input  {grid-area: defi;}
 .category-input    {grid-area: cate;}
 .notes-input       {grid-area: note;}
 
@@ -97,7 +97,7 @@
   }
 }
 
-.study-item-id-top-left {
+.study-item-index-bullet {
   text-align   : center;
   border-radius: 2137px;
   padding      : 5px 10px;

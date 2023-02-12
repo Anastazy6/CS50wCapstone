@@ -55,7 +55,7 @@ export const Create = (function() {
 
   const addStudyItem = () => {
     const studyItemsWrapper = document.getElementById("study-items-wrapper")
-    studyItemsWrapper.append(_createNewStudyItem());
+    studyItemsWrapper.append(_createNewStudyItemWrapper());
   }
 
   // ---------------------
@@ -81,58 +81,81 @@ export const Create = (function() {
   }
 
 
+  const _createNewStudyItemWrapper = () => {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add("study-item-wrapper-single");
+
+    wrapper.append(_createIndexBullet());
+    wrapper.append(_createNewStudyItem());
+
+    return wrapper;
+  }
+
+  
+  const _createIndexBullet = () => {
+    const indexBullet = document.createElement('div');
+
+    indexBullet.classList.add('study-item-index-bullet',
+                              'bg-lleuad',
+                              'text-lleuad-lawn');
+    indexBullet.innerHTML = _generateIndex();
+    return indexBullet;
+  }
+
+
+  const _generateIndex = (function() {
+    let index = 5;
+    return function() {index += 1; return index;}
+  })()
+
+
   const _createNewStudyItem = () => {
-    const newStudyItem      = document.createElement('div');
-    newStudyItem.classList.add( "form-line",
-                                "study-item");
+    const newStudyItem = document.createElement('div');
+
+    newStudyItem.classList.add('study-item-container');
+
     _addFormInputsTo(newStudyItem);
     return newStudyItem;
   }
+  
 
   const _addFormInputsTo = (newStudyItem) => {
-    ['term', 'definition'].forEach(name => {
-      newStudyItem.append(_createTextarea(name));
+    let inputFields = [
+        'term',
+        'definition',
+        'category',
+        'notes'
+    ]
+
+    let required = [
+        'term',
+        'definition'
+    ]
+    
+    inputFields.forEach(name => {
+      newStudyItem.append(_createTextarea(name, required));
     })
-    newStudyItem.append(_createTextInput("category"));
   }
 
-  const _createTextarea = (name) => {
-    const container = _createInputContainer();
+  const _createTextarea = (name, required) => {
     const textarea  = document.createElement("textarea");
     
-    container.append(textarea);
     textarea .setAttributes(
       { "name"       : name,
         "cols"       : 25,
         "rows"       : 1,
-        "required"   : true,
+        "required"   : required.includes(name) ? true : false,
         "placeholder": `Enter ${name}`}
     );
+
+    textarea.classList.add(
+        `${name}-input`,
+        'study-item-input'
+    )
     
-    return container;
+    return textarea;
   }
 
-  const _createTextInput = (name) => {
-    const container = _createInputContainer();
-    const input     = document.createElement("input");
-
-    container.append(input);
-    input    .classList.add(`${name}-input`)
-    input    .setAttributes(
-      { "name"       : name,
-        "type"       : "text",
-        "placeholder": name.capitalize()}
-    );
-
-    return container;
-  }
-
-  const _createInputContainer = () => {
-    const container = document.createElement('div');
-    container.classList.add("form-cell");
-
-    return container;
-  }
 
   return {
     addStudyItem  : addStudyItem,

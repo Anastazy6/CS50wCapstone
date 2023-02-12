@@ -60,39 +60,51 @@
 }
 
 .term-input        {grid-area: term;}
-.description-input {grid-area: def; }
-.category-input    {grid-area: cat; }
+.description-input {grid-area: defi;}
+.category-input    {grid-area: cate;}
 .notes-input       {grid-area: note;}
 
 .study-item-container {
   background   : theme-color("moon-glass");
   border-radius: 21.37px;
   display      : grid;
+  column-gap   : 10px;
   margin       : 10px 0;
   padding      : 15px;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 4fr 11fr;
   grid-template-rows   : 1fr 1fr 1fr;
   grid-template-areas  : 
       'term term'
-      'def  def '
-      'cat  note';
+      'defi defi'
+      'cate note';
 
 }
 
 .study-item-input {
   display: block;
-  input, textarea {
-    background   : transparent;
-    border       : none;
-    border-radius: 0;
-    padding      : 0 10px;
-    border-bottom: 2px solid theme-color("lleuad");
-    resize       : none;
 
-    &:focus {
-      outline      : none;
-      border-bottom: 2px solid theme-color("lleuad-lawn");
-    }
+  background   : transparent;
+  border       : none;
+  border-radius: 0;
+  height       : 50px;
+  padding-top  : 20px;
+  border-bottom: 2px solid theme-color("lleuad");
+  resize       : none;
+
+  &:focus, &:hover {
+    outline      : none;
+    border-bottom: 2px solid theme-color("lleuad-lawn");
   }
+}
+
+.study-item-id-top-left {
+  text-align   : center;
+  border-radius: 2137px;
+  padding      : 5px 10px;
+  position     : relative;
+  left         : -15px;
+  top          : 35px;
+  width        : 35px;
+  height       : 35px;
 }
 

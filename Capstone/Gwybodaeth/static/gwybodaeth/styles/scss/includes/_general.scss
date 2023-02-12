@@ -47,7 +47,6 @@ select,
 button {
   width           : 100%;
   border-radius   : 21.37px;
-  padding         : 8px 20px;
   background-color: $background-color;
   border          : none;
   color           : $text-color;
@@ -55,6 +54,10 @@ button {
   &:active, &:focus, &:hover {
     border: none;
   }
+}
+
+select {
+  padding: 5px;
 }
 
 .learning-options {

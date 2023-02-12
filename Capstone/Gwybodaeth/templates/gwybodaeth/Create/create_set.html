@@ -63,8 +63,18 @@
 
     <div id="study-items-wrapper">
       {% for i in range %}
-        <div class="study-item-container">
-          {% include './study_item.html' %}
+        <div class="study-item-wrapper-single">
+          
+          <div class ="study-item-id-top-left
+                        bg-lleuad 
+                        text-lleuad-lawn">
+            {{ i }}
+          </div>
+
+          <div class="study-item-container">
+            {% include './study_item.html' %}
+          </div>
+
         </div>
       {% endfor %}
     </div>

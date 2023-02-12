@@ -1,25 +1,28 @@
-<div class="term-input study-item-input">
-  <textarea name       ="term" 
-            placeholder="Enter term"
-            required
-            >{% if debug %}Term {{ i }}{% endif %}</textarea>
-</div>
+<textarea class ="term-input 
+                  study-item-input"
+          name       ="term" 
+          placeholder="Enter term"
+          required
+  >{% if debug %}Term {{ i }}{% endif %}</textarea>
 
-<div class="description-input study-item-input">
-  <textarea name       ="definition"
-            placeholder="Enter definition"
-            required
-            >{% if debug %}Def {{ i }}{% endif %}</textarea>
-</div>
 
-<div class="category-input study-item-input">
-  <textarea name       ="category"
-            placeholder="Category"
-            >{% if debug %}Cat {{ i }}{% endif %}</textarea>
-</div>
+<textarea class ="description-input 
+                  study-item-input"
+          name       ="definition"
+          placeholder="Enter definition"
+          required
+  >{% if debug %}Def {{ i }}{% endif %}</textarea>
 
-<div class="notes-input study-item-input">
-  <textarea name       ="notes"
-            placeholder="Notes (placeholder for a future update"
-            ></textarea>
-</div>
+
+<textarea class ="category-input 
+                  study-item-input"
+          name       ="category"
+          placeholder="Category"
+  >{% if debug %}Cat {{ i }}{% endif %}</textarea>
+
+
+<textarea class ="notes-input 
+                  study-item-input"
+          name       ="notes"
+          placeholder="Notes (placeholder for a future update"
+  ></textarea>

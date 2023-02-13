@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   Util.highlightCurrentLearningOption();
 
-  if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
-  if (!!createStudySetForm) {createStudySetForm.onsubmit = Create.createStudySet;}
+  //if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
+  if (!!createStudySetForm) {Create.run()}
   if (!!flashcardsView)     {Load.justTerms(Flashcards.loadFlashcards);}
   if (!!learnView     )     {Load.justTerms(Learn     .loadItems     );}
   if (!!studySetView  )     {Load.justTerms(StudySet  .loadStudySet  );}

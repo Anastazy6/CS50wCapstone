@@ -25,24 +25,32 @@ String.prototype.capitalize = function() {
   return this[0].toUpperCase() + this.slice(1).toLowerCase();
 }
 
+import { Memory           } from "./Memory/Memory.mjs";
+import { View             } from "./View/View.mjs";
+import { StudyItemCreator } from "./Models/study_item_creator.mjs";
+
 export const Create = (function() {
   
   // ---------------------
   //        Public
   // ---------------------
 
+  
+
   const createStudySet = () => {
+    let studySetInfo = View.getStudySetInfo();
+
     fetch('/create-set', {
       method: 'POST',
       headers: {
-        "X-CSRFToken" : document.querySelector("[name=csrfmiddlewaretoken]").value,
+        "X-CSRFToken" : View.CSRFToken.value,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "title"       : document.getElementById("create-set-title"      ).value,
-        "description" : document.getElementById("create-set-description").value,
-        "terms-lang"  : document.querySelector ("[name=terms-lang]"     ).value,
-        "defs-lang"   : document.querySelector ("[name=defs-lang]"      ).value,
+        "title"       : studySetInfo.title,
+        "description" : studySetInfo.description,
+        "terms-lang"  : studySetInfo.termsLang,
+        "defs-lang"   : studySetInfo.defsLang,
         "terms"       : _getNewStudySetData()
       })
     })
@@ -53,9 +61,20 @@ export const Create = (function() {
     return false;
   }
 
-  const addStudyItem = () => {
-    const studyItemsWrapper = document.getElementById("study-items-wrapper")
-    studyItemsWrapper.append(_createNewStudyItemWrapper());
+  const _intermodularMethods = () => {
+    return {
+      addStudyItem: _addStudyItem,
+      submit      : createStudySet
+    }
+  }
+
+  const run = () => {
+    View.initialize(_intermodularMethods());
+  }
+
+  const _addStudyItem = () => {
+    Memory.addStudyItem(StudyItemCreator.createStudyItem());
+    View.showNewItem(Memory.getLast());
   }
 
   // ---------------------
@@ -70,95 +89,25 @@ export const Create = (function() {
     Array.from(studyItems).forEach(studyItem => {
       const term       = studyItem.querySelector("[name=term]"      ).value;
       const definition = studyItem.querySelector("[name=definition]").value;
-      const category   = studyItem.querySelector("[name=category"   ).value;
+      const category   = studyItem.querySelector("[name=category]"  ).value;
+      const notes      = studyItem.querySelector("[name=notes]"     ).value
 
       data[`${id}`] = { "term": `${term}`,
                         "def" : `${definition}`,
-                        "cat" : `${category}` };
+                        "cat" : `${category}`,
+                        "note": `${notes}`};
       id++;
     })
     return data;
   }
 
 
-  const _createNewStudyItemWrapper = () => {
-    const wrapper = document.createElement('div');
-    wrapper.classList.add("study-item-wrapper-single");
-
-    wrapper.append(_createIndexBullet());
-    wrapper.append(_createNewStudyItem());
-
-    return wrapper;
-  }
-
   
-  const _createIndexBullet = () => {
-    const indexBullet = document.createElement('div');
-
-    indexBullet.classList.add('study-item-index-bullet',
-                              'bg-lleuad',
-                              'text-lleuad-lawn');
-    indexBullet.innerHTML = _generateIndex();
-    return indexBullet;
-  }
-
-
-  const _generateIndex = (function() {
-    let index = 5;
-    return function() {index += 1; return index;}
-  })()
-
-
-  const _createNewStudyItem = () => {
-    const newStudyItem = document.createElement('div');
-
-    newStudyItem.classList.add('study-item-container');
-
-    _addFormInputsTo(newStudyItem);
-    return newStudyItem;
-  }
-  
-
-  const _addFormInputsTo = (newStudyItem) => {
-    let inputFields = [
-        'term',
-        'definition',
-        'category',
-        'notes'
-    ]
-
-    let required = [
-        'term',
-        'definition'
-    ]
-    
-    inputFields.forEach(name => {
-      newStudyItem.append(_createTextarea(name, required));
-    })
-  }
-
-  const _createTextarea = (name, required) => {
-    const textarea  = document.createElement("textarea");
-    
-    textarea .setAttributes(
-      { "name"       : name,
-        "cols"       : 25,
-        "rows"       : 1,
-        "required"   : required.includes(name) ? true : false,
-        "placeholder": `Enter ${name}`}
-    );
-
-    textarea.classList.add(
-        `${name}-input`,
-        'study-item-input'
-    )
-    
-    return textarea;
-  }
 
 
   return {
-    addStudyItem  : addStudyItem,
+  //  addStudyItem  : addStudyItem,
+    run           : run,
     createStudySet: createStudySet
   }
 

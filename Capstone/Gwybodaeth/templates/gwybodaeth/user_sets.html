@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block body %}
-  TODO
 
   <div class="grid-container-2">
     {% for set in sets %}
       <div class="set-item">
         <div class="set-title">
-          <h3><a href="{% url 'study-set-view' set.id %}">{{ set.title }}</a></h3>
+          <h3><a  class="text-lleuad-lawn"
+                  href ="{% url 'study-set-view' set.id %}">{{ set.title }}</a></h3>
         </div>
 
         <div class="set-description">

@@ -11,7 +11,7 @@ from .util   import *
 
 # Create your views here.
 
-
+DEBUG = True
 ################################################################################
 
 def index(request):
@@ -48,8 +48,8 @@ def create_set(request):
 
     else:
         return render(request, "gwybodaeth/Create/create_set.html", {
-            'range': range(1, 6),
-            'debug': False
+            'range': range(0),
+            'debug': DEBUG
         })
 
 

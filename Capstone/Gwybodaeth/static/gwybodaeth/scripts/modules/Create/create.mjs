@@ -29,6 +29,7 @@ import { Memory           } from "./Memory/Memory.mjs";
 import { View             } from "./View/View.mjs";
 import { StudyItemCreator } from "./Models/study_item_creator.mjs";
 
+
 export const Create = (function() {
   
   // ---------------------
@@ -61,15 +62,25 @@ export const Create = (function() {
     return false;
   }
 
+  const debug = () => {
+    console.log("DEBUG clicked");
+    console.log(Memory.getAll());
+
+  }
+
   const _intermodularMethods = () => {
     return {
       addStudyItem: _addStudyItem,
-      submit      : createStudySet
+      submit      : createStudySet,
+      debug       : debug
     }
   }
 
   const run = () => {
+    _loadStudyItemGuts();
     View.initialize(_intermodularMethods());
+    
+
   }
 
   const _addStudyItem = () => {
@@ -84,7 +95,8 @@ export const Create = (function() {
   const _getNewStudySetData = () => {
     let   id         = 1
     let   data       = {};
-    const studyItems = document.getElementsByClassName("study-item");
+    const studyItems = Memory.getAll();
+    console.log(studyItems);
     
     Array.from(studyItems).forEach(studyItem => {
       const term       = studyItem.querySelector("[name=term]"      ).value;
@@ -101,6 +113,13 @@ export const Create = (function() {
     return data;
   }
 
+  const _loadStudyItemGuts = () => {
+    fetch('static/gwybodaeth/scripts/modules/Create/Models/study_item_guts.html')
+    .then(response => response.text())
+    .then(result => {
+      StudyItemCreator.setGuts(result);
+    });
+  }
 
   
 

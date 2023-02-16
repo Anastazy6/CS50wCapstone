@@ -2,6 +2,11 @@
  * Study Item model for the Create module. This model contains input fields for the DOM.
  */
 export const StudyItemCreator = (function() {
+  let studyItemGuts;
+
+  const setGuts = (guts) => {
+    studyItemGuts = guts;
+  }
 
   const createStudyItem = () => {
     const studyItem = _createNewStudyItemWrapper();
@@ -13,6 +18,7 @@ export const StudyItemCreator = (function() {
   }
 
   const _createNewStudyItemWrapper = () => {
+    console.log("Creating new single item wrapper")
     const wrapper = document.createElement('div');
     wrapper.classList.add("study-item-wrapper-single");
 
@@ -22,6 +28,7 @@ export const StudyItemCreator = (function() {
 
   
   const _createIndexBullet = () => {
+    console.log("Creating index bullet")
     const indexBullet = document.createElement('div');
 
     indexBullet.classList.add('study-item-index-bullet',
@@ -39,11 +46,13 @@ export const StudyItemCreator = (function() {
 
 
   const _createNewStudyItem = () => {
+    console.log("Adding study item guts")
+    console.log(studyItemGuts);
     const newStudyItem = document.createElement('div');
 
     newStudyItem.classList.add('study-item-container');
 
-    _addFormInputsTo(newStudyItem);
+    newStudyItem.innerHTML = studyItemGuts;
     return newStudyItem;
   }
   
@@ -87,6 +96,7 @@ export const StudyItemCreator = (function() {
   }
 
   return {
-    createStudyItem: createStudyItem
+    createStudyItem: createStudyItem,
+    setGuts        : setGuts
   }
 })()

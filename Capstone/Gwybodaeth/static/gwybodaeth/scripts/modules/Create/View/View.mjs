@@ -14,8 +14,11 @@ export const View = (function() {
 
   const addItemButton       = document.getElementById('study-set-add-item');
   const submitButton        = document.getElementById('study-set-submit'  );
+  
+  // Remove this when not needed anymore
+  const debugBTN = document.getElementById('debug');
 
-
+  const INITAL_STUDY_ITEMS_NUMBER = 5;
 
   const getStudySetInfo = () => {
     return {
@@ -28,6 +31,7 @@ export const View = (function() {
 
   const initialize = (methods) => {
     _addEventListeners(methods);
+    _createInitialStudyItems(INITAL_STUDY_ITEMS_NUMBER, methods.addStudyItem);
   }
 
 
@@ -39,7 +43,7 @@ export const View = (function() {
     StudyItems.forEach(studyItem => {
       fragment.append(studyItem);
     })
-    
+
     studyItemsWrapper.append(fragment);
   }
 
@@ -56,6 +60,11 @@ export const View = (function() {
   const _addEventListeners = (methods) => {
     addItemButton.onclick = methods.addStudyItem;
     submitButton .onclick = methods.submit;
+    debugBTN     .onclick = methods.debug;
+  }
+
+  const _createInitialStudyItems = (count, studyItemCreator) => {
+    for (let i = 0; i < count; i++) {studyItemCreator.call()}
   }
 
 

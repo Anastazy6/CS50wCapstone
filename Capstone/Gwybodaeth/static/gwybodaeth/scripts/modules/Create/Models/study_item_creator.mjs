@@ -40,7 +40,7 @@ export const StudyItemCreator = (function() {
 
 
   const _generateIndex = (function() {
-    let index = 5;
+    let index = 0;
     return function() {index += 1; return index;}
   })()
 
@@ -52,7 +52,17 @@ export const StudyItemCreator = (function() {
 
     newStudyItem.classList.add('study-item-container');
 
-    newStudyItem.innerHTML = studyItemGuts;
+    if (!!studyItemGuts) {
+      newStudyItem.innerHTML = studyItemGuts;
+    } else {
+      fetch('static/gwybodaeth/scripts/modules/Create/Models/study_item_guts.html')
+      .then(response => response.text())
+      .then(result => {
+        studyItemGuts = result;
+        newStudyItem.innerHTML = studyItemGuts;
+      });
+    }
+
     return newStudyItem;
   }
   
@@ -93,6 +103,10 @@ export const StudyItemCreator = (function() {
     )
     
     return textarea;
+  }
+
+  const _loadStudyItemGuts = () => {
+
   }
 
   return {

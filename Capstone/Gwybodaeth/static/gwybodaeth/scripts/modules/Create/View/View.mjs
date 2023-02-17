@@ -64,7 +64,7 @@ export const View = (function() {
   }
 
   const _createInitialStudyItems = (count, studyItemCreator) => {
-    for (let i = 0; i < count; i++) {studyItemCreator.call()}
+    for (let i = 0; i < count; i++) {studyItemCreator()}
   }
 
 

@@ -65,8 +65,9 @@ export const Create = (function() {
   const debug = () => {
     console.log("DEBUG clicked");
     console.log(Memory.getAll());
-
+    View.reload(Memory.getAll());
   }
+
 
   const _intermodularMethods = () => {
     return {
@@ -77,7 +78,7 @@ export const Create = (function() {
   }
 
   const run = () => {
-    _loadStudyItemGuts();
+ //   _loadStudyItemGuts();
     View.initialize(_intermodularMethods());
     
 
@@ -85,6 +86,7 @@ export const Create = (function() {
 
   const _addStudyItem = () => {
     Memory.addStudyItem(StudyItemCreator.createStudyItem());
+    console.log(Memory.getLast());
     View.showNewItem(Memory.getLast());
   }
 
@@ -113,13 +115,7 @@ export const Create = (function() {
     return data;
   }
 
-  const _loadStudyItemGuts = () => {
-    fetch('static/gwybodaeth/scripts/modules/Create/Models/study_item_guts.html')
-    .then(response => response.text())
-    .then(result => {
-      StudyItemCreator.setGuts(result);
-    });
-  }
+
 
   
 

@@ -22,7 +22,7 @@ export const Memory = (function() {
   }
 
   const getLast = () => {
-    return _studyItems[-1];
+    return _studyItems.at(-1);
   }
 
   /**

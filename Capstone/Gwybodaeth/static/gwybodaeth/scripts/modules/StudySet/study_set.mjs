@@ -34,9 +34,12 @@ export const StudySet = (function(){
    */
   const _createStudyTerm = (termData) => {
     const studyItem = _createStudyTermContainer(termData[0]);
+    console.log(termData[1])
 
     Object.entries(termData[1]).forEach(([key, value]) => {
-      studyItem.append(_createStudyTermFields(key, value));
+      if (key != 'note') {
+        studyItem.append(_createStudyTermFields(key, value));
+      }
     })
     studyItem.append(_createStudyTermOptions());
 

@@ -64,30 +64,26 @@ export const Create = (function() {
 
   const debug = () => {
     console.log("DEBUG clicked");
-    console.log(Memory.getAll());
-    View.reload(Memory.getAll());
+    View.focusLastItem();
   }
 
 
   const _intermodularMethods = () => {
     return {
-      addStudyItem: _addStudyItem,
-      submit      : createStudySet,
-      debug       : debug
+      addStudyItem    : _addStudyItem,
+      autoAddStudyItem: _autoAddStudyItem,
+      submit          : createStudySet,
+      debug           : debug
     }
   }
 
   const run = () => {
- //   _loadStudyItemGuts();
     View.initialize(_intermodularMethods());
-    
-
   }
 
   const _addStudyItem = () => {
     Memory.addStudyItem(StudyItemCreator.createStudyItem());
-    console.log(Memory.getLast());
-    View.showNewItem(Memory.getLast());
+    View  .showNewItem (Memory.getLast());
   }
 
   // ---------------------
@@ -98,13 +94,12 @@ export const Create = (function() {
     let   id         = 1
     let   data       = {};
     const studyItems = Memory.getAll();
-    console.log(studyItems);
     
     Array.from(studyItems).forEach(studyItem => {
       const term       = studyItem.querySelector("[name=term]"      ).value;
       const definition = studyItem.querySelector("[name=definition]").value;
       const category   = studyItem.querySelector("[name=category]"  ).value;
-      const notes      = studyItem.querySelector("[name=notes]"     ).value
+      const notes      = studyItem.querySelector("[name=notes]"     ).value;
 
       data[`${id}`] = { "term": `${term}`,
                         "def" : `${definition}`,
@@ -116,12 +111,15 @@ export const Create = (function() {
   }
 
 
+  const _autoAddStudyItem = () => {
+    _addStudyItem();
+    View.focusLastItem();
+  }
 
   
 
 
   return {
-  //  addStudyItem  : addStudyItem,
     run           : run,
     createStudySet: createStudySet
   }

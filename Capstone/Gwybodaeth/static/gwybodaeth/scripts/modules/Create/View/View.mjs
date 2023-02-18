@@ -20,6 +20,10 @@ export const View = (function() {
 
   const INITAL_STUDY_ITEMS_NUMBER = 5;
 
+  const focusLastItem = () => {
+    studyItemsWrapper.lastChild.lastChild.firstChild.focus();
+  }
+
   const getStudySetInfo = () => {
     return {
       title      : studySetTitle      .value,
@@ -59,6 +63,8 @@ export const View = (function() {
 
   const _addEventListeners = (methods) => {
     addItemButton.onclick = methods.addStudyItem;
+    addItemButton.onfocus = methods.autoAddStudyItem;
+
     submitButton .onclick = methods.submit;
     debugBTN     .onclick = methods.debug;
   }
@@ -68,8 +74,12 @@ export const View = (function() {
   }
 
 
+
+
+
   return {
     CSRFToken        : CSRFToken,
+    focusLastItem    : focusLastItem,
     getStudySetInfo  : getStudySetInfo,
     initialize       : initialize,
     reload           : reload,

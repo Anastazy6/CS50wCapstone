@@ -46,8 +46,6 @@ export const StudyItemCreator = (function() {
 
 
   const _createNewStudyItem = () => {
-    console.log("Adding study item guts")
-    console.log(studyItemGuts);
     const newStudyItem = document.createElement('div');
 
     newStudyItem.classList.add('study-item-container');

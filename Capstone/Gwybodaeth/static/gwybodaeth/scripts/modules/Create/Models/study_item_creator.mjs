@@ -1,3 +1,5 @@
+import { Util } from "../../Utilities/util.mjs";
+
 /**
  * Study Item model for the Create module. This model contains input fields for the DOM.
  */
@@ -18,7 +20,6 @@ export const StudyItemCreator = (function() {
   }
 
   const _createNewStudyItemWrapper = () => {
-    console.log("Creating new single item wrapper")
     const wrapper = document.createElement('div');
     wrapper.classList.add("study-item-wrapper-single");
 
@@ -28,21 +29,17 @@ export const StudyItemCreator = (function() {
 
   
   const _createIndexBullet = () => {
-    console.log("Creating index bullet")
     const indexBullet = document.createElement('div');
 
     indexBullet.classList.add('study-item-index-bullet',
                               'bg-lleuad',
                               'text-lleuad-lawn');
-    indexBullet.innerHTML = _generateIndex();
+    indexBullet.innerHTML = Util.generateIndex();
     return indexBullet;
   }
 
 
-  const _generateIndex = (function() {
-    let index = 0;
-    return function() {index += 1; return index;}
-  })()
+
 
 
   const _createNewStudyItem = () => {

@@ -1,10 +1,11 @@
 export const Util = (function() {
   
+  /*
   const autoGrow = (element) => {
     element.style.height = '5px';
     element.style.height = `${element.scrollHeight}px`;
   }
-
+  */
 
   const highlightCurrentLearningOption = () => {
     let currentOption = _getCurrentLearningOption() || 'set';  
@@ -15,12 +16,21 @@ export const Util = (function() {
     }
   }
 
+
+  const generateIndex = (function() {
+    let index = 0;
+    return function() {index += 1; return index;}
+  })()
+
+
+
   const _getCurrentLearningOption = () => {
     return window.location.pathname.slice(1).split("/")[2];
   }
 
   return {
-    autoGrow                      : autoGrow,
+//  autoGrow                      : autoGrow,
+    generateIndex                 : generateIndex,
     highlightCurrentLearningOption: highlightCurrentLearningOption
   }
 

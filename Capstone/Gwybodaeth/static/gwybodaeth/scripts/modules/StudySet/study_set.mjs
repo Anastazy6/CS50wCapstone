@@ -1,5 +1,7 @@
 export const StudySet = (function(){
 
+  const studyItems = [];
+
   const View = function() {
     const studySet =  document.getElementById("study-items");
 
@@ -15,10 +17,15 @@ export const StudySet = (function(){
 
 
   const loadStudySet = (terms) => {
+
     Object.entries(terms).forEach(term => {
-      View.studySet.append(_createStudyTerm(term));
+      studyItems.push(term);
+      //View.studySet.append(_createStudyTerm(term));
     })
   }
+
+
+
 
 
   // ---------------------
@@ -34,7 +41,6 @@ export const StudySet = (function(){
    */
   const _createStudyTerm = (termData) => {
     const studyItem = _createStudyTermContainer(termData[0]);
-    console.log(termData[1])
 
     Object.entries(termData[1]).forEach(([key, value]) => {
       if (key != 'note') {
@@ -83,6 +89,7 @@ export const StudySet = (function(){
 
   //
   return {
-    loadStudySet  : loadStudySet
+    loadStudySet  : loadStudySet,
+    studyItems: studyItems
   };
 })();

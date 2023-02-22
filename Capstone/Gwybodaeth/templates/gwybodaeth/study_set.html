@@ -1,5 +1,7 @@
 {% extends "gwybodaeth/layout.html" %}
 
+{% load static %}
+
 {% block title %}
   {{ study_set.title }}
 {% endblock %}
@@ -10,8 +12,54 @@
   {% include "./includable/study_set_description.html" %}
   {% include "./includable/learning_options.html"      %}
 
-  <div id="study-items" class="study-items">
+  <div  id   ="study-items"
+        class="study-items"
+
+        data-ng-app       ="studySet"
+        data-ng-controller="studySetController">
+
+    <div data-ng-bind="test"></div>
+
+    <div data-ng-bind="terms"></div>
+
     <!-- Generated with JavaScript -->
+
+      <div  id   = "study-item-1" 
+            class= "grid-container-6
+                    study-item"
+
+            data-ng-repeat="term in terms">
+        
+        <div class="study-term
+                    study-set-cell-2"
+            
+            data-ng-bind="term[1].term">
+        </div>
+        
+        <div class="study-def
+                    study-set-cell-2"
+            data-ng-bind="term[1].def">
+        </div>
+        
+        <div class="study-cat
+                    study-set-cell-1"
+            data-ng-bind="term[1].cat" >
+        </div>
+
+        <div class="study-set-cell-1
+                    study-options">TODO
+        </div>
+      </div>
+
+
   </div>
+
+
+
+<!-- experimental -->
+
+<script type='module'
+        src="{% static 'gwybodaeth/scripts/modules/StudySet/studySetAngular.js' %}"></script>
+
   
 {% endblock %}

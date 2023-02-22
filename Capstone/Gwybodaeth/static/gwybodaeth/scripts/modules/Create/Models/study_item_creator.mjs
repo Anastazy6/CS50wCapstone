@@ -62,47 +62,6 @@ export const StudyItemCreator = (function() {
   }
   
 
-  const _addFormInputsTo = (newStudyItem) => {
-    let inputFields = [
-        'term',
-        'definition',
-        'category',
-        'notes'
-    ]
-
-    let required = [
-        'term',
-        'definition'
-    ]
-    
-    inputFields.forEach(name => {
-      newStudyItem.append(_createTextarea(name, required));
-    })
-  }
-
-  const _createTextarea = (name, required) => {
-    const textarea  = document.createElement("textarea");
-    
-    textarea .setAttributes(
-      { "name"       : name,
-        "cols"       : 25,
-        "rows"       : 1,
-        "placeholder": `Enter ${name}`}
-    );
-
-    if (required.includes(name)) { textarea.setAttribute('required', '')}
-
-    textarea.classList.add(
-        `${name}-input`,
-        'study-item-input'
-    )
-    
-    return textarea;
-  }
-
-  const _loadStudyItemGuts = () => {
-
-  }
 
   return {
     createStudyItem: createStudyItem,

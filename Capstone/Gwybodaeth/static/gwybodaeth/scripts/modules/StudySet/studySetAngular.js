@@ -1,22 +1,16 @@
 // Experimental
-
-import { StudySet } from "./study_set.mjs";
-import { Load }     from "../Load/load.mjs";
+import { Util } from "../Utilities/util.mjs";
 
 
 const app = angular.module('studySet', []);
 
-app.controller('studySetController', function($scope) {
-  $scope.terms = Load.justTerms((terms) => {return terms});
-  $scope.test  = "If this is visible, then angular works";
+app.controller('studySetController', function($scope, $http) {
+  $http.get(`/load/${Util.getStudySetID()}`)
+  .then(response => {
+    console.log(response);
+    $scope.terms = response.data.terms;
+  })
 })
 
 
 
-const test = (terms) => {
-  console.log(terms);
-  Object.entries(terms).forEach(term => {
-    console.log(term[1]);
-  })
-  return terms;
-}

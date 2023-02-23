@@ -6,23 +6,24 @@
 
 {% block body %}
 
-  <div class="grid-container-2">
+  <div class="user-sets">
     {% for set in sets %}
-      <div class="set-item">
-        <div class="set-title">
+      <div class="user-set
+                  bg-moon-glass">
+        <div class="user-set-title">
           <h3><a  class="text-lleuad-lawn"
                   href ="{% url 'study-set-view' set.id %}">{{ set.title }}</a></h3>
         </div>
 
-        <div class="set-description">
+        <div class="user-set-description">
           <p>{{ set.description}}</p>
         </div>
 
-        <div class="set-terms-counter">
+        <div class="user-set-terms-counter">
           {{ set.terms_count }} terms
         </div>
 
-        <div class="set-timestamp">
+        <div class="user-set-timestamp">
           Created on {{ set.timestamp }}.
         </div>
       </div>

@@ -1,0 +1,13 @@
+.user-sets {
+  display: grid;
+  gap    : 40px;
+  grid-template-columns: 400px 400px;
+  justify-content      : center;
+}
+
+.user-set {
+  border-radius   : 21.37px;
+  padding         : 10px;
+  justify-content : space-evenly;
+  text-align      : center;
+}

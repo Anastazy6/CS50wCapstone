@@ -1,11 +1,5 @@
 export const Util = (function() {
   
-  /*
-  const autoGrow = (element) => {
-    element.style.height = '5px';
-    element.style.height = `${element.scrollHeight}px`;
-  }
-  */
 
   const highlightCurrentLearningOption = () => {
     let currentOption = _getCurrentLearningOption() || 'set';  
@@ -22,6 +16,9 @@ export const Util = (function() {
     return function() {index += 1; return index;}
   })()
 
+  const getStudySetID = () => {
+    return window.location.pathname.slice(1).split("/")[1];
+  }
 
 
   const _getCurrentLearningOption = () => {
@@ -29,8 +26,8 @@ export const Util = (function() {
   }
 
   return {
-//  autoGrow                      : autoGrow,
     generateIndex                 : generateIndex,
+    getStudySetID                 : getStudySetID,
     highlightCurrentLearningOption: highlightCurrentLearningOption
   }
 

@@ -18,45 +18,45 @@
         data-ng-app       ="studySet"
         data-ng-controller="studySetController">
 
-    <div data-ng-bind="test"></div>
-
-    <div data-ng-bind="terms"></div>
-
     <!-- Generated with JavaScript -->
+    <!-- experimental -->
+    <div  class         ="study-item
+                          bg-moon-glass"
+          data-ng-repeat="term in terms">
 
-      <div  id   = "study-item-1" 
-            class= "grid-container-6
-                    study-item"
-
-            data-ng-repeat="term in terms">
-        
-        <div class="study-term
-                    study-set-cell-2"
-            
-            data-ng-bind="term[1].term">
-        </div>
-        
-        <div class="study-def
-                    study-set-cell-2"
-            data-ng-bind="term[1].def">
-        </div>
-        
-        <div class="study-cat
-                    study-set-cell-1"
-            data-ng-bind="term[1].cat" >
-        </div>
-
-        <div class="study-set-cell-1
-                    study-options">TODO
-        </div>
+      <div  class       ="study-item-index"
+            data-ng-bind="">
       </div>
+      
+      <div  class       ="study-item-term"
+            data-ng-bind="term.term">
+      </div>
+      
+      <div  class       ="study-item-def"
+            data-ng-bind="term.def">
+      </div>
+      
+      <div  class       ="study-item-cat"
+            data-ng-bind="term.cat">
+      </div>
+
+      <div  [title]="term.note"
+            class  ="study-item-note"
+            data-ng-bind="term.note">
+        <span>&#128220</span>
+      </div>
+
+      <div class="study-item-options">
+        TODO
+      </div>
+    </div>
 
 
   </div>
 
 
 
-<!-- experimental -->
+
 
 <script type='module'
         src="{% static 'gwybodaeth/scripts/modules/StudySet/studySetAngular.js' %}"></script>

@@ -1,3 +1,5 @@
+import { Util } from "../Utilities/util.mjs";
+
 /**
  *   Contains functions used for loading study set data, which will be then
  *     processed by other modules. 
@@ -8,7 +10,7 @@ export const Load = function() {
    * @param {*} handler 
    */
   const justTerms = (handler) => { 
-    fetch(`/load/${_getStudySetID()}`)
+    fetch(`/load/${Util.getStudySetID()}`)
     .then(response => response.json())
     .then(result => {
       handler(result['terms']);
@@ -20,19 +22,15 @@ export const Load = function() {
    * @param {*} handler 
    */
   const full = (handler) => { 
-    fetch(`/load/${_getStudySetID()}`)
+    fetch(`/load/${Util.getStudySetID()}`)
     .then(response => response.json())
     .then(result => {
       handler(result);
     });
   }
 
-  const _getStudySetID = () => {
-    return window.location.pathname.slice(1).split("/")[1];
-  }
-
   return {
-    justTerms: justTerms,
-    full     : full
+    justTerms    : justTerms,
+    full         : full
   };
 }();

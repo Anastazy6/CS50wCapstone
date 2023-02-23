@@ -1,77 +1,49 @@
-.grid-container-2 {
-  display: grid;
-  gap    : 40px;
-  grid-template-columns: 400px 400px;
-  justify-content      : center;
-}
+.study-item-index   {grid-area: index;}
+.study-item-term    {grid-area: term; }
+.study-item-def     {grid-area: def;  }
+.study-item-cat     {grid-area: cat;  }
+.study-item-note    {grid-area: note; }
+.study-item-options {grid-area: opts; }
 
-.grid-container-6 {
-  display: grid;
-  gap    : 5px;
-  grid-template-columns: auto auto auto auto auto auto;
-  justify-content      : center;
-}
 
-.form-cell,
-.form-line, 
-.set-item,
-.study-item,
-.study-set-line {
-  border-radius   : 21.37px;
-  padding         : 10px;
-  justify-content : space-evenly;
-  background      : theme-color("moon-glass");
-  text-align      : center;
-}
-
-.form-line,
-.study-set-line,
 .study-item {
-  max-width       : 1200px;
-  margin          : auto;
-  margin-top      : 10px;
-  vertical-align  : middle;
+  font-size     : 1.1em;
+  border-radius : 21.37px;
+  height        : 50px;
+  margin        : auto;
+  margin-bottom : 10px;
+  max-width     : 1200px;
+  padding       : 5px;
+  vertical-align: middle;
+  
+
+  
+  display: grid;
+  grid-template-rows   : 1fr;
+  grid-template-columns: 40px 3fr 3fr 1fr 50px 1fr;
+  grid-template-areas  :
+      'index term def cat note opts';
 }
 
-.study-set-cell-1 {
-  width: 150px;
+
+.study-item-index  ,
+.study-item-term   ,
+.study-item-def    ,
+.study-item-cat    ,
+.study-item-note   ,
+.study-item-options {
+  align-items : center;
+  border-left : 2px solid $transparent-ghostwhite-15;
+  display     : flex;
+  padding     : auto;
+  padding-left: 15px;
 }
 
-.study-set-cell-2 {
-  width: 400px;
+.study-item-index {
+  border-left: none !important;
 }
 
-
-.form-line {
-  grid-column: 1 / span 2;
-  display    : grid;
-  grid-template-columns: auto auto;
-}
-
-.form-cell, .set-item {
-  grid-column: span 1;
-}
-
-.study-set-line {
-  grid-column: 1 / span 6;
-}
-
-.study-set-cell-1 {
-  grid-column: span 1;
-}
-
-.study-set-cell-2 {
-  grid-column: span 2;
-
-}
-
-.study-set-cell-1,
-.study-set-cell-2 {
-  border-left: 2px solid $item-box-shador-color;
-  padding    : 5px 10px;
-}
-
-#study-items-wrapper {
-  display: block;
-  width: 840px;
+.study-item-note {
+  padding: 0;
+  justify-content: center !important;
 }

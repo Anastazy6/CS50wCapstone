@@ -11,27 +11,49 @@ import  { Create     }  from  "./modules/Create/create.mjs";
 import  { Flashcards }  from  "./modules/Flashcards/flashcards.mjs";
 import  { Learn      }  from  "./modules/Learn/learn.mjs";
 import  { Load       }  from  "./modules/Load/load.mjs";
-import  { StudySet   }  from  "./modules/StudySet/study_set.mjs"
 import  { Write      }  from  "./modules/Write/write.mjs";
-
-import  { Util       } from "./modules/Utilities/util.mjs";
+import  { Util       }  from  "./modules/Utilities/util.mjs";
 
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  const addStudyItemButton = document.getElementById("study-set-add-item"  );
-  const createStudySetForm = document.getElementById("create-set"          );
+  
   const flashcardsView     = document.getElementById("flashcards-container");
   const learnView          = document.getElementById("learn-wrapper"       );
-  const studySetView       = document.getElementById("study-items"         );
+  const createStudySetForm = document.getElementById("create-set"          );  
   const writeView          = document.getElementById("write-wrapper"       );
 
   Util.highlightCurrentLearningOption();
 
-  //if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
+  
   if (!!createStudySetForm) {Create.run()}
   if (!!flashcardsView)     {Load.justTerms(Flashcards.loadFlashcards);}
   if (!!learnView     )     {Load.justTerms(Learn     .loadItems     );}
-  if (!!studySetView  )     {Load.justTerms(StudySet  .loadStudySet  );}
   if (!!writeView     )     {Load.justTerms(Write     .loadItems     );}
+
+
+  // ---------------------------------------------------------------------------
+  //                     Deprecated due to refactored vanilla JS
+  // ---------------------------------------------------------------------------
+
+  /*
+   *  const addStudyItemButton = document.getElementById("study-set-add-item"  );
+   *
+   *
+   *  if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
+   *
+   */
+
+
+  // ---------------------------------------------------------------------------
+  //                           Deprecated due to Angular
+  // ---------------------------------------------------------------------------
+  
+  /* 
+   *  import  { StudySet   }  from  "./modules/StudySet/study_set.mjs"
+   *
+   *  const studySetView = document.getElementById("study-items");
+   *
+   *  if (!!studySetView) {Load.justTerms(StudySet.loadStudySet);}
+   */
 })

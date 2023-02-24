@@ -25,7 +25,7 @@
           data-ng-repeat="term in terms">
 
       <div  class       ="study-item-index"
-            data-ng-bind="">
+            data-ng-bind="term.id">
       </div>
       
       <div  class       ="study-item-term"
@@ -40,9 +40,8 @@
             data-ng-bind="term.cat">
       </div>
 
-      <div  [title]="term.note"
-            class  ="study-item-note"
-            data-ng-bind="term.note">
+      <div  title="{[{term.note}]}"
+            class  ="study-item-note">
         <span>&#128220</span>
       </div>
 

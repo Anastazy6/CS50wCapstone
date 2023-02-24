@@ -20,7 +20,7 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "gwybodaeth/login.html", {
+            return render(request, "gwybodaeth/Auth/login.html", {
                 'message': "Invalid username or password."
             })
     else:
@@ -39,7 +39,7 @@ def register(request):
         confirmation = request.POST['confirmation']
 
         if not password == confirmation:
-            return render(request, 'gwybodaeth/register.html', {
+            return render(request, 'gwybodaeth/Auth/register.html', {
                 'message': 'Password and confirmation must match!'
             })
 
@@ -47,7 +47,7 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            return render(request, 'gwybodaeth/register.html', {
+            return render(request, 'gwybodaeth/Auth/register.html', {
                 'message': "Username taken."
             })
 

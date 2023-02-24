@@ -37,9 +37,11 @@ $theme-colors: (
 // Keep other imports below Bootstrap so as to be able to override its styles.
 @import "./includes/_general.scss";
 
-@import "./includes/create.scss";
-@import "./includes/_study_set.scss";
+
+@import "./includes/_create.scss";
 @import "./includes/_flashcards.scss";
-@import "./includes/_write.scss";
 @import "./includes/_learn.scss";
-@import "./includes/user_sets"
+@import "./includes/_news.scss";
+@import "./includes/_study_set.scss";
+@import "./includes/_user_sets";
+@import "./includes/_write.scss";

@@ -28,9 +28,24 @@ def require_login(request, error_message="Login required!"):
     in while trying to access stuff only accessible to authenticated users.
     '''
     if not request.user.is_authenticated:
-            return JsonResponse(
-                {   "error" : error_message
-                },   status = 403)
+        return JsonResponse(
+            {   "error" : error_message
+            },   status = 403)
+
+
+def require_staff(request, error_mesage="Permission denied!"):
+    '''
+    Requires the user to be a staff member. Checks, if the user is logged in and
+    then checks if they are a staff member (but not neccessarily a superuser).
+    '''
+    require_login(request)
+    
+    if not request.user.is_staff:
+        return JsonResponse(
+            {   "error" : error_mesage
+            },   status = 403
+        )
+
 
 def get_object_if_exists(model, id):
     '''
@@ -44,6 +59,7 @@ def get_object_if_exists(model, id):
     except ObjectDoesNotExist:
         return False
     return object
+
 
 def page_not_found(request, type, id):
     return render(request, "gwybodaeth/404_page_not_found.html", {

@@ -14,7 +14,21 @@ from .util   import *
 DEBUG = True
 ################################################################################
 
+
 def index(request):
+    require_method(request, ['GET', 'POST'])
+
+    if request.method == 'POST':
+        require_staff(request)
+
+        data = json.loads(request.body)
+
+        News(
+            author = request.user,
+            title  = data['title'],
+            body   = data['body']
+        )
+
     return render(request, "gwybodaeth/index.html")
 
 

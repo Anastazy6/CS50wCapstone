@@ -10,50 +10,86 @@
         data-ng-controller="indexController">
 
 
-  <header id='news-header'>
-        What's new?
-  </header>
+    <header id='news-header'>
+          What's new?
+    </header>
 
-  {% if user.is_authenticated and user.is_staff %}
+    {% if user.is_authenticated and user.is_staff %}
 
-    <form id   ='news-form'
-          class='bg-moon-glass'>
+      <form id   ='news-form'
+            class='bg-moon-glass'
+            novalidate>
 
-      <header id="news-form-header">
-        Enter news
-      </header>
-      
-      <textarea id          ="news-title-input"
-                class       ="news-input"
-                maxlength   ="127"
-                name        ="title" 
-                placeholder ="Enter title"
-                required
-      ></textarea>
+        {% csrf_token %}
 
+        <header id="news-form-header">
+          Enter news
+        </header>
+        
+        <textarea id           ="news-title-input"
+                  class        ="news-input"
+                  maxlength    ="127"
+                  name         ="title"
+                  placeholder  ="Enter title"
 
-      <textarea id          ="news-body-input" 
-                class       ="news-input"
-                maxlength   ="2047"
-                name        ="body"
-                placeholder ="Enter body"
-                required
-      ></textarea>
-
-      <input  id    ="news-submit"
-              class ="btn
-                      btn-outline-lleuad-lawn"
-              type  ="submit" 
-              value ="Submit">
-
-    </form>
-
-  {% endif %}
+                  data-ng-model="newsTitle"
+                  required
+        ></textarea>
 
 
+        <textarea id           ="news-body-input" 
+                  class        ="news-input"
+                  maxlength    ="2047"
+                  name         ="body"
+                  placeholder  ="Enter body"
 
+                  data-ng-model="newsBody"
+                  required
+        ></textarea>
 
+        <button id    ="news-submit"
+                class ="btn
+                        btn-outline-lleuad-lawn"
+                role  ="button"
+                
+                data-ng-click="postNews()">
+          Submit
+        </button>
 
+      </form>
+
+    {% endif %}
+
+    <div id="news-container">
+      {% for news_item in news %}
+        <div class="news-item
+                    bg-moon-glass">
+
+          <div class="news-item-title
+                      text-lleuad-lawn">
+            {{ news_item.title }}
+          </div>
+
+          <div class="news-item-body">
+            {{ news_item.body }}
+          </div>
+
+          <div class="news-item-time">
+            Posted on {{ news_item.timestamp }}
+          </div>
+
+          <div class="news-item-author">
+            By {{ news_item.author.id }}
+          </div>
+
+        </div>
+      {% empty %}
+        <h1 id   ="no-news"
+            class="text-lleuad-lawn">
+          This site is too new to have news
+        </h1>
+      {% endfor %}
+    </div>
 
 
   </div>

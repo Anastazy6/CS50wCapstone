@@ -27,9 +27,19 @@ def index(request):
             author = request.user,
             title  = data['title'],
             body   = data['body']
-        )
+        ).save()
 
-    return render(request, "gwybodaeth/index.html")
+        return HttpResponseRedirect(reverse('index'))
+
+    else:
+        news = News.objects.all().order_by('-timestamp').values()
+        print(news)
+
+        return render(request, "gwybodaeth/index.html", {
+            'news': news
+        })
+    
+
 
 
 

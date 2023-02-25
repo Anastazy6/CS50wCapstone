@@ -53,6 +53,10 @@
   &:focus, &:hover {
     border-bottom: 2px solid theme-color("lleuad-lawn");
   }
+
+  &:visited {
+    border-bottom : 2px solid theme-color("lleuad");
+  }
 }
 
 
@@ -65,4 +69,55 @@
 .news-input {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width   : none;  /* Firefox */
+}
+
+
+#news-container {
+  display   : block;
+  margin    : auto;
+  margin-top: 40px;
+}
+
+
+.news-item-title  {grid-area: title; }
+.news-item-body   {grid-area: body;  }
+.news-item-time   {grid-area: time;  }
+.news-item-author {grid-area: author;}
+
+.news-item {
+  max-width    : 666px;
+  border-radius: 21.37px;
+  padding      : 15px;
+  margin       : auto;
+  margin-top   : 20px;
+  gap          : 20px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas  :
+    'title title '
+    'body  body  '
+    'time  author';
+}
+
+.news-item-title {
+  text-align   : center;
+  font-size    : 1.3em;
+  border-bottom: 2px solid theme-color("lleuad");
+
+}
+
+.news-item-body {
+  text-align   : justify;
+  border-bottom: 1  px solid theme-color("lleuad");
+}
+
+.news-item-time,
+.news-item-author {
+  font-size : 0.75em;
+  font-style: italic;
+}
+
+.news-item-author {
+  text-align: right;
 }

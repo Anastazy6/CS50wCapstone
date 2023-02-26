@@ -16,6 +16,12 @@ export const Util = (function() {
     return function() {index += 1; return index;}
   })()
 
+
+  const getRoute = () => {
+    return window.location.pathname.slice(1).split("/");
+  }
+
+
   const getStudySetID = () => {
     return window.location.pathname.slice(1).split("/")[1];
   }
@@ -25,8 +31,11 @@ export const Util = (function() {
     return window.location.pathname.slice(1).split("/")[2];
   }
 
+
+
   return {
     generateIndex                 : generateIndex,
+    getRoute                      : getRoute,
     getStudySetID                 : getStudySetID,
     highlightCurrentLearningOption: highlightCurrentLearningOption
   }

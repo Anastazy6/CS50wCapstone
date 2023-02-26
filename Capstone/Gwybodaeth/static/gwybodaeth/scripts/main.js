@@ -1,9 +1,9 @@
 /* TODO: (either @ core or advanced level): Lazy module importing.
  *   Current iteration works just fine, but importing all the modules at once isn't
  *   the best design as it slows content loading.
- *   Calling module functions like StudySet.createStudySet or Flashcards.loadFlashcards(...)
- *   if and only if an HTML element which is going to use them exist works just fine too, but
- *   I guess it's not the best idea as well. At the moment (24.12.2022) I have no better idea tho...
+ *   26.02.2023: Different modules are run depending on the route instead of
+ *   accessing the DOM several times. Not the best solution, but shouldn't be
+ *   as expensive as the previous one.
  */
 
 
@@ -17,19 +17,14 @@ import  { Util       }  from  "./modules/Utilities/util.mjs";
 
 document.addEventListener("DOMContentLoaded", function() {
 
+  const route = Util.getRoute();
   
-  const flashcardsView     = document.getElementById("flashcards-container");
-  const learnView          = document.getElementById("learn-wrapper"       );
-  const createStudySetForm = document.getElementById("create-set"          );  
-  const writeView          = document.getElementById("write-wrapper"       );
-
-  Util.highlightCurrentLearningOption();
-
+  if (route[0] === 'set')  Util.highlightCurrentLearningOption(); 
   
-  if (!!createStudySetForm) {Create.run()}
-  if (!!flashcardsView)     {Load.justTerms(Flashcards.loadFlashcards);}
-  if (!!learnView     )     {Load.justTerms(Learn     .loadItems     );}
-  if (!!writeView     )     {Load.justTerms(Write     .loadItems     );}
+  if (route[0] === 'create-set') {Create.run()}
+  if (route[2] === 'flashcards') {Load.justTerms(Flashcards.loadFlashcards);}
+  if (route[2] === 'learn'     ) {Load.justTerms(Learn     .loadItems     );}
+  if (route[2] === 'write'     ) {Load.justTerms(Write     .loadItems     );}
 
 
   // ---------------------------------------------------------------------------

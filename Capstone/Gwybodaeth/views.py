@@ -33,7 +33,9 @@ def index(request):
 
     else:
         news = News.objects.all().order_by('-timestamp').values()
-        print(news)
+        
+        for news_item in news:
+            news_item['author'] = User.objects.get(pk=news_item['author_id'])
 
         return render(request, "gwybodaeth/index.html", {
             'news': news

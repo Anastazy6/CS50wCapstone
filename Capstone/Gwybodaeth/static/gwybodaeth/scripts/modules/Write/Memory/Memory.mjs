@@ -7,9 +7,31 @@
     const _correct   = [];
     const _incorrect = [];
 
-    const countRemaining = () => {return _remaining.length;}
-    const countCorrect   = () => {return _correct  .length;}
-    const countIncorrect = () => {return _incorrect.length;}
+    const _rounds       = [];
+    const _currentRound = [];
+
+
+    // *************************************************************************
+    //                       Simple public methods
+    // *************************************************************************
+
+    // Add public one-liners here, as long as their intention can be guessed from
+    //   their name.
+
+    const countRemaining = () => _remaining.length;
+    const countCorrect   = () => _correct  .length;
+    const countIncorrect = () => _incorrect.length;
+
+    const getLastRound   = () => _rounds.at(-1);
+    const getAllRounds   = () => _rounds;
+
+
+    // *************************************************************************
+    //                            Public methods
+    // *************************************************************************
+
+    // Add public methods (that require more than one line or need an explaination
+    //   why they do stuff they do) here.
 
     /**
      * Loads into memory a new StudyItem object, created from the fetched data. 
@@ -21,8 +43,8 @@
 
     /**
      * 
-     * @returns the first element from the _remaining list, which will be used to ask the user a question
-     *   and await their answer for it.
+     * @returns the first element from the _remaining list, which will be used to
+     *   ask the user a question and await their answer for it.
      */
     const currentItem = () => {
       return (!!_remaining[0]) ? _remaining[0] : false;
@@ -30,7 +52,10 @@
 
     /**
      *  Marks the currentItem as being answered correctly, moving it from
-     *   the _remaining list to the _correct list.
+     *    the _remaining list to the _correct list. 
+     *  Does not add the currentItem
+     *    to the _currentRound as there's no need to explicitely remeber the user's
+     *    answer - it's just the term. 
      */
     const processCorrectWrite = () => {
       _correct.push(_remaining.shift());
@@ -38,32 +63,66 @@
     
     /**
      *  Marks the currentItem as being answered incorrectly, moving it from
-     *   the _remaining list to the _incorrect list.
+     *    the _remaining list to the _incorrect list.
+     *  Adds the currentItem AND the user's answer to the current round, in order
+     *    to display the mistake in the summary.
      */
-    const processWrongWrite = () => {
-      _incorrect.push(_remaining.shift());
+    const processWrongWrite = (answer='') => {
+      const lastItem = _remaining.shift();
+      
+      _incorrect   .push(lastItem);
+      _currentRound.push({
+          item  : lastItem,
+          answer: answer
+      })
+      console.log("Current round:");
+      console.log(_currentRound);
     }
 
     /**
-     *  Shuffles the _remaining list randomly in order to provide the user with more challenge
-     *    and inability to associate answers with their positions in the order of questions.
+     *  Shuffles the _remaining list randomly in order to provide the user with
+     *    more challenge and inability to associate answers with their positions
+     *    in the order of questions.
      */
     const shuffle = () => {
       _remaining.sort(() => { return Math.random() - 0.5; });
     }
 
     /**
-     *  Sorts the study items by their ID, which is assigned on study set creation.
+     *  Sorts the study items by their ID.
+     *    Note that the ID is assigned on study set creation!
      */
     const sort = () => {
-      _remaining.sort((first, second) => {return parseInt(first.id) - parseInt(second.id)});
+      _remaining.sort((first, second) => {
+        return parseInt(first.id) - parseInt(second.id);
+      });
     }
+
+    /**
+     *  TODO: docstring
+     * 
+     */
+    const finishRound = () => {
+      _rounds.push(clone(_currentRound));
+      _currentRound = [];
+    }
+
+    // *************************************************************************
+    //                             Private methods
+    // *************************************************************************
+
+    // Wow, such empty
+
+    
 
     return {
       countRemaining     : countRemaining,
       countCorrect       : countCorrect,
       countIncorrect     : countIncorrect,
       currentItem        : currentItem,
+      finishRound        : finishRound,
+      getAllRounds       : getAllRounds,
+      getLastRound       : getLastRound,
       loadItem           : loadItem,
       processCorrectWrite: processCorrectWrite,
       processWrongWrite  : processWrongWrite,

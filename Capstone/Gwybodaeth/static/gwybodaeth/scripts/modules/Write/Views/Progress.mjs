@@ -49,15 +49,19 @@ export const Progress = (function() {
   //--------------------------------------------------------------------------
   //                 Progress: private methods for counters
   //--------------------------------------------------------------------------
+
+
   const _setCounters = (counters) => {
     correctCounter  .innerHTML = counters.correct;
     incorrectCounter.innerHTML = counters.incorrect;
     remainingCounter.innerHTML = counters.remaining;
   }
 
+
   const _setTotalItems = (numberOfItems) => {
     totalItems = numberOfItems;
   }
+
 
   const _setTotalCounters = () => {
     totalCounters.forEach(totalCounter => {
@@ -135,6 +139,7 @@ export const Progress = (function() {
     })
   }
 
+  
   const _setEmptyWidths = (values) => {
     let pairs = [
       [correctEmpty  , values.correct  ],

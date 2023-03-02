@@ -2,7 +2,7 @@ export const Util = (function() {
   
 
   const highlightCurrentLearningOption = () => {
-    let currentOption = _getCurrentLearningOption() || 'set';  
+    let currentOption = _getLearningOption() || 'set';  
 
     const optionButton = document.getElementById(`learning-options-${currentOption}`);
     if (optionButton) { 
@@ -17,21 +17,10 @@ export const Util = (function() {
   })()
 
 
-  const getRoute = () => {
-    return window.location.pathname.slice(1).split("/");
-  }
-
-
-  const getStudySetID = () => {
-    return window.location.pathname.slice(1).split("/")[1];
-  }
-
-
-  const _getCurrentLearningOption = () => {
-    return window.location.pathname.slice(1).split("/")[2];
-  }
-
-
+  const getRoute           = () => _getPath().slice(1).split("/");
+  const getStudySetID      = () => getRoute()[1];
+  const _getLearningOption = () => getRoute()[2];
+  const _getPath           = () => window.location.pathname;
 
   return {
     generateIndex                 : generateIndex,

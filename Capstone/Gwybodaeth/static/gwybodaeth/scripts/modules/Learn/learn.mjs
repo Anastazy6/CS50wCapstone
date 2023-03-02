@@ -1,7 +1,7 @@
 import { Memory         } from "./Memory/memory.mjs"
-import { StudyItem      } from "./Models/study_item.mjs"
+import { StudyItem      } from "../Utilities/Models/common_models.mjs"
 import { View           } from "./Views/view.mjs"
-import { WriteUtilities } from "../Write/write_utilities.mjs"
+import { WriteUtilities } from "../Utilities/write_utilities.mjs"
 
 export const Learn = (function() {
 

@@ -1,4 +1,4 @@
-{% extends './layout.html' %}
+{% extends 'gwybodaeth/layout.html' %}
 
 {% block title %}
   {{ study_set.title}} - flashcards
@@ -7,8 +7,8 @@
 {% block body %}
 
 
-  {% include "./includable/study_set_header.html" %}
-  {% include "./includable/learning_options.html" %}
+  {% include "gwybodaeth/includable/study_set_header.html" %}
+  {% include "gwybodaeth/includable/learning_options.html" %}
 
   <div  id   ="flashcards-container"
         class="grid-standard-container">

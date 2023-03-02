@@ -22,6 +22,11 @@
     //         Feedback: public
     // ----------------------------------
 
+
+    const show = () => container.classList.remove('hidden');  
+    const hide = () => container.classList.add   ('hidden');
+
+
     const addEventListeners = (methods) => {
       retry      .onclick = methods.retry;
       btnContinue.onclick = methods.resolve;
@@ -30,17 +35,14 @@
       _addKeyboardSupport();
     }
 
-    const show = () => {  
-      container.classList.remove('hidden'); 
-    } 
-
+    
     const showNegative = (currentItem, userInput) => {
-        show();
+      show();
       _setNegativeStyle();
       _setNegativeResolution();
       _showData(currentItem, userInput);
-
     }
+
 
     const showPositive = (currentItem, userInput) => {
       show();
@@ -49,9 +51,7 @@
       _showData(currentItem, userInput);
     }
 
-    const hide = () => {
-      container.classList.add   ('hidden');
-    }
+    
 
     const isVisible = () => {
       if (container.classList.contains('hidden')) {

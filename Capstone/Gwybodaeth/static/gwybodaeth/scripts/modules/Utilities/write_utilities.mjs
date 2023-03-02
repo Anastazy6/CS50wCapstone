@@ -17,7 +17,6 @@ export const WriteUtilities = (function() {
     }
 
 
-
   const submitAnswer = (currentItem, input, feedbackView) => {
     let data = {
       currentItem  : currentItem,
@@ -33,6 +32,7 @@ export const WriteUtilities = (function() {
     return _clean(answers).some(answer => _clean(questions).includes(answer));
   }
 
+  
   /**
    * Takes an array of strings and makes it easier to compare with another cleaned array of strings by
    *   trimming its both ends (so the extra spaces won't interfere with the comparison process),
@@ -44,6 +44,7 @@ export const WriteUtilities = (function() {
     const _clean = (choices) => {
       return choices.map(choice => choice.trim().toLowerCase().replace(/\./g, ''));
     }
+
 
     const _showFeedback = (view, data) => {
       view.hide();
@@ -59,7 +60,6 @@ export const WriteUtilities = (function() {
   // TODO (optional): refactor so that it uses booleans instead of strings. Using dataset for booleans
   //   has proven to be quite tricky, so I'm leaving this band-aid solution for now.
   const resolve = (methods, event) => {
-    console.log(event.target);
     let resolution = event.target.dataset.resolution;
 
     if (resolution === 'positive') {
@@ -76,6 +76,7 @@ export const WriteUtilities = (function() {
     methods.processCorrect();
     methods.updateView();
   }
+
 
   const _resolveNegatively = (methods) => {
     methods.processWrong();

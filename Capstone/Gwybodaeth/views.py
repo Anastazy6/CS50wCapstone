@@ -37,7 +37,7 @@ def index(request):
         for news_item in news:
             news_item['author'] = User.objects.get(pk=news_item['author_id'])
 
-        return render(request, "gwybodaeth/index.html", {
+        return render(request, "gwybodaeth/Simple/index.html", {
             'news': news
         })
     
@@ -90,7 +90,7 @@ def user_sets(request, username):
 
     sets = Study_set.objects.filter(author__username=username)
 
-    return render(request, "gwybodaeth/user_sets.html", {
+    return render(request, "gwybodaeth/Simple/user_sets.html", {
         "sets": sets
     })
 
@@ -101,7 +101,7 @@ def study_set_view(request, study_set_id):
 
     study_set = require_study_set(request, study_set_id)
 
-    return render(request, "gwybodaeth/study_set.html", {
+    return render(request, "gwybodaeth/Simple/study_set.html", {
         "study_set": study_set,
     #   "subtitle" : None       # Keeping this line for information
     })
@@ -113,7 +113,7 @@ def flashcards_view(request, study_set_id):
     
     study_set = require_study_set(request, study_set_id)
 
-    return render(request, "gwybodaeth/flashcards.html", {
+    return render(request, "gwybodaeth/Simple/flashcards.html", {
         "study_set": study_set,
         "subtitle" : "flashcards"
     })

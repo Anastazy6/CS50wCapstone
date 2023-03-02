@@ -62,7 +62,7 @@ def get_object_if_exists(model, id):
 
 
 def page_not_found(request, type, id):
-    return render(request, "gwybodaeth/404_page_not_found.html", {
+    return render(request, "gwybodaeth/Errors/404.html", {
             "page_type": type,
             "page_id"  : id
         })

@@ -18,10 +18,14 @@ export const Write = (function() {
   const specials         = document.getElementById("write-special-letters"   );
 
 
+  const clearInput = () => answer.value = '';
+  
+  const hide = () => mainView.classList.add('hidden');
 
-
-  const clearInput = () => {
-    answer.value = '';
+  const show = () => {
+    mainView.classList.remove('hidden');
+    clearInput();
+    answer.focus();
   }
 
 
@@ -31,17 +35,6 @@ export const Write = (function() {
     return answer.value.split(/[,;/]/);
   }
 
-
-  const hide = () => {
-    mainView.classList.add('hidden');
-  }
-
-
-  const show = () => {
-    mainView.classList.remove('hidden');
-    clearInput();
-    answer.focus();
-  }
 
   const showCurrent = (currentItem) => {
     show();

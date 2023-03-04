@@ -81,7 +81,8 @@ export const Write = function() {
 
   const _updateView = () => {
     let currentItem = Memory.currentItem();
-    if (!currentItem) { return _showSummary() };
+    if (!currentItem) { 
+      return _showSummary() };
 
     let data = {
       currentItem: currentItem,
@@ -111,6 +112,7 @@ export const Write = function() {
 
 
   const _showSummary = () => {
+    Memory.finishRound();
     View.Progress.update(_getCountersData());
     View.Summary.setValues(_getSummaryData());
     _showView(View.Summary);
@@ -132,9 +134,13 @@ export const Write = function() {
 
 
   const _showRoundsSummary = () => {
+    console.log(Memory.countIncorrect());
     const data  = Memory.countIncorrect() > 0 ?
-                    Memory.getLastRound():
+                    Memory.getLastRound() :
                     Memory.getAllRounds();
+
+    console.log(Memory.getLastRound());
+    console.log(Memory.getAllRounds());
     
     console.log(data);
 

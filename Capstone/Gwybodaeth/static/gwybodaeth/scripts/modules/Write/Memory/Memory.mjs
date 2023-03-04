@@ -8,7 +8,7 @@
     const _incorrect = [];
 
     const _rounds       = [];
-    const _currentRound = [];
+    let   _currentRound = [];
 
 
     // *************************************************************************
@@ -103,7 +103,7 @@
      * 
      */
     const finishRound = () => {
-      _rounds.push(clone(_currentRound));
+      _rounds.push(_currentRound);
       _currentRound = [];
     }
 

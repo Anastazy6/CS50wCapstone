@@ -4,18 +4,18 @@ export const Write = (function() {
   //--------------------------------------------------------------------------
 
   // Main view
-  const mainView    = document.getElementById("write-container");
+  const mainView = document.getElementById("write-container"    );
 
-  const question         = document.getElementById("write-question"          );
-  const pass             = document.getElementById("write-pass"              );
-  const answer           = document.getElementById("write-answer-area"       );
-  const submit           = document.getElementById("write-answer-button"     );
-  const category         = document.getElementById("write-category"          );
+  const question = document.getElementById("write-question"     );
+  const pass     = document.getElementById("write-pass"         );
+  const answer   = document.getElementById("write-answer-area"  );
+  const submit   = document.getElementById("write-answer-button");
+  const category = document.getElementById("write-category"     );
   
   // Will only become useful when answering with both terms or definitions will be implemented
-  const label            = document.getElementById("write-textarea-label"    );
+  // const label            = document.getElementById("write-textarea-label"    );
   // Will only become useful when support for diacritics will be added
-  const specials         = document.getElementById("write-special-letters"   );
+  // const specials         = document.getElementById("write-special-letters"   );
 
 
   const clearInput = () => answer.value = '';

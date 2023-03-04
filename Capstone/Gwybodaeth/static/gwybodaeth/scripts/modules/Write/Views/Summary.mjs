@@ -26,6 +26,8 @@ export const Summary = (function() {
       fragment.append(_createFailureItem(failure));
     })
 
+    console.log(fragment);
+
     rounds.innerHTML = fragment;
   }
 
@@ -44,7 +46,16 @@ export const Summary = (function() {
     const userInput = document.createElement('div');
 
     userInput.classList.add('failure-user-input');
-    userInput.innerHTML = failure['user-input']
+    userInput.innerHTML = failure['answer']
+  }
+
+
+  const _addCorrectValue = (failure) => {
+    const correctValue = document.createElement('div');
+
+    console.log(failure);
+    correctValue.classList.add("failure-correct-value");
+    correctValue.innerHTML = failure['item']['terms'].join(', ');
   }
 
 

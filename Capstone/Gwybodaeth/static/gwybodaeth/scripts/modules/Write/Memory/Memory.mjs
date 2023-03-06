@@ -8,7 +8,10 @@
     const _incorrect = [];
 
     const _rounds       = [];
-    let   _currentRound = [];
+    let   _currentRound = {
+                            id  : 1, 
+                            data: []
+                          };
 
 
     // *************************************************************************
@@ -22,7 +25,7 @@
     const countCorrect   = () => _correct  .length;
     const countIncorrect = () => _incorrect.length;
 
-    const getLastRound   = () => _rounds.at(-1);
+    const getLastRound   = () => [_rounds.at(-1)];
     const getAllRounds   = () => _rounds;
 
 
@@ -67,13 +70,13 @@
      *  Adds the currentItem AND the user's answer to the current round, in order
      *    to display the mistake in the summary.
      */
-    const processWrongWrite = (answer='') => {
+    const processWrongWrite = (data) => {
       const lastItem = _remaining.shift();
       
       _incorrect   .push(lastItem);
-      _currentRound.push({
+      _currentRound.data.push({
           item  : lastItem,
-          answer: answer
+          answer: data['input']
       })
       console.log("Current round:");
       console.log(_currentRound);
@@ -85,7 +88,7 @@
      *    in the order of questions.
      */
     const shuffle = () => {
-      _remaining.sort(() => { return Math.random() - 0.5; });
+      _remaining.sort( () => Math.random() - 0.5 );
     }
 
     /**
@@ -103,15 +106,30 @@
      * 
      */
     const finishRound = () => {
+      let nextId = _currentRound.id + 1;
       _rounds.push(_currentRound);
-      _currentRound = [];
+      
+      _currentRound = {
+                        id  : nextId,
+                        data: []
+                      };
+
+      _retryFailures();
     }
+
+
 
     // *************************************************************************
     //                             Private methods
     // *************************************************************************
 
-    // Wow, such empty
+
+    const _retryFailures = () => {
+      while (_incorrect.length > 0) {
+        _remaining.push(_incorrect.pop());
+      }
+      shuffle();
+    }
 
     
 

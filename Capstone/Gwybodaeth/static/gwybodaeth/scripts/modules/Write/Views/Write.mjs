@@ -55,7 +55,7 @@ export const Write = (function() {
   const _addKeyboardSupport = () => {
     answer.addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
-        event.preventDefault();
+        event .preventDefault();
         submit.click();
       }
     })

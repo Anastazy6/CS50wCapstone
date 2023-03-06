@@ -79,7 +79,9 @@ export const WriteUtilities = (function() {
 
 
   const _resolveNegatively = (methods) => {
-    methods.processWrong();
+    methods.processWrong({
+      input: methods.getUserInput()
+    });
     methods.updateView();
   }
 

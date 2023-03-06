@@ -86,7 +86,7 @@ export const Memory = (function() {
   }
 
 
-  const processWrongWrite = () => {
+  const processWrongWrite = (_data) => {
     _failedWrites += 1;
     shuffleWritables();
   }

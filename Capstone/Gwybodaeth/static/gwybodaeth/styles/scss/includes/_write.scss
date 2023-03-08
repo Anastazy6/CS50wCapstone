@@ -148,11 +148,11 @@
 #write-summary-correct    {grid-area: good; }
 #write-summary-incorrect  {grid-area: bad;  }
 #write-summary-percentage {grid-area: perc; }
-#summary-rounds-container {grid-area: round;}
+#summary-rounds-wrapper   {grid-area: round;}
 
 #write-summary-container {
-  height: max-content;
-  width : max-content;
+  height: 100%t;
+  width : 100%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows   : 60px 1fr;
   grid-template-areas  :
@@ -161,8 +161,19 @@
 }
 
 
+#summary-rounds-wrapper::-webkit-scrollbar {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  display: none;
+}
 
-#summary-round-wrapper {
+/* Hide scrollbar for IE, Edge and Firefox */
+#summary-rounds-wrapper {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width   : none;  /* Firefox */
+}
+
+
+#summary-rounds-wrapper {
   width  : 100%;
   display: block
 }
@@ -189,10 +200,12 @@
 
 
 .summary-round-container {
-  width  : 600px;
+  width  : 100%;
   display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  grid-template-columns: subgrid;
   grid-template-rows   : 60px 60px 1fr;
   grid-template-areas  : 
     'round-header .           '
@@ -203,3 +216,5 @@
 .summary-items-container {
   width: 100%;
 }
+
+

@@ -46,4 +46,3 @@ class News(models.Model):
 #
 #   Nauka:
 #     - test
-#     - poprawianie niepoprawnych odpowiedzi po serii testów

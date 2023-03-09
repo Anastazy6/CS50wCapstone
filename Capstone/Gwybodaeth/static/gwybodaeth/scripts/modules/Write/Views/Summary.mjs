@@ -2,11 +2,15 @@
  * View shown when the user finishes a study set.
  */
 export const Summary = (function() {
-  const container  = document.getElementById("write-summary-container");
-  const correct    = document.getElementById("summary-correct"        );
-  const incorrect  = document.getElementById("summary-incorrect"      );
-  const percentage = document.getElementById("summary-percentage"     );
-  const roundsView = document.getElementById("summary-rounds-wrapper" );
+  const container   = document.getElementById("write-summary-container");
+
+  const correct     = document.getElementById("summary-correct"        );
+  const incorrect   = document.getElementById("summary-incorrect"      );
+  const percentage  = document.getElementById("summary-percentage"     );
+
+  const btnContinue = document.getElementById("write-summary-continue" );
+
+  const roundsView  = document.getElementById("summary-rounds-wrapper" );
 
   // Labels for failure items in the summary
   const protolabels = [ 
@@ -17,6 +21,10 @@ export const Summary = (function() {
   const show = () => container.classList.remove('hidden');
   const hide = () => container.classList.add   ('hidden');
 
+
+  const addEventListeners = (methods) => {
+    btnContinue.onclick = methods.startNextRound;
+  }
 
 
   const setValues = (data) => {
@@ -76,6 +84,7 @@ export const Summary = (function() {
     round.data.forEach(failure => {
       container.append(_createFailureItem(failure));
     })
+
     fragment.append(container);
   }
 
@@ -142,9 +151,10 @@ export const Summary = (function() {
 
 
   return {
-    hide      : hide,
-    setValues : setValues,
-    show      : show,
-    showRounds: showRounds
+    addEventListeners: addEventListeners,
+    hide             : hide,
+    setValues        : setValues,
+    show             : show,
+    showRounds       : showRounds
   }
 })()

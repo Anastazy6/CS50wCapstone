@@ -18,7 +18,7 @@
 }
 
 
-/**
+/*******************************************************************************
  *  #write-container elements
  *  The block below is only meant to contain grid-area names for each element.
  *  Note: keep the elements in order and keep the block clumped together.
@@ -57,21 +57,24 @@
   border-radius: 21.37px;;
 }
 
+
 #write-answer-area {
+  background   : transparent;
+  border-bottom: 3px solid theme-color("lleuad");  
+  border-radius: 0;
+  border-top   : 2px solid $transparent-ghostwhite-15;
   font-size    : 1.5em;
+  height       : 100px;
   padding-top  : 50px;
   padding-left : 0;
   padding-right: 0;
-  height       : 100px;
-  background   : transparent;
-  border-top   : 2px solid $transparent-ghostwhite-15;
-  border-bottom: 3px solid theme-color("lleuad");
-  border-radius: 0;
+  resize       : none;
 
   &:focus {
     outline: none !important;
   }
 }
+
 
 #write-answer-button {
   border-radius: 21.37px;
@@ -79,7 +82,7 @@
   width        : 100%;
 }
 
-/**
+/*******************************************************************************
  *  #write-progress-area elements
  *  #write-progress-area is a grid container which itself is located in another grid container,
  *     namely #write-progress-container (which is designed to hold 3 areas)
@@ -115,7 +118,7 @@
 }
 
 
-/**
+/*******************************************************************************
  *  #write-feedback-container elements
  *  The block below is only meant to contain grid-area names for each element.
  *  Note: keep the elements in order and keep the block clumped together.
@@ -141,14 +144,12 @@
 }
 
 
-
-
-
-  
+/**************************************************************************** */ 
 #write-summary-correct    {grid-area: good; }
 #write-summary-incorrect  {grid-area: bad;  }
-#write-summary-percentage {grid-area: perc; }
+#write-summary-continue   {grid-area: cont; }
 #summary-rounds-wrapper   {grid-area: round;}
+
 
 #write-summary-container {
   height: 100%t;
@@ -156,7 +157,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows   : 60px 1fr;
   grid-template-areas  :
-    'good  bad   perc'
+    'good  bad   cont '
     'round round round';
 }
 
@@ -174,8 +175,10 @@
 
 
 #summary-rounds-wrapper {
-  width  : 100%;
-  display: block
+  width     : 100%;
+  max-height: 250px;
+  display   : block;
+  overflow  : scroll;
 }
 
 
@@ -193,10 +196,10 @@
 
 
 
-.summary-round-header    {grid-area: round-header; }
-.summary-input-label     {grid-area: input-label;  }
-.summary-answer-label    {grid-area: answer-label; }
-.summary-items-container {grid-area: items;        }
+.summary-round-header    {grid-area: header; }
+.summary-input-label     {grid-area: input;  }
+.summary-answer-label    {grid-area: answer; }
+.summary-items-container {grid-area: items;  }
 
 
 .summary-round-container {
@@ -208,9 +211,9 @@
   grid-template-columns: subgrid;
   grid-template-rows   : 60px 60px 1fr;
   grid-template-areas  : 
-    'round-header .           '
-    'input-label  answer-label'
-    'items        items       ';
+    'header .     '
+    'input  answer'
+    'items  items ';
 }
 
 .summary-items-container {

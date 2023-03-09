@@ -113,10 +113,15 @@
                         id  : nextId,
                         data: []
                       };
-
-      _retryFailures();
     }
 
+
+    const retryFailures = () => {
+      while (_incorrect.length > 0) {
+        _remaining.push(_incorrect.pop());
+      }
+      shuffle();
+    }
 
 
     // *************************************************************************
@@ -124,12 +129,7 @@
     // *************************************************************************
 
 
-    const _retryFailures = () => {
-      while (_incorrect.length > 0) {
-        _remaining.push(_incorrect.pop());
-      }
-      shuffle();
-    }
+    
 
     
 
@@ -144,6 +144,7 @@
       loadItem           : loadItem,
       processCorrectWrite: processCorrectWrite,
       processWrongWrite  : processWrongWrite,
+      retryFailures      : retryFailures,
       shuffle            : shuffle,
       sort               : sort
     }

@@ -5,7 +5,7 @@ import { WriteUtilities } from "../Utilities/write_utilities.mjs";
 
 export const Write = function() {
   
-  const _resolutionMethods = () =>{
+  const _resolutionMethods = () => {
     return {
       processCorrect: Memory.processCorrectWrite,
       processWrong  : Memory.processWrongWrite,
@@ -39,15 +39,22 @@ export const Write = function() {
   const _startView = () => {
     let itemCount  = Memory.countRemaining();
     let methods = {
-      submit : _submitAnswerWrapper,
-      pass   : _passWrapper,
-      retry  : _retryItem,
-      resolve: (target) => {WriteUtilities.resolve(_resolutionMethods(), target)}
+      startNextRound: _startNextRound,
+      submit        : _submitAnswerWrapper,
+      pass          : _passWrapper,
+      retry         : _retryItem,
+      resolve       : (target) => {WriteUtilities.resolve(_resolutionMethods(), target)}
     }
 
     View.initialize(itemCount, methods);
     _updateView();
   } 
+
+
+  const _startNextRound = () => {
+    Memory.retryFailures();
+    _updateView();
+  }
   
 
   const _submitAnswerWrapper = () => {
@@ -91,7 +98,8 @@ export const Write = function() {
       currentItem: currentItem,
       counters   : _getCountersData() 
     }
-    
+
+    _showView(View.Write);
     return View.update(data);
   }
 

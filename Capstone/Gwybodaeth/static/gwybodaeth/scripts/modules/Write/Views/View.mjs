@@ -39,8 +39,12 @@ export const View = function() {
 
 
   const _addEventListeners = (methods) => {
-    Write   .addEventListeners(methods);
-    Feedback.addEventListeners(methods);
+    [ Write,
+      Feedback,
+      Summary
+    ].forEach(module => {
+        module.addEventListeners(methods);
+      })
   }
 
 

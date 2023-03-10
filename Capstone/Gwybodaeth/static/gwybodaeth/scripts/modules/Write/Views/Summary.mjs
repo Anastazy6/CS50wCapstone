@@ -8,7 +8,7 @@ export const Summary = (function() {
   const incorrect   = document.getElementById("summary-incorrect"      );
   const percentage  = document.getElementById("summary-percentage"     );
 
-  const btnContinue = document.getElementById("write-summary-continue" );
+  const btnContinue = document.getElementById("summary-continue-button");
 
   const roundsView  = document.getElementById("summary-rounds-wrapper" );
 
@@ -51,10 +51,13 @@ export const Summary = (function() {
     fragment.classList.add('summary-round-container');
     
     _addHeaderTo  (fragment, round.id);
-    _addLabelsTo  (fragment);
-    _addFailuresTo(fragment, round);
-    
-    console.log(fragment);
+
+    if (_hasFailues(round)) {         // TODO: (this looks ugly) => refactor when there's nothing better to do.
+      _addLabelsTo  (fragment);
+      _addFailuresTo(fragment, round);
+    } else {
+      _addSuccessTo(fragment);
+    }
 
     roundsView.append(fragment);
   }
@@ -86,6 +89,17 @@ export const Summary = (function() {
     })
 
     fragment.append(container);
+  }
+
+
+  const _addSuccessTo = (fragment) => {
+    const success = document.createElement('div');
+
+    // Place the success message where the label for user input is.
+    success.classList.add('failure-user-input'); 
+    success.innerHTML = "You have written everything correctly!"
+
+    fragment.append(success);
   }
 
 
@@ -147,6 +161,10 @@ export const Summary = (function() {
 
     return label;
   }
+
+
+  const _hasFailues = (round) => (round.data.length === 0) ? false : true;
+  
 
 
 

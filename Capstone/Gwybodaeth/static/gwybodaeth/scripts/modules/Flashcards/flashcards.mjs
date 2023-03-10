@@ -22,6 +22,7 @@ export const Flashcards = (function(){
         values['term'   ],
         values['def'    ],
         values['cat'    ],
+        values['note'   ],
         values['options']
       ))
     })

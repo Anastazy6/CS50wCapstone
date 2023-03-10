@@ -1,6 +1,7 @@
 export const View = (function() {
   const type       = document.getElementById("flashcards-side-type"   );
   const id         = document.getElementById("flashcards-current-id"  );
+  const note       = document.getElementById("flashcards-note"        );
   const totalCards = document.getElementById("flashcards-total-cards" );
   const options    = document.getElementById("flashcards-options"     );
   const main       = document.getElementById("flashcards-main"        );
@@ -25,6 +26,7 @@ export const View = (function() {
 
   const show = (flashcard) => {
     showTerm(flashcard.card);
+    note    .setAttribute('title', flashcard.card.note);
     id      .innerHTML = flashcard.index + 1;
     category.innerHTML = flashcard.card.category;
   }
@@ -85,6 +87,7 @@ export const View = (function() {
       view.onclick = flipMethod;
     })
   }
+
 
   return {
     getCurrentType: getCurrentType, 

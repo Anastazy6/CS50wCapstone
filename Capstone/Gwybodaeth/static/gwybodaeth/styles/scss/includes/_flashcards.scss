@@ -5,6 +5,7 @@
  */
 #flashcards-side-type    { grid-area: type;}
 #flashcards-card-id      { grid-area: id;  }
+#flashcards-note         { grid-area: note;}
 #flashcards-category     { grid-area: cat; }
 #flashcards-main         { grid-area: main;}
 #flashcards-options      { grid-area: opts;}
@@ -16,7 +17,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows   : 1fr 4fr 1fr 1fr;
   grid-template-areas  : 
-    'type .    id   id   .    opts'
+    'type .    id   id   note    opts'
     'main main main main main main'
     'cat  cat  cat  cat  cat  cat '
     'butl butl butl butr butr butr';
@@ -24,6 +25,7 @@
 
 #flashcards-side-type   ,
 #flashcards-card-id     ,
+#flashcards-note        ,
 #flashcards-category    ,
 #flashcards-main        ,
 #flashcards-options     ,

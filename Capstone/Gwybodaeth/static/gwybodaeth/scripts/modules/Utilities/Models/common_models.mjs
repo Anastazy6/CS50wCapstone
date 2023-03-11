@@ -4,11 +4,12 @@
    *    something that is more suitable for further use.
    */
   export class StudyItem {
-    constructor(id, terms, definitions, category, options=null) {
+    constructor(id, terms, definitions, category, note, options=null) {
       this.id          = id;
       this.terms       = this.#splitAnswers(terms);     
       this.definitions = this.#splitAnswers(definitions);
       this.category    = category;
+      this.note        = note || 'No note'
       this.options     = options;
     }
 

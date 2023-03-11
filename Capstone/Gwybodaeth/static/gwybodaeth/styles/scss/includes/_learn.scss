@@ -143,6 +143,11 @@
 .prog-row-mid    {grid-area: mid;   }
 
 
+#correct-percentage {
+  padding-left: 25px;
+}
+
+
 .learn-progress-grid-cell {
   display: grid;
   grid-template-rows   : 1fr 1fr;

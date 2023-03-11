@@ -10,6 +10,7 @@ export const Write = (function() {
   const pass     = document.getElementById("write-pass"         );
   const answer   = document.getElementById("write-answer-area"  );
   const submit   = document.getElementById("write-answer-button");
+  const note     = document.getElementById("write-note"         );
   const category = document.getElementById("write-category"     );
   
   // Will only become useful when answering with both terms or definitions will be implemented
@@ -41,6 +42,7 @@ export const Write = (function() {
 
     question.innerHTML = currentItem.definitions.join(', ');
     category.innerHTML = currentItem.category;
+    note.setAttribute('title', currentItem.note);
   }
 
 

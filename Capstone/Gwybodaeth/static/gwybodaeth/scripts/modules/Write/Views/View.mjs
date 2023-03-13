@@ -7,17 +7,16 @@ import { Summary  } from "./summary.mjs";
    *  Contains references to the visible HTML elements and methods of displaying/updating them.
    */
 export const View = function() {
-
-
-
   //--------------------------------------------------------------------------
   //                     View: public methods
   //--------------------------------------------------------------------------
   
+
   const initialize = (itemCount, methods) => {
     Progress.initialize(itemCount)
     _addEventListeners(methods);
   }
+
 
   const update = (data) => {
     _showCurrent(data.currentItem);
@@ -25,12 +24,10 @@ export const View = function() {
   }
 
 
-
-
-
   //--------------------------------------------------------------------------
   //                     View: private methods
   //--------------------------------------------------------------------------
+
 
   const _showCurrent = (currentItem) => {
     Feedback.hide();
@@ -46,8 +43,6 @@ export const View = function() {
         module.addEventListeners(methods);
       })
   }
-
-
 
 
   return {

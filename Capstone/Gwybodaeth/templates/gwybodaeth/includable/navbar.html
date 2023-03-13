@@ -1,0 +1,65 @@
+<nav class="navbar 
+            fixed-top
+            navbar-expand-lg 
+            navbar-dark 
+            bg-lleuad
+            moonlight-stronk">
+  <a  class="navbar-brand"
+      href="{% url 'index' %}">Gwybodaeth</a>
+  
+  <ul class="navbar-nav mr-auto">
+  
+    <li class="nav-item">
+      <a  class="nav-link" 
+          href="{% url 'index' %}">Home</a>
+    </li>
+
+    {% if user.is_authenticated %}
+
+    <li class="nav-item">
+      <a  class="nav-link" 
+          href="{% url 'user-sets' user.username %}">Your study sets</a>
+    </li>
+
+    {% include "./navbar_create.html" %}
+    
+      {% endif %}
+  </ul>
+
+  <ul class="navbar-nav ml-auto">
+  {% if user.is_authenticated %}
+
+    {% if user.is_superuser %}
+      <li class="nav-item">
+        <a  href="/admin/" 
+            class="nav-link">Administration panel</a>
+      </li>
+    {% endif %}
+
+    <li class="nav-item">
+      <a  class="nav-link" 
+          href="">
+          <strong>{{ user.username }}</strong>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a  class="nav-link" 
+          href="{% url 'logout' %}">Log Out</a>
+    </li>
+  
+  {% else %}
+    <li class="nav-item">
+      <a  class="nav-link" 
+          href="{% url 'login' %}">Log In</a>
+    </li>
+
+    <li class="nav-item">
+      <a  class="nav-link" 
+          href="{% url 'register' %}">Register</a>
+    </li>
+  {% endif %}
+
+  </ul>
+        
+</nav>

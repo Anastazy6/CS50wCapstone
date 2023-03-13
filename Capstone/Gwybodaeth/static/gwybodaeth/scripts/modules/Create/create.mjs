@@ -55,11 +55,11 @@ export const Create = (function() {
         "terms"       : _getNewStudySetData()
       })
     })
-    .then(response => response.json())
-    .then(result   => {
-      console.log(result);
-    })
-    return false;
+    //.then(response => response.json())
+    //.then(result   => {
+    //  console.log(result);
+    //})
+    return true;
   }
 
   const debug = () => {

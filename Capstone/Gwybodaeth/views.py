@@ -58,19 +58,18 @@ def create_set(request):
 
         data = json.loads(request.body)
         
-        Study_set(
+        new_set = Study_set(
             author      = request.user,
             title       = data['title'],
             description = data['description'],
             terms_lang  = data['terms-lang'],
             defs_lang   = data['defs-lang'],
             terms       = data['terms']
-        ).save()
+        )
 
-        return JsonResponse(
-            {   'study_set': data['title'],
-                'action'   : "Create"
-            },   status    = 200)
+        new_set.save()
+    
+        return HttpResponseRedirect(reverse, "study-set-view", args=(new_set.id,))
 
     else:
         return render(request, "gwybodaeth/Create/create_set.html", {

@@ -191,3 +191,10 @@ select {
   color     : $background-color;
 }
 
+#navbar-create-dropdown-button {
+  border: none;
+  &:hover, &:active, &:focus {
+    border : none;
+    outline: none;
+  }
+}

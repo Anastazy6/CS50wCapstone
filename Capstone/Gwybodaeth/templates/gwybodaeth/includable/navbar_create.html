@@ -1,0 +1,52 @@
+<!--
+<li class="nav-item">
+  <a  class="nav-link" 
+      href="{% url 'create-set' %}">Create</a>
+</li>
+-->
+
+<li class="nav-item">
+
+  <div class="dropdown">
+
+    <button  class ="btn 
+                btn-transparent
+                dropdown-toggle
+                nav-link" 
+        
+        href  ="#"
+        role  ="button" 
+        id    ="navbar-create-dropdown-button"
+        
+        data-toggle="dropdown"
+        aria-haspopup ="true"
+        aria-expanded ="false">
+      Create
+    </button>
+
+    <div  class="dropdown-menu"
+          role ="menu"
+          aria-labelledby="dropdownMenuLink">
+
+      <a  class="dropdown-item" 
+          href ="{% url 'create-set' %}">
+        With vanilla JS
+      </a>
+      
+      
+      <a  class="dropdown-item"
+          href ="#">
+        With Angular JS
+      </a>
+    
+    </div>
+  </div>
+</li>
+
+
+<script>
+  $(document).ready(function(){
+    $(".dropdown-toggle").dropdown();
+    console.log("JQuery working...");
+  });
+</script>

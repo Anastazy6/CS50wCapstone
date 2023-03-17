@@ -33,7 +33,21 @@ $theme-colors: (
 }
 
 // Bootstrap
-@import "../bootstrap/scss/bootstrap";
+@import "../bootstrap-5/scss/bootstrap";
+
+
+$theme-colors-rgb     : map-loop(  $theme-colors,     to-rgb,           "$value"       );
+$utilities-colors     : map-merge( $utilities-colors, $theme-colors-rgb                );
+$utilities-text-colors: map-loop(  $utilities-colors, rgba-css-var,     "$key",  "text");
+$utilities-bg-colors  : map-loop(  $utilities-colors, rgba-css-var,     "$key",  "bg"  );
+
+
+
+
+
+
+
+
 
 // Keep other imports below Bootstrap so as to be able to override its styles.
 @import "./includes/_general.scss";

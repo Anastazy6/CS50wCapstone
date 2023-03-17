@@ -21,19 +21,19 @@ h1 {
 } 
 
 /*
-.bg-porffor       { background-color: theme-color("porffor"      ) !important; }
-.bg-lleuad        { background-color: theme-color("lleuad"       ) !important; }
-.bg-moon-glass    { background-color: theme-color("moon-glass"   ) !important; }
-.bg-success-empty { background-color: theme-color("success-empty") !important; }
-.bg-info-empty    { background-color: theme-color("info-empty"   ) !important; }
-.bg-danger-empty  { background-color: theme-color("danger-empty" ) !important; }
-.bg-warning-empty { background-color: theme-color("warning-empty") !important; }
+.bg-porffor       { background-color: map-get($theme-colors, "porffor"      ) !important; }
+.bg-lleuad        { background-color: map-get($theme-colors, "lleuad"       ) !important; }
+.bg-moon-glass    { background-color: map-get($theme-colors, "moon-glass"   ) !important; }
+.bg-success-empty { background-color: map-get($theme-colors, "success-empty") !important; }
+.bg-info-empty    { background-color: map-get($theme-colors, "info-empty"   ) !important; }
+.bg-danger-empty  { background-color: map-get($theme-colors, "danger-empty" ) !important; }
+.bg-warning-empty { background-color: map-get($theme-colors, "warning-empty") !important; }
 */
 
 .btn-lleuad,
 .btn-outline-lleuad {
   &:hover {
-    background-color: theme-color("lleuad") !important;
+    background-color: map-get($theme-colors, "lleuad") !important;
   }
 }
 
@@ -77,19 +77,19 @@ select {
 
 .hover-moonlight:hover {
   box-shadow:
-    0 0 25px 2px theme-color("lleuad");
+    0 0 25px 2px map-get($theme-colors, "lleuad");
 }
 
 .moonlight-stronk {
   box-shadow: 
-      0 0 10px  theme-color("lleuad"),
-      0 0 25px  theme-color("lleuad"),
-      0 0 70px  theme-color("lleuad");
+      0 0 10px  map-get($theme-colors, "lleuad"),
+      0 0 25px  map-get($theme-colors, "lleuad"),
+      0 0 70px  map-get($theme-colors, "lleuad");
 }
 
 .moonlight-full-small {
   box-shadow:
-      0 0 5px  theme-color("lleuad-lawn") !important;
+      0 0 5px  map-get($theme-colors, "lleuad-lawn") !important;
 }
 
 #study-set-submit,
@@ -135,7 +135,7 @@ select {
 
 .grid-standard-container,
 .grid-wide-outer {
-  background: theme-color("moon-glass");
+  background: map-get($theme-colors, "moon-glass");
 }
 
 .grid-standard-container {
@@ -175,7 +175,7 @@ select {
 .study-set-title,
 .study-set-description {
   text-align : center;
-  text-shadow: 0 0 3px theme-color("lleuad-lawn");
+  text-shadow: 0 0 3px map-get($theme-colors, "lleuad-lawn");
 }
 
 .study-set-title {
@@ -187,7 +187,7 @@ select {
 }
 
 .active-learning-option {
-  background: theme-color("lleuad-lawn");
+  background: map-get($theme-colors, "lleuad-lawn");
   color     : $background-color;
 }
 

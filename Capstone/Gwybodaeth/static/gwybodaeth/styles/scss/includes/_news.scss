@@ -41,7 +41,7 @@
 
 .news-input {
   background    : transparent;
-  border-bottom : 2px solid theme-color("lleuad");
+  border-bottom : 2px solid map-get($theme-colors, "lleuad");
   border-radius : 0 !important;
   display       : flex;
   font-size     : 1.25em;
@@ -51,11 +51,11 @@
   vertical-align: bottom;
 
   &:focus, &:hover {
-    border-bottom: 2px solid theme-color("lleuad-lawn");
+    border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
   }
 
   &:visited {
-    border-bottom : 2px solid theme-color("lleuad");
+    border-bottom : 2px solid map-get($theme-colors, "lleuad");
   }
 }
 
@@ -103,13 +103,13 @@
 .news-item-title {
   text-align   : center;
   font-size    : 1.3em;
-  border-bottom: 2px solid theme-color("lleuad");
+  border-bottom: 2px solid map-get($theme-colors, "lleuad");
 
 }
 
 .news-item-body {
   text-align   : justify;
-  border-bottom: 1  px solid theme-color("lleuad");
+  border-bottom: 1  px solid map-get($theme-colors, "lleuad");
 }
 
 .news-item-time,

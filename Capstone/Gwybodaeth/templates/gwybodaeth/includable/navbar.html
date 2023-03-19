@@ -3,11 +3,12 @@
             navbar-expand-lg 
             navbar-dark 
             bg-lleuad
-            moonlight-stronk">
+            moonlight-stronk"
+      id="navbar-main">
   <a  class="navbar-brand"
       href="{% url 'index' %}">Gwybodaeth</a>
   
-  <ul class="navbar-nav mr-auto">
+  <ul class="navbar-nav me-auto">
   
     <li class="nav-item">
       <a  class="nav-link" 
@@ -26,7 +27,7 @@
       {% endif %}
   </ul>
 
-  <ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav ms-auto">
   {% if user.is_authenticated %}
 
     {% if user.is_superuser %}

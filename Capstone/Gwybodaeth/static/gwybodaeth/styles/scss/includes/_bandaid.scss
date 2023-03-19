@@ -1,0 +1,17 @@
+// Band-aid fixed (replace with a more civilized solution when there's nothing else to do)
+
+// This hurts A LOT. Damned bootstrap 5, BS4 wasn't so problematic...
+.bg-moon-glass    { background: map-get($theme-colors, "moon-glass"   ); }
+.bg-lleuad        { background: map-get($theme-colors, "lleuad"       ); }
+.bg-lleuad-lawn   { background: map-get($theme-colors, "lleuad-lawn"  ); }
+.bg-moon-glass    { background: map-get($theme-colors, "moon-glass"   ); }
+.bg-success-empty { background: map-get($theme-colors, "success-empty"); }
+.bg-info-empty    { background: map-get($theme-colors, "info-empty"   ); }
+.bg-danger-empty  { background: map-get($theme-colors, "danger-empty" ); }
+.bg-warning-empty { background: map-get($theme-colors, "warning-empty"); }
+
+
+#navbar-main {
+  padding-left : 20px !important;
+  padding-right: 20px !important;
+}

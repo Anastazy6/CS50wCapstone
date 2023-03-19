@@ -14,11 +14,17 @@ $base-z-index: 0;
 
 // Bootstrap variables and modifications
 
-$theme-colors: (
+@import "../bootstrap-5/scss/functions";
+@import "../bootstrap-5/scss/variables";
+@import "../bootstrap-5/scss/maps";
+@import "../bootstrap-5/scss/mixins";
+@import "../bootstrap-5/scss/utilities";
+
+$custom-colors: (
   "porffor"      : rgb(32, 7, 34),
   "lleuad"       : rgb(60, 100, 115),
   "lleuad-lawn"  : rgb(183, 209, 218),
-  "moon-glass"   : rgba(60, 100, 115, 0.3),
+  "moon-glass"   : rgb(60, 100, 115, 0.3),
   "success-empty": rgb(1, 76, 37),
   "info-empty"   : rgb(0, 49, 89),
   "danger-empty" : rgb(87, 2, 2),
@@ -26,37 +32,49 @@ $theme-colors: (
   "transparent"  : rgba(255, 255, 255, 0)
 );
 
+
+
+
+
+
+
+$theme-colors         : map-merge( $theme-colors,     $custom-colors                   );
+$theme-colors-rgb     : map-loop(  $theme-colors,     to-rgb,           "$value"       );
+$utilities-colors     : map-merge( $utilities-colors, $theme-colors-rgb                );
+$utilities-text-colors: map-loop(  $utilities-colors, rgba-css-var,     "$key",  "text");
+$utilities-bg-colors  : map-loop(  $utilities-colors, rgba-css-var,     "$key",  "bg"  );
+//$utilities-btn-colors : map-loop(  $utilities-colors, rgba-css-var,     "$key",  "btn" );
+
+
+
+// Bootstrap
+@import "../bootstrap-5/scss/bootstrap";
+
+// Keep other imports below Bootstrap so as to be able to override its styles.
+@import "./includes/general";
+
+
+@import "./includes/create";
+@import "./includes/flashcards";
+@import "./includes/learn";
+@import "./includes/news";
+@import "./includes/study_set";
+@import "./includes/user_sets";
+@import "./includes/write";
+
 // The rest
 
 * {
   box-sizing: border-box !important;
 }
 
-// Bootstrap
-@import "../bootstrap-5/scss/bootstrap";
 
+// Band-aid fixed (replace with a more civilized solution when there's nothing else to do)
 
-$theme-colors-rgb     : map-loop(  $theme-colors,     to-rgb,           "$value"       );
-$utilities-colors     : map-merge( $utilities-colors, $theme-colors-rgb                );
-$utilities-text-colors: map-loop(  $utilities-colors, rgba-css-var,     "$key",  "text");
-$utilities-bg-colors  : map-loop(  $utilities-colors, rgba-css-var,     "$key",  "bg"  );
+.bg-moon-glass {
+  background: map-get($theme-colors, "moon-glass");
+}
 
-
-
-
-
-
-
-
-
-// Keep other imports below Bootstrap so as to be able to override its styles.
-@import "./includes/_general.scss";
-
-
-@import "./includes/_create.scss";
-@import "./includes/_flashcards.scss";
-@import "./includes/_learn.scss";
-@import "./includes/_news.scss";
-@import "./includes/_study_set.scss";
-@import "./includes/_user_sets";
-@import "./includes/_write.scss";
+.bg-lleuad {
+  background: map-get($map: $theme-colors, $key: "lleuad");
+}

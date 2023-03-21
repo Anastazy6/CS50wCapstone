@@ -69,7 +69,7 @@ def create_set(request):
 
         new_set.save()
     
-        return HttpResponseRedirect(reverse, "study-set-view", args=(new_set.id,))
+        return HttpResponseRedirect(reverse("study-set-view", args=(new_set.id,)))
 
     else:
         return render(request, "gwybodaeth/Create/create_set.html", {

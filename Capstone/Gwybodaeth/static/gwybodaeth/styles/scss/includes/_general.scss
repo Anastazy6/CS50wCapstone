@@ -20,24 +20,10 @@ h1 {
   color: $text-color;
 } 
 
-/*
-.bg-porffor       { background-color: map-get($theme-colors, "porffor"      ) !important; }
-.bg-lleuad        { background-color: map-get($theme-colors, "lleuad"       ) !important; }
-.bg-moon-glass    { background-color: map-get($theme-colors, "moon-glass"   ) !important; }
-.bg-success-empty { background-color: map-get($theme-colors, "success-empty") !important; }
-.bg-info-empty    { background-color: map-get($theme-colors, "info-empty"   ) !important; }
-.bg-danger-empty  { background-color: map-get($theme-colors, "danger-empty" ) !important; }
-.bg-warning-empty { background-color: map-get($theme-colors, "warning-empty") !important; }
-*/
 
-.btn-lleuad,
-.btn-outline-lleuad {
-  &:hover {
-    background-color: map-get($theme-colors, "lleuad") !important;
-  }
-}
 
-a:hover {
+
+a, a:hover {
   text-decoration: none;
 }
 
@@ -94,7 +80,6 @@ select {
 
 #study-set-submit,
 #study-set-add-item {
-  background-color: $item-background-color;
   cursor          : pointer;
   display         : block;
   max-width       : fit-content;

@@ -11,7 +11,8 @@
         method="POST">
     {% csrf_token %}
   
-  <div id="study-set-info-wrapper">
+  <div  id   ="study-set-info-wrapper"
+        class="bg-moon-glass">
 
 
       <input  id  ="create-set-title" 
@@ -80,18 +81,23 @@
     </div>
 
 
-  <button id="study-set-add-item"
-          type="button">
+  <button id   ="study-set-add-item"
+          class="btn btn-outline-lleuad-lawn"
+          type ="button">
     Add item
   </button>
 
   <input  id   ="study-set-submit"
+          class="btn btn-outline-lleuad-lawn"
           type ="submit" 
           value="Create study set">
 
+<!-- 
   <button id="debug"
           type="button">
     DEBUG
   </button>
+-->
+
 </form>
 {% endblock %}

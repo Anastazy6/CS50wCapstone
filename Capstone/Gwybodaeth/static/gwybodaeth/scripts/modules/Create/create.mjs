@@ -55,17 +55,10 @@ export const Create = (function() {
         "terms"       : _getNewStudySetData()
       })
     })
-    //.then(response => response.json())
-    //.then(result   => {
-    //  console.log(result);
-    //})
     return true;
   }
 
-  const debug = () => {
-    console.log("DEBUG clicked");
-    View.focusLastItem();
-  }
+
 
 
   const _intermodularMethods = () => {
@@ -73,7 +66,6 @@ export const Create = (function() {
       addStudyItem    : _addStudyItem,
       autoAddStudyItem: _autoAddStudyItem,
       submit          : createStudySet,
-      debug           : debug
     }
   }
 

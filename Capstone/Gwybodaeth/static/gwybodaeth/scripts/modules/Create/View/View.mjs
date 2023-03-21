@@ -15,8 +15,6 @@ export const View = (function() {
   const addItemButton       = document.getElementById('study-set-add-item');
   const submitButton        = document.getElementById('study-set-submit'  );
   
-  // Remove this when not needed anymore
-  const debugBTN = document.getElementById('debug');
 
   const INITAL_STUDY_ITEMS_NUMBER = 5;
 
@@ -63,17 +61,26 @@ export const View = (function() {
 
   const _addEventListeners = (methods) => {
     addItemButton.onclick = methods.addStudyItem;
-    addItemButton.onfocus = methods.autoAddStudyItem;
-
     submitButton .onclick = methods.submit;
-    debugBTN     .onclick = methods.debug;
+
+    _addFocusFromTabHandler(methods);
   }
+
+
 
   const _createInitialStudyItems = (count, studyItemCreator) => {
     for (let i = 0; i < count; i++) {studyItemCreator()}
   }
 
 
+
+  const _addFocusFromTabHandler = (methods) => {
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Tab' && document.activeElement === addItemButton) {
+        methods.autoAddStudyItem();
+      }
+    })
+  }
 
 
 

@@ -78,18 +78,7 @@ select {
       0 0 5px  map-get($theme-colors, "lleuad-lawn") !important;
 }
 
-#study-set-submit,
-#study-set-add-item {
-  cursor          : pointer;
-  display         : block;
-  max-width       : fit-content;
-  margin          : auto;
-  margin-top      : 15px;
 
-  &:hover {
-    box-shadow: 0 0 5px ghostwhite;
-  }
-}
 
 .stylish {
   font-family: $font-stylish;

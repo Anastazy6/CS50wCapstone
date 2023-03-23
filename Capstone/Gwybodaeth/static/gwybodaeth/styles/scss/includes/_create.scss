@@ -4,7 +4,7 @@
 #defs-lang-container    {grid-area: langD;}
 
 
-#study-set-info-wrapper {
+#create-set-info-wrapper {
   background   : theme-color("moon-glass");
   border-radius: 21.37px;
   display      : grid;
@@ -57,7 +57,7 @@
 
 
 
-#study-items-wrapper {
+#create-items-wrapper {
   max-width: 800px;
   margin   : auto;
 
@@ -68,7 +68,7 @@
 .category-input    {grid-area: cate;}
 .notes-input       {grid-area: note;}
 
-.study-item-container {
+.create-item-container {
   background   : map-get($theme-colors, "moon-glass");
   border-radius: 21.37px;
   display      : grid;
@@ -83,8 +83,7 @@
       'cate note';
 
 }
-
-.study-item-input {
+.create-item-input {
   display: block;
 
   background   : transparent;
@@ -101,7 +100,7 @@
   }
 }
 
-.study-item-index-bullet {
+.create-item-index-bullet {
   text-align   : center;
   border-radius: 2137px;
   padding      : 5px 0px;
@@ -112,3 +111,32 @@
   height       : 35px;
 }
 
+
+#create-set-add-item {grid-area: addnew;}
+#create-set-submit   {grid-area: submit;}
+
+#create-form-buttons-container {
+  gap        : 20px;
+  margin     : auto;
+  height     : 60px;
+  padding-top: 20px;
+  width      : 500px;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows   : 1fr;
+  grid-template-areas  :
+    'addnew submit';
+}
+
+.create-set-button {
+  cursor    : pointer;
+  display   : block;
+  margin    : auto;
+  margin-top: 15px;
+  width     : 200px;
+
+  &:hover {
+    box-shadow: 0 0 5px ghostwhite;
+  }
+}

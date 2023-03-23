@@ -37,7 +37,7 @@ export const Memory = (function() {
   // #TODO: check if forEach and innerHTML work with getElementsByClassName
   const updateIndexBullets = () => {
     let index = 1;
-    document.getElementsByClassName('study-item-index-bullet').forEach(indexBullet => {
+    document.getElementsByClassName('create-item-index-bullet').forEach(indexBullet => {
       indexBullet.innerHTML = index;
       index++;
     })

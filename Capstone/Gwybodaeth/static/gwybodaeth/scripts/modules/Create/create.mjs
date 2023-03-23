@@ -1,30 +1,3 @@
-/**
- *  Source: https://stackoverflow.com/a/12274886
- *  Allows to set multiple attributes to an element at once.
- *  
- */
-Element.prototype.setAttributes = function(attributes) {
-  for (let index in attributes) {
-    if ((index === 'styles' || index === 'style') && typeof attributes[index] === 'object') {
-      for (let property in attributes[index]) {
-        this.style[property] = attributes[index][property];
-      }
-    } else if (index === 'html') {
-      this.innerHTML = attributes[index];
-    } else {
-      this.setAttribute(index, attributes[index]);
-    }
-  }
-}
-
-
-/**
- * Capitalizes a string. The first letter will be upcased whild the rest will be downcased.
- */
-String.prototype.capitalize = function() {
-  return this[0].toUpperCase() + this.slice(1).toLowerCase();
-}
-
 import { Memory           } from "./Memory/Memory.mjs";
 import { View             } from "./View/View.mjs";
 import { StudyItemCreator } from "./Models/study_item_creator.mjs";
@@ -39,7 +12,7 @@ export const Create = (function() {
   
 
   const createStudySet = () => {
-    let studySetInfo = View.getStudySetInfo();
+    
 
     fetch('/create-set', {
       method: 'POST',
@@ -47,18 +20,27 @@ export const Create = (function() {
         "X-CSRFToken" : View.CSRFToken.value,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        "title"       : studySetInfo.title,
-        "description" : studySetInfo.description,
-        "terms-lang"  : studySetInfo.termsLang,
-        "defs-lang"   : studySetInfo.defsLang,
-        "terms"       : _getNewStudySetData()
-      })
+      body: _generatePostBody()
     })
     return true;
   }
 
 
+  const _generatePostBody = () => {
+    let data = View.getStudySetInfo();
+
+    let body = JSON.stringify({
+        "title"       : data.title,
+        "description" : data.description,
+        "terms-lang"  : data.termsLang,
+        "defs-lang"   : data.defsLang,
+        "terms"       : _getNewStudySetData()
+    })
+
+    console.log(body);
+    
+    return body;
+  }
 
 
   const _intermodularMethods = () => {

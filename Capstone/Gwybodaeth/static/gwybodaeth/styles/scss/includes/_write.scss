@@ -13,7 +13,7 @@
 }
 
 #write-progress-container {
-  border-top : 3px solid theme-color("lleuad");
+  border-top : 3px solid map-get($theme-colors, "lleuad");
   padding-top: 20px;
 }
 
@@ -60,7 +60,7 @@
 
 #write-answer-area {
   background   : transparent;
-  border-bottom: 3px solid theme-color("lleuad");  
+  border-bottom: 3px solid map-get($theme-colors, "lleuad");  
   border-radius: 0;
   border-top   : 2px solid $transparent-ghostwhite-15;
   font-size    : 1.5em;
@@ -189,7 +189,7 @@
 
 
 #summary-rounds-wrapper {
-  box-shadow: 0px 0px 5px theme-color("lleuad-lawn") inset;
+  box-shadow: 0px 0px 5px map-get($theme-colors, "lleuad-lawn") inset;
   display   : block;
   max-height: 250px;
   width     : 100%;
@@ -221,7 +221,7 @@
 
 .summary-round-container {
   align-items   : center;
-  border-bottom : 1px solid theme-color("lleuad-lawn");
+  border-bottom : 1px solid map-get($theme-colors, "lleuad-lawn");
   display       : grid;
   margin-bottom : 15px;
   padding-bottom: 15px;

@@ -21,7 +21,7 @@ export const StudyItemCreator = (function() {
 
   const _createNewStudyItemWrapper = () => {
     const wrapper = document.createElement('div');
-    wrapper.classList.add("study-item-wrapper-single");
+    wrapper.classList.add("create-item-wrapper-single");
 
 
     return wrapper;
@@ -31,7 +31,7 @@ export const StudyItemCreator = (function() {
   const _createIndexBullet = () => {
     const indexBullet = document.createElement('div');
 
-    indexBullet.classList.add('study-item-index-bullet',
+    indexBullet.classList.add('create-item-index-bullet',
                               'bg-lleuad',
                               'text-lleuad-lawn');
     indexBullet.innerHTML = Util.generateIndex();
@@ -45,7 +45,7 @@ export const StudyItemCreator = (function() {
   const _createNewStudyItem = () => {
     const newStudyItem = document.createElement('div');
 
-    newStudyItem.classList.add('study-item-container');
+    newStudyItem.classList.add('create-item-container');
 
     if (!!studyItemGuts) {
       newStudyItem.innerHTML = studyItemGuts;

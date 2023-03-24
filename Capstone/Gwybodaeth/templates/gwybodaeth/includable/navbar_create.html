@@ -1,9 +1,11 @@
-<!--
-<li class="nav-item">
+
+<li class="nav-item"
+    title= "Temporary link to the vanilla JS Create module (will be removed when both the dropdown menu and Angular JS Create module will be done).">
   <a  class="nav-link" 
-      href="{% url 'create-set' %}">Create</a>
+      href="{% url 'create-set' %}">
+    Create
+  </a>
 </li>
--->
 
 <li class="nav-item">
 
@@ -20,8 +22,10 @@
         
         data-toggle="dropdown"
         aria-haspopup ="true"
-        aria-expanded ="false">
-      Create
+        aria-expanded ="false"
+        
+        title="Dropdown menu which allows to choose between Create module written with vanilla JS or Angular JS (work in progress).">
+      <s>Create (WIP)</s>
     </button>
 
     <div  class="dropdown-menu"
@@ -43,10 +47,3 @@
   </div>
 </li>
 
-
-<script>
-  $(document).ready(function(){
-    $(".dropdown-toggle").dropdown();
-    console.log("JQuery working...");
-  });
-</script>

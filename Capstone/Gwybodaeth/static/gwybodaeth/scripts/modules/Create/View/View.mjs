@@ -2,57 +2,55 @@
  * View for Create module
  */
 export const View = (function() {
-  const CSRFToken           = document.querySelector("[name=csrfmiddlewaretoken]");
+  const CSRFToken            = document.querySelector("[name=csrfmiddlewaretoken]");
 
-  const studySetTitle       = document.getElementById('create-set-title'      );
-  const studySetDescription = document.getElementById('create-set-description');
+  const createSetTitle       = document.getElementById('create-set-title'      );
+  const createSetDescription = document.getElementById('create-set-description');
   
-  const studySetTermsLang   = document.getElementById('terms-lang');
-  const studySetDefsLang    = document.getElementById('defs-lang' );
+  const createSetTermsLang   = document.getElementById('terms-lang');
+  const createSetDefsLang    = document.getElementById('defs-lang' );
 
-  const studyItemsWrapper   = document.getElementById('study-items-wrapper');
+  const createItemsWrapper   = document.getElementById('create-items-wrapper');
 
-  const addItemButton       = document.getElementById('study-set-add-item');
-  const submitButton        = document.getElementById('study-set-submit'  );
+  const addItemButton        = document.getElementById('create-set-add-item');
+  const submitButton         = document.getElementById('create-set-submit'  );
   
-  // Remove this when not needed anymore
-  const debugBTN = document.getElementById('debug');
 
   const INITAL_STUDY_ITEMS_NUMBER = 5;
 
   const focusLastItem = () => {
-    studyItemsWrapper.lastChild.lastChild.firstChild.focus();
+    createItemsWrapper.lastChild.lastChild.firstChild.focus();
   }
 
   const getStudySetInfo = () => {
     return {
-      title      : studySetTitle      .value,
-      description: studySetDescription.value,
-      termsLang  : studySetTermsLang  .value,
-      defsLang   : studySetDefsLang   .value
+      title      : createSetTitle      .value,
+      description: createSetDescription.value,
+      termsLang  : createSetTermsLang  .value,
+      defsLang   : createSetDefsLang   .value
     }
   }
 
   const initialize = (methods) => {
     _addEventListeners(methods);
-    _createInitialStudyItems(INITAL_STUDY_ITEMS_NUMBER, methods.addStudyItem);
+    _createInitialcreateItems(INITAL_STUDY_ITEMS_NUMBER, methods.addStudyItem);
   }
 
 
-  const reload = (StudyItems) => {
-    studyItemsWrapper.innerHTML = ''; // Clear wrapper
+  const reload = (createItems) => {
+    createItemsWrapper.innerHTML = ''; // Clear wrapper
 
     let fragment = new DocumentFragment();
 
-    StudyItems.forEach(studyItem => {
-      fragment.append(studyItem);
+    createItems.forEach(createItem => {
+      fragment.append(createItem);
     })
 
-    studyItemsWrapper.append(fragment);
+    createItemsWrapper.append(fragment);
   }
 
   const showNewItem = (newItem) => {
-    studyItemsWrapper.append(newItem);
+    createItemsWrapper.append(newItem);
   }
 
 
@@ -63,17 +61,26 @@ export const View = (function() {
 
   const _addEventListeners = (methods) => {
     addItemButton.onclick = methods.addStudyItem;
-    addItemButton.onfocus = methods.autoAddStudyItem;
-
     submitButton .onclick = methods.submit;
-    debugBTN     .onclick = methods.debug;
-  }
 
-  const _createInitialStudyItems = (count, studyItemCreator) => {
-    for (let i = 0; i < count; i++) {studyItemCreator()}
+    _addFocusFromTabHandler(methods);
   }
 
 
+
+  const _createInitialcreateItems = (count, createItemCreator) => {
+    for (let i = 0; i < count; i++) {createItemCreator()}
+  }
+
+
+
+  const _addFocusFromTabHandler = (methods) => {
+    window.addEventListener('keyup', event => {
+      if (event.key === 'Tab' && document.activeElement === addItemButton) {
+        methods.autoAddStudyItem();
+      }
+    })
+  }
 
 
 

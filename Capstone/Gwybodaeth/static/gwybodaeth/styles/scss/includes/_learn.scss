@@ -77,7 +77,7 @@
   width        : 100%;
 
   &:hover {
-    box-shadow: 0 0 15px theme-color("lleuad") inset;
+    box-shadow: 0 0 15px map-get($theme-colors, "lleuad") inset;
   }
 }
 
@@ -93,7 +93,7 @@
 #learn-progress-failures-area  {grid-area: fail;}
 
 #learn-progress-container {
-  border-top : 3px solid theme-color('lleuad');
+  border-top : 3px solid map-get($theme-colors, 'lleuad');
   padding-top: 10px;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows   : 1fr;
@@ -159,12 +159,12 @@
 
 .lmc-answer-clicked-correct,
 .lmc-answer-clicked-correct:hover {
-  box-shadow: 0 0 15px theme-color("success") inset;
+  box-shadow: 0 0 15px map-get($theme-colors, "success") inset;
 }
 
 .lmc-answer-clicked-wrong,
 .lmc-answer-clicked-wrong:hover {
-  box-shadow: 0 0 15px theme-color("danger") inset;
+  box-shadow: 0 0 15px map-get($theme-colors, "danger") inset;
 }
 
 #lmc-continue-button:disabled {

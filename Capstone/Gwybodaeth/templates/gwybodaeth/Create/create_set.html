@@ -11,7 +11,8 @@
         method="POST">
     {% csrf_token %}
   
-  <div id="study-set-info-wrapper">
+  <div  id   ="create-set-info-wrapper"
+        class="bg-moon-glass">
 
 
       <input  id  ="create-set-title" 
@@ -61,37 +62,42 @@
 
   </div>
 
-    <div id="study-items-wrapper">
+    <div id="create-items-wrapper">
       {% for i in range %}
-        <div class="study-item-wrapper-single">
+        <div class="create-item-wrapper-single">
           
-          <div class ="study-item-index-bullet
-                        bg-lleuad 
-                        text-lleuad-lawn">
+          <div class="create-item-index-bullet
+                      bg-lleuad 
+                      text-lleuad-lawn">
             {{ i }}
           </div>
 
-          <div class="study-item-container">
-            {% include './study_item.html' %}
+          <div class="create-item-container">
+            {% include './create_study_item.html' %}
           </div>
 
         </div>
       {% endfor %}
     </div>
 
+  <div id="create-form-buttons-container">
+    
+    <button id    ="create-set-add-item"
+            class ="btn
+                    btn-outline-lleuad-lawn
+                    create-set-button"
+            type  ="button">
+      Add item
+    </button>
 
-  <button id="study-set-add-item"
-          type="button">
-    Add item
-  </button>
+    <input  id    ="create-set-submit"
+            class ="btn
+                    btn-outline-lleuad-lawn
+                    create-set-button"
+            type  ="submit" 
+            value ="Create study set">
 
-  <input  id   ="study-set-submit"
-          type ="submit" 
-          value="Create study set">
+  </div>
 
-  <button id="debug"
-          type="button">
-    DEBUG
-  </button>
 </form>
 {% endblock %}

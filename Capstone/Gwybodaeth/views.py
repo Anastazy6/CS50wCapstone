@@ -11,7 +11,7 @@ from .util   import *
 
 # Create your views here.
 
-DEBUG = False
+DEBUG = True
 ################################################################################
 
 
@@ -55,8 +55,29 @@ def create_set(request):
 
     if request.method == 'POST':
         require_login(request, "Log in to create study sets!")
-
+        
+        if DEBUG:
+            try:
+                print(type(request.body.decode('utf-8')))
+                data = json.loads(request.body)
+                return JsonResponse({
+                        'debug' : 'DEBUG mode active.',
+                        'data'  :  data
+                    },   status =  200
+                )
+            except Exception as error:
+                return JsonResponse({
+                        'debug' : 'DEBUG mode active.',
+                        'error' : str(type(error)),
+                        'msg'   : str(error),
+                        'guts'  : str(request.body.decode('utf-8'))
+                    },   status =  418
+                )
+        
+        
         data = json.loads(request.body)
+
+
         
         new_set = Study_set(
             author      = request.user,
@@ -69,7 +90,7 @@ def create_set(request):
 
         new_set.save()
     
-        return HttpResponseRedirect(reverse, "study-set-view", args=(new_set.id,))
+        return HttpResponseRedirect(reverse("study-set-view", args=(new_set.id,)))
 
     else:
         return render(request, "gwybodaeth/Create/create_set.html", {

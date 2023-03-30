@@ -20,7 +20,6 @@ export const Create = (function() {
     })
     .then(response => response.json())
     .then(result => {
-      console.log(result);
       Util.redirect(result['set-url']);
     })
     return false;
@@ -30,17 +29,13 @@ export const Create = (function() {
   const _generatePostBody = () => {
     let data = View.getStudySetInfo();
 
-    let body = JSON.stringify({
+    return JSON.stringify({
         "title"       : data.title,
         "description" : data.description,
         "terms-lang"  : data.termsLang,
         "defs-lang"   : data.defsLang,
         "terms"       : _getNewStudySetData()
-    })
-
-    console.log(body);
-    
-    return body;
+    });
   }
 
 

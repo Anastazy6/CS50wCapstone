@@ -24,7 +24,8 @@ export const Util = (function() {
 
 
   /**
-   *  Redirects to another page WITHIN this web service. 
+   *  Redirects to another page WITHIN this web service. The url argument is relative
+   *    to the site's root location.
    * 
    * @param {String} url 
    * @returns void

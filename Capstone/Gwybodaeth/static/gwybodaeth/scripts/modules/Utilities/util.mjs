@@ -22,11 +22,25 @@ export const Util = (function() {
   const _getLearningOption = () => getRoute()[2];
   const _getPath           = () => window.location.pathname;
 
+
+  /**
+   *  Redirects to another page WITHIN this web service. 
+   * 
+   * @param {String} url 
+   * @returns void
+   */
+  const redirect = (url) => {
+    const origin = window.location.origin;
+
+    window.location.replace(`${origin}${url}`);
+  }
+
   return {
     generateIndex                 : generateIndex,
     getRoute                      : getRoute,
     getStudySetID                 : getStudySetID,
-    highlightCurrentLearningOption: highlightCurrentLearningOption
+    highlightCurrentLearningOption: highlightCurrentLearningOption,
+    redirect                      : redirect
   }
 
 })()

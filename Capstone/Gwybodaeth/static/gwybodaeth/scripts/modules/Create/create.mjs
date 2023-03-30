@@ -1,7 +1,7 @@
 import { Memory           } from "./Memory/Memory.mjs";
 import { View             } from "./View/View.mjs";
 import { StudyItemCreator } from "./Models/study_item_creator.mjs";
-
+import { Util             } from "../Utilities/util.mjs";
 
 export const Create = (function() {
   
@@ -9,11 +9,7 @@ export const Create = (function() {
   //        Public
   // ---------------------
 
-  
-
   const createStudySet = () => {
-    
-
     fetch('/create-set', {
       method: 'POST',
       headers: {
@@ -22,7 +18,12 @@ export const Create = (function() {
       },
       body: _generatePostBody()
     })
-    return true;
+    .then(response => response.json())
+    .then(result => {
+      console.log(result);
+      Util.redirect(result['set-url']);
+    })
+    return false;
   }
 
 

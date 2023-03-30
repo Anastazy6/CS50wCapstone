@@ -5,6 +5,9 @@
 #learn-progress-container {grid-area: prog;}
 
 #learn-wrapper {
+  max-width: 1000px;
+  height: 435px;
+
   grid-template-rows   : 350px 70px;
   grid-template-columns: 1fr;
   grid-template-areas  :

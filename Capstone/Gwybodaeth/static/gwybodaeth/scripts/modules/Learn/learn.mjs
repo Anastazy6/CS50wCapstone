@@ -9,7 +9,8 @@ export const Learn = (function() {
     return {
       processCorrect: Memory.processCorrectWrite,
       processWrong  : Memory.processWrongWrite,
-      updateView    : _updateView
+      updateView    : _updateView,
+      getUserInput  : View.Writing.Write.getUserInput
     }
   }
 

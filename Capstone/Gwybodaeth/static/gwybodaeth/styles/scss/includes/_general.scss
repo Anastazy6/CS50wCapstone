@@ -25,6 +25,7 @@ h1 {
 
 a, a:hover {
   text-decoration: none;
+  color: map-get($theme-colors, "lleuad-lawn");
 }
 
 input,
@@ -119,9 +120,7 @@ select {
 }
 
 .grid-wide-outer {
-  padding   : 0px 20px 10px 20px;
-  min-height: 400px;
-  max-width : 1000px;
+  padding: 0px 20px 10px 20px;
 }
 
 .grid-progress-container {

@@ -5,6 +5,9 @@
 #write-progress-container {grid-area: prog;}
 
 #write-wrapper {
+  max-width: 1000px;
+  height   : 425px;
+
   grid-template-columns: 1fr;
   grid-template-rows   : 350px 65px;
   grid-template-areas  :
@@ -132,6 +135,9 @@
 #write-feedback-override          {grid-area: overr;}
 
 #write-feedback-container { 
+  height    : 320px;
+  width     : 100%;
+
   gap: 20px;
   grid-template-columns: 3fr 1fr;
   grid-template-rows   : 1fr 1fr 1fr 1fr 1fr;

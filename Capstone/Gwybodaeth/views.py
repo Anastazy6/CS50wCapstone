@@ -11,7 +11,7 @@ from .util   import *
 
 # Create your views here.
 
-DEBUG = True
+DEBUG = False
 ################################################################################
 
 
@@ -47,9 +47,6 @@ def index(request):
 
 def create_set(request):
     # TODO: Expand this feature: 
-    #   A) allow the user to expand the form to create study sets with more than 5 items.
-    #   This should be done with Java Script. Ideally, the user should be able to add another
-    #   form line with the Tab key if they tab from the last form cell.
     #   B) allow the user to edit their study sets. This will require python and possibly JS.
     require_method(request, ['GET', 'POST'])
 
@@ -58,6 +55,9 @@ def create_set(request):
         
         if DEBUG:
             try:
+                with open("text.txt", 'w') as test:
+                    test.write(str(request.body))
+
                 print(type(request.body.decode('utf-8')))
                 data = json.loads(request.body)
                 return JsonResponse({
@@ -74,23 +74,31 @@ def create_set(request):
                     },   status =  418
                 )
         
-        
-        data = json.loads(request.body)
+        try:    
+            data = json.loads(request.body)
 
+            new_set = Study_set(
+                author      = request.user,
+                title       = data['title'],
+                description = data['description'],
+                terms_lang  = data['terms-lang'],
+                defs_lang   = data['defs-lang'],
+                terms       = data['terms']
+            )
 
+            new_set.save()
         
-        new_set = Study_set(
-            author      = request.user,
-            title       = data['title'],
-            description = data['description'],
-            terms_lang  = data['terms-lang'],
-            defs_lang   = data['defs-lang'],
-            terms       = data['terms']
+            return JsonResponse({
+                "message": "Study set created successfully!",
+                "set-url":  str(reverse("study-set-view", args=(new_set.id,)))
+            },   status  =  200)
+        
+        except Exception as error:
+            return JsonResponse({
+                "message": "Something went wrong...",
+                "error"  :  str(error)
+            },   status  =  418
         )
-
-        new_set.save()
-    
-        return HttpResponseRedirect(reverse("study-set-view", args=(new_set.id,)))
 
     else:
         return render(request, "gwybodaeth/Create/create_set.html", {

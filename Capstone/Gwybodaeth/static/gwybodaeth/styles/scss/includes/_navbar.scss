@@ -1,0 +1,21 @@
+#navbar-create-dropdown-button {
+  border: none;
+  &:hover, &:active, &:focus {
+    border : none;
+    outline: none;
+  }
+}
+
+#navbar-main {
+  padding-left : 20px !important;
+  padding-right: 20px !important;
+}
+
+.dropdown-in-navbar {
+  color: map-get($theme-colors, 'lleuad-lawn');
+
+  &:hover {
+    background: map-get($theme-colors, 'lleuad-lawn');
+    color     : map-get($theme-colors, 'lleuad'     );
+  }
+}

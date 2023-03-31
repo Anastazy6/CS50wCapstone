@@ -62,6 +62,8 @@ def get_object_if_exists(model, id):
 
 
 def page_not_found(request, type, id):
+    print("Rendering error page!")
+
     return render(request, "gwybodaeth/Errors/404.html", {
             "page_type": type,
             "page_id"  : id
@@ -74,6 +76,11 @@ def require_study_set(request, study_set_id):
     informing the client that a study set with given id was not found.
     '''
     study_set = get_object_if_exists(Study_set, study_set_id)
+
+    if study_set:
+        print("\n\n\n\nStudy set found!\n\n\n\n")
+    else:
+        print("\n\n\n\nStudy set not found!\n\n\n\n")
 
     if not study_set:
         return page_not_found(request, "Study set", study_set_id)

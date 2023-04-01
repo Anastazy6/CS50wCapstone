@@ -10,4 +10,111 @@ Create study set (Angular JS)
     TODO
   </p>
 
+  <div  data-ng-app       ="createApp"
+        data-ng-controller="createCtrl">
+
+    <h1 class="stylish header-centered">Create a new set</h1>
+
+    <form id    ="create-set" 
+            action=""
+            method="POST">
+        {% csrf_token %}
+      
+      <div  id   ="create-set-info-wrapper"
+            class="bg-moon-glass">
+
+
+          <input  id  ="create-set-title" 
+                  type="text" 
+                  name="title" 
+                  size="81" 
+                  maxlength  ="127"
+                  placeholder="Title"  
+                  {% if debug %}value="Title test"{% endif %}
+                  required>
+
+
+
+          <textarea id  ="create-set-description" 
+                    name="description"
+                    maxlenght  ="1023" 
+                    oninput    ="" 
+                    placeholder="Description">{% if debug %}Description test{% endif %}</textarea>
+
+
+    <!-- Util.autoGrow(this) -->
+
+        <div  id   ="terms-lang-container">
+          <label for="terms-lang-container">
+            Terms language: 
+          </label>
+
+          <select id   ="terms-lang"
+                  name ="terms-lang"  
+                  required>
+            {% include './language_selection.html' %}
+          </select>
+        </div>
+
+
+        <div  id   ="defs-lang-container">
+          <label for="defs-lang-container">
+            Definitions language:
+          </label>
+
+          <select id   ="defs-lang"
+                  name ="defs-lang" 
+                  required>
+            {% include './language_selection.html' %}
+          </select>
+        </div>
+
+      </div>
+
+        <div id="create-items-wrapper">
+          {% for i in range %}
+            <div class="create-item-wrapper-single">
+              
+              <div class="create-item-index-bullet
+                          bg-lleuad 
+                          text-lleuad-lawn">
+                {{ i }}
+              </div>
+
+              <div class="create-item-container">
+                {% include './create_study_item.html' %}
+              </div>
+
+            </div>
+          {% endfor %}
+        </div>
+
+      <div id="create-form-buttons-container">
+        
+        <button id    ="create-set-add-item"
+                class ="btn
+                        btn-outline-lleuad-lawn
+                        create-set-button"
+                type  ="button">
+          Add item
+        </button>
+
+        <input  id    ="create-set-submit"
+                class ="btn
+                        btn-outline-lleuad-lawn
+                        create-set-button"
+                type  ="submit" 
+                value ="Create study set">
+
+      </div>
+
+    </form>
+
+  </div> <!-- ng-app -->
+
+
+  <script type="module"
+          src ="{% static 'gwybodaeth/scripts/modules/CreateAngular/createAngular.js' %}"
+
+
 {% endblock %}

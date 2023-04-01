@@ -25,30 +25,4 @@ document.addEventListener("DOMContentLoaded", function() {
   if (route[2] === 'flashcards') Load.justTerms(Flashcards.loadFlashcards);
   if (route[2] === 'learn'     ) Load.justTerms(Learn     .loadItems     );
   if (route[2] === 'write'     ) Load.justTerms(Write     .loadItems     );
-
-
-  // ---------------------------------------------------------------------------
-  //                     Deprecated due to refactored vanilla JS
-  // ---------------------------------------------------------------------------
-
-  /*
-   *  const addStudyItemButton = document.getElementById("study-set-add-item"  );
-   *
-   *
-   *  if (!!addStudyItemButton) {addStudyItemButton.onclick  = Create.addStudyItem;  }
-   *
-   */
-
-
-  // ---------------------------------------------------------------------------
-  //                           Deprecated due to Angular
-  // ---------------------------------------------------------------------------
-  
-  /* 
-   *  import  { StudySet   }  from  "./modules/StudySet/study_set.mjs"
-   *
-   *  const studySetView = document.getElementById("study-items");
-   *
-   *  if (!!studySetView) {Load.justTerms(StudySet.loadStudySet);}
-   */
 })

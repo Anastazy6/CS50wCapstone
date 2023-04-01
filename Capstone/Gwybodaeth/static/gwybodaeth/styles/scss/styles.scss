@@ -20,7 +20,7 @@ $base-z-index: 0;
 @import "../bootstrap-5/scss/mixins";
 @import "../bootstrap-5/scss/utilities";
 
-$custom-colors: (
+$custom-colors: map-merge($theme-colors, (
   "porffor"      : rgb(32, 7, 34),
   "lleuad"       : rgb(60, 100, 115),
   "lleuad-lawn"  : rgb(183, 209, 218),
@@ -30,15 +30,66 @@ $custom-colors: (
   "danger-empty" : rgb(87, 2, 2),
   "warning-empty": rgb(83, 74, 0),
   "transparent"  : rgba(255, 255, 255, 0)
-);
+));
 
 
 
 $theme-colors         : map-merge( $theme-colors,     $custom-colors                   );
+$theme-colors-rgb     : map-loop(  $theme-colors,     to-rgb,           "$value"       );
+$utilities-colors     : map-merge( $utilities-colors, $theme-colors-rgb                );
+$utilities-text-colors: map-loop(  $utilities-colors, rgba-css-var,     "$key",  "text");
+$utilities-bg-colors  : map-loop(  $utilities-colors, rgba-css-var,     "$key",  "bg"  );
 
 
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "color": map-merge(
+      map-get($utilities, "color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "color"), "values"),
+          (
+            $custom-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "background-color": map-merge(
+      map-get($utilities, "background-color"),
+      (
+        values: map-merge(
+          map-get(map-get($utilities, "background-color"), "values"),
+          (
+            $custom-colors
+          ),
+        ),
+      ),
+    ),
+  )
+);
+
+
+
+
+@import "../bootstrap-5/scss/utilities/api";
 // Bootstrap
 @import "../bootstrap-5/scss/bootstrap";
+
+
+
+
+
+
+
+
 
 // Keep other imports below Bootstrap so as to be able to override its styles.
 @import "./includes/general";
@@ -53,7 +104,7 @@ $theme-colors         : map-merge( $theme-colors,     $custom-colors            
 @import "./includes/write";
 
 // Add temporary solutions to the file imported below
-@import "./includes/bandaid";
+// @import "./includes/bandaid";
 
 // The rest
 

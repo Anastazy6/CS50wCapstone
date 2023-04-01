@@ -1,12 +1,3 @@
-
-<li class="nav-item"
-    title= "Temporary link to the vanilla JS Create module (will be removed when both the dropdown menu and Angular JS Create module will be done).">
-  <a  class="nav-link" 
-      href="{% url 'create-set' %}">
-    Create
-  </a>
-</li>
-
 <li class="nav-item">
 
   <div class="dropdown">
@@ -17,33 +8,39 @@
                 nav-link" 
         
         href  ="#"
+        type  ="button"
         role  ="button" 
         id    ="navbar-create-dropdown-button"
         
-        data-toggle="dropdown"
+        data-bs-toggle="dropdown"
         aria-haspopup ="true"
         aria-expanded ="false"
         
-        title="Dropdown menu which allows to choose between Create module written with vanilla JS or Angular JS (work in progress).">
-      <s>Create (WIP)</s>
+        title="Dropdown menu which allows to choose between Create module written with vanilla JS or Angular JS.">
+      Create
     </button>
 
-    <div  class="dropdown-menu"
+    <ul  class="dropdown-menu
+                bg-lleuad
+                dropdown-in-navbar"
           role ="menu"
           aria-labelledby="dropdownMenuLink">
 
-      <a  class="dropdown-item" 
-          href ="{% url 'create-set' %}">
-        With vanilla JS
-      </a>
-      
-      
-      <a  class="dropdown-item"
-          href ="#">
-        With Angular JS
-      </a>
+      <li>
+        <a  class="dropdown-item" 
+            href ="{% url 'create-set' %}">
+          With vanilla JS
+        </a>
+      </li>
+        
+      <li>  
+        <a  class="dropdown-item"
+            href ="{% url 'create-set-angular' %}">
+          With Angular JS
+        </a>
+      </li>
     
-    </div>
+    </ul>
   </div>
 </li>
 

@@ -25,5 +25,4 @@ document.addEventListener("DOMContentLoaded", function() {
   if (route[2] === 'flashcards') Load.justTerms(Flashcards.loadFlashcards);
   if (route[2] === 'learn'     ) Load.justTerms(Learn     .loadItems     );
   if (route[2] === 'write'     ) Load.justTerms(Write     .loadItems     );
-
 })

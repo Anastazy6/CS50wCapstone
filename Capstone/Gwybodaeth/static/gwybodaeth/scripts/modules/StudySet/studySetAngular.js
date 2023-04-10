@@ -14,7 +14,6 @@ studySetApp.config(function($interpolateProvider) {
 studySetApp.controller('studySetController', function($scope, $http) {
   $http.get(`/load/${Util.getStudySetID()}`)
   .then(response => {
-    console.log(response);
     $scope.terms = response.data.terms;
 
     addMissingData($scope.terms);

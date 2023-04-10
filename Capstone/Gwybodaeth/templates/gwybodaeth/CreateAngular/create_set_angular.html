@@ -1,5 +1,7 @@
 {% extends '../layout.html' %}
 
+{% load static %}
+
 {% block title %}
 Create study set (Angular JS)
 {% endblock %}
@@ -42,9 +44,9 @@ Create study set (Angular JS)
                     placeholder="Description">{% if debug %}Description test{% endif %}</textarea>
 
 
-    <!-- Util.autoGrow(this) -->
-
         <div  id   ="terms-lang-container">
+          
+          
           <label for="terms-lang-container">
             Terms language: 
           </label>
@@ -52,12 +54,15 @@ Create study set (Angular JS)
           <select id   ="terms-lang"
                   name ="terms-lang"  
                   required>
-            {% include './language_selection.html' %}
+            {% include '../Create/language_selection.html' %}
           </select>
+
+
         </div>
 
-
         <div  id   ="defs-lang-container">
+
+
           <label for="defs-lang-container">
             Definitions language:
           </label>
@@ -65,32 +70,41 @@ Create study set (Angular JS)
           <select id   ="defs-lang"
                   name ="defs-lang" 
                   required>
-            {% include './language_selection.html' %}
+            {% include '../Create/language_selection.html' %}
           </select>
+
+
         </div>
 
+
       </div>
+
 
         <div id="create-items-wrapper">
           {% for i in range %}
             <div class="create-item-wrapper-single">
-              
+
+
               <div class="create-item-index-bullet
                           bg-lleuad 
                           text-lleuad-lawn">
                 {{ i }}
               </div>
 
+
               <div class="create-item-container">
                 {% include './create_study_item.html' %}
               </div>
+
 
             </div>
           {% endfor %}
         </div>
 
+
       <div id="create-form-buttons-container">
-        
+
+
         <button id    ="create-set-add-item"
                 class ="btn
                         btn-outline-lleuad-lawn
@@ -99,6 +113,7 @@ Create study set (Angular JS)
           Add item
         </button>
 
+
         <input  id    ="create-set-submit"
                 class ="btn
                         btn-outline-lleuad-lawn
@@ -106,15 +121,15 @@ Create study set (Angular JS)
                 type  ="submit" 
                 value ="Create study set">
 
+
+
       </div>
-
     </form>
-
   </div> <!-- ng-app -->
 
 
   <script type="module"
-          src ="{% static 'gwybodaeth/scripts/modules/CreateAngular/createAngular.js' %}"
-
+          src ="{% static 'gwybodaeth/scripts/modules/CreateAngular/createAngular.js' %}">
+  </script>
 
 {% endblock %}

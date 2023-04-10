@@ -90,15 +90,13 @@ export const Learn = (function() {
   }
 
   const _showWrite = () => {
-    console.log("Writing should be shown")
     _showView(View.Writing.Write);
     View.Writing.Write.showCurrent(Memory.currentItem());
   }
 
   const _showSummary = () => {
-    console.log("Summary should be shown")
-    _showMultileChoice(); // Temporary!
-
+    _showView(View.Summary);
+    View.Summary.showStats(Memory.getStats());
   }
   
 

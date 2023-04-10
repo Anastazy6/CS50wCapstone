@@ -190,3 +190,22 @@
   border-right: 2px solid $transparent-ghostwhite-15;
   padding     : 0 20px;
 }
+
+
+
+
+#ls-choices   {grid-area: c-total ;}
+#lsc-failures {grid-area: c-fails ;}
+#lsc-ratio    {grid-area: c-ratio ;}
+#ls-writes    {grid-area: w-total ;}
+#lsw-failures {grid-area: w-fails ;}
+#lsw-ratio    {grid-area: w-ratio ;}
+
+
+#learn-summary-container {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows   : 1fr 1fr;
+  grid-template-areas  :
+    'c-total c-fails c-ratio'
+    'w-total w-fails w-ratio';
+}

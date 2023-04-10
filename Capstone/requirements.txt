@@ -1,1 +1,1 @@
-Django==3.2.18
+Django==4.1 # 3.2.8 on live server due to technical issues

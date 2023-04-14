@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta   name="referrer" 
+            content="same-origin"/>
+    
+    
+    <!-- links to thirt-party stuff -->
+    {% include './angularJS.html'    %}
+    {% include './babel.html'        %}
+    {% include './bootstrapJS.html'  %}
+    {% include './favicon_link.html' %}
+    {% include './react.html'        %}
+
+
+
+    <link   rel ="stylesheet" 
+            href="{% static 'gwybodaeth/styles/styles.css' %}">
+
+
+    <!-- Custom JS (project-specific) -->
+    <script type="module"
+            src ="{% static 'gwybodaeth/scripts/main.js' %}">
+    </script>
+
+  </head>
+
+
+  <body>
+
+    {% include "gwybodaeth/includable/navbar.html" %}
+    
+    <div class="body">          
+      {% block body %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

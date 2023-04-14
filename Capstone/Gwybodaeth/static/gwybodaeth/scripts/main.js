@@ -1,18 +1,19 @@
 /* TODO: (either @ core or advanced level): Lazy module importing.
- *   Current iteration works just fine, but importing all the modules at once isn't
- *   the best design as it slows content loading.
- *   26.02.2023: Different modules are run depending on the route instead of
- *   accessing the DOM several times. Not the best solution, but shouldn't be
- *   as expensive as the previous one.
+ *   14.04.2023 I think this is the way to do it (or at the very least it's better
+ *   than it used to be). I've decided to keep Load and Util being imported statically,
+ *   as they're used in several parts of the app, but the others are mutually exclusive
+ *   by design so there's no need to import them all at once. I actually HAD to implement
+ *   lazy importing because the "firstElementChild" part invoked in Learn.View.Summary
+ *   somehow interfered with the other modules (such element couldn't be found whenever
+ *   the user tried to access different part of the app instead of Learn), completely disabling them.
+ * 
+ *   I'm leaving this in TODO state as there might be some improvements to make: naming, DRYing the code,
+ *   and better routing system.
  */
 
 
-import  { Create     }  from  "./modules/Create/create.mjs";
-import  { Flashcards }  from  "./modules/Flashcards/flashcards.mjs";
-import  { Learn      }  from  "./modules/Learn/learn.mjs";
-import  { Load       }  from  "./modules/Load/load.mjs";
-import  { Write      }  from  "./modules/Write/write.mjs";
-import  { Util       }  from  "./modules/Utilities/util.mjs";
+import  { Load }  from  "./modules/Load/load.mjs";
+import  { Util }  from  "./modules/Utilities/util.mjs";
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -21,8 +22,33 @@ document.addEventListener("DOMContentLoaded", function() {
   
   if (route[0] === 'set')  Util.highlightCurrentLearningOption(); 
   
-  if (route[0] === 'create-set') Create.run();
-  if (route[2] === 'flashcards') Load.justTerms(Flashcards.loadFlashcards);
-  if (route[2] === 'learn'     ) Load.justTerms(Learn     .loadItems     );
-  if (route[2] === 'write'     ) Load.justTerms(Write     .loadItems     );
+  if (route[0] === 'create-set') {
+    import("./modules/Create/create.mjs")
+    .then(createModule => {
+      createModule.Create.run();
+    })
+  }
+
+
+  if (route[2] === 'flashcards') {
+    import("./modules/Flashcards/flashcards.mjs")
+    .then(flashcardsModule => {
+      Load.justTerms(flashcardsModule.Flashcards.loadFlashcards);
+    })
+  }
+  
+  if (route[2] === 'learn') {
+    import("./modules/Learn/learn.mjs")
+    .then(learnModule => {
+      Load.justTerms(learnModule.Learn.loadItems)
+    })
+  }
+  
+  if (route[2] === 'write') {
+    import("./modules/Write/write.mjs")
+    .then(writeModule => {
+      Load.justTerms(writeModule.Write.loadItems)
+    })
+  }
 })
+

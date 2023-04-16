@@ -1,0 +1,23 @@
+{% extends 'gwybodaeth/Layout/layout.html' %}
+
+{% load static %}
+
+{% block title %}
+Test page - if you see this in prod then the dev must have been drunk...
+{% endblock %}
+
+{% block body %}
+
+<h1>Test page!</h1>
+
+
+<div id="react-test"></div>
+
+
+
+
+<script type="module"
+        src ="{% static 'gwybodaeth/scripts/test.js' %}">
+</script>
+
+{% endblock %}

@@ -151,7 +151,6 @@ export const Choice = (function() {
 
   
   const _disableAnswers = () => {
-    console.log("disabling answers");
     _allAnswers().forEach(answer => answer.disabled = true);
   }
 

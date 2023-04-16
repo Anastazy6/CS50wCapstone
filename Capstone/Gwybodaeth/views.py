@@ -14,6 +14,10 @@ from .util   import *
 DEBUG = False
 ################################################################################
 
+# View for testing and experimentation purposes. REMOVE FOR PRODUCTION etc...
+def test_view(request):
+    return render(request, "gwybodaeth/Simple/test_page.html")
+
 
 def index(request):
     require_method(request, ['GET', 'POST'])

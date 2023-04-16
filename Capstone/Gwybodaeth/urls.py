@@ -30,6 +30,9 @@ urlpatterns = [
             views.create_set_angular,
             name="create-set-angular"),
 
+    path(  "test",
+            views.test_view,
+            name="test-view"),
 
 
     # Single-parameter views

@@ -21,8 +21,6 @@ export const Summary = (function() {
   }
 
   const showStats = (stats) => {
-    console.log(stats);
-
     totalChoices .innerHTML = stats.correctChoices + stats.failedChoices;
     failedChoices.innerHTML = stats.failedChoices;
     choicesRatio .innerHTML = _calculateRatio(stats.correctChoices, stats.failedChoices);

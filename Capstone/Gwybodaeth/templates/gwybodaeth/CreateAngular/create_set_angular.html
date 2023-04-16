@@ -1,4 +1,4 @@
-{% extends "gwybodaeth/Layout/layout.html" %}
+{% extends '../layout.html' %}
 
 {% load static %}
 
@@ -7,7 +7,7 @@ Create study set (Angular JS)
 {% endblock %}
 
 {% block body %}
-<!--
+
   <p>
     TODO
   </p>
@@ -125,23 +125,11 @@ Create study set (Angular JS)
 
       </div>
     </form>
-  </div> --><!-- ng-app -->
+  </div> <!-- ng-app -->
 
-<!--
+
   <script type="module"
           src ="{% static 'gwybodaeth/scripts/modules/CreateAngular/createAngular.js' %}">
   </script>
--->
-
-<script type="text/babel">
-import { createRoot } from 'react-dom/client';
-
-// Clear the existing HTML content
-document.body.innerHTML = '<div id="app"></div>';
-
-// Render your React component instead
-const root = createRoot(document.getElementById('app'));
-root.render(<h1>Hello, world</h1>);
-</script>
 
 {% endblock %}

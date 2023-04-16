@@ -1,14 +1,9 @@
-import { Util } from "../Utilities/util.mjs";
-
+import { Util } from "../Utilities/util.js";
 const createApp = angular.module('createApp', []);
-
-createApp.config(function($interpolateProvider) {
+createApp.config(function ($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{');
-  $interpolateProvider.endSymbol  ('}]}');
+  $interpolateProvider.endSymbol('}]}');
 });
-
-
-
-createApp.controller("createCtrl", function($scope) {
+createApp.controller("createCtrl", function ($scope) {
   console.log("Angular works correctly!");
-})
+});

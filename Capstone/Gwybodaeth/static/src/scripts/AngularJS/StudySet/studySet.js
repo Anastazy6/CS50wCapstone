@@ -1,5 +1,5 @@
 // Experimental
-import { Util } from "../Utilities/util.mjs";
+import { Util } from "../../vanillaJS/modules/Utilities/util.mjs";
 
 
 const studySetApp = angular.module('studySet', []);

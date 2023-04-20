@@ -15,40 +15,46 @@
 import  { Load }  from  "./modules/Load/load.mjs";
 import  { Util }  from  "./modules/Utilities/util.mjs";
 
+const Main = (function(){
 
-document.addEventListener("DOMContentLoaded", function() {
+  const run = () => {
+    const route = Util.getRoute();
+    
+    if (route[0] === 'set')  Util.highlightCurrentLearningOption(); 
+    
+    if (route[0] === 'create-set') {
+      import("./modules/Create/create.js")
+      .then(createModule => {
+        createModule.Create.run();
+      })
+    }
 
-  const route = Util.getRoute();
-  
-  if (route[0] === 'set')  Util.highlightCurrentLearningOption(); 
-  
-  if (route[0] === 'create-set') {
-    import("./modules/Create/create.js")
-    .then(createModule => {
-      createModule.Create.run();
-    })
+
+    if (route[2] === 'flashcards') {
+      import("./modules/Flashcards/flashcards.js")
+      .then(flashcardsModule => {
+        Load.justTerms(flashcardsModule.Flashcards.loadFlashcards);
+      })
+    }
+    
+    if (route[2] === 'learn') {
+      import("./modules/Learn/learn.js")
+      .then(learnModule => {
+        Load.justTerms(learnModule.Learn.loadItems)
+      })
+    }
+    
+    if (route[2] === 'write') {
+      import("./modules/Write/write.js")
+      .then(writeModule => {
+        Load.justTerms(writeModule.Write.loadItems)
+      })
+    }
   }
 
+  return {
+    run: run
+  }
+})()
 
-  if (route[2] === 'flashcards') {
-    import("./modules/Flashcards/flashcards.js")
-    .then(flashcardsModule => {
-      Load.justTerms(flashcardsModule.Flashcards.loadFlashcards);
-    })
-  }
-  
-  if (route[2] === 'learn') {
-    import("./modules/Learn/learn.js")
-    .then(learnModule => {
-      Load.justTerms(learnModule.Learn.loadItems)
-    })
-  }
-  
-  if (route[2] === 'write') {
-    import("./modules/Write/write.js")
-    .then(writeModule => {
-      Load.justTerms(writeModule.Write.loadItems)
-    })
-  }
-})
-
+export default Main;

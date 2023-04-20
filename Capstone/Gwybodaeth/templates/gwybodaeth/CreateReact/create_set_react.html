@@ -1,0 +1,19 @@
+{% extends 'Gwybodaeth/Layout/layout.html' %}
+
+{% load static %}
+
+{% block title %}
+Create study set (React)
+{% endblock %}
+
+{% block body %}
+
+  <div id="react-root"></div>
+
+
+
+  <script type="module"
+          src ="{% static 'gwybodaeth/scripts/reactApps/CreateReact/createReact.js' %}">
+  </script>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 // Experimental
-import { Util } from "../Utilities/util.js";
+import { Util } from "../../vanillaJS/modules/Utilities/util.js";
 const studySetApp = angular.module('studySet', []);
 studySetApp.config(function ($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{');

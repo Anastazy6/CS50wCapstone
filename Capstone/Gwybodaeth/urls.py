@@ -26,9 +26,9 @@ urlpatterns = [
             views.create_set_vanilla_js,
             name="create-set"),
 
-    path(  "create-set-angular",
-            views.create_set_angular,
-            name="create-set-angular"),
+    path(  "create-set-react",
+            views.create_set_react,
+            name="create-set-react"),
 
     path(  "test",
             views.test_view,

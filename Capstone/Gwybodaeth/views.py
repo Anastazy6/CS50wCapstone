@@ -96,15 +96,15 @@ def create_set_vanilla_js(request):
         })
 
 
-def create_set_angular(request):
-    # TODO: Develop Create view using Angular JS
+def create_set_react(request):
+    # TODO: Develop Create view using React
     require_method(request, ['GET', 'POST'])
 
     if request.method == 'POST':
         create_set_post(request)
 
     else:
-        return render(request, "gwybodaeth/CreateAngular/create_set_angular.html", {
+        return render(request, "gwybodaeth/CreateReact/create_set_react.html", {
             'range': range(0),
             'debug': DEBUG
         })

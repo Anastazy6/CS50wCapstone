@@ -1,0 +1,33 @@
+{
+  "name": "gwybodaeth",
+  "version": "1.0.0",
+  "description": "Package for my project",
+  "main": "Gwybodaeth/src/gwybodaeth/scripts/main.js",
+  "scripts": {
+    "build": "babel ./src/scripts/ -d ./gwybodaeth/scripts/"
+  },
+  "author": "kamil",
+  "license": "whatever... I'm just trying to learn all this stuff, OK?",
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/standalone": "^7.21.4",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "babel-plugin-module-extension": "^0.1.3",
+    "babel-plugin-transform-modules-requirejs-babel": "^0.1.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^10.0.0",
+    "browserify": "^14.4.0",
+    "eslint": "^8.0.0",
+    "eslint-config-react-app": "^7.0.1",
+    "node-sass": "^8.0.0",
+    "postcss-cli": "^10.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "requirejs-babel7": "^1.3.2",
+    "webpack": "^5.79.0"
+  }
+}

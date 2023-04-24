@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 from .models import *
 from .util   import *
 
@@ -95,7 +97,7 @@ def create_set_vanilla_js(request):
             'debug': DEBUG
         })
 
-
+@ensure_csrf_cookie
 def create_set_react(request):
     # TODO: Develop Create view using React
     require_method(request, ['GET', 'POST'])

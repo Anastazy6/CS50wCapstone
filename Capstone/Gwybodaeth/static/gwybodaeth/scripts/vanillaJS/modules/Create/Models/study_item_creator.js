@@ -31,7 +31,7 @@ export const StudyItemCreator = function () {
     if (!!studyItemGuts) {
       newStudyItem.innerHTML = studyItemGuts;
     } else {
-      fetch('static/gwybodaeth/scripts/modules/Create/Models/study_item_guts.html').then(response => response.text()).then(result => {
+      fetch('static/gwybodaeth/scripts/vanillaJS/modules/Create/Models/study_item_guts.html').then(response => response.text()).then(result => {
         studyItemGuts = result;
         newStudyItem.innerHTML = studyItemGuts;
       });

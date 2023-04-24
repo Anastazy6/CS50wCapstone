@@ -13,6 +13,26 @@ export const Util = function () {
       return index;
     };
   }();
+
+  /**
+   * Source: https://stackoverflow.com/a/50735730
+   * @param {*} name 
+   * @returns Cookie value
+   */
+  const getCookie = name => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      let cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = jQuery.trim(cookies[i]);
+        if (cookie.substring(0, name.length + 1) === name + '=') {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  };
   const getRoute = () => _getPath().slice(1).split("/");
   const getStudySetID = () => getRoute()[1];
   const _getLearningOption = () => getRoute()[2];
@@ -31,6 +51,7 @@ export const Util = function () {
   };
   return {
     generateIndex: generateIndex,
+    getCookie: getCookie,
     getRoute: getRoute,
     getStudySetID: getStudySetID,
     highlightCurrentLearningOption: highlightCurrentLearningOption,

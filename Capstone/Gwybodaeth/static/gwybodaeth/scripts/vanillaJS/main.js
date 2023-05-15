@@ -11,31 +11,20 @@
  *   and better routing system.
  */
 
-import { Load } from "./modules/Load/load.js";
 import { Util } from "./modules/Utilities/util.js";
+import routes from "./routes.js";
 const Main = function () {
   const run = () => {
-    const route = Util.getRoute();
-    if (route[0] === 'set') Util.highlightCurrentLearningOption();
-    if (route[0] === 'create-set') {
-      import("./modules/Create/create.js").then(createModule => {
-        createModule.Create.run();
+    if (Util.isStudySetActive()) Util.highlightCurrentLearningOption();
+    const path = Util.getPath();
+    const currentRoute = routes.filter(r => r.route.test(path));
+    if (currentRoute.length === 1) {
+      console.log(currentRoute[0].module);
+      import(currentRoute[0].module).then(module => {
+        module.default.launcher();
       });
-    }
-    if (route[2] === 'flashcards') {
-      import("./modules/Flashcards/flashcards.js").then(flashcardsModule => {
-        Load.justTerms(flashcardsModule.Flashcards.loadFlashcards);
-      });
-    }
-    if (route[2] === 'learn') {
-      import("./modules/Learn/learn.js").then(learnModule => {
-        Load.justTerms(learnModule.Learn.loadItems);
-      });
-    }
-    if (route[2] === 'write') {
-      import("./modules/Write/write.js").then(writeModule => {
-        Load.justTerms(writeModule.Write.loadItems);
-      });
+    } else if (currentRoute.length > 1) {
+      throw `Routing error: current route matches more than one from the predefined ones.`;
     }
   };
   return {

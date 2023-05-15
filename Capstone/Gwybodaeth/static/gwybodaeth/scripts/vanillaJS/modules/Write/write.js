@@ -1,8 +1,9 @@
+import { Load } from "../Load/load.js";
 import { Memory } from "./Memory/Memory.js";
 import { View } from "./Views/View.js";
 import { StudyItem } from "../Utilities/Models/common_models.js";
 import { WriteUtilities } from "../Utilities/write_utilities.js";
-export const Write = function () {
+const Write = function () {
   const _resolutionMethods = () => {
     return {
       processCorrect: Memory.processCorrectWrite,
@@ -11,7 +12,10 @@ export const Write = function () {
       getUserInput: View.Write.getUserInput
     };
   };
-  const loadItems = data => {
+  const launcher = () => {
+    Load.justTerms(_loadItems);
+  };
+  const _loadItems = data => {
     Object.entries(data).forEach(([id, values]) => {
       Memory.loadItem(new StudyItem(id, values['term'], values['def'], values['cat'], values['note'], values['options']));
     });
@@ -108,6 +112,7 @@ export const Write = function () {
     View.Summary.showRounds(data);
   };
   return {
-    loadItems: loadItems
+    launcher: launcher
   };
 }();
+export default Write;

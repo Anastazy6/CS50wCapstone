@@ -1,9 +1,7 @@
-//import React from 'react'
-//import ReactDOM from 'react-dom/client'
+export default function App() {
+  return (
+    <h1>Hello, world</h1>
+  );
+}
 
-// Clear the existing HTML content
-document.body.innerHTML = '<div id="app"></div>';
-
-// Render your React component instead
-const root = ReactDOM.createRoot(document.getElementById('app'));
-root.render(<h1>Hello, world</h1>);
+App();

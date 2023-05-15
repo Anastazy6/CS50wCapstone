@@ -1,8 +1,9 @@
+import { Load } from "../Load/load.js";
 import { Memory } from "./Memory/memory.js";
 import { StudyItem } from "../Utilities/Models/common_models.js";
 import { View } from "./Views/view.js";
 import { WriteUtilities } from "../Utilities/write_utilities.js";
-export const Learn = function () {
+const Learn = function () {
   const _resolutionMethods = () => {
     return {
       processCorrect: Memory.processCorrectWrite,
@@ -11,7 +12,10 @@ export const Learn = function () {
       getUserInput: View.Writing.Write.getUserInput
     };
   };
-  const loadItems = data => {
+  const launcher = () => {
+    Load.justTerms(_loadItems);
+  };
+  const _loadItems = data => {
     Object.entries(data).forEach(([id, values]) => {
       Memory.loadItem(new StudyItem(id, values['term'], values['def'], values['cat'], values['options']));
     });
@@ -109,6 +113,7 @@ export const Learn = function () {
     return false;
   };
   return {
-    loadItems: loadItems
+    launcher: launcher
   };
 }();
+export default Learn;

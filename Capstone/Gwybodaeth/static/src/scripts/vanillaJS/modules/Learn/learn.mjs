@@ -1,9 +1,11 @@
+import { Load           } from "../Load/load.mjs"
+
 import { Memory         } from "./Memory/memory.mjs"
 import { StudyItem      } from "../Utilities/Models/common_models.mjs"
 import { View           } from "./Views/view.mjs"
 import { WriteUtilities } from "../Utilities/write_utilities.mjs"
 
-export const Learn = (function() {
+const Learn = (function() {
 
   const _resolutionMethods = () => {
     return {
@@ -14,9 +16,11 @@ export const Learn = (function() {
     }
   }
 
+  const launcher = () => {
+    Load.justTerms(_loadItems);
+  }
 
-
-  const loadItems = (data) => {
+  const _loadItems = (data) => {
     Object.entries(data).forEach(([id, values]) => {
       Memory.loadItem(new StudyItem(
           id,
@@ -148,6 +152,8 @@ export const Learn = (function() {
   }
 
   return {
-    loadItems: loadItems
+    launcher: launcher
   }
 })()
+
+export default Learn;

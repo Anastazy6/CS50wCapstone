@@ -33,10 +33,11 @@ export const Util = function () {
     }
     return cookieValue;
   };
-  const getRoute = () => _getPath().slice(1).split("/");
+  const getPath = () => window.location.pathname;
+  const getRoute = (path = getPath()) => path.slice(1).split("/");
   const getStudySetID = () => getRoute()[1];
   const _getLearningOption = () => getRoute()[2];
-  const _getPath = () => window.location.pathname;
+  const isStudySetActive = () => getRoute()[0] === 'set';
 
   /**
    *  Redirects to another page WITHIN this web service. The url argument is relative
@@ -52,8 +53,10 @@ export const Util = function () {
   return {
     generateIndex: generateIndex,
     getCookie: getCookie,
+    getPath: getPath,
     getRoute: getRoute,
     getStudySetID: getStudySetID,
+    isStudySetActive: isStudySetActive,
     highlightCurrentLearningOption: highlightCurrentLearningOption,
     redirect: redirect
   };

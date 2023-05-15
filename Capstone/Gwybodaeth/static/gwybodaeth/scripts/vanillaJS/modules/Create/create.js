@@ -2,11 +2,14 @@ import { Memory } from "./Memory/Memory.js";
 import { View } from "./View/View.js";
 import { StudyItemCreator } from "./Models/study_item_creator.js";
 import { Util } from "../Utilities/util.js";
-export const Create = function () {
+const Create = function () {
   // ---------------------
   //        Public
   // ---------------------
 
+  const launcher = () => {
+    View.initialize(_intermodularMethods());
+  };
   const createStudySet = () => {
     fetch('/create-set', {
       method: 'POST',
@@ -20,6 +23,11 @@ export const Create = function () {
     });
     return false;
   };
+
+  // ---------------------
+  //        Private
+  // ---------------------
+
   const _generatePostBody = () => {
     let data = View.getStudySetInfo();
     return JSON.stringify({
@@ -37,18 +45,10 @@ export const Create = function () {
       submit: createStudySet
     };
   };
-  const run = () => {
-    View.initialize(_intermodularMethods());
-  };
   const _addStudyItem = () => {
     Memory.addStudyItem(StudyItemCreator.createStudyItem());
     View.showNewItem(Memory.getLast());
   };
-
-  // ---------------------
-  //        Private
-  // ---------------------
-
   const _getNewStudySetData = () => {
     let id = 1;
     let data = {};
@@ -73,7 +73,8 @@ export const Create = function () {
     View.focusLastItem();
   };
   return {
-    run: run,
-    createStudySet: createStudySet
+    createStudySet: createStudySet,
+    launcher: launcher
   };
 }();
+export default Create;

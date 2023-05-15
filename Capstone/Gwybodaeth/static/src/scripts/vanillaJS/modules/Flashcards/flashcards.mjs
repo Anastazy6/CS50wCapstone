@@ -1,14 +1,19 @@
 import { Memory    } from "./Memory/memory.mjs";
 import { View      } from "./Views/view.mjs";
 import { Flashcard } from "./Models/flashcard.mjs";
+import { Load      } from "../Load/load.mjs";
 
 
-export const Flashcards = (function(){
+const Flashcards = (function(){
 
 
   // Public
 
-  const loadFlashcards = (data) => {
+  const launcher = () => {
+    Load.justTerms(_loadFlashcards);
+  }
+
+  const _loadFlashcards = (data) => {
     _prepareData(data);
     View.show(Memory.currentCard());
   }
@@ -79,6 +84,8 @@ export const Flashcards = (function(){
   }
 
   return {
-    loadFlashcards: loadFlashcards,
+    launcher: launcher
   };
 })();
+
+export default Flashcards;

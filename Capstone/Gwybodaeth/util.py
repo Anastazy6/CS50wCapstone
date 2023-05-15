@@ -11,13 +11,15 @@ def require_method(request, method, status=400):
     Method may be a list of accepted methods. 
     '''
     if (type(method) is list) and (not request.method in method):
-        return JsonResponse({"error": f"Request method must be one of the following:\
-                            {', '.join(method)}."},
-                            status=status)
+        return JsonResponse(
+            {  "error" :  f"Request method must be one of the following:\
+                        {', '.join(method)}."
+            },  status = status)
     
     if not request.method == method:
-        return JsonResponse({"error": f"{method} request required"},
-                            status=status)
+        return JsonResponse(
+            {  "error" : f"{method} request required"
+            },  status = status)
 
 
 

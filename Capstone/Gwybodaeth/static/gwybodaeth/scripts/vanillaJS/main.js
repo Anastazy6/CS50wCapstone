@@ -9,6 +9,8 @@
  * 
  *   I'm leaving this in TODO state as there might be some improvements to make: naming, DRYing the code,
  *   and better routing system.
+ *  
+ *   15.05.2023 Another rework - added routing system
  */
 
 import { Util } from "./modules/Utilities/util.js";
@@ -16,16 +18,25 @@ import routes from "./routes.js";
 const Main = function () {
   const run = () => {
     if (Util.isStudySetActive()) Util.highlightCurrentLearningOption();
+    const modulePath = _getModulePath();
+    if (modulePath) _loadModule(modulePath);
+  };
+  const _getModulePath = () => {
     const path = Util.getPath();
     const currentRoute = routes.filter(r => r.route.test(path));
-    if (currentRoute.length === 1) {
-      console.log(currentRoute[0].module);
-      import(currentRoute[0].module).then(module => {
-        module.default.launcher();
-      });
-    } else if (currentRoute.length > 1) {
-      throw `Routing error: current route matches more than one from the predefined ones.`;
+    switch (currentRoute.length) {
+      case 0:
+        // No module path if the current route is not associated with any of the VanillaJS modules.
+        // This may happen if the route uses React, Angular.js or Django template rendering
+        return false;
+      case 1:
+        return currentRoute[0].module;
+      default:
+        throw `Routing error: current route matches more than one from the predefined ones.`;
     }
+  };
+  const _loadModule = modulePath => {
+    import(modulePath).then(module => module.default.launcher());
   };
   return {
     run: run

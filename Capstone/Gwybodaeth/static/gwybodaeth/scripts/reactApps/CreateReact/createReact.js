@@ -1,5 +1,6 @@
 import { Util } from "../../vanillaJS/modules/Utilities/util.js"; // For getCookie for CSRF token
 
+import createReducer from "./Reducers/createReducer.js";
 import FormHead from "./Components/FormHead.js";
 import StudyItem from "./Components/StudyItem.js";
 const root = ReactDOM.createRoot(document.getElementById('react-root'));

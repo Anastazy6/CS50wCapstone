@@ -8,12 +8,6 @@ Create study set (React)
 
 {% block body %}
 
-  <div id="react-root"></div>
-
-
-
-  <script type="module"
-          src ="{% static 'gwybodaeth/scripts/reactApps/CreateReact/createReact.js' %}">
-  </script>
+  {% include '../Layout/reactRoot.html' %}
 
 {% endblock %}

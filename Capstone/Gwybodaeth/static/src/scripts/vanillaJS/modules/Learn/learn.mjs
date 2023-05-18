@@ -16,7 +16,7 @@ const Learn = (function() {
     }
   }
 
-  const launcher = () => {
+  const start = () => {
     Load.justTerms(_loadItems);
   }
 
@@ -152,8 +152,12 @@ const Learn = (function() {
   }
 
   return {
-    launcher: launcher
+    start: start
   }
 })()
 
-export default Learn;
+function App() {
+  Learn.start();
+}
+
+export default App;

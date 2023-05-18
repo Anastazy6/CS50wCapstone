@@ -5,7 +5,7 @@ import { Load } from "../Load/load.js";
 const Flashcards = function () {
   // Public
 
-  const launcher = () => {
+  const start = () => {
     Load.justTerms(_loadFlashcards);
   };
   const _loadFlashcards = data => {
@@ -64,7 +64,10 @@ const Flashcards = function () {
     sort: _sort
   };
   return {
-    launcher: launcher
+    start: start
   };
 }();
-export default Flashcards;
+function App() {
+  Flashcards.start();
+}
+export default App;

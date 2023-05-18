@@ -1,7 +1,11 @@
-export default function App() {
-  return (
+function App() {
+  document.innerHTML = '';
+  const root = ReactDOM.createRoot(document.createElement('div'));
+
+  root.render(
     <h1>Hello, world</h1>
-  );
+  )
 }
 
-App();
+export default App;
+

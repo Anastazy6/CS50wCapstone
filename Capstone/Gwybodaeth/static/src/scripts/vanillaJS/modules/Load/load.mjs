@@ -1,4 +1,4 @@
-import { Util } from "../Utilities/util.mjs";
+import { Util } from "../Utilities/util.js";
 
 /**
  *   Contains functions used for loading study set data, which will be then

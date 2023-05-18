@@ -6,13 +6,13 @@ import { WriteUtilities } from "../Utilities/write_utilities.js";
 const Write = function () {
   const _resolutionMethods = () => {
     return {
+      getUserInput: View.Write.getUserInput,
       processCorrect: Memory.processCorrectWrite,
       processWrong: Memory.processWrongWrite,
-      updateView: _updateView,
-      getUserInput: View.Write.getUserInput
+      updateView: _updateView
     };
   };
-  const launcher = () => {
+  const start = () => {
     Load.justTerms(_loadItems);
   };
   const _loadItems = data => {
@@ -112,7 +112,10 @@ const Write = function () {
     View.Summary.showRounds(data);
   };
   return {
-    launcher: launcher
+    start: start
   };
 }();
-export default Write;
+function App() {
+  Write.start();
+}
+export default App;

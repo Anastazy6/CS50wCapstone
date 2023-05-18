@@ -9,15 +9,15 @@ const Write = function() {
   
   const _resolutionMethods = () => {
     return {
+      getUserInput  : View  .Write.getUserInput,
       processCorrect: Memory.processCorrectWrite,
       processWrong  : Memory.processWrongWrite,
       updateView    : _updateView,
-      getUserInput  : View.Write.getUserInput,
     }
   }
 
 
-  const launcher = () => {
+  const start = () => {
     Load.justTerms(_loadItems)
   }
 
@@ -62,7 +62,7 @@ const Write = function() {
     Memory.retryFailures();
     _updateView();
   }
-  
+
 
   const _submitAnswerWrapper = () => {
     let currentItem  = Memory.currentItem();
@@ -164,8 +164,12 @@ const Write = function() {
 
 
   return {
-    launcher: launcher
+    start: start
   };
 }();
 
-export default Write;
+function App() {
+  Write.start();
+}
+
+export default App;

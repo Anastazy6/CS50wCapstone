@@ -12,6 +12,7 @@ export const Write = (function() {
   const submit   = document.getElementById("write-answer-button");
   const note     = document.getElementById("write-note"         );
   const category = document.getElementById("write-category"     );
+  const label    = document.getElementById("wtl-label"          );
   
   // Will only become useful when answering with both terms or definitions will be implemented
   // const label            = document.getElementById("write-textarea-label"    );

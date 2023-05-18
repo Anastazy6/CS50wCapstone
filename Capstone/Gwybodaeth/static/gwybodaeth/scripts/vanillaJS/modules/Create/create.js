@@ -7,7 +7,7 @@ const Create = function () {
   //        Public
   // ---------------------
 
-  const launcher = () => {
+  const start = () => {
     View.initialize(_intermodularMethods());
   };
   const createStudySet = () => {
@@ -74,7 +74,10 @@ const Create = function () {
   };
   return {
     createStudySet: createStudySet,
-    launcher: launcher
+    start: start
   };
 }();
-export default Create;
+function App() {
+  Create.start();
+}
+export default App;

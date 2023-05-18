@@ -7,7 +7,7 @@ const StudyItem = () => {
                       text-lleuad-lawn">
       </div>
     
-      <div class="create-item-container">
+      <div className="create-item-container">
         <textarea className   ="term-input 
                                       create-item-input"
                   name        ="term" 

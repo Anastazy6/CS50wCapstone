@@ -2,7 +2,7 @@ const StudyItem = () => {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "create-item-index-bullet\r bg-lleuad \r text-lleuad-lawn"
   }), /*#__PURE__*/React.createElement("div", {
-    class: "create-item-container"
+    className: "create-item-container"
   }, /*#__PURE__*/React.createElement("textarea", {
     className: "term-input \r create-item-input",
     name: "term",

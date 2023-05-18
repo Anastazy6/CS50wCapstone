@@ -38,6 +38,20 @@ export const Util = function () {
   const getStudySetID = () => getRoute()[1];
   const _getLearningOption = () => getRoute()[2];
   const isStudySetActive = () => getRoute()[0] === 'set';
+  const getModulePath = routes => {
+    const path = Util.getPath();
+    const currentRoute = routes.filter(r => r.route.test(path));
+    switch (currentRoute.length) {
+      case 0:
+        // No module path if the current route is not associated with any of the VanillaJS modules.
+        // This may happen if the route uses React, Angular.js or Django template rendering
+        return false;
+      case 1:
+        return currentRoute[0].module;
+      default:
+        throw `Routing error: current route matches more than one from the predefined ones.`;
+    }
+  };
 
   /**
    *  Redirects to another page WITHIN this web service. The url argument is relative
@@ -56,6 +70,7 @@ export const Util = function () {
     getPath: getPath,
     getRoute: getRoute,
     getStudySetID: getStudySetID,
+    getModulePath: getModulePath,
     isStudySetActive: isStudySetActive,
     highlightCurrentLearningOption: highlightCurrentLearningOption,
     redirect: redirect

@@ -12,7 +12,7 @@ const Learn = function () {
       getUserInput: View.Writing.Write.getUserInput
     };
   };
-  const launcher = () => {
+  const start = () => {
     Load.justTerms(_loadItems);
   };
   const _loadItems = data => {
@@ -113,7 +113,10 @@ const Learn = function () {
     return false;
   };
   return {
-    launcher: launcher
+    start: start
   };
 }();
-export default Learn;
+function App() {
+  Learn.start();
+}
+export default App;

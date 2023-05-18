@@ -9,7 +9,7 @@ const Flashcards = (function(){
 
   // Public
 
-  const launcher = () => {
+  const start = () => {
     Load.justTerms(_loadFlashcards);
   }
 
@@ -84,8 +84,12 @@ const Flashcards = (function(){
   }
 
   return {
-    launcher: launcher
+    start: start
   };
 })();
 
-export default Flashcards;
+function App() {
+  Flashcards.start()
+}
+
+export default App;

@@ -1,4 +1,4 @@
-import { Util } from "../../Utilities/util.mjs";
+import { Util } from "../../Utilities/util.js";
 
 /**
  * Study Item model for the Create module. This model contains input fields for the DOM.

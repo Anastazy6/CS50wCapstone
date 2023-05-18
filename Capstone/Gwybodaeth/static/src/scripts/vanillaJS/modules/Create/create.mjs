@@ -1,7 +1,7 @@
 import { Memory           } from "./Memory/Memory.mjs";
 import { View             } from "./View/View.mjs";
 import { StudyItemCreator } from "./Models/study_item_creator.mjs";
-import { Util             } from "../Utilities/util.mjs";
+import { Util             } from "../Utilities/util.js";
 
 const Create = (function() {
   
@@ -9,7 +9,7 @@ const Create = (function() {
   //        Public
   // ---------------------
 
-  const launcher = () => {
+  const start = () => {
     View.initialize(_intermodularMethods());
   }
 
@@ -94,9 +94,13 @@ const Create = (function() {
 
   return {
     createStudySet: createStudySet,
-    launcher      : launcher
+    start: start
   }
 
 })();
 
-export default Create;
+function App() {
+  Create.start()
+}
+
+export default App;

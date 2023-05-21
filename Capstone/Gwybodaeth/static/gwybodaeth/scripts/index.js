@@ -1,5 +1,9 @@
 import routes from './routes.js';
 import { Util } from './vanillaJS/modules/Utilities/util.js';
+var location = window.location.pathname;
+var path = location.substring(0, location.lastIndexOf("/"));
+var directoryName = path.substring(path.lastIndexOf("/") + 1);
+console.log(directoryName);
 document.addEventListener("DOMContentLoaded", function () {
   main();
 });
@@ -11,5 +15,6 @@ const main = () => {
 const loadModule = modulePath => {
   console.log(window.location.pathname);
   console.log(modulePath);
-  const module = import(modulePath).then(module.default()).catch(error => console.log(error));
+  import(modulePath).then(module => module.default());
+  //.catch(error => console.log(error))
 };

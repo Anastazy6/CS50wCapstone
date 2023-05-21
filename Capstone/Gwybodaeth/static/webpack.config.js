@@ -1,12 +1,15 @@
 const path = require('path');
 
+console.log(path.resolve(__dirname, '.'))
+
 module.exports = {
-  mode : 'production',
-  entry: './src/scripts/index.js', // Replace with the path to your main JavaScript file
+  mode : 'development',
+  entry: './gwybodaeth/scripts/index.js', // Replace with the path to your main JavaScript file
   output: {
     path: path.resolve(__dirname, './gwybodaeth/scripts'), // Replace with the desired output directory for your bundled JavaScript
     filename: 'bundle.js',
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -24,8 +27,14 @@ module.exports = {
 
   resolve: {
     extensions: ['.js'],
-    modules: ['node_modules', 'src/scripts'], // Add the relevant directories where your modules are located
-  }
+    modules: [path.resolve(__dirname, 'scripts'), 'node_modules'], // Add the relevant directories where your modules are located
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
 
   
 };

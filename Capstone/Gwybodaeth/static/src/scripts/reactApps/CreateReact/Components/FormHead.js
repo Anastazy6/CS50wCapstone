@@ -1,6 +1,6 @@
 import LanguagePicker from "./LanguagePicker.js";
 
-const htmlFormHead = () => {
+function htmlFormHead() {
   return (
     <div>
 

@@ -1,4 +1,4 @@
-const StudyItem = () => {
+function StudyItem() {
   return (
     <div>
       

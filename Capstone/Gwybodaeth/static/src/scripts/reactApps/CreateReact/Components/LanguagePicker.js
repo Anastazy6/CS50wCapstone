@@ -1,4 +1,4 @@
-const LanguagePicker = () => {
+function LanguagePicker() {
   return (
     <select>
       <optgroup label="Featured">

@@ -1,5 +1,5 @@
 import LanguagePicker from "./LanguagePicker.js";
-const htmlFormHead = () => {
+function htmlFormHead() {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
     id: "create-set-title",
     type: "text",
@@ -30,5 +30,5 @@ const htmlFormHead = () => {
     name: "defs-lang",
     required: true
   })));
-};
+}
 export default htmlFormHead;

@@ -1,4 +1,4 @@
-const LanguagePicker = () => {
+function LanguagePicker() {
   return /*#__PURE__*/React.createElement("select", null, /*#__PURE__*/React.createElement("optgroup", {
     label: "Featured"
   }, /*#__PURE__*/React.createElement("option", {
@@ -154,5 +154,5 @@ const LanguagePicker = () => {
   }, "Western Taiwanese (Mandarin)"), /*#__PURE__*/React.createElement("option", {
     value: "XH"
   }, "Xhosa"));
-};
+}
 export default LanguagePicker;

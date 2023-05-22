@@ -1,8 +1,8 @@
-import { Util } from "../../vanillaJS/modules/Utilities/util.js"; // For getCookie for CSRF token
+import { Util } from "../../../vanillaJS/modules/Utilities/util.js"; // For getCookie for CSRF token
 
 import createReducer from "../Reducers/createReducer.js";
-import FormHead from "./Components/FormHead.js";
-import StudyItem from "./Components/StudyItem.js";
+import FormHead from "./FormHead.js";
+import StudyItem from "./StudyItem.js";
 export default function CreateForm() {
   return /*#__PURE__*/React.createElement("form", {
     id: "create-set",

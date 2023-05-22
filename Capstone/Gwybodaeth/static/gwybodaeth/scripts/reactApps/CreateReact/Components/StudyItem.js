@@ -1,4 +1,4 @@
-const StudyItem = () => {
+function StudyItem() {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "create-item-index-bullet\r bg-lleuad \r text-lleuad-lawn"
   }), /*#__PURE__*/React.createElement("div", {
@@ -22,5 +22,5 @@ const StudyItem = () => {
     name: "notes",
     placeholder: "Enter notes"
   })));
-};
+}
 export default StudyItem;
